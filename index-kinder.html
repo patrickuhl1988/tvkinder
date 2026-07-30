@@ -1320,15 +1320,120 @@
   .feat{font:600 11px "Inter",sans-serif; padding:2px 8px; border-radius:99px;
     border:1px solid var(--line); background:var(--bg2); color:var(--muted)}
   .feat.yes{color:var(--free); border-color:var(--free-line); background:var(--free-soft)}
+  /* ================= Warme Farbwelt für das Kinderprogramm =================
+     Prinzip wie die Vereinsfarben bei TVFussball: jede Sendung trägt ein
+     eigenes Farbpaar (--c1/--c2), das aus dem Titel abgeleitet wird und
+     damit immer gleich bleibt. Daraus speisen sich Sticker, Kartenwäsche
+     und der geöffnete Zustand.
+     ===================================================================== */
+
+  /* ---- Grundpalette: von kühlem Blaugrau auf warm gedreht -------------
+     Struktur und Abstände bleiben identisch zu TVFussball, nur die
+     Neutraltöne und der Akzent wechseln. Grün bleibt für „kostenlos".  */
+  :root{
+    --bg:#FDF6F0; --bg2:#F8EADF; --surface:#FFFFFF; --surface2:#FDF3EB;
+    --line:#F0DFD1; --line2:#E2C8B4;
+    --ink:#1F1512; --muted:#7A6153; --faint:#A89083;
+    --green:#C24009; --green-soft:rgba(194,64,9,.10); --green-line:rgba(194,64,9,.28);
+    --free:#0B7A42; --free-soft:rgba(11,122,66,.12); --free-line:rgba(11,122,66,.32);
+    --on-accent:#FFFFFF;
+    --header-bg:rgba(253,246,240,.86); --hover:rgba(31,21,18,.035);
+    --shadow:0 1px 2px rgba(90,50,25,.05), 0 6px 20px -8px rgba(90,50,25,.14);
+    --header-shadow:0 1px 0 rgba(90,50,25,.06), 0 8px 22px -14px rgba(90,50,25,.14);
+    --wm:#B7791F; --wm-soft:#FBF1DD;
+  }
+  html[data-theme="dark"]{
+    --bg:#17100E; --bg2:#1E1512; --surface:#261A16; --surface2:#31221C;
+    --line:rgba(255,236,222,.09); --line2:rgba(255,236,222,.16);
+    --ink:#FBEFE7; --muted:#C4A896; --faint:#9A8172;
+    --green:#FF9A5C; --green-soft:rgba(255,154,92,.16); --green-line:rgba(255,154,92,.38);
+    --free:#3DD68C; --free-soft:rgba(61,214,140,.15); --free-line:rgba(61,214,140,.36);
+    --on-accent:#2A1206;
+    --header-bg:rgba(23,16,14,.86); --hover:rgba(255,255,255,.045);
+    --shadow:0 1px 2px rgba(0,0,0,.42), 0 10px 30px -12px rgba(0,0,0,.62);
+    --header-shadow:0 6px 24px rgba(0,0,0,.5);
+    --wm:#F0C868; --wm-soft:rgba(240,200,104,.13);
+  }
+
+  /* Hintergrundschein */
+  :root{--glow1:rgba(251,133,0,.10); --glow2:rgba(247,37,133,.05)}
+  html[data-theme="dark"]{--glow1:rgba(251,133,0,.11); --glow2:rgba(247,37,133,.07)}
+
+  /* Tagestrenner bekommt den warmen Verlauf */
+  .daybar .dtag{background:linear-gradient(135deg,#FB8500,#F72585); border:0}
+  .daybar .dtag.tm{background:transparent; color:#FB8500; border:1px solid rgba(251,133,0,.42)}
+
+  /* --- Farbbalken links auf jeder Karte -------------------------------- */
+  .row{padding-left:6px}
+  .row::before{content:""; position:absolute; left:0; top:0; bottom:0; width:6px; z-index:2;
+    background:linear-gradient(180deg, var(--c1), var(--c2))}
+  .row.free{box-shadow:var(--shadow)}          /* grüne Kante ersetzt durch Farbbalken */
+  .row.open.free{box-shadow:0 0 0 1.5px var(--c1), var(--shadow)}
+
+  /* --- Sticker statt Ball --------------------------------------------- */
+  .stick{flex:0 0 auto; width:38px; height:38px; border-radius:12px; display:grid; place-items:center;
+    background:linear-gradient(140deg, var(--s1), var(--s2)); color:#fff;
+    box-shadow:0 3px 10px -3px var(--s1), inset 0 1px 0 rgba(255,255,255,.35);
+    transform:rotate(-4deg); transition:transform .2s cubic-bezier(.34,1.5,.5,1)}
+  .stick svg{width:21px; height:21px; display:block; filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}
+  .rowhead:hover .stick{transform:rotate(4deg) scale(1.08)}
+  .row.open .stick{transform:rotate(0deg) scale(1.05)}
+  html[data-theme="dark"] .stick{box-shadow:0 3px 12px -3px var(--s1), inset 0 1px 0 rgba(255,255,255,.22)}
+
+  /* --- Farbwäsche der Karte ------------------------------------------- */
+  .row .rowhead{background:
+    radial-gradient(125% 150% at 0% 0%, var(--w1), transparent 58%),
+    radial-gradient(125% 150% at 100% 0%, var(--w2), transparent 58%)}
+  .row .rowhead:hover{background:
+    radial-gradient(125% 150% at 0% 0%, var(--w1), transparent 52%),
+    radial-gradient(125% 150% at 100% 0%, var(--w2), transparent 52%),
+    var(--hover)}
+  .row.open{border-color:transparent; box-shadow:0 0 0 1.5px var(--c1), var(--shadow)}
+  .row.open.free{box-shadow:inset 3px 0 0 var(--free), 0 0 0 1.5px var(--c1), var(--shadow)}
+  .row.open .rowhead{background:
+    radial-gradient(130% 165% at 0% 0%, var(--w1), transparent 62%),
+    radial-gradient(130% 165% at 100% 0%, var(--w2), transparent 62%)}
+  html[data-theme="dark"] .row .rowhead,
+  html[data-theme="dark"] .row.open .rowhead{background:
+    radial-gradient(130% 165% at 0% 0%, var(--w1d), transparent 62%),
+    radial-gradient(130% 165% at 100% 0%, var(--w2d), transparent 62%)}
+  html[data-theme="dark"] .row.open{border-color:transparent; box-shadow:0 0 0 1.5px var(--c1), 0 8px 30px rgba(0,0,0,.42)}
+
+  /* Trennlinie im Panel in Sendungsfarbe statt Grau */
+  .row .panel-pad{border-top:1.5px solid var(--w1)}
+  html[data-theme="dark"] .row .panel-pad{border-top-color:var(--w1d)}
+
+  /* Chevron übernimmt die Sendungsfarbe */
+  .rowhead:hover .chev{color:var(--c1); border-color:var(--c1)}
+  .row.open .chev{background:linear-gradient(140deg,var(--c1),var(--c2)); color:#fff; border-color:transparent}
+
+  /* Aufklapp-Buttons und Links im Panel ebenfalls warm */
+  .row .morebtn{color:var(--c1)}
+  .row .chrow .nm a.streamlink{text-decoration-color:var(--c1)}
+  .row .chrow .nm a.streamlink:hover{color:var(--c1)}
+
+  /* Genre-Label bekommt einen farbigen Anstrich statt grauer Kante */
+  .row .comp{border-left-color:var(--c1); color:var(--c1); opacity:.95}
+  html[data-theme="dark"] .row .comp{opacity:1}
+
+  /* Uhrzeit-Block als getönte Kachel */
+  .row .time{background:linear-gradient(160deg, var(--w1), var(--w2));
+    border-radius:11px; padding:7px 4px; margin-left:2px}
+  html[data-theme="dark"] .row .time{background:linear-gradient(160deg, var(--w1d), var(--w2d))}
+
+  /* Tagestrenner-Linie warm auslaufen lassen */
+  .daybar .ln{background:linear-gradient(90deg, rgba(251,133,0,.45), rgba(247,37,133,.12) 60%, var(--line))}
+
   /* Querverweis auf das Schwesterprojekt */
   .crosslink{display:flex; align-items:center; gap:13px; margin:12px 0 10px; padding:12px 14px;
     background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
     box-shadow:var(--shadow); text-decoration:none; color:inherit;
     transition:border-color .16s ease, box-shadow .16s ease, transform .1s ease}
-  .crosslink:hover{border-color:var(--green-line); box-shadow:0 0 0 3px var(--green-soft), var(--shadow)}
+  .crosslink:hover{border-color:rgba(37,99,235,.34); box-shadow:0 0 0 3px rgba(37,99,235,.10), var(--shadow)}
   .crosslink:active{transform:scale(.994)}
   .crosslink .cl-ic{flex:0 0 auto; width:40px; height:40px; border-radius:12px; display:grid; place-items:center;
-    background:var(--green-soft); color:var(--green); border:1px solid var(--green-line)}
+    background:rgba(37,99,235,.10); color:#2563EB; border:1px solid rgba(37,99,235,.26)}
+  html[data-theme="dark"] .crosslink .cl-ic{background:rgba(91,140,255,.16); color:#7FA8FF; border-color:rgba(91,140,255,.36)}
   .crosslink .cl-ic svg{width:22px; height:22px}
   .crosslink .cl-txt{flex:1 1 auto; min-width:0}
   .crosslink .cl-txt b{display:block; font-family:"Archivo",sans-serif; font-weight:800; font-size:14.5px;
@@ -1337,7 +1442,7 @@
   .crosslink .cl-go{flex:0 0 auto; width:28px; height:28px; border-radius:50%; display:grid; place-items:center;
     border:1px solid var(--line); background:var(--bg2); color:var(--muted); transition:color .15s, border-color .15s}
   .crosslink .cl-go svg{width:15px; height:15px}
-  .crosslink:hover .cl-go{color:var(--green); border-color:var(--green-line)}
+  .crosslink:hover .cl-go{color:#2563EB; border-color:rgba(37,99,235,.34)}
   @media (max-width:400px){ .crosslink .cl-txt span{font-size:11.5px} }
   .fchip.freechip{color:var(--free); border-color:var(--free-line); background:var(--free-soft); font-weight:800}
   .fchip.freechip[aria-pressed="true"]{background:var(--free); color:#fff; border-color:var(--free)}
@@ -1630,11 +1735,60 @@ function buildFilters(host, onChange){
 const MCHEV='<svg class="mchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
 const RCHEV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
 
-function tile(color){
-  const c = color || "#2563EB";
-  return `<span class="flag"><svg class="cball" viewBox="0 0 24 24" aria-hidden="true">`+
-    `<circle cx="12" cy="12" r="10.5" fill="${c}" stroke="rgba(0,0,0,.32)" stroke-width="1"></circle>`+
-    `<path d="M9.6 8.2l6.4 3.8-6.4 3.8z" fill="#FFFFFF"></path></svg></span>`;
+/* ---------------------------------------------------------------------
+   Farbpaare pro Sendung — das Pendant zu den Vereinsfarben bei TVFussball.
+   Der Titel wird gehasht, daraus fällt immer dasselbe Paar. „Feuerwehrmann
+   Sam" ist also jeden Tag rot-orange, „Löwenzahn" jeden Tag grün-gelb.
+   Warme, kräftige Töne; alle tragen weiße Symbole mit genug Kontrast.
+   --------------------------------------------------------------------- */
+const PALETTE = [
+  ["#FF6B35","#FFB703"],  // Mango
+  ["#EF476F","#FF9E7D"],  // Himbeere
+  ["#F72585","#FF8FA3"],  // Bubblegum
+  ["#FB8500","#FFD166"],  // Sonnenblume
+  ["#E76F51","#F4A261"],  // Terrakotta
+  ["#D00000","#FF8800"],  // Feuer
+  ["#8338EC","#FF6B9D"],  // Traube
+  ["#00A6A6","#F6C177"],  // Lagune
+  ["#2A9D8F","#E9C46A"],  // Salbei
+  ["#7B2CBF","#C77DFF"],  // Pflaume
+  ["#06A77D","#B7E4C7"],  // Minze
+  ["#C1121F","#F9844A"],  // Kirsche
+  ["#3A86FF","#8ECAE6"],  // Himmel
+  ["#FF4D6D","#FFC09F"]   // Koralle
+];
+
+function hashStr(t){
+  let h = 0;
+  for(let i=0;i<t.length;i++){ h = (h*31 + t.charCodeAt(i)) | 0; }
+  return Math.abs(h);
+}
+function pairFor(title){ return PALETTE[hashStr(title||"?") % PALETTE.length]; }
+
+function hexA(hex, a){
+  const n = parseInt(hex.slice(1),16);
+  return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
+}
+
+/* Symbol je Genre — gefüllt, damit es bei 19px noch trägt */
+const GLYPH = {
+  "Zeichentrick": '<path d="M12 3.2l2.6 5.4 5.9.85-4.3 4.2 1.02 5.9L12 16.7l-5.22 2.85L7.8 13.65 3.5 9.45l5.9-.85z"/>',
+  "Anime":        '<path d="M12 2l2.1 6.1L20 10l-5.9 1.9L12 18l-2.1-6.1L4 10l5.9-1.9z"/><circle cx="18.5" cy="17.5" r="2"/>',
+  "Film":         '<path d="M3 6.4h18v12.2a1.6 1.6 0 0 1-1.6 1.6H4.6A1.6 1.6 0 0 1 3 18.6z"/><path d="M3.4 3.4h4l1.4 2.6h-4zM9.4 3.4h4l1.4 2.6h-4zM15.4 3.4h4l1.4 2.6h-4z"/>',
+  "Wissen":       '<path d="M12 2.4A6.4 6.4 0 0 0 8.1 13.9c.5.4.8 1 .8 1.6v.6h6.2v-.6c0-.6.3-1.2.8-1.6A6.4 6.4 0 0 0 12 2.4z"/><path d="M9.2 17.6h5.6v1.5H9.2zM10.1 20.4h3.8v1.3h-3.8z"/>',
+  "Vorlesen":     '<path d="M20.4 14.6A8.4 8.4 0 0 1 9.5 3.7a8.6 8.6 0 1 0 10.9 10.9z"/><path d="M17.4 3l.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7z"/>',
+  "Serie":        '<circle cx="12" cy="12" r="9.2"/><circle cx="9" cy="10" r="1.3" fill="#fff"/><circle cx="15" cy="10" r="1.3" fill="#fff"/><path d="M7.8 14c1 1.9 2.5 2.8 4.2 2.8s3.2-.9 4.2-2.8" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round"/>',
+  "Jugendserie":  '<path d="M12 20.6l-1.5-1.36C5.3 14.5 2 11.5 2 7.9A5.6 5.6 0 0 1 7.6 2.3c1.8 0 3.5.84 4.4 2.16A5.4 5.4 0 0 1 16.4 2.3 5.6 5.6 0 0 1 22 7.9c0 3.6-3.3 6.6-8.5 11.34z"/>',
+  "Fantasyserie": '<path d="M6.6 20.4l9-9 2 2-9 9z"/><path d="M17.8 3.2l.85 2.35 2.35.85-2.35.85-.85 2.35-.85-2.35-2.35-.85 2.35-.85zM8.2 2.6l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6z"/>',
+  "Musik & Tanz": '<path d="M9.4 17.6V6.2l10-1.9v11.4"/><circle cx="6.8" cy="17.9" r="2.7"/><circle cx="16.8" cy="15.9" r="2.7"/>'
+};
+const GLYPH_DEFAULT = '<path d="M8.6 5.6l10 6.4-10 6.4z"/>';
+
+function sticker(s){
+  const [c1,c2] = s.color2 ? [s.color, s.color2] : pairFor(s.title);
+  const g = GLYPH[s.genre] || GLYPH_DEFAULT;
+  return `<span class="stick" style="--s1:${c1};--s2:${c2}" aria-hidden="true">`+
+         `<svg viewBox="0 0 24 24" fill="currentColor">${g}</svg></span>`;
 }
 
 function rowHTML(s){
@@ -1649,12 +1803,17 @@ function rowHTML(s){
       : (s.fskTodo ? "noch zu prüfen — Kinofilme haben eine FSK-Freigabe, sie muss einzeln nachgeschlagen werden"
                    : "keine Angabe — FSK gilt nur für Filme und Bildträger, nicht für Serienfolgen");
 
+  const [pc1,pc2] = pairFor(s.title);
+  const styleVars = `--c1:${pc1};--c2:${pc2};`+
+    `--w1:${hexA(pc1,.22)};--w2:${hexA(pc2,.20)};`+
+    `--w1d:${hexA(pc1,.30)};--w2d:${hexA(pc2,.26)}`;
+
   return `
-<div class="row${free.length?" free":""}" data-k="${s.day}|${s.time}|${s.title}|${s.sub||""}|${s.genre||""}|${(s.ch||[]).map(c=>c.n).join(" ")}">
+<div class="row${free.length?" free":""}" style="${styleVars}" data-k="${s.day}|${s.time}|${s.title}|${s.sub||""}|${s.genre||""}|${(s.ch||[]).map(c=>c.n).join(" ")}">
   <button class="rowhead" aria-expanded="false">
     <div class="time"><span class="time-clock">${s.time}<small>${s.dur||""}</small></span></div>
     <div class="teams">
-      <div class="t">${tile(s.color)}<span>${s.title}</span>
+      <div class="t">${sticker(s)}<span>${s.title}</span>
         <span class="favstar" data-follow="${s.title}" role="button" tabindex="0" aria-pressed="false"
               aria-label="${s.title} merken" title="${s.title} merken">☆</span></div>
       ${s.sub?`<div class="t subline">${s.sub}</div>`:""}
