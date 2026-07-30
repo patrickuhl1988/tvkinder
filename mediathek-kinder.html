@@ -1594,6 +1594,55 @@
     font-size:15px; letter-spacing:-.02em; background:#2563EB; color:#fff; border-color:#2563EB}
   html[data-theme="dark"] .crosslink .cl-ic{background:#5B8CFF; color:#0A0D14; border-color:#5B8CFF}
 
+  /* --- Retro-Kennzeichnung --------------------------------------------- */
+  .retro{display:inline-flex; align-items:center; font-family:"JetBrains Mono",monospace;
+    font-size:9.5px; font-weight:700; padding:2.5px 6px; border-radius:var(--r-tag);
+    border:1px solid rgba(122,44,191,.42); color:#6D28A8; background:rgba(122,44,191,.10); white-space:nowrap}
+  html[data-theme="dark"] .retro{color:#C77DFF; border-color:rgba(199,125,255,.40); background:rgba(199,125,255,.13)}
+  .fchip.retrochip{color:#6D28A8; border-color:rgba(122,44,191,.40); background:rgba(122,44,191,.09)}
+  .fchip.retrochip[aria-pressed="true"]{background:#6D28A8; color:#fff; border-color:#6D28A8}
+  html[data-theme="dark"] .fchip.retrochip{color:#C77DFF; border-color:rgba(199,125,255,.38); background:rgba(199,125,255,.12)}
+  html[data-theme="dark"] .fchip.retrochip[aria-pressed="true"]{background:#C77DFF; color:#1A0B26}
+
+  /* --- Katalogzeile in der Mediathek ----------------------------------- */
+  .mrow{display:flex; gap:12px; align-items:flex-start; padding:12px 13px}
+  .mmain{min-width:0; flex:1}
+  .mmain > b{display:block; font-family:"Archivo",sans-serif; font-weight:800; font-size:15px;
+    letter-spacing:-.01em; line-height:1.25}
+  .msub{display:block; font-size:12.5px; color:var(--muted); margin-top:2px}
+  .mmeta{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:8px}
+  .myear{font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--muted);
+    border:1px solid var(--line2); border-radius:var(--r-tag); padding:2px 6px}
+  .pvrow{display:flex; flex-wrap:wrap; gap:6px; margin-top:9px}
+
+  /* --- Herkunftsmarken in den Farben der jeweiligen Anbieter ------------ */
+  .pv{display:inline-flex; align-items:center; gap:6px;
+    font-size:11.5px; font-weight:700; padding:3px 9px 3px 7px; border-radius:var(--r-tag);
+    background:var(--pv-bg); border:1px solid var(--pv-bd); color:var(--pv-tx); white-space:nowrap}
+  .pv i{width:8px; height:8px; border-radius:1px; background:var(--pv); flex:0 0 auto}
+  .pv:not(.sure){border-style:dashed}
+  html[data-theme="dark"] .pv{background:var(--pv-bgd); border-color:var(--pv-bd); color:var(--pv-txd)}
+  html[data-theme="dark"] .pv i{background:var(--pv-txd)}
+  .pvlegend{display:flex; gap:14px; flex-wrap:wrap; align-items:center;
+    font-size:11.5px; color:var(--faint); margin:2px 2px 10px}
+  .pvlegend b{font-weight:700; color:var(--muted)}
+  .pvlegend .ex{display:inline-flex; align-items:center; gap:6px}
+  .pvlegend .ex i{width:8px; height:8px; border-radius:1px; background:var(--muted)}
+  .pvlegend .ex.dash{border:1px dashed var(--line2); border-radius:var(--r-tag); padding:2px 7px}
+  .pvlegend .ex.solid{border:1px solid var(--line2); border-radius:var(--r-tag); padding:2px 7px}
+
+  /* --- Auswahlfeld im Optionsbalken ------------------------------------ */
+  .sel{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:700; color:var(--ink)}
+  .sel select{appearance:none; -webkit-appearance:none; font:inherit; font-weight:600;
+    color:var(--ink); background:var(--bg2); border:1.5px solid var(--line2);
+    border-radius:var(--r-tag); padding:6px 26px 6px 9px; cursor:pointer;
+    background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),
+                     linear-gradient(135deg,var(--muted) 50%,transparent 50%);
+    background-position:calc(100% - 14px) 51%, calc(100% - 9px) 51%;
+    background-size:5px 5px, 5px 5px; background-repeat:no-repeat}
+  .sel select:focus-visible{outline:2px solid var(--green); outline-offset:2px}
+  @media (max-width:420px){ .sel{font-size:12.5px} .sel select{padding:5px 24px 5px 8px} }
+
   /* --- letzte Rundungsreste (steht bewusst am Ende der Kaskade) -------- */
   .logo .tv{border-radius:var(--r-tag)}
   .crosslink .cl-ic,.crosslink .cl-go{border-radius:var(--r-ctl)}
@@ -1631,12 +1680,30 @@
 
 <div class="wrap">
   <section class="tabpane active" id="pane-mediathek" role="tabpanel">
-    <div class="fsearch"><span class="ic">⌕</span><input id="medSearch" type="text" placeholder="Anbieter suchen …"></div>
+    <div class="filters" id="medFilters"></div>
+    <div class="opts" id="medOpts">
+      <label class="opt"><input type="checkbox" id="medImdb"><span>Nur IMDb über 8</span></label>
+      <label class="sel"><span>Sortieren</span>
+        <select id="medSort">
+          <option value="az">A – Z</option>
+          <option value="jahr-ab">Jahr, neueste zuerst</option>
+          <option value="jahr-auf">Jahr, älteste zuerst</option>
+          <option value="alter">Alter, aufsteigend</option>
+          <option value="imdb">IMDb-Bewertung</option>
+        </select></label>
+      <span class="opt-cnt" id="medCount"></span>
+    </div>
+    <div class="fsearch"><span class="ic">⌕</span><input id="medSearch" type="text" placeholder="Titel, Genre oder Anbieter suchen …"></div>
 
-    <div class="section-eyebrow"><h2>Kostenlos</h2><span class="cnt">Mediatheken</span></div>
+    <div class="pvlegend">
+      <span class="ex solid"><i></i>Sender-Mediathek</span>
+      <span class="ex dash"><i></i>meist dort *</span>
+      <span>Farbe und Punkt zeigen den Anbieter.</span>
+    </div>
+    <div class="board" id="medBoard"></div>
+
+    <div class="section-eyebrow"><h2>Die Anbieter</h2><span class="cnt">Kinderbereich im Vergleich</span></div>
     <div class="board" id="medFree"></div>
-
-    <div class="section-eyebrow"><h2>Mit Abo</h2><span class="cnt">monatlich kündbar</span></div>
     <div class="board" id="medPaid"></div>
 
     <details class="wmsec">
@@ -1709,6 +1776,62 @@ const PROVIDERS = [
   {name:"KiKA-Player",short:"KiKA",type:"frei",price:"kostenlos",kids:"Werbefrei, sortiert nach 3, 6 und 10 Jahren",age:"3–13",profiles:false,offline:true,u:"https://www.kika.de/"},
   {name:"ARD Mediathek",short:"ARD",type:"frei",price:"kostenlos",kids:"Kinderbereich mit Sendungen aus KiKA und den Dritten",age:"3–13",profiles:false,offline:true,u:"https://www.ardmediathek.de/kinder"},
   {name:"ZDFtivi",short:"ZDF",type:"frei",price:"kostenlos",kids:"Kinderangebot des ZDF, werbefrei, mit Elternbereich",age:"3–13",profiles:false,offline:true,u:"https://www.zdf.de/kinder"}
+];
+
+const MEDIA = [
+  {title:"Schloss Einstein",sub:"Erfurt · Freundschaft ist harte Arbeit",genre:"Jugendserie",age:10,grp:"a10",year:null,imdb:null,retro:{y:1998,n:"Läuft seit 1998 ununterbrochen. Wer in den Nullerjahren Kind war, kennt mindestens eine Staffel."},prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Internatsserie mit Beziehungsthemen und leichten Konflikten. Läuft seit Jahren, Einstieg mitten in der Staffel ist möglich."},
+  {title:"H2O – Plötzlich Meerjungfrau",sub:"Rikko, der Clown",genre:"Fantasyserie",age:10,grp:"a10",year:null,imdb:null,retro:{y:2006,n:"Australische Serie von 2006 — Pflichtprogramm für alle, die um 2010 in der Grundschule waren."},prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Ruhige Fantasyserie ohne Schreckmomente. Thema Freundschaft und Geheimnisse."},
+  {title:"Mia and Me",sub:"Abenteuer in Centopia · Tanzende Lichter",genre:"Zeichentrick",age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Freundliche Fantasywelt, klare Gut-Böse-Struktur, keine harten Konflikte."},
+  {title:"Sherlock Yack – Der Zoodetektiv",sub:"Wer hat Sherlock umgehauen?",genre:"Zeichentrick",age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Kurze Rätselgeschichten zum Mitraten. Gut geeignet, um Kinder aktiv einzubinden."},
+  {title:"Garfield",sub:"Der neue Autor",genre:"Zeichentrick",age:6,grp:"a6",year:null,imdb:null,retro:{y:1978,n:"Der Comic startete 1978, im deutschen Fernsehen lief der Kater ab den 80ern."},prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Slapstick-Humor, hohes Tempo. Wenig Bildungsanteil, dafür kurz."},
+  {title:"Die Schlümpfe",sub:"Ein unwiderschlumpfliches Lächeln",genre:"Zeichentrick",age:6,grp:"a6",year:null,imdb:null,retro:{y:1981,n:"Die Zeichentrickserie startete 1981, im deutschen Fernsehen lief sie durch die ganzen 80er."},prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Klassiker mit ruhigem Erzähltempo. Eine Figur bricht sich ein Bein — wird harmlos aufgelöst."},
+  {title:"Der kleine Nick und die Ferien",sub:"Der Papagei",genre:"Zeichentrick",age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Alltagskomik im Ferienhotel. Thema: zu Unrecht beschuldigt werden — gut zum Nachbesprechen."},
+  {title:"Feuerwehrmann Sam",sub:"Panik beim Picknick",genre:"Zeichentrick",age:3,grp:"a3",year:null,imdb:null,retro:{y:1987,n:"Der walisische Feuerwehrmann fährt seit 1987 nach Pontypandy aus."},prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Vorschulklassiker mit vorhersehbarer Struktur: Problem, Einsatz, Lösung. Keine echte Gefahr."},
+  {title:"Zacki und die Zoobande",sub:"Das Geburtstagslied",genre:"Zeichentrick",age:3,grp:"a3",year:null,imdb:null,retro:null,prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Sehr ruhig, viel Musik, Thema Zusammenarbeit. Gut für Vorschulkinder."},
+  {title:"Baumhaus",sub:"An Geburtstage denken mit dem Wochenplan",genre:"Vorlesen",age:3,grp:"a3",year:null,imdb:null,retro:null,prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Dreiminütige Übergangssendung vor dem Sandmännchen. Ruhig, mit einer Alltagsidee zum Nachmachen."},
+  {title:"Unser Sandmännchen",sub:"Dr. Brumm backt Pfannkuchen",genre:"Vorlesen",age:3,grp:"a3",year:null,imdb:null,retro:{y:1959,n:"Läuft seit 1959 und damit schon bei den Großeltern. Das Ritual vor dem Schlafengehen schlechthin."},prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Der klassische Einschlaf-Anker. Langsames Tempo, leise Musik, feste Struktur."},
+  {title:"Arthur und die Freunde der Tafelrunde",sub:"Das Fest der Kobolde",genre:"Zeichentrick",age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Ritterabenteuer mit Zaubereien. Streiche statt Bedrohung, aber lauter als das Vorabendprogramm."},
+  {title:"Löwenzahn",sub:"Physik – Ein Spielplatz für Bärstadt",genre:"Wissen",age:6,grp:"a6",year:null,imdb:null,retro:{y:1981,n:"Seit 1981, jahrzehntelang mit Peter Lustig im Bauwagen. Die heutige Folge stammt aus den Classics."},prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Erklärt Feder-, Flieh- und Anziehungskraft an einem Spielplatz. Hoher Sachanteil, gut zum Mitschauen."},
+  {title:"logo!",sub:"Kindernachrichten",genre:"Wissen",age:8,grp:"a6",year:null,imdb:null,retro:{y:1989,n:"Deutschlands Kindernachrichten seit 1989 — viele Eltern haben damit selbst die Welt erklärt bekommen."},prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Deutschlands einzige tägliche Nachrichtensendung für Kinder. Je nach Weltlage können belastende Themen vorkommen — mitschauen lohnt."},
+  {title:"KiKA LIVE",sub:"Kochen ohne Plan / Teil 2",genre:"Musik & Tanz",age:10,grp:"a10",year:null,imdb:null,retro:null,prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Moderationsformat mit Koch-Challenge. Hohes Tempo, laut, aber ohne Konfliktthemen."},
+  {title:"Crazy Fun Park",sub:"Vergiss mich nicht",genre:"Jugendserie",age:12,grp:"a10",year:null,imdb:null,retro:null,prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Mystery-Serie mit Geistern und dem Thema Tod und Vergessenwerden. Für jüngere Kinder ungeeignet, ab etwa 12 gut."},
+  {title:"Die Regeln von Floor",sub:"Pool",genre:"Serie",age:10,grp:"a10",year:null,imdb:null,retro:null,prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Niederländische Comedyserie. Thema: Freundschaft aus falschen Motiven."},
+  {title:"Voll zu spät!",sub:"Der Kampf der Götter",genre:"Zeichentrick",age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"RTL+",sure:false,c:"#E0004D"},{n:"TOGGO App",sure:false,c:"#F5333F"}],note:"Kurze Schulweg-Geschichten mit Mythologie-Bezug. Tempo hoch, Konflikte harmlos."},
+  {title:"Ninjago – Aufstieg der Drachen",sub:"Zane und die Kapsel",genre:"Anime",age:8,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"RTL+",sure:false,c:"#E0004D"},{n:"TOGGO App",sure:false,c:"#F5333F"}],note:"Actionlastige Ninja-Serie mit dauerhaften Kampfszenen. Für jüngere Kinder oft zu hektisch."},
+  {title:"ALVINNN!!! und die Chipmunks",sub:"Endlich frei",genre:"Zeichentrick",age:6,grp:"a6",year:null,imdb:null,retro:{y:1983,n:"Die Chipmunks gibt es als Zeichentrickserie seit 1983 — die aktuelle Fassung ist eine Neuauflage."},prov:[{n:"RTL+",sure:false,c:"#E0004D"},{n:"TOGGO App",sure:false,c:"#F5333F"}],note:"Slapstick-Folge um Regeln und Freiheit. Kurz, laut, ohne Tiefgang."},
+  {title:"Jade Armor",sub:"Die Sache mit dem Knöchel",genre:"Anime",age:8,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"RTL+",sure:false,c:"#E0004D"},{n:"TOGGO App",sure:false,c:"#F5333F"}],note:"Superheldinnen-Serie im Anime-Stil mit Kampfszenen. Klare Gut-Böse-Struktur."},
+  {title:"Die Nektons – Abenteurer der Tiefe",sub:"Meerjungfrauen",genre:"Zeichentrick",age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"RTL+",sure:false,c:"#E0004D"},{n:"TOGGO App",sure:false,c:"#F5333F"}],note:"Tiefsee-Abenteuer mit Familienteam. Piraten als Gegner, aber ohne echte Bedrohung."},
+  {title:"Willkommen bei den echten Louds",sub:"Schöne Überraschung",genre:"Serie",age:8,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"RTL+",sure:false,c:"#E0004D"},{n:"TOGGO App",sure:false,c:"#F5333F"}],note:"Realverfilmung der Zeichentrickserie. Thema Doppel-Date, eher für ältere Grundschulkinder."},
+  {title:"Pokémon Horizonte: Die Serie",sub:"Der Plan, Rayquaza zu fangen!",genre:"Anime",age:6,grp:"a6",year:null,imdb:null,retro:{y:1999,n:"Aktuelle Staffel der Reihe, die 1999 im deutschen Fernsehen startete."},prov:[{n:"RTL+",sure:false,c:"#E0004D"},{n:"TOGGO App",sure:false,c:"#F5333F"}],note:"Aktuelle Pokémon-Staffel. Kämpfe sind stilisiert und ohne Verletzungen."},
+  {title:"Willkommen bei den Louds",sub:"Eiskalte Lernmethoden",genre:"Zeichentrick",age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"RTL+",sure:false,c:"#E0004D"},{n:"TOGGO App",sure:false,c:"#F5333F"}],note:"Großfamilien-Comedy, hohes Tempo, viele Figuren gleichzeitig."},
+  {title:"Monster Loving Maniacs",sub:"Zeitschleim",genre:"Zeichentrick",age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"RTL+",sure:false,c:"#E0004D"},{n:"TOGGO App",sure:false,c:"#F5333F"}],note:"Monster-Comedy, überzeichnet und laut, aber ohne Gruselabsicht."},
+  {title:"Woozle Goozle",sub:"Holz",genre:"Wissen",age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"RTL+",sure:false,c:"#E0004D"},{n:"TOGGO App",sure:false,c:"#F5333F"}],note:"Wissensmagazin mit Experimenten rund um den Werkstoff Holz. Bester Sachanteil im Toggo-Programm."},
+  {title:"Pokémon",sub:"Kampf um Platz acht!",genre:"Anime",age:6,grp:"a6",year:null,imdb:null,retro:{y:1999,n:"Kam 1999 ins deutsche Fernsehen und hat eine ganze Generation durch die Grundschule begleitet."},prov:[{n:"RTL+",sure:false,c:"#E0004D"},{n:"TOGGO App",sure:false,c:"#F5333F"}],note:"Klassische Pokémon-Folge. Um 21:15 aber weit außerhalb der üblichen Kinder-Sendezeit."},
+  {title:"Mr. Magoo",sub:"Ritter Magoo / Rockstar aus dem All / Doktor Magoo",genre:"Anime",age:6,grp:"a6",year:null,imdb:null,retro:{y:1949,n:"Die Figur stammt aus dem Jahr 1949, die Kurzfilme liefen in Deutschland über Jahrzehnte."},prov:[{n:"RTL+",sure:false,c:"#E0004D"},{n:"TOGGO App",sure:false,c:"#F5333F"}],note:"Drei Kurzgeschichten mit Sehschwäche-Slapstick. Sehr spät im Programm."},
+  {title:"Die Chroniken von Narnia",sub:"Prinz Kaspian von Narnia",genre:"Film",age:10,grp:"a10",year:2008,imdb:null,retro:null,prov:[{n:"Disney+",sure:false,c:"#0C2A6B"}],note:"Zweiter Teil der Fantasy-Reihe mit großen Schlachtszenen. Für Grundschulkinder stellenweise zu düster, Ende weit nach 23 Uhr."},
+  {title:"Das doppelte Lottchen",sub:"Spielfilm, Deutschland 2017",genre:"Film",age:6,grp:"a6",year:2017,imdb:null,retro:null,prov:[{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Kästner-Klassiker um Zwillinge im Ferienheim. Ruhig erzählt, Trennung der Eltern als Thema."},
+  {title:"Baymax",sub:"Riesiges Robowabohu",genre:"Film",age:8,grp:"a6",year:2014,imdb:null,retro:null,prov:[{n:"Disney+",sure:false,c:"#0C2A6B"}],note:"Oscar-prämiertes Animationsabenteuer. Der Tod des älteren Bruders wird offen behandelt — braucht bei jüngeren Kindern Begleitung."},
+  {title:"Bolt",sub:"Ein Hund für alle Fälle",genre:"Film",age:6,grp:"a6",year:2008,imdb:null,retro:{y:2008,n:"Von 2008 — der Film, mit dem Disney Animation wieder Fahrt aufnahm."},prov:[{n:"Disney+",sure:false,c:"#0C2A6B"}],note:"Hund hält seine Serienrolle für echt. Warmherzig, ein paar Verfolgungsszenen."},
+  {title:"Tom Turbo",sub:"Das Geheimnis des Pinguins",genre:"Film",age:6,grp:"a6",year:1993,imdb:null,retro:{y:1993,n:"Thomas Brezinas Fahrrad-Detektiv fährt seit 1993 durch den ORF."},prov:[{n:"ORF ON",sure:false,c:"#E2001A"}],note:"Interaktive Krimiserie von Thomas Brezina zum Mitraten. In Deutschland nur über Satellit oder Stream."},
+  {title:"Pippi Langstrumpf",sub:"Pippi auf großer Ballonfahrt",genre:"Film",age:6,grp:"a6",year:1969,imdb:null,retro:{y:1969,n:"Die schwedische Verfilmung von 1969 mit Inger Nilsson — bei drei Generationen im Wohnzimmer gelaufen."},prov:[{n:"ZDFtivi",sure:true,c:"#FA7D19"}],note:"Lindgren-Klassiker in Serienlänge. Ruhiges Tempo, starke Hauptfigur."},
+  {title:"Hans im Glück",sub:"Spielfilm, Deutschland 1998",genre:"Film",age:6,grp:"a6",year:1998,imdb:null,retro:{y:1998,n:"Märchenverfilmung von 1998, ein Fixpunkt im Feiertagsprogramm der Dritten."},prov:[{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Grimm-Märchen als Realverfilmung. Langsam erzählt, gut für den Samstagvormittag."},
+  {title:"Findet Dorie",sub:"",genre:"Film",age:6,grp:"a6",year:2016,imdb:null,retro:null,prov:[{n:"Disney+",sure:false,c:"#0C2A6B"}],note:"Fortsetzung von Findet Nemo. Vergesslichkeit und Elternsuche als Thema, einzelne bange Momente."},
+  {title:"Minions",sub:"",genre:"Film",age:6,grp:"a6",year:2015,imdb:null,retro:null,prov:[{n:"RTL+",sure:false,c:"#E0004D"}],note:"Slapstick am laufenden Band, kaum Handlung. Laut, aber harmlos."},
+  {title:"Charlie & Louise",sub:"",genre:"Film",age:8,grp:"a6",year:1994,imdb:null,retro:{y:1994,n:"Deutsche Kästner-Adaption von 1994 mit den Zwillingen Floriane und Fritzi Eichhorn."},prov:[{n:"RTL+",sure:false,c:"#E0004D"},{n:"TOGGO App",sure:false,c:"#F5333F"}],note:"Deutsche Doppelgängerinnen-Geschichte nach Kästner-Motiv. Läuft parallel zu Minions und Arielle."},
+  {title:"Arielle, die Meerjungfrau",sub:"",genre:"Film",age:6,grp:"a6",year:1989,imdb:null,retro:{y:1989,n:"Disneys Wendepunkt von 1989, der die große Zeichentrick-Renaissance einleitete."},prov:[{n:"Disney+",sure:false,c:"#0C2A6B"}],note:"Disney-Klassiker nach Andersen. Die Meerhexe Ursula kann kleinere Kinder erschrecken."},
+  {title:"Pünktchen und Anton",sub:"",genre:"Film",age:8,grp:"a6",year:1999,imdb:null,retro:{y:1999,n:"Caroline Links Neuverfilmung von 1999, gedreht mit Elea Geissler und Max Felder."},prov:[{n:"RTL+",sure:false,c:"#E0004D"},{n:"TOGGO App",sure:false,c:"#F5333F"}],note:"Caroline Links Neuverfilmung. Thema soziale Unterschiede — inhaltlich stark, Sendeplatz aber sehr spät."},
+  {title:"Der Schuh des Manitu",sub:"Extra Large",genre:"Film",age:12,grp:"a10",year:2001,imdb:null,retro:{y:2001,n:"Der Kinohit von 2001. Nostalgie für die Eltern — für die Kinder aber kein Kinderfilm."},prov:[{n:"Joyn",sure:false,c:"#7B2FF7"}],note:"Kein Kinderfilm. Westernparodie mit derbem Humor und Anspielungen für Erwachsene, Sendeplatz 22:35. Steht hier nur, weil die Quelle ihn unter Familienfilm führt."},
+  {title:"Mary Poppins' Rückkehr",sub:"",genre:"Film",age:6,grp:"a6",year:2018,imdb:null,retro:null,prov:[{n:"ORF ON",sure:false,c:"#E2001A"}],note:"Charmante Fortsetzung mit Emily Blunt — läuft aber um 4 Uhr nachts. Nur zum Aufnehmen."},
+  {title:"Ostwind (3)",sub:"Aufbruch nach Ora",genre:"Film",age:8,grp:"a6",year:2017,imdb:null,retro:null,prov:[{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Dritter Teil der Pferdefilmreihe. Freundschaft und Verantwortung, keine harten Konflikte."},
+  {title:"Das Märchen von der silbernen Brücke",sub:"Spielfilm, Deutschland 2024",genre:"Film",age:6,grp:"a6",year:2024,imdb:null,retro:null,prov:[{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Neues Weihnachtsmärchen von 2024, hier als Sommerwiederholung. Klassische Märchenstruktur."},
+  {title:"Himmel und Huhn",sub:"",genre:"Film",age:6,grp:"a6",year:2005,imdb:null,retro:{y:2005,n:"Disneys erster vollständig computeranimierter Film ohne Pixar, von 2005."},prov:[{n:"Disney+",sure:false,c:"#0C2A6B"}],note:"Hühnchen rettet die Erde vor Außerirdischen. Hohes Tempo, viele Gags, wenig Ruhe."},
+  {title:"Angry Birds – Der Film",sub:"",genre:"Film",age:6,grp:"a6",year:2016,imdb:null,retro:null,prov:[{n:"ORF ON",sure:false,c:"#E2001A"}],note:"Verfilmung der Spiele-App. Viel Wut und Zerstörung als Running Gag, erzählerisch dünn."},
+  {title:"Ritter Rost 2",sub:"Das Schrottkomplott",genre:"Film",age:6,grp:"a6",year:2017,imdb:null,retro:null,prov:[{n:"KiKA-Player",sure:true,c:"#5FB030"},{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Deutscher Animationsfilm mit Musik. Werbefrei und auf einem guten Sonntagsplatz."},
+  {title:"Dornröschen",sub:"Spielfilm, Deutschland 2009",genre:"Film",age:6,grp:"a6",year:2009,imdb:null,retro:null,prov:[{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Grimm-Verfilmung aus der ARD-Märchenreihe. Eine Stunde, ruhig erzählt."},
+  {title:"Heidi",sub:"Spielfilm",genre:"Film",age:6,grp:"a6",year:1974,imdb:null,retro:{y:1974,n:"Die japanische Zeichentrickserie von 1974 prägte das Heidi-Bild in ganz Europa."},prov:[{n:"3sat Mediathek",sure:true,c:"#E9500E"}],note:"Der Klassiker von Johanna Spyri. Hinweis: Die Quelle nennt in der Überschrift 1952 und im Text die Verfilmung von Alain Gsponer — Jahr vor der Übernahme prüfen."},
+  {title:"Der Zauberlehrling",sub:"Spielfilm, Deutschland 2017",genre:"Film",age:8,grp:"a6",year:2017,imdb:null,retro:null,prov:[{n:"ARD Mediathek",sure:true,c:"#123A8F"}],note:"Märchenverfilmung um Zauberei und Machtkampf. Etwas düsterer als die ARD-Standardmärchen."},
+  {title:"Der König der Löwen 2",sub:"Simbas Königreich",genre:"Film",age:6,grp:"a6",year:1998,imdb:null,retro:{y:1998,n:"Die Fortsetzung von 1998 kam direkt auf Video — für viele die erste eigene Kassette."},prov:[{n:"Disney+",sure:false,c:"#0C2A6B"}],note:"Direct-to-Video-Fortsetzung. Kämpfe zwischen zwei Löwenrudeln, für sensible Kinder stellenweise heftig."},
+  {title:"Jim Knopf und Lukas der Lokomotivführer",sub:"",genre:"Film",age:6,grp:"a6",year:2018,imdb:null,retro:null,prov:[{n:"Joyn",sure:false,c:"#7B2FF7"}],note:"Aufwendige Verfilmung des Michael-Ende-Klassikers. Über zwei Stunden inklusive Werbepausen — Ende gegen 22:30."}
 ];
 
 
@@ -1789,6 +1912,7 @@ function buildFilters(host, onChange){
   host.innerHTML =
     GROUPS.map(g=>`<button class="fchip${g.id!=="all"?" tmode":""}" data-g="${g.id}" aria-pressed="${g.id==="all"}">`+
       (g.color?`<span class="cdot" style="background:${g.color}"></span>`:"")+g.label+`</button>`).join("") +
+    '<button class="fchip retrochip" data-g="retro" aria-pressed="false">Kennst du noch?</button>' +
     GENRES.map(x=>`<button class="fchip" data-g="genre:${x}" aria-pressed="false">${x}</button>`).join("");
   host.addEventListener("click", e=>{
     const b=e.target.closest(".fchip"); if(!b) return;
@@ -1829,6 +1953,17 @@ function hashStr(t){
   return Math.abs(h);
 }
 function pairFor(title){ return PALETTE[hashStr(title||"?") % PALETTE.length]; }
+
+/* Markenfarbe so nachziehen, dass sie auf hellem bzw. dunklem Grund lesbar
+   bleibt — die Logo-Farben selbst sind dafür teils zu hell oder zu dunkel. */
+function _rgb(hex){ const n=parseInt(hex.slice(1),16); return [(n>>16)&255,(n>>8)&255,n&255]; }
+function _hex(r,g,b){ return "#"+[r,g,b].map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,"0")).join(""); }
+function _lum(hex){ const [r,g,b]=_rgb(hex).map(v=>{v/=255; return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});
+  return .2126*r+.7152*g+.0722*b; }
+function darkenTo(hex, maxLum){ let [r,g,b]=_rgb(hex), out=hex, i=0;
+  while(_lum(out)>maxLum && i<40){ r*=.92; g*=.92; b*=.92; out=_hex(r,g,b); i++; } return out; }
+function lightenTo(hex, minLum){ let [r,g,b]=_rgb(hex), out=hex, i=0;
+  while(_lum(out)<minLum && i<40){ r=r+(255-r)*.12; g=g+(255-g)*.12; b=b+(255-b)*.12; out=_hex(r,g,b); i++; } return out; }
 
 function hexA(hex, a){
   const n = parseInt(hex.slice(1),16);
@@ -1904,7 +2039,7 @@ function rowHTML(s){
         <span class="favstar" data-follow="${s.title}" role="button" tabindex="0" aria-pressed="false"
               aria-label="${s.title} merken" title="${s.title} merken">☆</span></div>
       ${s.sub?`<div class="t subline">${s.sub}</div>`:""}
-      <div class="meta">${now?'<span class="nowtag">läuft</span>':""}${past?'<span class="pasttag">vorbei</span>':""}<span class="comp">${s.channel?s.channel+" · ":""}${s.genre||""}</span>${imdbBadge(s)}
+      <div class="meta">${now?'<span class="nowtag">läuft</span>':""}${past?'<span class="pasttag">vorbei</span>':""}<span class="comp">${s.channel?s.channel+" · ":""}${s.genre||""}</span>${imdbBadge(s)}${s.retro?`<span class="retro">seit ${s.retro.y}</span>`:""}
         ${s.age!==undefined?`<span class="agetag">ab ${s.age}</span>`:""}
         ${(s.fsk!==null&&s.fsk!==undefined)?`<span class="fsktag">FSK ${s.fsk}</span>`:""}${badge}</div>
     </div>
@@ -1924,6 +2059,7 @@ function rowHTML(s){
         <span class="aval">ab ${s.age} Jahren${s.est?'<span class="estmark">redaktionell</span>':''}</span></div>
       <div class="arow"><span class="alb">Laufzeit</span><span class="aval">${s.dur||"—"}</span></div>
       <div class="arow"><span class="alb">Werbung</span><span class="aval">${s.ads===false?"werbefrei":(s.ads===true?"mit Werbeunterbrechungen":"—")}</span></div>
+      ${s.retro?`<div class="arow"><span class="alb">Kennst du noch?</span><span class="aval">${s.retro.n}</span></div>`:""}
       <div class="arow"><span class="alb">IMDb</span><span class="aval">${
         (s.imdb && s.imdb.r)
           ? `<b>${String(s.imdb.r).replace(".",",")}</b> von 10 · <a href="${imdbUrl(s)}" target="_blank" rel="noopener">bei IMDb ansehen</a>`
@@ -2087,6 +2223,7 @@ document.addEventListener("keydown", e=>{
 
 
 
+/* ---------- Anbieterkarten ---------- */
 function pcard(p){
   return '<div class="row"><div class="provrow">' +
     '<span class="plogo">'+p.short+'</span>' +
@@ -2095,14 +2232,71 @@ function pcard(p){
         '<span class="feat">Alter '+p.age+'</span>' +
         '<span class="feat'+(p.profiles?' yes':'')+'">'+(p.profiles?'Kinderprofile':'keine Profile')+'</span>' +
         '<span class="feat'+(p.offline?' yes':'')+'">'+(p.offline?'Downloads':'kein Download')+'</span>' +
-      '</span>' +
-    '</span>' +
+      '</span></span>' +
     '<span class="pprice">'+p.price+'</span></div></div>';
 }
-const mFree=document.getElementById("medFree"), mPaid=document.getElementById("medPaid");
-mFree.innerHTML = PROVIDERS.filter(p=>p.type!=="abo").map(pcard).join("");
-mPaid.innerHTML = PROVIDERS.filter(p=>p.type==="abo").map(pcard).join("");
-initSearch(document.getElementById("medSearch"), mFree);
+document.getElementById("medFree").innerHTML = PROVIDERS.filter(p=>p.type!=="abo").map(pcard).join("");
+document.getElementById("medPaid").innerHTML = PROVIDERS.filter(p=>p.type==="abo").map(pcard).join("");
+
+/* ---------- Katalog ---------- */
+const mBoard = document.getElementById("medBoard");
+let mGroup="all", mImdb=false, mSort="az";
+
+function mcard(e){
+  const [c1,c2] = pairFor(e.title);
+  const g = GLYPH[e.genre] || GLYPH_DEFAULT;
+  const prov = e.prov.map(p=>{
+    const c = p.c || "#7A6153";
+    const style = `--pv:${c};--pv-bg:${hexA(c,.11)};--pv-bd:${hexA(c,.38)};`+
+                  `--pv-tx:${darkenTo(c,.185)};--pv-bgd:${hexA(c,.17)};--pv-txd:${lightenTo(c,.42)}`;
+    return `<span class="pv${p.sure?" sure":""}" style="${style}" title="${
+      p.sure?"Feste Regel: nach der Ausstrahlung in dieser Mediathek":"In der Regel dort, ohne Garantie"}">`+
+      `<i></i>${p.n}${p.sure?"":" *"}</span>`;
+  }).join("");
+  const key = [e.title, e.sub||"", e.genre, e.year||"", e.prov.map(p=>p.n).join(" ")].join("|");
+  return `<div class="row" data-k="${key}" style="--c1:${c1};--c2:${c2};--w1:${hexA(c1,.22)};--w2:${hexA(c2,.20)};--w1d:${hexA(c1,.30)};--w2d:${hexA(c2,.26)}">
+    <div class="mrow">
+      <span class="stick" style="--s1:${c1};--s2:${c2}"><svg viewBox="0 0 24 24" fill="currentColor">${g}</svg></span>
+      <span class="mmain">
+        <b>${e.title}</b>
+        ${e.sub?`<span class="msub">${e.sub}</span>`:""}
+        <span class="mmeta"><span class="comp">${e.genre}</span><span class="agetag">ab ${e.age}</span>${
+          e.year?`<span class="myear">${e.year}</span>`:""}${
+          e.imdb&&e.imdb.r?`<span class="imdb"><b>IMDb</b>${String(e.imdb.r).replace(".",",")}</span>`:""}${
+          e.retro?`<span class="retro">seit ${e.retro.y}</span>`:""}</span>
+        <span class="pvrow">${prov}</span>
+      </span>
+    </div></div>`;
+}
+
+function mApply(){
+  let l = MEDIA.slice();
+  if(mGroup==="retro") l = l.filter(e=>!!e.retro);
+  else if(mGroup.indexOf("genre:")===0) l = l.filter(e=>e.genre===mGroup.slice(6));
+  else if(mGroup!=="all") l = l.filter(e=>e.grp===mGroup);
+  if(mImdb) l = l.filter(e=>e.imdb && e.imdb.r > 8);
+  l = l.filter(e=>(e.age||0) < 16);
+
+  const last = 9999;
+  if(mSort==="az")       l.sort((a,b)=>a.title.localeCompare(b.title,"de"));
+  if(mSort==="jahr-ab")  l.sort((a,b)=>(b.year||-1)-(a.year||-1));
+  if(mSort==="jahr-auf") l.sort((a,b)=>(a.year||last)-(b.year||last));
+  if(mSort==="alter")    l.sort((a,b)=>a.age-b.age || a.title.localeCompare(b.title,"de"));
+  if(mSort==="imdb")     l.sort((a,b)=>((b.imdb&&b.imdb.r)||-1)-((a.imdb&&a.imdb.r)||-1));
+
+  mBoard.innerHTML = l.length
+    ? l.map(mcard).join("") + '<div class="empty" style="display:none">Nichts gefunden.</div>'
+    : '<div class="soonbox"><span class="ic">\ud83d\udd0e</span><div><b style="display:block;color:var(--ink);font-family:Archivo,sans-serif;font-size:14px;margin-bottom:3px">Keine Treffer</b><span style="font-size:12.5px;line-height:1.55">' +
+      (mImdb ? 'Die IMDb-Bewertungen sind noch nicht importiert — siehe <code class="codechip">import_imdb.py</code>.' : 'Anderen Filter waehlen.') +
+      '</span></div></div>';
+  document.getElementById("medCount").textContent = l.length + " von " + MEDIA.length;
+}
+
+buildFilters(document.getElementById("medFilters"), g=>{ mGroup=g; mApply(); });
+document.getElementById("medImdb").addEventListener("change", e=>{ mImdb=e.target.checked; mApply(); });
+document.getElementById("medSort").addEventListener("change", e=>{ mSort=e.target.value; mApply(); });
+mApply();
+initSearch(document.getElementById("medSearch"), mBoard);
 
 </script>
 </body>
