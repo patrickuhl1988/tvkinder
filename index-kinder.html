@@ -1424,6 +1424,117 @@
   /* Tagestrenner-Linie warm auslaufen lassen */
   .daybar .ln{background:linear-gradient(90deg, rgba(251,133,0,.45), rgba(247,37,133,.12) 60%, var(--line))}
 
+
+  /* =====================================================================
+     ENTRUNDUNG — zweiter Durchgang
+     Die durchgehenden 14–18px-Radien, Pillen und weichen Schatten sind das,
+     was ein Layout nach Baukasten aussehen lässt. Hier ersetzt durch eine
+     knappe Radiusskala (4 / 3 / 2 px), Haarlinien statt Schlagschatten und
+     eine Zeitspalte, die wie eine gedruckte Programmzeile liest.
+     Bewusst nicht auf 0px: ganz kantig plus Haarlinien wäre das nächste
+     Klischee. 4px liest sich präzise, nicht steril.
+     ===================================================================== */
+  :root{--r:4px; --r-ctl:3px; --r-tag:2px;
+        --shadow:none;
+        --header-shadow:0 1px 0 rgba(90,50,25,.10)}
+  html[data-theme="dark"]{--r:4px; --shadow:none;
+        --header-shadow:0 1px 0 rgba(255,255,255,.07)}
+
+  /* Karten: Kontur statt Schatten */
+  .row{border-radius:var(--r); box-shadow:none; padding-left:5px}
+  .row::before{width:4px}
+  .row.free{box-shadow:none}
+  .row.open{box-shadow:none; border-color:var(--c1)}
+  .row.open.free{box-shadow:none}
+  html[data-theme="dark"] .row.open{box-shadow:none; border-color:var(--c1)}
+
+  /* Bedienelemente */
+  .fchip{border-radius:var(--r-ctl); padding:7px 12px; font-weight:700}
+  /* #liveFilters wird in orig.css mit höherer Spezifität überschrieben */
+  #liveFilters .fchip{border-radius:var(--r-ctl); box-shadow:none;
+    padding:8px 13px; font-size:13px}
+  #liveFilters .fchip[aria-pressed="true"]{box-shadow:none}
+  .fchip .cdot{width:8px; height:8px; border-radius:2px; box-shadow:none}
+  .fsearch{border-radius:var(--r); box-shadow:none}
+  .seg{border-radius:var(--r-ctl)}
+  .seg button{border-radius:2px}
+  .mktbtn,.themebtn{border-radius:var(--r-ctl)}
+  .mktpop{border-radius:var(--r); box-shadow:0 6px 24px rgba(60,35,20,.14)}
+  .mktopt{border-radius:2px}
+  .sharebtn{border-radius:var(--r-ctl)}
+  .actrow .sharebtn{border-radius:var(--r-ctl)}
+  .navitem{border-radius:var(--r-ctl)}
+  .toast{border-radius:var(--r-ctl)}
+  .consent{border-radius:var(--r); box-shadow:0 8px 30px rgba(60,35,20,.16)}
+  .consent button{border-radius:var(--r-ctl)}
+  .legal-card{border-radius:var(--r); box-shadow:none}
+  .legal-x{border-radius:var(--r-ctl)}
+  details.wmsec{border-radius:var(--r); box-shadow:none}
+  .wmchev,.wm-secico{border-radius:var(--r-ctl)}
+  .crosslink{border-radius:var(--r); box-shadow:none}
+  .crosslink .cl-ic,.crosslink .cl-go{border-radius:var(--r-ctl)}
+  .crosslink:hover{box-shadow:none; border-color:rgba(37,99,235,.42)}
+  .provrow .plogo{border-radius:var(--r-ctl)}
+  .vcard,.cardgrid .vcard{border-radius:var(--r); box-shadow:none}
+
+  /* Chevron: Quadrat statt Kreis */
+  .chev{border-radius:var(--r-ctl); width:28px; height:28px}
+  .row.open .chev{border-radius:var(--r-ctl)}
+
+  /* Marker: flache Kachel, keine schräge Sticker-Optik */
+  .stick{width:32px; height:32px; border-radius:var(--r-ctl);
+    background:var(--s1); box-shadow:none; transform:none}
+  .stick svg{width:18px; height:18px; filter:none}
+  .rowhead:hover .stick,.row.open .stick{transform:none; filter:brightness(1.08)}
+
+  /* Badges kantiger und ruhiger */
+  .agetag,.fsktag,.freebest,.chrow .tag{border-radius:var(--r-tag)}
+  .freebest{font-weight:700; letter-spacing:.03em}
+
+  /* --- Zeitspalte wie eine gedruckte Programmzeile --------------------- */
+  .rowhead{grid-template-columns:66px 1fr auto; gap:13px; padding:12px 13px 12px 13px}
+  .row .time{background:none; padding:0; margin:0; text-align:left; border-left:2px solid var(--c1);
+    padding-left:9px}
+  html[data-theme="dark"] .row .time{background:none}
+  .t-start{display:block; font-family:"JetBrains Mono",monospace; font-weight:700;
+    font-size:17px; letter-spacing:-.02em; color:var(--ink); line-height:1.05}
+  .t-dur{display:block; font-family:"JetBrains Mono",monospace; font-size:10.5px;
+    color:var(--muted); margin-top:3px; letter-spacing:.01em}
+  .till{font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--faint)}
+
+  /* Zustände: läuft gerade / vorbei */
+  .nowtag{font:700 9.5px "JetBrains Mono",monospace; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--red); color:#fff; padding:2.5px 6px; border-radius:var(--r-tag)}
+  .pasttag{font:700 9.5px "JetBrains Mono",monospace; letter-spacing:.08em; text-transform:uppercase;
+    border:1px solid var(--line2); color:var(--faint); padding:1.5px 5px; border-radius:var(--r-tag)}
+  .row.past{opacity:.62}
+  .row.past .stick{filter:grayscale(.55)}
+  .row.playing{border-color:var(--red)}
+  .row.playing .t-start{color:var(--red)}
+
+  /* --- Optionen als echte Checkboxen ---------------------------------- */
+  .opts{display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    margin:9px 0 2px; padding:11px 13px;
+    border:1px solid var(--line); border-radius:var(--r); background:var(--surface)}
+  .opt{display:inline-flex; align-items:center; gap:9px; cursor:pointer;
+    font-size:13px; font-weight:700; color:var(--ink); user-select:none}
+  .opt input{appearance:none; -webkit-appearance:none; margin:0; flex:0 0 auto;
+    width:18px; height:18px; border:1.5px solid var(--line2); border-radius:var(--r-tag);
+    background:var(--surface); display:grid; place-items:center; cursor:pointer;
+    transition:background .12s ease, border-color .12s ease}
+  .opt input:hover{border-color:var(--muted)}
+  .opt input:checked{background:var(--free); border-color:var(--free)}
+  .opt input:checked::after{content:""; width:9px; height:5px; margin-top:-2px;
+    border-left:2px solid #fff; border-bottom:2px solid #fff; transform:rotate(-45deg)}
+  .opt input:focus-visible{outline:2px solid var(--green); outline-offset:2px}
+  #optPast:checked{background:var(--green); border-color:var(--green)}
+  .opt-cnt{margin-left:auto; font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--faint)}
+  @media (max-width:420px){
+    .opts{gap:10px 16px; padding:10px 12px}
+    .opt{font-size:12.5px}
+    .opt-cnt{margin-left:0; flex-basis:100%}
+  }
+
   /* Querverweis auf das Schwesterprojekt */
   .crosslink{display:flex; align-items:center; gap:13px; margin:12px 0 10px; padding:12px 14px;
     background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
@@ -1453,6 +1564,16 @@
   /* Wortmarke ist länger als "TVFUSSBALL" – auf schmalen Geräten runterskalieren */
   @media (max-width:400px){ .logo{font-size:22px} .logo .tv{font-size:19px} .logo .de{font-size:13px} }
   @media (max-width:345px){ .logo{font-size:18px} .logo .tv{font-size:16px} .logo .de{font-size:11px} }
+
+  /* --- letzte Rundungsreste (steht bewusst am Ende der Kaskade) -------- */
+  .logo .tv{border-radius:var(--r-tag)}
+  .crosslink .cl-ic,.crosslink .cl-go{border-radius:var(--r-ctl)}
+  .row .time{border-radius:0}
+  .row .morebtn{border-radius:var(--r-tag)}
+  .stick{border-radius:var(--r-ctl)}
+  .opt input{border-radius:var(--r-tag)}
+  .vthumb{border-radius:0}
+  .feat{border-radius:var(--r-tag)}
 
 </style>
 <script type="application/ld+json">
@@ -1495,7 +1616,7 @@
       <span class="cl-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </a>
     <div class="filters" id="liveFilters"></div>
-    <div class="filters" id="freeFilter"></div>
+    <div class="opts" id="liveOpts"></div>
     <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" placeholder="Sendung, Folge oder Sender suchen …"></div>
     <div class="board" id="liveBoard"></div>
 
@@ -1706,17 +1827,19 @@ const LEGAL = {
     <h4>Was sie nicht macht</h4><p>Wir streamen nichts selbst und verlinken nur auf legale Quellen.</p>`}
 };
 
-/* Kostenlos-Schalter — unabhaengig von der Senderwahl, standardmaessig aktiv */
-function buildFreeToggle(host, onChange){
+/* Optionen als echte Checkboxen — Tastatur, Screenreader, Browser-Semantik */
+function buildOptions(host, onChange){
   if(!host) return;
-  host.innerHTML = '<button class="fchip freechip" id="freeToggle" aria-pressed="true">' +
-    '<span class="cdot" style="background:var(--free)"></span>Nur kostenlos</button>';
-  host.addEventListener("click", e=>{
-    const b=e.target.closest("#freeToggle"); if(!b) return;
-    const on = b.getAttribute("aria-pressed") !== "true";
-    b.setAttribute("aria-pressed", String(on));
-    onChange && onChange(on);
-  });
+  host.innerHTML =
+    '<label class="opt"><input type="checkbox" id="optFree" checked>' +
+      '<span>Nur kostenlos</span></label>' +
+    '<label class="opt"><input type="checkbox" id="optPast">' +
+      '<span>Vergangene Sendungen anzeigen</span></label>' +
+    '<span class="opt-cnt" id="optCount"></span>';
+  host.addEventListener("change", ()=> onChange && onChange({
+    free: host.querySelector("#optFree").checked,
+    past: host.querySelector("#optPast").checked
+  }));
 }
 
 function buildFilters(host, onChange){
@@ -1784,6 +1907,19 @@ const GLYPH = {
 };
 const GLYPH_DEFAULT = '<path d="M8.6 5.6l10 6.4-10 6.4z"/>';
 
+/* --- Zeitrechnung: Ende einer Sendung, "läuft gerade", "vorbei" --------- */
+function startTs(s){
+  const m = (s.day||"").match(/(\d{2})\.(\d{2})\.(\d{4})/);
+  if(!m) return null;
+  const [hh,mm] = (s.time||"0:0").split(":").map(Number);
+  return new Date(+m[3], +m[2]-1, +m[1], hh, mm, 0, 0).getTime();
+}
+function durMin(s){ const m=(s.dur||"").match(/(\d+)/); return m?+m[1]:0; }
+function endTs(s){ const t=startTs(s); return t===null?null:t + durMin(s)*60000; }
+function isPast(s){ const e=endTs(s); return e!==null && e <= Date.now(); }
+function isNow(s){ const a=startTs(s), b=endTs(s), n=Date.now(); return a!==null && a<=n && n<b; }
+function hhmm(ts){ const d=new Date(ts); return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); }
+
 function sticker(s){
   const [c1,c2] = s.color2 ? [s.color, s.color2] : pairFor(s.title);
   const g = GLYPH[s.genre] || GLYPH_DEFAULT;
@@ -1803,21 +1939,23 @@ function rowHTML(s){
       : (s.fskTodo ? "noch zu prüfen — Kinofilme haben eine FSK-Freigabe, sie muss einzeln nachgeschlagen werden"
                    : "keine Angabe — FSK gilt nur für Filme und Bildträger, nicht für Serienfolgen");
 
+  const past = isPast(s), now = isNow(s);
+  const e = endTs(s);
   const [pc1,pc2] = pairFor(s.title);
   const styleVars = `--c1:${pc1};--c2:${pc2};`+
     `--w1:${hexA(pc1,.22)};--w2:${hexA(pc2,.20)};`+
     `--w1d:${hexA(pc1,.30)};--w2d:${hexA(pc2,.26)}`;
 
   return `
-<div class="row${free.length?" free":""}" style="${styleVars}" data-k="${s.day}|${s.time}|${s.title}|${s.sub||""}|${s.genre||""}|${(s.ch||[]).map(c=>c.n).join(" ")}">
+<div class="row${free.length?" free":""}${past?" past":""}${now?" playing":""}" style="${styleVars}" data-k="${s.day}|${s.time}|${s.title}|${s.sub||""}|${s.genre||""}|${(s.ch||[]).map(c=>c.n).join(" ")}">
   <button class="rowhead" aria-expanded="false">
-    <div class="time"><span class="time-clock">${s.time}<small>${s.dur||""}</small></span></div>
+    <div class="time"><span class="t-start">${s.time}</span><span class="t-dur">${s.dur||""}</span></div>
     <div class="teams">
       <div class="t">${sticker(s)}<span>${s.title}</span>
         <span class="favstar" data-follow="${s.title}" role="button" tabindex="0" aria-pressed="false"
               aria-label="${s.title} merken" title="${s.title} merken">☆</span></div>
       ${s.sub?`<div class="t subline">${s.sub}</div>`:""}
-      <div class="meta"><span class="comp">${s.channel?s.channel+" · ":""}${s.genre||""}</span>
+      <div class="meta">${now?'<span class="nowtag">läuft</span>':""}${past?'<span class="pasttag">vorbei</span>':""}<span class="comp">${s.channel?s.channel+" · ":""}${s.genre||""}</span>${e?`<span class="till">bis ${hhmm(e)}</span>`:""}
         ${s.age!==undefined?`<span class="agetag">ab ${s.age}</span>`:""}
         ${(s.fsk!==null&&s.fsk!==undefined)?`<span class="fsktag">FSK ${s.fsk}</span>`:""}${badge}</div>
     </div>
@@ -2001,17 +2139,24 @@ const EMPTY_LIVE = '<div class="soonbox"><span class="ic">\ud83d\udcfa</span><di
   '<b style="display:block;color:var(--ink);font-family:Archivo,sans-serif;font-size:14px;margin-bottom:3px">Keine Sendungen fuer diese Auswahl</b>' +
   '<span style="font-size:12.5px;line-height:1.55">Anderen Sender oder Altersfilter waehlen.</span></div></div>';
 
-let fGroup = "all", fFree = true;
+let fGroup = "all", fFree = true, fPast = false;
 
 function apply(){
   let list = SHOWS;
   if(fFree) list = list.filter(s=>(s.ch||[]).some(c=>c.free));
+  if(!fPast) list = list.filter(s=>!isPast(s));
   if(fGroup.indexOf("genre:")===0) list = list.filter(s=>s.genre===fGroup.slice(6));
   else if(fGroup !== "all") list = list.filter(s=>s.grp===fGroup);
   renderBoard(board, list, EMPTY_LIVE);
+  const c = document.getElementById("optCount");
+  if(c){ const weg = SHOWS.length - list.length;
+    c.textContent = list.length + " von " + SHOWS.length + (weg ? " · " + weg + " ausgeblendet" : ""); }
 }
 
-buildFreeToggle(document.getElementById("freeFilter"), on=>{ fFree=on; apply(); });
+/* Minütlich nachziehen, damit gelaufene Sendungen von selbst verschwinden */
+setInterval(()=>{ if(!fPast) apply(); }, 60000);
+
+buildOptions(document.getElementById("liveOpts"), o=>{ fFree=o.free; fPast=o.past; apply(); });
 buildFilters(document.getElementById("liveFilters"), g=>{ fGroup=g; apply(); });
 apply();
 initSearch(document.getElementById("liveSearch"), board);
