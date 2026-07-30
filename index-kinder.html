@@ -1309,9 +1309,19 @@
   .wmsec-body p{font-size:13.5px; color:var(--muted); line-height:1.62}
   .wmsec-body p + p{margin-top:9px}
   .provrow{display:flex; align-items:center; gap:13px; padding:13px 15px}
-  .provrow .plogo{flex:0 0 auto; width:44px; height:44px; border-radius:12px; display:grid; place-items:center;
-    background:var(--green-soft); color:var(--green); border:1px solid var(--green-line);
+  .provrow .plogo{flex:0 0 auto; width:44px; height:44px; display:grid; place-items:center;
+    background:var(--pv-bg); color:var(--pv-tx); border:1px solid var(--pv-bd);
     font-family:"Archivo",sans-serif; font-weight:900; font-size:13px}
+  html[data-theme="dark"] .provrow .plogo{background:var(--pv-bgd); color:var(--pv-txd)}
+  .provcard{--c1:var(--pv); --c2:var(--pv)}
+  .provcard .provrow{background:
+    radial-gradient(120% 150% at 0% 0%, var(--pv-bg), transparent 60%)}
+  html[data-theme="dark"] .provcard .provrow{background:
+    radial-gradient(130% 165% at 0% 0%, var(--pv-bgd), transparent 64%)}
+  .provcard .pprice{color:var(--pv-tx)}
+  html[data-theme="dark"] .provcard .pprice{color:var(--pv-txd)}
+  .provcard .feat.yes{color:var(--pv-tx); border-color:var(--pv-bd); background:var(--pv-bg)}
+  html[data-theme="dark"] .provcard .feat.yes{color:var(--pv-txd); background:var(--pv-bgd)}
   .provrow .pmain{flex:1 1 auto; min-width:0}
   .provrow .pmain b{display:block; font-family:"Archivo",sans-serif; font-weight:800; font-size:15px; letter-spacing:-.01em}
   .provrow .pmain span{display:block; color:var(--muted); font-size:12.5px; margin-top:2px}
@@ -1336,18 +1346,23 @@
     --ink:#1F1512; --muted:#7A6153; --faint:#A89083;
     --green:#C24009; --green-soft:rgba(194,64,9,.10); --green-line:rgba(194,64,9,.28);
     --free:#0B7A42; --free-soft:rgba(11,122,66,.12); --free-line:rgba(11,122,66,.32);
+    --free-grad:linear-gradient(135deg,#12A25C,#0B7A42 62%,#086434);
     --on-accent:#FFFFFF;
     --header-bg:rgba(253,246,240,.86); --hover:rgba(31,21,18,.035);
     --shadow:0 1px 2px rgba(90,50,25,.05), 0 6px 20px -8px rgba(90,50,25,.14);
     --header-shadow:0 1px 0 rgba(90,50,25,.06), 0 8px 22px -14px rgba(90,50,25,.14);
-    --wm:#B7791F; --wm-soft:#FBF1DD;
+    --wm:#8A5A0B; --wm-soft:#FBF1DD;
   }
   html[data-theme="dark"]{
-    --bg:#17100E; --bg2:#1E1512; --surface:#261A16; --surface2:#31221C;
-    --line:rgba(255,236,222,.09); --line2:rgba(255,236,222,.16);
-    --ink:#FBEFE7; --muted:#C4A896; --faint:#9A8172;
+    /* Flächen fast neutral halten. Ein brauner Grundton plus farbige Wäsche
+       ergibt Matsch — die Wärme kommt hier aus Akzent, Farbbalken und Sticker,
+       nicht aus dem Untergrund. Sättigung der Flächen unter 8 %. */
+    --bg:#111010; --bg2:#191716; --surface:#221F1D; --surface2:#2C2825;
+    --line:rgba(255,246,240,.10); --line2:rgba(255,246,240,.17);
+    --ink:#F6F1EC; --muted:#B9ACA3; --faint:#8D827B;
     --green:#FF9A5C; --green-soft:rgba(255,154,92,.16); --green-line:rgba(255,154,92,.38);
     --free:#3DD68C; --free-soft:rgba(61,214,140,.15); --free-line:rgba(61,214,140,.36);
+    --free-grad:linear-gradient(135deg,#5FE7A8,#3DD68C 62%,#2BBE79);
     --on-accent:#2A1206;
     --header-bg:rgba(23,16,14,.86); --hover:rgba(255,255,255,.045);
     --shadow:0 1px 2px rgba(0,0,0,.42), 0 10px 30px -12px rgba(0,0,0,.62);
@@ -1357,7 +1372,7 @@
 
   /* Hintergrundschein */
   :root{--glow1:rgba(251,133,0,.10); --glow2:rgba(247,37,133,.05)}
-  html[data-theme="dark"]{--glow1:rgba(251,133,0,.11); --glow2:rgba(247,37,133,.07)}
+  html[data-theme="dark"]{--glow1:rgba(251,133,0,.07); --glow2:rgba(247,37,133,.045)}
 
   /* Tagestrenner bekommt den warmen Verlauf */
   .daybar .dtag{background:linear-gradient(135deg,#FB8500,#F72585); border:0}
@@ -1381,6 +1396,21 @@
   html[data-theme="dark"] .stick{box-shadow:0 3px 12px -3px var(--s1), inset 0 1px 0 rgba(255,255,255,.22)}
 
   /* --- Farbwäsche der Karte ------------------------------------------- */
+  .row .mrow{background:
+    radial-gradient(125% 150% at 0% 0%, var(--w1), transparent 58%),
+    radial-gradient(125% 150% at 100% 0%, var(--w2), transparent 58%)}
+  html[data-theme="dark"] .row .mrow{background:
+    radial-gradient(140% 180% at 0% 0%, var(--w1d), transparent 66%),
+    radial-gradient(140% 180% at 100% 0%, var(--w2d), transparent 66%)}
+  .mnote{font-size:12.5px; color:var(--muted); line-height:1.5; margin:8px 0 0}
+  .provmore{border:1px solid var(--line); border-radius:var(--r); background:var(--surface); margin:0 0 9px}
+  .provmore>summary{list-style:none; cursor:pointer; padding:11px 13px; display:flex;
+    align-items:center; gap:10px; font-size:12.5px; font-weight:700}
+  .provmore>summary::-webkit-details-marker{display:none}
+  .provmore .pm-cnt{margin-left:auto; font:400 11px "JetBrains Mono",monospace; color:var(--faint)}
+  .provmore .wmchev{width:24px; height:24px}
+  .provmore[open]>summary .wmchev{transform:rotate(180deg)}
+  .provgrid.aus{border:0; border-top:1px solid var(--line); border-radius:0; margin:0; background:none}
   .row .rowhead{background:
     radial-gradient(125% 150% at 0% 0%, var(--w1), transparent 58%),
     radial-gradient(125% 150% at 100% 0%, var(--w2), transparent 58%)}
@@ -1393,10 +1423,14 @@
   .row.open .rowhead{background:
     radial-gradient(130% 165% at 0% 0%, var(--w1), transparent 62%),
     radial-gradient(130% 165% at 100% 0%, var(--w2), transparent 62%)}
+  html[data-theme="dark"] .row{background:var(--surface); border-color:rgba(255,246,240,.11)}
   html[data-theme="dark"] .row .rowhead,
   html[data-theme="dark"] .row.open .rowhead{background:
-    radial-gradient(130% 165% at 0% 0%, var(--w1d), transparent 62%),
-    radial-gradient(130% 165% at 100% 0%, var(--w2d), transparent 62%)}
+    radial-gradient(140% 180% at 0% 0%, var(--w1d), transparent 66%),
+    radial-gradient(140% 180% at 100% 0%, var(--w2d), transparent 66%)}
+  /* Farbbalken und Sticker bleiben voll gesättigt — dort sitzt die Farbe */
+  html[data-theme="dark"] .row::before{filter:saturate(1.15) brightness(1.1)}
+  html[data-theme="dark"] .stick{filter:saturate(1.1) brightness(1.08)}
   html[data-theme="dark"] .row.open{border-color:transparent; box-shadow:0 0 0 1.5px var(--c1), 0 8px 30px rgba(0,0,0,.42)}
 
   /* Trennlinie im Panel in Sendungsfarbe statt Grau */
@@ -1513,9 +1547,10 @@
   .row.playing .t-start{color:var(--red)}
 
   /* --- Optionen als echte Checkboxen ---------------------------------- */
-  .opts{display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+  .opts{display:flex; align-items:center; gap:10px 16px; flex-wrap:wrap;
     margin:9px 0 2px; padding:11px 13px;
     border:1px solid var(--line); border-radius:var(--r); background:var(--surface)}
+  .opts .fchip{flex:0 0 auto; text-decoration:none}
   .opt{display:inline-flex; align-items:center; gap:9px; cursor:pointer;
     font-size:13px; font-weight:700; color:var(--ink); user-select:none}
   .opt input{appearance:none; -webkit-appearance:none; margin:0; flex:0 0 auto;
@@ -1529,11 +1564,13 @@
   .opt input:focus-visible{outline:2px solid var(--green); outline-offset:2px}
   #optPast:checked{background:var(--green); border-color:var(--green)}
   .opt-cnt{margin-left:auto; font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--faint)}
-  @media (max-width:420px){
-    .opts{gap:10px 16px; padding:10px 12px}
-    .opt{font-size:12.5px}
-    .opt-cnt{margin-left:0; flex-basis:100%}
+  .opt span{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  @media (max-width:460px){
+    .opts{gap:11px; padding:10px 11px}
+    .opt{font-size:12px; min-width:0}
+    .opt-cnt{display:none}
   }
+  #liveSpecial{padding-top:0}
 
   /* Querverweis auf das Schwesterprojekt */
   .crosslink{display:flex; align-items:center; gap:13px; margin:12px 0 10px; padding:12px 14px;
@@ -1564,6 +1601,16 @@
   /* Wortmarke ist länger als "TVFUSSBALL" – auf schmalen Geräten runterskalieren */
   @media (max-width:400px){ .logo{font-size:22px} .logo .tv{font-size:19px} .logo .de{font-size:13px} }
   @media (max-width:345px){ .logo{font-size:18px} .logo .tv{font-size:16px} .logo .de{font-size:11px} }
+
+  .lh-txt.lang{font-size:13.5px; line-height:1.6}
+  .lh-flags{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 0}
+  .lh-flag{font-size:11px; font-weight:700; padding:3px 9px; border-radius:var(--r-tag);
+    background:var(--w1); border:1px solid var(--c1); color:var(--c1)}
+  html[data-theme="dark"] .lh-flag{background:var(--w1d); filter:brightness(1.3)}
+  .lh-reden{margin:11px 0 0; padding:10px 12px; border-radius:var(--r-tag);
+    background:var(--bg2); border:1px solid var(--line);
+    font-size:12.5px; color:var(--muted); line-height:1.5}
+  .lh-reden b{color:var(--ink); font-weight:700}
 
   /* --- IMDb ------------------------------------------------------------ */
   .imdb{display:inline-flex; align-items:center; gap:5px; font-family:"JetBrains Mono",monospace;
@@ -1614,6 +1661,8 @@
   .mmeta{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:8px}
   .myear{font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--muted);
     border:1px solid var(--line2); border-radius:var(--r-tag); padding:2px 6px}
+  .mkurz{font-size:13px; color:var(--ink); line-height:1.5; margin:9px 0 0; font-weight:600}
+  .mnote b{color:var(--muted); font-weight:700}
   .folgen{font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--muted)}
   .pvlink{font-size:11.5px; font-weight:700; color:var(--c1); text-decoration:none;
     padding:3px 2px; white-space:nowrap}
@@ -1760,8 +1809,14 @@
       <span class="cl-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </a>
     <div class="filters" id="liveFilters"></div>
-    <div class="opts" id="liveOpts"></div>
-    <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" placeholder="Sendung, Folge oder Sender suchen …"></div>
+    <div class="opts" id="liveOpts">
+      <button class="fchip retrochip" id="optRetro" aria-pressed="false" data-i18n="f_retro">Kennst du noch?</button>
+      <a class="fchip tippchip" href="mediathek-kinder.html#tipps" data-i18n="f_tipp">Elterntipp</a>
+      <label class="opt"><input type="checkbox" id="optFree" checked><span data-i18n="o_free">Nur kostenlos</span></label>
+      <label class="opt"><input type="checkbox" id="optPast"><span data-i18n="o_past">Vergangene anzeigen</span></label>
+      <span class="opt-cnt" id="optCount"></span>
+    </div>
+    <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" data-i18n-ph="such_live" placeholder="Sendung, Folge oder Sender suchen …"></div>
     <div class="board" id="liveBoard"></div>
 
     <details class="wmsec">
@@ -1789,28 +1844,29 @@
   </section>
 
   <footer>
-    <a href="#" data-legal="imprint">Impressum</a>
-    <a href="#" data-legal="privacy">Datenschutz</a>
-    <a href="#" data-legal="about">Über uns</a>
+    <span class="lnote" id="langHint"></span>
+    <a href="#" data-legal="imprint" data-i18n="imprint">Impressum</a>
+    <a href="#" data-legal="privacy" data-i18n="privacy">Datenschutz</a>
+    <a href="#" data-legal="about" data-i18n="about">Über uns</a>
     <span class="lnote" id="attrib"></span>
+    <span class="lnote" id="langHint"></span>
     <span class="lnote">TVKinderprogramm.de überträgt selbst keine Sendungen. Wir verweisen nur auf legale Sender und Mediatheken und betten ausschließlich offizielle, freigegebene Videos ein. Altersempfehlungen sind redaktionell und ersetzen keine FSK-Freigabe. Programmangaben ohne Gewähr — verbindlich ist das Programm des Senders.</span>
   </footer>
 
   <div class="legal-ov" id="loginOv" aria-hidden="true">
     <div class="legal-card" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-      <div class="legal-head"><h3 id="loginTitle">Anmelden</h3><button class="legal-x" id="loginClose" aria-label="Schließen">✕</button></div>
+      <div class="legal-head"><h3 id="loginTitle" data-i18n="anmelden">Anmelden</h3><button class="legal-x" id="loginClose" aria-label="Schließen">✕</button></div>
       <div class="legal-body">
-        <p class="testnote">Die Nutzerverwaltung befindet sich in der Testphase. Anmelden können sich
-           derzeit nur Konten, die wir manuell angelegt haben.</p>
-        <label class="field"><span>Benutzername</span>
+        <p class="testnote" data-i18n="test_note">Die Nutzerverwaltung befindet sich in der Testphase.</p>
+        <label class="field"><span data-i18n="benutzer">Benutzername</span>
           <input type="text" id="loginUser" autocomplete="username" placeholder="benutzername"></label>
-        <label class="field"><span>Passwort</span>
+        <label class="field"><span data-i18n="passwort">Passwort</span>
           <input type="password" id="loginPass" autocomplete="current-password" placeholder="••••••••"></label>
         <div class="loginrow">
-          <button class="loginsubmit" id="loginGo">Anmelden</button>
-          <button class="loginreg" disabled title="Während der Testphase nicht möglich">Registrieren</button>
+          <button class="loginsubmit" id="loginGo" data-i18n="anmelden">Anmelden</button>
+          <button class="loginreg" disabled data-i18n="registrieren">Registrieren</button>
         </div>
-        <p class="reghint">Registrierung ist während der Testphase deaktiviert.</p>
+        <p class="reghint" data-i18n="reg_hint">Registrierung ist während der Testphase deaktiviert.</p>
       </div>
     </div>
   </div>
@@ -1826,17 +1882,17 @@
 <nav class="bottomnav" role="tablist" aria-label="Bereiche">
   <a class="navitem" role="tab" aria-selected="true" data-tab="live" href="index-kinder.html">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="12.5" rx="2.6"/><path d="M8 20.5h8M12 17v3.5"/><path d="M10.7 9.1l3.4 2-3.4 2z" fill="currentColor" stroke="none"/></svg>
-    <span>Heute</span></a>
+    <span data-i18n="nav_live">Heute</span></a>
   <a class="navitem" role="tab" aria-selected="false" data-tab="mediathek" href="mediathek-kinder.html">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.6" width="18" height="14.8" rx="2"/><path d="M10.3 9.2l4.6 2.8-4.6 2.8z" fill="currentColor" stroke="none"/></svg>
-    <span>Mediathek</span></a>
+    <span data-i18n="nav_med">Mediathek</span></a>
 </nav>
 
 <div class="consent hide" id="consent">
-  <p>Wir messen anonym, welche Seiten genutzt werden. Cookies dafür werden erst nach deiner Einwilligung gesetzt.</p>
+  <p data-i18n="consent">Wir messen anonym, welche Seiten genutzt werden. Cookies dafür werden erst nach deiner Einwilligung gesetzt.</p>
   <div class="cbtns">
-    <button id="consentNo">Ablehnen</button>
-    <button class="ok" id="consentYes">Einverstanden</button>
+    <button id="consentNo" data-i18n="c_no">Ablehnen</button>
+    <button class="ok" id="consentYes" data-i18n="c_yes">Einverstanden</button>
   </div>
 </div>
 
@@ -1892,7 +1948,7 @@ const SHOWS = [
   {day:"Donnerstag, 30.07.2026",time:"20:00",dur:"10 Min",title:"KiKA LIVE",sub:"Kochen ohne Plan / Teil 2",age:10,grp:"a10",fsk:null,genre:"Musik & Tanz",channel:"KiKA",color:"#DB2777",est:true,ads:false,ch:[{n:"KiKA",free:true,u:"https://www.kika.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek. Einziger Kindersender ohne Werbung."}],imdb:null,year:null,retro:null,score:70,note:"Moderationsformat mit Koch-Challenge. Hohes Tempo, laut, aber ohne Konfliktthemen."},
   {day:"Donnerstag, 30.07.2026",time:"20:00",dur:"20 Min",title:"ALVINNN!!! und die Chipmunks",sub:"Der Zeitungsjunge",age:6,grp:"a6",fsk:null,genre:"Zeichentrick",channel:"Toggo plus",color:"#E30613",est:true,ads:true,ch:[{n:"Toggo plus",free:true,u:"https://www.toggo.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV. Zeitversetzte Ausgabe von Super RTL."}],imdb:{r:4.7,id:"tt3496230",v:2118},year:null,retro:{y:1983,n:"Die Chipmunks gibt es als Zeichentrickserie seit 1983 — die aktuelle Fassung ist eine Neuauflage."},score:47,note:"Alvin verkauft geklaute Zeitungen weiter. Spät am Abend, Thema unehrliches Verhalten."},
   {day:"Donnerstag, 30.07.2026",time:"20:10",dur:"25 Min",title:"Crazy Fun Park",sub:"Vergiss mich nicht",age:12,grp:"a10",fsk:null,genre:"Jugendserie",channel:"KiKA",color:"#7C3AED",est:true,ads:false,ch:[{n:"KiKA",free:true,u:"https://www.kika.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek. Einziger Kindersender ohne Werbung."}],imdb:{r:6.8,id:"tt16267464",v:2456},year:null,retro:null,score:55,note:"Mystery-Serie mit Geistern und dem Thema Tod und Vergessenwerden. Für jüngere Kinder ungeeignet, ab etwa 12 gut."},
-  {day:"Donnerstag, 30.07.2026",time:"20:15",dur:"175 Min",title:"Die Chroniken von Narnia",sub:"Prinz Kaspian von Narnia",age:10,grp:"a10",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:6.5,id:"tt0499448",v:240593},year:2008,retro:null,score:62,note:"Zweiter Teil der Fantasy-Reihe mit großen Schlachtszenen. Für Grundschulkinder stellenweise zu düster, Ende weit nach 23 Uhr."},
+  {day:"Donnerstag, 30.07.2026",time:"20:15",dur:"175 Min",title:"Die Chroniken von Narnia",sub:"Prinz Kaspian von Narnia",age:10,grp:"a10",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:6.5,id:"tt0499448",v:240593},year:2008,detail:null,retro:null,score:62,note:"Zweiter Teil der Fantasy-Reihe mit großen Schlachtszenen. Für Grundschulkinder stellenweise zu düster, Ende weit nach 23 Uhr."},
   {day:"Donnerstag, 30.07.2026",time:"20:20",dur:"25 Min",title:"Willkommen bei den echten Louds",sub:"Epische Reinfälle",age:8,grp:"a6",fsk:null,genre:"Serie",channel:"Toggo plus",color:"#B7791F",est:true,ads:true,ch:[{n:"Toggo plus",free:true,u:"https://www.toggo.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV. Zeitversetzte Ausgabe von Super RTL."}],imdb:{r:5.4,id:"tt22495072",v:896},year:null,retro:null,score:44,note:"Ein Freund bricht sich bei einem Stunt den Arm, der Unfall wird vertuscht. Später Sendeplatz."},
   {day:"Donnerstag, 30.07.2026",time:"20:35",dur:"10 Min",title:"Die Regeln von Floor",sub:"Pool",age:10,grp:"a10",fsk:null,genre:"Serie",channel:"KiKA",color:"#B7791F",est:true,ads:false,ch:[{n:"KiKA",free:true,u:"https://www.kika.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek. Einziger Kindersender ohne Werbung."}],imdb:{r:8.8,id:"tt8180660",v:346},year:null,retro:null,score:63,note:"Niederländische Comedyserie. Thema: Freundschaft aus falschen Motiven."},
   {day:"Donnerstag, 30.07.2026",time:"20:45",dur:"10 Min",title:"Die Regeln von Floor",sub:"Gras",age:10,grp:"a10",fsk:null,genre:"Serie",channel:"KiKA",color:"#B7791F",est:true,ads:false,ch:[{n:"KiKA",free:true,u:"https://www.kika.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek. Einziger Kindersender ohne Werbung."}],imdb:{r:8.8,id:"tt8180660",v:346},year:null,retro:null,score:52,note:"Ein Nebencharakter versucht, Drogen auf dem Schulhof zu verkaufen. Braucht ein Gespräch danach."},
@@ -1900,38 +1956,40 @@ const SHOWS = [
   {day:"Donnerstag, 30.07.2026",time:"20:55",dur:"5 Min",title:"Die Regeln von Floor",sub:"Papagei",age:10,grp:"a10",fsk:null,genre:"Serie",channel:"KiKA",color:"#B7791F",est:true,ads:false,ch:[{n:"KiKA",free:true,u:"https://www.kika.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek. Einziger Kindersender ohne Werbung."}],imdb:{r:8.8,id:"tt8180660",v:346},year:null,retro:null,score:60,note:"Komödiantische Schlussfolge des Abends, Kraftausdruck als Running Gag."},
   {day:"Donnerstag, 30.07.2026",time:"21:15",dur:"20 Min",title:"Pokémon",sub:"Kampf um Platz acht!",age:6,grp:"a6",fsk:null,genre:"Anime",channel:"Toggo plus",color:"#0F766E",est:true,ads:true,ch:[{n:"Toggo plus",free:true,u:"https://www.toggo.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV. Zeitversetzte Ausgabe von Super RTL."}],imdb:{r:7.6,id:"tt0168366",v:56719},year:null,retro:{y:1999,n:"Kam 1999 ins deutsche Fernsehen und hat eine ganze Generation durch die Grundschule begleitet."},score:50,note:"Klassische Pokémon-Folge. Um 21:15 aber weit außerhalb der üblichen Kinder-Sendezeit."},
   {day:"Donnerstag, 30.07.2026",time:"21:35",dur:"10 Min",title:"Mr. Magoo",sub:"Ritter Magoo / Rockstar aus dem All / Doktor Magoo",age:6,grp:"a6",fsk:null,genre:"Anime",channel:"Toggo plus",color:"#0F766E",est:true,ads:true,ch:[{n:"Toggo plus",free:true,u:"https://www.toggo.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV. Zeitversetzte Ausgabe von Super RTL."}],imdb:{r:6.8,id:"tt10544020",v:103},year:null,retro:{y:1949,n:"Die Figur stammt aus dem Jahr 1949, die Kurzfilme liefen in Deutschland über Jahrzehnte."},score:51,note:"Drei Kurzgeschichten mit Sehschwäche-Slapstick. Sehr spät im Programm."},
-  {day:"Freitag, 31.07.2026",time:"07:40",dur:"90 Min",title:"Das doppelte Lottchen",sub:"Spielfilm, Deutschland 2017",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"WDR",color:"#EA580C",est:true,ads:false,ch:[{n:"WDR",free:true,u:"https://www.wdr.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:6.2,id:"tt5843312",v:250},year:2017,retro:null,score:78,note:"Kästner-Klassiker um Zwillinge im Ferienheim. Ruhig erzählt, Trennung der Eltern als Thema."},
-  {day:"Freitag, 31.07.2026",time:"18:40",dur:"95 Min",title:"Baymax",sub:"Riesiges Robowabohu",age:8,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:7.8,id:"tt2245084",v:558341},year:2014,retro:null,score:76,note:"Oscar-prämiertes Animationsabenteuer. Der Tod des älteren Bruders wird offen behandelt — braucht bei jüngeren Kindern Begleitung."},
-  {day:"Freitag, 31.07.2026",time:"20:15",dur:"115 Min",title:"Bolt",sub:"Ein Hund für alle Fälle",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:6.8,id:"tt0397892",v:249890},year:2008,retro:{y:2008,n:"Von 2008 — der Film, mit dem Disney Animation wieder Fahrt aufnahm."},score:74,note:"Hund hält seine Serienrolle für echt. Warmherzig, ein paar Verfolgungsszenen."},
-  {day:"Freitag, 31.07.2026",time:"22:10",dur:"180 Min",title:"Die Chroniken von Narnia",sub:"Prinz Kaspian von Narnia (Wiederholung)",age:10,grp:"a10",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:6.5,id:"tt0499448",v:240593},year:2008,retro:null,score:55,note:"Zweite Ausstrahlung des Tages, Beginn 22:10 und Ende um 1:10 nachts. Praktisch nur zum Aufnehmen."},
-  {day:"Samstag, 01.08.2026",time:"08:15",dur:"25 Min",title:"Tom Turbo",sub:"Das Geheimnis des Pinguins",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"ORF 1",color:"#EA580C",est:true,ads:false,ch:[{n:"ORF 1",free:false,u:"https://tv.orf.at/",note:"Nur in Österreich frei empfangbar (ORF-Karte). Aus Deutschland nicht regulär zu empfangen."}],imdb:{r:7.1,id:"tt3094424",v:25},year:1993,retro:{y:1993,n:"Thomas Brezinas Fahrrad-Detektiv fährt seit 1993 durch den ORF."},score:72,note:"Interaktive Krimiserie von Thomas Brezina zum Mitraten. In Deutschland nur über Satellit oder Stream."},
-  {day:"Samstag, 01.08.2026",time:"08:20",dur:"85 Min",title:"Bolt",sub:"Ein Hund für alle Fälle",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:6.8,id:"tt0397892",v:249890},year:2008,retro:{y:2008,n:"Von 2008 — der Film, mit dem Disney Animation wieder Fahrt aufnahm."},score:74,note:"Wiederholung vom Vorabend, diesmal auf einem kindgerechten Sendeplatz."},
-  {day:"Samstag, 01.08.2026",time:"09:35",dur:"25 Min",title:"Pippi Langstrumpf",sub:"Pippi auf großer Ballonfahrt",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"ZDF",color:"#EA580C",est:true,ads:false,ch:[{n:"ZDF",free:true,u:"https://www.zdf.de/kinder",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:7.0,id:"tt0366905",v:5986},year:1969,retro:{y:1969,n:"Die schwedische Verfilmung von 1969 mit Inger Nilsson — bei drei Generationen im Wohnzimmer gelaufen."},score:80,note:"Lindgren-Klassiker in Serienlänge. Ruhiges Tempo, starke Hauptfigur."},
-  {day:"Samstag, 01.08.2026",time:"10:00",dur:"25 Min",title:"Pippi Langstrumpf",sub:"Pippi und die Flaschenpost",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"ZDF",color:"#EA580C",est:true,ads:false,ch:[{n:"ZDF",free:true,u:"https://www.zdf.de/kinder",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:7.0,id:"tt0366905",v:5986},year:1969,retro:{y:1969,n:"Die schwedische Verfilmung von 1969 mit Inger Nilsson — bei drei Generationen im Wohnzimmer gelaufen."},score:80,note:"Direkt anschließende zweite Folge. Beide zusammen ergeben knapp eine Stunde."},
-  {day:"Samstag, 01.08.2026",time:"10:25",dur:"70 Min",title:"Hans im Glück",sub:"Spielfilm, Deutschland 1998",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"RBB",color:"#EA580C",est:true,ads:false,ch:[{n:"RBB",free:true,u:"https://www.rbb-online.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:4.6,id:"tt0164630",v:76},year:1998,retro:{y:1998,n:"Märchenverfilmung von 1998, ein Fixpunkt im Feiertagsprogramm der Dritten."},score:74,note:"Grimm-Märchen als Realverfilmung. Langsam erzählt, gut für den Samstagvormittag."},
-  {day:"Samstag, 01.08.2026",time:"18:45",dur:"90 Min",title:"Findet Dorie",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:7.2,id:"tt2277860",v:337412},year:2016,retro:null,score:82,note:"Fortsetzung von Findet Nemo. Vergesslichkeit und Elternsuche als Thema, einzelne bange Momente."},
-  {day:"Samstag, 01.08.2026",time:"20:15",dur:"105 Min",title:"Minions",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"VOX",color:"#EA580C",est:true,ads:true,ch:[{n:"VOX",free:true,u:"https://www.vox.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV."}],imdb:{r:6.4,id:"tt2293640",v:287839},year:2015,retro:null,score:66,note:"Slapstick am laufenden Band, kaum Handlung. Laut, aber harmlos."},
-  {day:"Samstag, 01.08.2026",time:"20:15",dur:"115 Min",title:"Charlie & Louise",sub:"",age:8,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"S-RTL",color:"#EA580C",est:true,ads:true,ch:[{n:"S-RTL",free:true,u:"https://www.toggo.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV."}],imdb:{r:5.7,id:"tt0106548",v:756},year:1994,retro:{y:1994,n:"Deutsche Kästner-Adaption von 1994 mit den Zwillingen Floriane und Fritzi Eichhorn."},score:72,note:"Deutsche Doppelgängerinnen-Geschichte nach Kästner-Motiv. Läuft parallel zu Minions und Arielle."},
-  {day:"Samstag, 01.08.2026",time:"20:15",dur:"100 Min",title:"Arielle, die Meerjungfrau",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:7.6,id:"tt0097757",v:313918},year:1989,retro:{y:1989,n:"Disneys Wendepunkt von 1989, der die große Zeichentrick-Renaissance einleitete."},score:75,note:"Disney-Klassiker nach Andersen. Die Meerhexe Ursula kann kleinere Kinder erschrecken."},
-  {day:"Samstag, 01.08.2026",time:"22:10",dur:"130 Min",title:"Pünktchen und Anton",sub:"",age:8,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"S-RTL",color:"#EA580C",est:true,ads:true,ch:[{n:"S-RTL",free:true,u:"https://www.toggo.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV."}],imdb:{r:7.0,id:"tt0161935",v:1121},year:1999,retro:{y:1999,n:"Caroline Links Neuverfilmung von 1999, gedreht mit Elea Geissler und Max Felder."},score:76,note:"Caroline Links Neuverfilmung. Thema soziale Unterschiede — inhaltlich stark, Sendeplatz aber sehr spät."},
-  {day:"Samstag, 01.08.2026",time:"22:35",dur:"110 Min",title:"Der Schuh des Manitu",sub:"Extra Large",age:12,grp:"a10",fsk:null,fskTodo:true,genre:"Film",channel:"SAT.1",color:"#EA580C",est:true,ads:true,ch:[{n:"SAT.1",free:true,u:"https://www.sat1.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV."}],imdb:{r:6.7,id:"tt0248408",v:23276},year:2001,retro:{y:2001,n:"Der Kinohit von 2001. Nostalgie für die Eltern — für die Kinder aber kein Kinderfilm."},score:34,note:"Kein Kinderfilm. Westernparodie mit derbem Humor und Anspielungen für Erwachsene, Sendeplatz 22:35. Steht hier nur, weil die Quelle ihn unter Familienfilm führt."},
-  {day:"Sonntag, 02.08.2026",time:"04:00",dur:"120 Min",title:"Mary Poppins' Rückkehr",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"ORF 1",color:"#EA580C",est:true,ads:false,ch:[{n:"ORF 1",free:false,u:"https://tv.orf.at/",note:"Nur in Österreich frei empfangbar (ORF-Karte). Aus Deutschland nicht regulär zu empfangen."}],imdb:{r:6.6,id:"tt5028340",v:101469},year:2018,retro:null,score:70,note:"Charmante Fortsetzung mit Emily Blunt — läuft aber um 4 Uhr nachts. Nur zum Aufnehmen."},
-  {day:"Sonntag, 02.08.2026",time:"06:30",dur:"100 Min",title:"Ostwind (3)",sub:"Aufbruch nach Ora",age:8,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"WDR",color:"#EA580C",est:true,ads:false,ch:[{n:"WDR",free:true,u:"https://www.wdr.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:6.1,id:"tt5311972",v:886},year:2017,retro:null,score:77,note:"Dritter Teil der Pferdefilmreihe. Freundschaft und Verantwortung, keine harten Konflikte."},
-  {day:"Sonntag, 02.08.2026",time:"08:35",dur:"80 Min",title:"Arielle, die Meerjungfrau",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:7.6,id:"tt0097757",v:313918},year:1989,retro:{y:1989,n:"Disneys Wendepunkt von 1989, der die große Zeichentrick-Renaissance einleitete."},score:75,note:"Wiederholung vom Vorabend auf einem passenderen Sendeplatz."},
-  {day:"Sonntag, 02.08.2026",time:"09:00",dur:"60 Min",title:"Das Märchen von der silbernen Brücke",sub:"Spielfilm, Deutschland 2024",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"BR",color:"#EA580C",est:true,ads:false,ch:[{n:"BR",free:true,u:"https://www.br.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:5.5,id:"tt35053195",v:27},year:2024,retro:null,score:76,note:"Neues Weihnachtsmärchen von 2024, hier als Sommerwiederholung. Klassische Märchenstruktur."},
-  {day:"Sonntag, 02.08.2026",time:"09:55",dur:"75 Min",title:"Himmel und Huhn",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:5.7,id:"tt0371606",v:110141},year:2005,retro:{y:2005,n:"Disneys erster vollständig computeranimierter Film ohne Pixar, von 2005."},score:65,note:"Hühnchen rettet die Erde vor Außerirdischen. Hohes Tempo, viele Gags, wenig Ruhe."},
-  {day:"Sonntag, 02.08.2026",time:"10:00",dur:"90 Min",title:"Angry Birds – Der Film",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"ORF 1",color:"#EA580C",est:true,ads:false,ch:[{n:"ORF 1",free:false,u:"https://tv.orf.at/",note:"Nur in Österreich frei empfangbar (ORF-Karte). Aus Deutschland nicht regulär zu empfangen."}],imdb:{r:6.3,id:"tt1985949",v:119850},year:2016,retro:null,score:60,note:"Verfilmung der Spiele-App. Viel Wut und Zerstörung als Running Gag, erzählerisch dünn."},
-  {day:"Sonntag, 02.08.2026",time:"13:00",dur:"80 Min",title:"Ritter Rost 2",sub:"Das Schrottkomplott",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"KiKA",color:"#EA580C",est:true,ads:false,ch:[{n:"KiKA",free:true,u:"https://www.kika.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek. Einziger Kindersender ohne Werbung."}],imdb:{r:5.4,id:"tt6198412",v:112},year:2017,retro:null,score:74,note:"Deutscher Animationsfilm mit Musik. Werbefrei und auf einem guten Sonntagsplatz."},
-  {day:"Sonntag, 02.08.2026",time:"15:20",dur:"100 Min",title:"Minions",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"VOX",color:"#EA580C",est:true,ads:true,ch:[{n:"VOX",free:true,u:"https://www.vox.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV."}],imdb:{r:6.4,id:"tt2293640",v:287839},year:2015,retro:null,score:66,note:"Zweite Ausstrahlung innerhalb von 24 Stunden, diesmal nachmittags."},
-  {day:"Sonntag, 02.08.2026",time:"15:25",dur:"60 Min",title:"Dornröschen",sub:"Spielfilm, Deutschland 2009",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"MDR",color:"#EA580C",est:true,ads:false,ch:[{n:"MDR",free:true,u:"https://www.mdr.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:6.0,id:"tt1451618",v:239},year:2009,retro:null,score:76,note:"Grimm-Verfilmung aus der ARD-Märchenreihe. Eine Stunde, ruhig erzählt."},
-  {day:"Sonntag, 02.08.2026",time:"15:30",dur:"100 Min",title:"Heidi",sub:"Spielfilm",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"3sat",color:"#EA580C",est:true,ads:false,ch:[{n:"3sat",free:true,u:"https://www.3sat.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:7.5,id:"tt3700392",v:8490},year:1974,retro:{y:1974,n:"Die japanische Zeichentrickserie von 1974 prägte das Heidi-Bild in ganz Europa."},score:84,note:"Der Klassiker von Johanna Spyri. Hinweis: Die Quelle nennt in der Überschrift 1952 und im Text die Verfilmung von Alain Gsponer — Jahr vor der Übernahme prüfen."},
-  {day:"Sonntag, 02.08.2026",time:"16:30",dur:"90 Min",title:"Der Zauberlehrling",sub:"Spielfilm, Deutschland 2017",age:8,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"MDR",color:"#EA580C",est:true,ads:false,ch:[{n:"MDR",free:true,u:"https://www.mdr.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:6.3,id:"tt6756506",v:93},year:2017,retro:null,score:74,note:"Märchenverfilmung um Zauberei und Machtkampf. Etwas düsterer als die ARD-Standardmärchen."},
-  {day:"Sonntag, 02.08.2026",time:"18:35",dur:"100 Min",title:"Bolt",sub:"Ein Hund für alle Fälle",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:6.8,id:"tt0397892",v:249890},year:2008,retro:{y:2008,n:"Von 2008 — der Film, mit dem Disney Animation wieder Fahrt aufnahm."},score:74,note:"Dritte Ausstrahlung innerhalb von drei Tagen."},
-  {day:"Sonntag, 02.08.2026",time:"20:15",dur:"100 Min",title:"Der König der Löwen 2",sub:"Simbas Königreich",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:6.4,id:"tt0120131",v:83622},year:1998,retro:{y:1998,n:"Die Fortsetzung von 1998 kam direkt auf Video — für viele die erste eigene Kassette."},score:71,note:"Direct-to-Video-Fortsetzung. Kämpfe zwischen zwei Löwenrudeln, für sensible Kinder stellenweise heftig."},
-  {day:"Mittwoch, 05.08.2026",time:"20:15",dur:"135 Min",title:"Jim Knopf und Lukas der Lokomotivführer",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Kabel Eins",color:"#EA580C",est:true,ads:true,ch:[{n:"Kabel Eins",free:true,u:"https://www.kabeleins.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV."}],imdb:{r:6.3,id:"tt3072732",v:3177},year:2018,retro:null,score:80,note:"Aufwendige Verfilmung des Michael-Ende-Klassikers. Über zwei Stunden inklusive Werbepausen — Ende gegen 22:30."},
-  {day:"Donnerstag, 06.08.2026",time:"01:00",dur:"105 Min",title:"Jim Knopf und Lukas der Lokomotivführer",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Kabel Eins",color:"#EA580C",est:true,ads:true,ch:[{n:"Kabel Eins",free:true,u:"https://www.kabeleins.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV."}],imdb:{r:6.3,id:"tt3072732",v:3177},year:2018,retro:null,score:45,note:"Nachtwiederholung um 1 Uhr. Nur relevant, wenn aufgenommen wird."}
+  {day:"Freitag, 31.07.2026",time:"07:40",dur:"90 Min",title:"Das doppelte Lottchen",sub:"Spielfilm, Deutschland 2017",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"WDR",color:"#EA580C",est:true,ads:false,ch:[{n:"WDR",free:true,u:"https://www.wdr.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:6.2,id:"tt5843312",v:250},year:2017,detail:null,retro:null,score:78,note:"Kästner-Klassiker um Zwillinge im Ferienheim. Ruhig erzählt, Trennung der Eltern als Thema."},
+  {day:"Freitag, 31.07.2026",time:"18:40",dur:"95 Min",title:"Baymax",sub:"Riesiges Robowabohu",age:8,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:7.8,id:"tt2245084",v:558341},year:2014,detail:null,retro:null,score:76,note:"Oscar-prämiertes Animationsabenteuer. Der Tod des älteren Bruders wird offen behandelt — braucht bei jüngeren Kindern Begleitung."},
+  {day:"Freitag, 31.07.2026",time:"20:15",dur:"115 Min",title:"Bolt",sub:"Ein Hund für alle Fälle",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:6.8,id:"tt0397892",v:249890},year:2008,detail:null,retro:{y:2008,n:"Von 2008 — der Film, mit dem Disney Animation wieder Fahrt aufnahm."},score:74,note:"Hund hält seine Serienrolle für echt. Warmherzig, ein paar Verfolgungsszenen."},
+  {day:"Freitag, 31.07.2026",time:"22:10",dur:"180 Min",title:"Die Chroniken von Narnia",sub:"Prinz Kaspian von Narnia (Wiederholung)",age:10,grp:"a10",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:6.5,id:"tt0499448",v:240593},year:2008,detail:null,retro:null,score:55,note:"Zweite Ausstrahlung des Tages, Beginn 22:10 und Ende um 1:10 nachts. Praktisch nur zum Aufnehmen."},
+  {day:"Samstag, 01.08.2026",time:"08:15",dur:"25 Min",title:"Tom Turbo",sub:"Das Geheimnis des Pinguins",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"ORF 1",color:"#EA580C",est:true,ads:false,ch:[{n:"ORF 1",free:false,u:"https://tv.orf.at/",note:"Nur in Österreich frei empfangbar (ORF-Karte). Aus Deutschland nicht regulär zu empfangen."}],imdb:{r:7.1,id:"tt3094424",v:25},year:1993,detail:{lang:"Interaktive Krimiserie: Das Fahrrad Tom Turbo löst mit den Zuschauerkindern einen Fall, zwischendurch wird direkt in die Kamera gefragt und zum Mitraten aufgefordert. Kein Tempo, keine Bedrohung, die Fälle lösen sich immer freundlich auf. Für Kinder, die gerne mitdenken und sich trauen zu rufen, ist das ideal — wer lieber passiv schaut, langweilt sich womöglich.",flags:["ruhig","zum Mitraten","keine Gefahr"],reden:"Welche Spur hättet ihr selbst zuerst verfolgt?"},retro:{y:1993,n:"Thomas Brezinas Fahrrad-Detektiv fährt seit 1993 durch den ORF."},score:72,note:"Interaktive Krimiserie: Tom Turbo stellt zwischendurch Fragen und wartet auf Antworten — Kinder rufen ins Zimmer, was sie gesehen haben. Genau 25 Minuten, klare Struktur, keine bedrohlichen Szenen. Gut für Kinder, die beim Fernsehen sonst wegdriften, weil das Format Mitdenken verlangt. Für deutsche Zuschauer nur über Satellit oder Stream erreichbar."},
+  {day:"Samstag, 01.08.2026",time:"08:20",dur:"85 Min",title:"Bolt",sub:"Ein Hund für alle Fälle",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:6.8,id:"tt0397892",v:249890},year:2008,detail:{lang:"Ein Serienhund hält seine Fernsehrolle für echt und macht sich quer durch die USA auf den Weg zu seiner Besitzerin. Der Kern ist eine Trennungs- und Heimkehrgeschichte, und die trifft manche Kinder stärker als erwartet: Bolt glaubt zwischenzeitlich, Penny habe ihn aufgegeben. Am Ende gibt es einen Brand im Studio mit echter Gefahr für beide. Ab sechs gut zu verkraften, darunter lieber gemeinsam schauen.",flags:["Trennung","Brandszene am Ende","warmherzig"],reden:"Woran hat Bolt gemerkt, dass er auch ohne Superkräfte etwas wert ist?"},retro:{y:2008,n:"Von 2008 — der Film, mit dem Disney Animation wieder Fahrt aufnahm."},score:74,note:"Ein Hund glaubt, seine Serienrolle sei echt, und muss lernen, dass er ganz normal ist. Das Thema — jemand verliert seine vermeintlichen Superkräfte und ist trotzdem genug — trägt gut. Zwei Verfolgungsszenen und ein Feuer am Ende können Vierjährige kurz mitnehmen, lösen sich aber sofort auf. Warmherzig erzählt, kein Zynismus."},
+  {day:"Samstag, 01.08.2026",time:"09:35",dur:"25 Min",title:"Pippi Langstrumpf",sub:"Pippi auf großer Ballonfahrt",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"ZDF",color:"#EA580C",est:true,ads:false,ch:[{n:"ZDF",free:true,u:"https://www.zdf.de/kinder",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:7.0,id:"tt0366905",v:5986},year:1969,detail:{lang:"Die schwedische Verfilmung von 1969, in Serienlänge geschnitten. Erzähltempo und Bildsprache sind langsam, das ist für heutige Sehgewohnheiten gewöhnungsbedürftig und genau deshalb erholsam. Pippi lebt allein, hat Geld und macht sich über Erwachsene lustig — manche Kinder probieren das danach aus. Inhaltlich harmlos, aber ein paar Szenen und Begriffe stammen erkennbar aus ihrer Zeit.",flags:["langsam","Vorbild mit Widerhaken","Klassiker"],reden:"Was findet ihr gut daran, dass Pippi keine Regeln befolgt — und was nicht?"},retro:{y:1969,n:"Die schwedische Verfilmung von 1969 mit Inger Nilsson — bei drei Generationen im Wohnzimmer gelaufen."},score:80,note:"Der Klassiker in Serienlänge, ruhig und ohne Schnittgewitter. Pippi macht, was sie will, und das ist Teil des Reizes — manche Kinder testen danach Grenzen aus. Die Kehrseite: Pippi lebt allein, ihre Mutter ist tot und der Vater weit weg. Für sensible Kinder ein Thema, über das man reden sollte."},
+  {day:"Samstag, 01.08.2026",time:"10:00",dur:"25 Min",title:"Pippi Langstrumpf",sub:"Pippi und die Flaschenpost",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"ZDF",color:"#EA580C",est:true,ads:false,ch:[{n:"ZDF",free:true,u:"https://www.zdf.de/kinder",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:7.0,id:"tt0366905",v:5986},year:1969,detail:{lang:"Die schwedische Verfilmung von 1969, in Serienlänge geschnitten. Erzähltempo und Bildsprache sind langsam, das ist für heutige Sehgewohnheiten gewöhnungsbedürftig und genau deshalb erholsam. Pippi lebt allein, hat Geld und macht sich über Erwachsene lustig — manche Kinder probieren das danach aus. Inhaltlich harmlos, aber ein paar Szenen und Begriffe stammen erkennbar aus ihrer Zeit.",flags:["langsam","Vorbild mit Widerhaken","Klassiker"],reden:"Was findet ihr gut daran, dass Pippi keine Regeln befolgt — und was nicht?"},retro:{y:1969,n:"Die schwedische Verfilmung von 1969 mit Inger Nilsson — bei drei Generationen im Wohnzimmer gelaufen."},score:80,note:"Der Klassiker in Serienlänge, ruhig und ohne Schnittgewitter. Pippi macht, was sie will, und das ist Teil des Reizes — manche Kinder testen danach Grenzen aus. Die Kehrseite: Pippi lebt allein, ihre Mutter ist tot und der Vater weit weg. Für sensible Kinder ein Thema, über das man reden sollte."},
+  {day:"Samstag, 01.08.2026",time:"10:25",dur:"70 Min",title:"Hans im Glück",sub:"Spielfilm, Deutschland 1998",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"RBB",color:"#EA580C",est:true,ads:false,ch:[{n:"RBB",free:true,u:"https://www.rbb-online.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:4.6,id:"tt0164630",v:76},year:1998,detail:{lang:"Grimm-Märchen als Realverfilmung: Hans tauscht sich Schritt für Schritt vom Goldklumpen bis zum Nichts herunter und ist am Ende der Glücklichste. Sehr ruhig erzählt, keine bedrohlichen Figuren, klarer Ablauf. Die Moral ist sperrig — jüngere Kinder verstehen sie oft als „Hans ist dumm\", worüber sich gut reden lässt.",flags:["sehr ruhig","Märchenmoral","keine Gruselszenen"],reden:"War Hans am Ende wirklich glücklich oder hat er sich nur überreden lassen?"},retro:{y:1998,n:"Märchenverfilmung von 1998, ein Fixpunkt im Feiertagsprogramm der Dritten."},score:74,note:"Märchenverfilmung von 1998, langsam erzählt und mit langen Einstellungen. Die Moral — Besitz gegen Leichtigkeit tauschen — ist für Sechsjährige nicht selbsterklärend und lohnt ein Gespräch danach. Keine Gruselszenen, kein Zeitdruck, gut geeignet für einen verregneten Samstagvormittag."},
+  {day:"Samstag, 01.08.2026",time:"18:45",dur:"90 Min",title:"Findet Dorie",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:7.2,id:"tt2277860",v:337412},year:2016,detail:{lang:"Dorie sucht ihre Eltern und kämpft dabei mit ihrer Vergesslichkeit. Der Film ist warmherzig und witzig, hat aber einen ernsten Kern: In Rückblenden sieht man die kleine Dorie ihre Eltern verlieren, und ihre Panik, wenn sie den Faden verliert, ist glaubwürdig gespielt. Für Kinder mit Trennungsangst kann das viel sein. Ab sechs meist gut, sensible Vierjährige besser in Begleitung.",flags:["Elternsuche","Rückblenden traurig","Behinderung als Thema"],reden:"Dorie kann sich nichts merken und schafft es trotzdem. Wie hat sie das gemacht?"},retro:null,score:82,note:"Fortsetzung von Findet Nemo, in der eine vergesslicheit Fischdame ihre Eltern sucht. Der Film behandelt Vergesslichkeit als Behinderung sehr freundlich und ohne Häme. Zwei Stellen sind bang: Dorie verliert sich als Kind, und im Aquarium droht kurz der Abtransport. Beides löst sich glücklich auf. Ab sechs gut allein zu schauen, jüngere brauchen jemanden daneben."},
+  {day:"Samstag, 01.08.2026",time:"20:15",dur:"105 Min",title:"Minions",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"VOX",color:"#EA580C",est:true,ads:true,ch:[{n:"VOX",free:true,u:"https://www.vox.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV."}],imdb:{r:6.4,id:"tt2293640",v:287839},year:2015,detail:{lang:"Slapstick am laufenden Band, Handlung nur als Vorwand. Die Minions suchen einen neuen Bösewicht und landen bei Scarlet Overkill. Sehr laut, sehr schnell, praktisch ohne ruhige Momente — als Abendprogramm vor dem Schlafengehen ungünstig. Inhaltlich harmlos, die Gewalt ist durchgehend Cartoon-Gewalt ohne Folgen. Kinder lieben es, Eltern finden es oft anstrengend.",flags:["sehr laut","hohes Tempo","wenig Handlung"],reden:"Braucht es nach dem Film noch etwas Ruhiges, bevor es ins Bett geht?"},retro:null,score:66,note:"Slapstick fast ohne Handlung, dafür mit hohem Tempo und viel Krach. Als Belohnungsfilm für einen langen Tag funktioniert er, als Vorlage für ruhiges Spielen danach eher nicht. Gewalt ist durchweg cartoonhaft, es passiert niemandem wirklich etwas. Kinder kommen aufgedreht heraus — kein Film für kurz vor dem Schlafengehen, zumal er um 20:15 startet."},
+  {day:"Samstag, 01.08.2026",time:"20:15",dur:"115 Min",title:"Charlie & Louise",sub:"",age:8,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"S-RTL",color:"#EA580C",est:true,ads:true,ch:[{n:"S-RTL",free:true,u:"https://www.toggo.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV."}],imdb:{r:5.7,id:"tt0106548",v:756},year:1994,detail:{lang:"Zwillinge, die getrennt bei Mutter und Vater aufwachsen, treffen sich zufällig im Ferienlager und tauschen die Rollen, um die Eltern wieder zusammenzubringen. Das Thema Trennung wird ernst genommen und nicht wegerzählt. Für Kinder aus getrennten Familien kann das sehr nah kommen — im guten wie im schwierigen Sinn. Der Ton ist warm, das Ende versöhnlich.",flags:["Trennung der Eltern","Rollentausch","ruhig erzählt"],reden:"Warum haben die beiden es den Eltern nicht einfach gesagt?"},retro:{y:1994,n:"Deutsche Kästner-Adaption von 1994 mit den Zwillingen Floriane und Fritzi Eichhorn."},score:72,note:"Zwillinge, die getrennt aufwachsen und sich zufällig treffen, wollen ihre Eltern wieder zusammenbringen. Die Trennung der Eltern wird ernsthaft verhandelt, nicht weggelacht — für Kinder aus Trennungsfamilien kann das sehr nah sein, im guten wie im schwierigen Sinn. Gedreht 1994, entsprechend ruhig geschnitten."},
+  {day:"Samstag, 01.08.2026",time:"20:15",dur:"100 Min",title:"Arielle, die Meerjungfrau",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:7.6,id:"tt0097757",v:313918},year:1989,detail:{lang:"Disney-Klassiker von 1989 mit starken Bildern und Ohrwürmern. Die Meerhexe Ursula ist für kleinere Kinder der Knackpunkt: Sie wird am Ende riesig, die Szene ist dunkel und laut und hat schon manches Kind aus dem Sessel geholt. Dazu kommt der Stoff selbst — Arielle gibt ihre Stimme auf, um bei einem Mann zu sein. Das lässt sich mit älteren Kindern gut auseinandernehmen.",flags:["Ursula erschreckt","dunkles Finale","Streit mit dem Vater"],reden:"Hätte Arielle einen anderen Weg gehabt, als ihre Stimme herzugeben?"},retro:{y:1989,n:"Disneys Wendepunkt von 1989, der die große Zeichentrick-Renaissance einleitete."},score:75,note:"Disneys Klassiker über eine Meerjungfrau, die Mensch werden will. Die Meerhexe Ursula ist für unter Sechsjährige der kritische Punkt: große Gestalt, dunkle Szene, laute Musik. Ältere finden sie eher großartig. Erzählerisch ist der Film schnell und die Musiknummern tragen — deshalb funktioniert er auch beim fünften Mal noch."},
+  {day:"Samstag, 01.08.2026",time:"22:10",dur:"130 Min",title:"Pünktchen und Anton",sub:"",age:8,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"S-RTL",color:"#EA580C",est:true,ads:true,ch:[{n:"S-RTL",free:true,u:"https://www.toggo.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV."}],imdb:{r:7.0,id:"tt0161935",v:1121},year:1999,detail:{lang:"Caroline Links Kästner-Verfilmung über zwei Kinder aus sehr verschiedenen Verhältnissen. Anton pflegt seine kranke Mutter und arbeitet nachts, während Pünktchens Eltern kaum zu Hause sind — beides wird ohne Beschönigung gezeigt. Inhaltlich stark und für Grundschulkinder gut zugänglich, emotional aber fordernder als eine Zeichentrickfolge. Der Sendeplatz um 22:10 spricht ohnehin fürs Aufnehmen.",flags:["soziale Ungleichheit","krankes Elternteil","später Sendeplatz"],reden:"Was hat Anton, das Pünktchen nicht hat — und umgekehrt?"},retro:{y:1999,n:"Caroline Links Neuverfilmung von 1999, gedreht mit Elea Geissler und Max Felder."},score:76,note:"Caroline Links Kästner-Verfilmung über zwei Kinder aus sehr unterschiedlichen Verhältnissen. Soziale Ungleichheit wird ohne erhobenen Zeigefinger gezeigt, das trägt bis in die vierte Klasse hinein. Inhaltlich einer der stärksten Titel der Woche — der Sendeplatz um 22:10 ist für die Zielgruppe allerdings völlig verfehlt, das ist ein Aufnahmefilm."},
+  {day:"Samstag, 01.08.2026",time:"22:35",dur:"110 Min",title:"Der Schuh des Manitu",sub:"Extra Large",age:12,grp:"a10",fsk:null,fskTodo:true,genre:"Film",channel:"SAT.1",color:"#EA580C",est:true,ads:true,ch:[{n:"SAT.1",free:true,u:"https://www.sat1.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV."}],imdb:{r:6.7,id:"tt0248408",v:23276},year:2001,detail:{lang:"Kein Kinderfilm, auch wenn die Quelle ihn unter Familienfilm führt. Westernparodie mit Anspielungen, die auf Erwachsene zielen, dazu ein Humor über Herkunft und Sexualität, der heute streckenweise unangenehm wirkt. Läuft um 22:35 und gehört auf dieser Seite eigentlich nur der Vollständigkeit halber.",flags:["kein Kinderfilm","Anspielungen","22:35 Uhr"],reden:"Für gemeinsames Schauen mit Kindern nicht geeignet."},retro:{y:2001,n:"Der Kinohit von 2001. Nostalgie für die Eltern — für die Kinder aber kein Kinderfilm."},score:34,note:"Steht in der Liste, weil die Quelle ihn als Familienfilm führt. Das ist er nicht. Westernparodie mit derbem Humor, Anspielungen für Erwachsene und einer Darstellung indigener Figuren, die heute zu Recht diskutiert wird. Sendeplatz 22:35. Für Kinder ungeeignet, für einen Elternabend auf dem Sofa dagegen genau richtig."},
+  {day:"Sonntag, 02.08.2026",time:"04:00",dur:"120 Min",title:"Mary Poppins' Rückkehr",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"ORF 1",color:"#EA580C",est:true,ads:false,ch:[{n:"ORF 1",free:false,u:"https://tv.orf.at/",note:"Nur in Österreich frei empfangbar (ORF-Karte). Aus Deutschland nicht regulär zu empfangen."}],imdb:{r:6.6,id:"tt5028340",v:101469},year:2018,detail:{lang:"Die Fortsetzung setzt nach dem Tod der Mutter an: Die Familie Banks trauert und droht ihr Haus zu verlieren. Das ist der Rahmen, in dem die Musik- und Trickfilmnummern stattfinden, und es wird nicht weggewischt. Für Kinder, die selbst einen Verlust erlebt haben, kann der Film sehr nah gehen. Ansonsten ein warmer, sehr schön ausgestatteter Film — der Sendeplatz um 4 Uhr nachts macht ihn allerdings zur reinen Aufnahmesache.",flags:["Tod der Mutter","Trauer","4 Uhr nachts"],reden:"Was hilft der Familie im Film dabei, wieder fröhlich zu werden?"},retro:null,score:70,note:"Fortsetzung des Klassikers mit Emily Blunt, aufwendig ausgestattet und mit vielen Musiknummern. Im Kern geht es um eine Familie nach dem Tod der Mutter — das wird warm, aber nicht ausweichend erzählt. Zwei Stunden Laufzeit sind für Sechsjährige viel. Der eigentliche Haken ist der Sendeplatz: 4 Uhr nachts, das ist reine Aufnahmeware."},
+  {day:"Sonntag, 02.08.2026",time:"06:30",dur:"100 Min",title:"Ostwind (3)",sub:"Aufbruch nach Ora",age:8,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"WDR",color:"#EA580C",est:true,ads:false,ch:[{n:"WDR",free:true,u:"https://www.wdr.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:6.1,id:"tt5311972",v:886},year:2017,detail:{lang:"Dritter Teil der Pferdefilmreihe. Mika bricht mit Ostwind nach Andalusien auf, es geht um Verantwortung, Loslassen und darum, dass gut gemeint nicht gut gemacht ist. Ein paar Szenen mit Gefahr für die Pferde, aber ohne drastische Bilder. Wer die ersten beiden Teile nicht kennt, kommt trotzdem mit. Gute Wahl für den Sonntagvormittag.",flags:["Tiere in Gefahr","Freundschaft","ohne Vorkenntnisse verständlich"],reden:"Wann muss man ein Tier gehen lassen, auch wenn man es liebt?"},retro:null,score:77,note:"Dritter Teil der Pferdefilmreihe, diesmal mit einer Reise nach Andalusien. Freundschaft, Verantwortung für ein Tier und das Aushalten von Konflikten unter Jugendlichen. Es gibt eine Szene mit einem verletzten Pferd, die Tierliebhabern naheght. Wer die ersten beiden Teile nicht kennt, kommt trotzdem mit."},
+  {day:"Sonntag, 02.08.2026",time:"08:35",dur:"80 Min",title:"Arielle, die Meerjungfrau",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:7.6,id:"tt0097757",v:313918},year:1989,detail:{lang:"Disney-Klassiker von 1989 mit starken Bildern und Ohrwürmern. Die Meerhexe Ursula ist für kleinere Kinder der Knackpunkt: Sie wird am Ende riesig, die Szene ist dunkel und laut und hat schon manches Kind aus dem Sessel geholt. Dazu kommt der Stoff selbst — Arielle gibt ihre Stimme auf, um bei einem Mann zu sein. Das lässt sich mit älteren Kindern gut auseinandernehmen.",flags:["Ursula erschreckt","dunkles Finale","Streit mit dem Vater"],reden:"Hätte Arielle einen anderen Weg gehabt, als ihre Stimme herzugeben?"},retro:{y:1989,n:"Disneys Wendepunkt von 1989, der die große Zeichentrick-Renaissance einleitete."},score:75,note:"Disneys Klassiker über eine Meerjungfrau, die Mensch werden will. Die Meerhexe Ursula ist für unter Sechsjährige der kritische Punkt: große Gestalt, dunkle Szene, laute Musik. Ältere finden sie eher großartig. Erzählerisch ist der Film schnell und die Musiknummern tragen — deshalb funktioniert er auch beim fünften Mal noch."},
+  {day:"Sonntag, 02.08.2026",time:"09:00",dur:"60 Min",title:"Das Märchen von der silbernen Brücke",sub:"Spielfilm, Deutschland 2024",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"BR",color:"#EA580C",est:true,ads:false,ch:[{n:"BR",free:true,u:"https://www.br.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:5.5,id:"tt35053195",v:27},year:2024,detail:{lang:"Neues ARD-Märchen von 2024, hier als Sommerwiederholung. Klassischer Aufbau mit Prüfung, Widersacher und gutem Ende, aufwendig ausgestattet und in gemächlichem Tempo erzählt. Keine Schreckmomente, die über das übliche Märchenmaß hinausgehen. Eine Stunde Länge macht es auch für Sechsjährige gut überschaubar.",flags:["klassisches Märchen","eine Stunde","keine Schrecksekunden"],reden:"Welche Prüfung war die schwierigste — und hättet ihr sie geschafft?"},retro:null,score:76,note:"Neues ARD-Weihnachtsmärchen von 2024, hier als Sommerwiederholung. Klassische Struktur: Aufgabe, Prüfung, gutes Ende. Eine Stunde Laufzeit ist angenehm kurz. Wie bei allen Märchenfilmen gibt es eine bedrohliche Figur, die aber klar als Rolle erkennbar bleibt. Solide Sonntagvormittagsware."},
+  {day:"Sonntag, 02.08.2026",time:"09:55",dur:"75 Min",title:"Himmel und Huhn",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:5.7,id:"tt0371606",v:110141},year:2005,detail:{lang:"Ein kleines Huhn wird nach einer Falschmeldung zum Gespött des ganzen Ortes und muss dann die Erde vor Außerirdischen retten. Unter dem Trubel liegt eine Vater-Sohn-Geschichte: Der Vater glaubt seinem Kind lange nicht, und das ist ehrlich unangenehm zu sehen. Das Tempo ist hoch, die Gagdichte ebenso. Für Kinder, die selbst gerade um Anerkennung ringen, überraschend berührend.",flags:["Vater glaubt nicht","hohes Tempo","Ausgelachtwerden"],reden:"Wie fühlt es sich an, wenn einem niemand glaubt?"},retro:{y:2005,n:"Disneys erster vollständig computeranimierter Film ohne Pixar, von 2005."},score:65,note:"Disneys erster CGI-Film ohne Pixar, und man merkt es. Sehr hohes Tempo, viele Gags, wenig Ruhe. Im Hintergrund läuft die Geschichte eines Vaters, der seinem Sohn nicht glaubt — das ist der wertvollste Teil, geht im Trubel aber unter. Für Kinder, die schnelle Bilder mögen; für ruhige eher nicht."},
+  {day:"Sonntag, 02.08.2026",time:"10:00",dur:"90 Min",title:"Angry Birds – Der Film",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"ORF 1",color:"#EA580C",est:true,ads:false,ch:[{n:"ORF 1",free:false,u:"https://tv.orf.at/",note:"Nur in Österreich frei empfangbar (ORF-Karte). Aus Deutschland nicht regulär zu empfangen."}],imdb:{r:6.3,id:"tt1985949",v:119850},year:2016,detail:{lang:"Verfilmung der Spiele-App. Der Held ist ein Vogel mit Wutproblem, und der Film erzählt Wut über weite Strecken als Pointe statt als Thema — am Ende ist sie sogar die Rettung. Dazu einige derbe Gags und viel Zerstörung. Unterhaltsam, aber erzählerisch dünn, und für Kinder, die gerade selbst an Wutausbrüchen arbeiten, ein zwiespältiges Vorbild.",flags:["Wut als Gag","viel Zerstörung","derbe Sprüche"],reden:"Wann hilft Wut wirklich weiter, und wann macht sie es schlimmer?"},retro:null,score:60,note:"Verfilmung der Handy-App. Der Held ist wütend und wird dafür ausgegrenzt, am Ende rettet genau diese Wut alle — eine Botschaft, die man mit dem Kind einordnen sollte. Viel Zerstörung als Running Gag, ein paar Anspielungen für Erwachsene. Erzählerisch dünn, unterhält aber verlässlich."},
+  {day:"Sonntag, 02.08.2026",time:"13:00",dur:"80 Min",title:"Ritter Rost 2",sub:"Das Schrottkomplott",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"KiKA",color:"#EA580C",est:true,ads:false,ch:[{n:"KiKA",free:true,u:"https://www.kika.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek. Einziger Kindersender ohne Werbung."}],imdb:{r:5.4,id:"tt6198412",v:112},year:2017,detail:{lang:"Deutscher Animationsfilm mit vielen Liedern, gebaut wie ein Musical. Schrottland ist pleite, Ritter Rost soll sparen — die Geschichte bleibt durchgehend freundlich, die Konflikte lösen sich singend. Werbefreier Sendeplatz am Sonntagmittag auf KiKA. Für Kinder, die Musik mögen, eine der entspanntesten Möglichkeiten, achtzig Minuten zu füllen.",flags:["viel Musik","werbefrei","keine Bedrohung"],reden:"Welches Lied ist hängengeblieben?"},retro:null,score:74,note:"Deutscher Animationsfilm mit Musiknummern, gemächlich erzählt und ohne Härte. Thema ist ein Königreich in der Pleite und die Frage, woran man spart — überraschend nah an dem, was Kinder aus Familiengesprächen kennen. Läuft werbefrei bei KiKA auf einem guten Sonntagsplatz. Für Vor- und Grundschulkinder gleichermaßen brauchbar."},
+  {day:"Sonntag, 02.08.2026",time:"15:20",dur:"100 Min",title:"Minions",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"VOX",color:"#EA580C",est:true,ads:true,ch:[{n:"VOX",free:true,u:"https://www.vox.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV."}],imdb:{r:6.4,id:"tt2293640",v:287839},year:2015,detail:{lang:"Slapstick am laufenden Band, Handlung nur als Vorwand. Die Minions suchen einen neuen Bösewicht und landen bei Scarlet Overkill. Sehr laut, sehr schnell, praktisch ohne ruhige Momente — als Abendprogramm vor dem Schlafengehen ungünstig. Inhaltlich harmlos, die Gewalt ist durchgehend Cartoon-Gewalt ohne Folgen. Kinder lieben es, Eltern finden es oft anstrengend.",flags:["sehr laut","hohes Tempo","wenig Handlung"],reden:"Braucht es nach dem Film noch etwas Ruhiges, bevor es ins Bett geht?"},retro:null,score:66,note:"Slapstick fast ohne Handlung, dafür mit hohem Tempo und viel Krach. Als Belohnungsfilm für einen langen Tag funktioniert er, als Vorlage für ruhiges Spielen danach eher nicht. Gewalt ist durchweg cartoonhaft, es passiert niemandem wirklich etwas. Kinder kommen aufgedreht heraus — kein Film für kurz vor dem Schlafengehen, zumal er um 20:15 startet."},
+  {day:"Sonntag, 02.08.2026",time:"15:25",dur:"60 Min",title:"Dornröschen",sub:"Spielfilm, Deutschland 2009",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"MDR",color:"#EA580C",est:true,ads:false,ch:[{n:"MDR",free:true,u:"https://www.mdr.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:6.0,id:"tt1451618",v:239},year:2009,detail:{lang:"Grimm-Verfilmung aus der ARD-Märchenreihe, eine Stunde lang und ruhig inszeniert. Der Fluch der dreizehnten Fee und der hundertjährige Schlaf sind die einzigen düsteren Momente und bleiben bildlich zurückhaltend. Solide Märchenkost für Sechsjährige, ohne Überraschungen in beide Richtungen.",flags:["Fluch","ruhig inszeniert","kurz"],reden:"Warum hat die dreizehnte Fee sich so geärgert?"},retro:null,score:76,note:"Grimm-Verfilmung aus der ARD-Märchenreihe von 2009. Eine Stunde, ruhig inszeniert, mit der bekannten Fluch-und-Erlösung-Struktur. Die böse Fee ist deutlich als Märchenfigur gezeichnet und erschreckt kaum. Weil die Handlung bekannt ist, funktioniert der Film gut zum Nebenbeischauen mit jüngeren Geschwistern."},
+  {day:"Sonntag, 02.08.2026",time:"15:30",dur:"100 Min",title:"Heidi",sub:"Spielfilm",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"3sat",color:"#EA580C",est:true,ads:false,ch:[{n:"3sat",free:true,u:"https://www.3sat.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:7.5,id:"tt3700392",v:8490},year:1974,detail:{lang:"Heidi wird von der Alm nach Frankfurt gebracht und leidet dort massiv unter Heimweh — das ist der emotionale Kern und wird nicht abgekürzt. Dazu kommt Klara, die im Rollstuhl sitzt, und Fräulein Rottenmeier als strenge Erzieherin. Bildstark und ruhig erzählt, aber die Trennung vom Großvater trifft besonders jüngere Kinder. Achtung: Die Quelle nennt widersprüchliche Jahresangaben, es dürfte die neuere Verfilmung sein.",flags:["Heimweh","Trennung","Behinderung als Thema"],reden:"Was hätte Heidi in Frankfurt geholfen, damit es ihr besser geht?"},retro:{y:1974,n:"Die japanische Zeichentrickserie von 1974 prägte das Heidi-Bild in ganz Europa."},score:84,note:"Der Stoff von Johanna Spyri, hier in einer Spielfilmfassung. Heimweh, ein strenger Großvater und ein Kind, das aus seiner vertrauten Umgebung gerissen wird — inhaltlich stärker, als man erwartet, und für Kinder mit Trennungsängsten spürbar. Landschaftsbilder und Tempo sind ruhig. Hinweis: Die Quelle nennt widersprüchliche Jahresangaben, welche Fassung läuft, ist unklar."},
+  {day:"Sonntag, 02.08.2026",time:"16:30",dur:"90 Min",title:"Der Zauberlehrling",sub:"Spielfilm, Deutschland 2017",age:8,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"MDR",color:"#EA580C",est:true,ads:false,ch:[{n:"MDR",free:true,u:"https://www.mdr.de/",note:"Öffentlich-rechtlich. Frei über Kabel, Satellit, DVB-T2 und Mediathek."}],imdb:{r:6.3,id:"tt6756506",v:93},year:2017,detail:{lang:"Märchenverfilmung um einen Jungen, der beim falschen Meister landet und in einen Machtkampf gerät. Deutlich düsterer als die üblichen ARD-Märchen: Der Apotheker Zacharias ist eine echte Bedrohung, und es geht um Gier und Verrat. Für Achtjährige gut, für Sechsjährige je nach Kind zu viel.",flags:["düsterer als üblich","bedrohlicher Gegenspieler","Machtkampf"],reden:"Woran hätte Valentin früher merken können, dass etwas nicht stimmt?"},retro:null,score:74,note:"Märchenverfilmung von 2017 über Zauberei, Machtmissbrauch und die Frage, wem man vertraut. Etwas düsterer und erwachsener als die Standard-ARD-Märchen, mit einem Antagonisten, der wirklich bedrohlich wirkt. Ab acht gut, darunter zu dicht. Neunzig Minuten am Sonntagnachmittag."},
+  {day:"Sonntag, 02.08.2026",time:"18:35",dur:"100 Min",title:"Bolt",sub:"Ein Hund für alle Fälle",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:6.8,id:"tt0397892",v:249890},year:2008,detail:{lang:"Ein Serienhund hält seine Fernsehrolle für echt und macht sich quer durch die USA auf den Weg zu seiner Besitzerin. Der Kern ist eine Trennungs- und Heimkehrgeschichte, und die trifft manche Kinder stärker als erwartet: Bolt glaubt zwischenzeitlich, Penny habe ihn aufgegeben. Am Ende gibt es einen Brand im Studio mit echter Gefahr für beide. Ab sechs gut zu verkraften, darunter lieber gemeinsam schauen.",flags:["Trennung","Brandszene am Ende","warmherzig"],reden:"Woran hat Bolt gemerkt, dass er auch ohne Superkräfte etwas wert ist?"},retro:{y:2008,n:"Von 2008 — der Film, mit dem Disney Animation wieder Fahrt aufnahm."},score:74,note:"Ein Hund glaubt, seine Serienrolle sei echt, und muss lernen, dass er ganz normal ist. Das Thema — jemand verliert seine vermeintlichen Superkräfte und ist trotzdem genug — trägt gut. Zwei Verfolgungsszenen und ein Feuer am Ende können Vierjährige kurz mitnehmen, lösen sich aber sofort auf. Warmherzig erzählt, kein Zynismus."},
+  {day:"Sonntag, 02.08.2026",time:"20:15",dur:"100 Min",title:"Der König der Löwen 2",sub:"Simbas Königreich",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Disney Channel",color:"#EA580C",est:true,ads:true,ch:[{n:"Disney Channel",free:true,u:"https://www.disneychannel.de/",note:"Seit 17.01.2014 im Free-TV. Frei über Kabel, Satellit und IPTV; über DVB-T2 HD nur mit freenet-TV-Karte. Wird Ende 2026 in Disney TV umbenannt."}],imdb:{r:6.4,id:"tt0120131",v:83622},year:1998,detail:{lang:"Die Fortsetzung dreht sich um Kiara und Kovu, dessen Mutter Zira auf Rache aus ist. Der Ton ist ernster als beim ersten Teil: Es gibt einen Steppenbrand, einen Kampf zwischen zwei Rudeln und einen Tod. Kovu trägt eine Narbe und wird als Ausgestoßener behandelt — das Thema Vorurteil ist gut angelegt. Für sensible Kinder sind die Kampfszenen der Knackpunkt.",flags:["Kämpfe","Steppenbrand","Ausgrenzung","ein Tod"],reden:"Warum haben alle Kovu misstraut, obwohl er nichts getan hatte?"},retro:{y:1998,n:"Die Fortsetzung von 1998 kam direkt auf Video — für viele die erste eigene Kassette."},score:71,note:"Direct-to-Video-Fortsetzung um Simbas Tochter und einen Konflikt zwischen zwei Löwenrudeln. Romeo-und-Julia-Motiv, überraschend ernst geführt, mit mehreren Kampfszenen und einem Feuer. Für sensible Kinder stellenweise heftig, für Fans des ersten Teils eine willkommene Fortsetzung. Startet um 20:15, Ende gegen 22 Uhr."},
+  {day:"Mittwoch, 05.08.2026",time:"20:15",dur:"135 Min",title:"Jim Knopf und Lukas der Lokomotivführer",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Kabel Eins",color:"#EA580C",est:true,ads:true,ch:[{n:"Kabel Eins",free:true,u:"https://www.kabeleins.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV."}],imdb:{r:6.3,id:"tt3072732",v:3177},year:2018,detail:{lang:"Aufwendige Verfilmung des Michael-Ende-Klassikers mit echten Schauplätzen. Der Knackpunkt ist Frau Mahlzahn: Der Drache ist groß, laut und für Vorschulkinder ernsthaft angsteinflößend, auch wenn er am Ende gezähmt wird. Dazu die Frage nach Jims Herkunft, die feinfühlig erzählt ist. Ab sechs gut, mit über zwei Stunden plus Werbepausen aber ein langer Abend — die Ausstrahlung um 20:15 endet gegen 22:30.",flags:["Drache macht Angst","über zwei Stunden","Herkunft als Thema"],reden:"Wie hat Jim herausgefunden, wo er hingehört?"},retro:null,score:80,note:"Aufwendige Verfilmung des Michael-Ende-Klassikers mit echten Schauplätzen und viel Ausstattung. Freundschaft, Herkunft und die Frage, wo man hingehört — das trägt über zwei Stunden. Der Scheinriese und der Drache sind die zwei Stellen, an denen jüngere Kinder kurz die Hand suchen. Mit Werbepausen endet der Film gegen 22:30."},
+  {day:"Donnerstag, 06.08.2026",time:"01:00",dur:"105 Min",title:"Jim Knopf und Lukas der Lokomotivführer",sub:"",age:6,grp:"a6",fsk:null,fskTodo:true,genre:"Film",channel:"Kabel Eins",color:"#EA580C",est:true,ads:true,ch:[{n:"Kabel Eins",free:true,u:"https://www.kabeleins.de/",note:"SD frei empfangbar. HD über Satellit nur mit HD+, über DVB-T2 nur mit freenet TV."}],imdb:{r:6.3,id:"tt3072732",v:3177},year:2018,detail:{lang:"Aufwendige Verfilmung des Michael-Ende-Klassikers mit echten Schauplätzen. Der Knackpunkt ist Frau Mahlzahn: Der Drache ist groß, laut und für Vorschulkinder ernsthaft angsteinflößend, auch wenn er am Ende gezähmt wird. Dazu die Frage nach Jims Herkunft, die feinfühlig erzählt ist. Ab sechs gut, mit über zwei Stunden plus Werbepausen aber ein langer Abend — die Ausstrahlung um 20:15 endet gegen 22:30.",flags:["Drache macht Angst","über zwei Stunden","Herkunft als Thema"],reden:"Wie hat Jim herausgefunden, wo er hingehört?"},retro:null,score:45,note:"Aufwendige Verfilmung des Michael-Ende-Klassikers mit echten Schauplätzen und viel Ausstattung. Freundschaft, Herkunft und die Frage, wo man hingehört — das trägt über zwei Stunden. Der Scheinriese und der Drache sind die zwei Stellen, an denen jüngere Kinder kurz die Hand suchen. Mit Werbepausen endet der Film gegen 22:30."}
 ];
 const DAY_ORDER = ["Donnerstag, 30.07.2026", "Freitag, 31.07.2026", "Samstag, 01.08.2026", "Sonntag, 02.08.2026", "Mittwoch, 05.08.2026", "Donnerstag, 06.08.2026"];
+
+const NACHSEHEN = {"Die Biene Maja": {"p": ["KiKA-Player", "ZDFtivi"], "f": 300, "u": "https://www.kika.de/die-biene-maja/videos/acht-knacks-im-schneckenhaus-102"}, "Wissen macht Ah!": {"p": ["ARD Mediathek", "KiKA-Player"], "f": 300, "u": "https://www.ardmediathek.de/video/Y3JpZDovL3dkci5kZS9CZWl0cmFnLXNvcGhvcmEtOTFlOWU3ODItNjI1Mi00ZDcwLWFhZTMtYzY1ZjBlYzdmYjdh"}, "Unser Sandmännchen": {"p": ["ARD Mediathek", "KiKA-Player"], "f": 300, "u": "https://www.ardmediathek.de/video/Y3JpZDovL3JiYl84ZWUwODU5OC0yZDc3LTQ0NzUtYjEyMi05ODU2ZDc1ZjViMmNfcHVibGljYXRpb24"}, "Die Sendung mit der Maus": {"p": ["ARD Mediathek", "KiKA-Player"], "f": 299, "u": "https://www.ardmediathek.de/video/Y3JpZDovL3dkci5kZS9CZWl0cmFnLXNvcGhvcmEtNGMyZmRjMWMtN2VhYi00Nzc3LTliYTAtZDMxMGU2MDA5ZWFj"}, "Die Pfefferkörner": {"p": ["ARD Mediathek", "KiKA-Player"], "f": 296, "u": "https://www.ardmediathek.de/video/Y3JpZDovL2Rhc2Vyc3RlLm5kci5kZS80NzUzXzIwMjItMDEtMjktMDktMjA"}, "PUR+": {"p": ["KiKA-Player", "ZDFtivi"], "f": 266, "u": "https://www.zdf.de/video/reportagen/purplus-100/meine-stadt-fit-fuers-klima-100"}, "Checker Reportagen": {"p": ["ARD Mediathek", "KiKA-Player"], "f": 265, "u": "https://www.ardmediathek.de/video/Y3JpZDovL2JyLmRlL3ZpZGVvLzlhNjBhNDZmLWI1ZWYtNGIwMy1iYjA0LTQ2NzY0ZjBmY2NkYg"}, "Löwenzahn": {"p": ["KiKA-Player", "ZDFtivi"], "f": 249, "u": "https://www.kika.de/loewenzahn/videos/audiodeskription/kranich-als-hoerfilm-100"}, "Wickie und die starken Männer": {"p": ["KiKA-Player", "ZDFtivi"], "f": 195, "u": "https://www.kika.de/wickie-und-die-starken-maenner/videos/neununddreissig-kampf-mit-dem-stier-100"}, "Rudis Siebenstein": {"p": ["KiKA-Player", "ZDFtivi"], "f": 173, "u": "https://www.kika.de/rudi/rudis-siebenstein/videos/der-tanzzauber-102"}, "Bibi Blocksberg": {"p": ["KiKA-Player", "ZDFtivi"], "f": 168, "u": "https://www.kika.de/bibi-blocksberg/videos/sieben-das-diamantendiadem-100"}, "logo!": {"p": ["KiKA-Player"], "f": 142, "u": "https://www.kika.de/logo/videos/logo-vom-dienstag-sechzehn-juni-zweitausendsechsundzwanzig-100"}, "Das Magazin": {"p": ["KiKA-Player"], "f": 128, "u": "https://www.kika.de/sesamstrasse/videos/audiodeskription/eins-zwei-drei-vier-jahreszeiten-hoerfassung-100"}, "Kikaninchen Schnipselwelt": {"p": ["KiKA-Player"], "f": 128, "u": "https://www.kika.de/kikaninchen-schnipselwelt/videos/das-pferd-hat-geburtstag-100"}, "Siebenstein": {"p": ["KiKA-Player", "ZDFtivi"], "f": 127, "u": "https://www.zdf.de/video/serien/siebenstein-110/spielen-verboten-102"}, "Zoom - Der weiße Delfin": {"p": ["KiKA-Player"], "f": 108, "u": "https://www.kika.de/zoom-der-weisse-delfin/videos/vierundvierzig-tag-der-streiche-100"}, "H2O - Plötzlich Meerjungfrau": {"p": ["KiKA-Player"], "f": 103, "u": "https://www.kika.de/h2o-ploetzlich-meerjungfrau/videos/sechsundzwanzig-komet-im-anflug-100"}, "Schloss Einstein": {"p": ["KiKA-Player"], "f": 101, "u": "https://www.kika.de/schloss-einstein/schloss-einstein/videos/schloss-einstein-neunhundertsechsundfuenfzig-108"}, "Heidi": {"p": ["KiKA-Player", "ZDFtivi"], "f": 94, "u": "https://www.kika.de/heidi/videos/neununddreissig-die-versoehnung-100"}, "Lilys Strandschatz Eiland": {"p": ["KiKA-Player"], "f": 82, "u": "https://www.kika.de/lilys-strandschatz-eiland/videos/einhundert-costa-del-hirsch-100"}, "Der kleine Drache Kokosnuss": {"p": ["KiKA-Player"], "f": 75, "u": "https://www.kika.de/der-kleine-drache-kokosnuss/videos/vierundzwanzig-das-buch-der-weisheit-100"}, "Die Sendung mit dem Elefanten": {"p": ["ARD Mediathek", "KiKA-Player"], "f": 71, "u": "https://www.ardmediathek.de/video/Y3JpZDovL3dkci5kZS9CZWl0cmFnLTI3NjllMGEzLTg2YTMtNDU2NS05YTQ3LTQ2OTE2MmYyNGM4OQ"}, "Saïd und Anna": {"p": ["KiKA-Player"], "f": 65, "u": "https://www.kika.de/said-und-anna/videos/discokugel-folge-sechzehn-100"}, "Shaun das Schaf": {"p": ["ARD Mediathek", "KiKA-Player"], "f": 59, "u": "https://www.ardmediathek.de/video/Y3JpZDovL3dkci5kZS9CZWl0cmFnLXNvcGhvcmEtMmE5YjNhYzMtNTA3Mi00NTgyLWIyZDctODM1ZGRkMWQyZmE5"}, "Wir sind die Dorfbande": {"p": ["KiKA-Player"], "f": 52, "u": "https://www.kika.de/wir-sind-die-dorfbande/videos/rettet-martin-102"}, "Dylans Spielkiste": {"p": ["KiKA-Player"], "f": 52, "u": "https://www.kika.de/dylans-spielkiste/videos/astronaut-102"}, "Kleine lustige Krabbler": {"p": ["KiKA-Player"], "f": 51, "u": "https://www.kika.de/kleine-lustige-krabbler/videos/zwei-die-heimkehr-zwei-100"}, "Robin Hood": {"p": ["KiKA-Player"], "f": 48, "u": "https://www.kika.de/robin-hood/videos/neununddreissig-der-muerrische-drache-100"}, "Baumhaus": {"p": ["KiKA-Player"], "f": 47, "u": "https://www.kika.de/baumhaus/videos/einhundertsiebenundsechzig-unterwasser-woche-fidi-spielt-tauchen-100"}, "Die drei Musketiere": {"p": ["KiKA-Player"], "f": 47, "u": "https://www.kika.de/die-drei-musketiere/videos/der-entdecker-koenig-102"}, "Lassie": {"p": ["KiKA-Player"], "f": 46, "u": "https://www.kika.de/lassie/videos/sechsundzwanzig-das-seifenkistenrennen-100"}, "Der kleine Rabe Socke": {"p": ["KiKA-Player"], "f": 45, "u": "https://www.kika.de/der-kleine-rabe-socke/videos/die-waldpruefung-142"}, "Meine Freundin Conni": {"p": ["KiKA-Player"], "f": 44, "u": "https://www.kika.de/meine-freundin-conni/videos/conni-und-der-hundebesuch-104"}, "Team Nuggets": {"p": ["KiKA-Player"], "f": 42, "u": "https://www.kika.de/team-nuggets/videos/ich-will-nach-hause-102"}, "ENE MENE BU": {"p": ["KiKA-Player"], "f": 41, "u": "https://www.kika.de/ene-mene-bu/videos/zweitausendachthunderteinundsechzig-geburtstagsparty-feiern-basteln-und-singen-zum-geburtstag-100"}, "Pippi Langstrumpf": {"p": ["KiKA-Player", "ZDFtivi"], "f": 41, "u": "https://www.kika.de/pippi-langstrumpf/videos/pippi-auf-der-walz-vier-100"}, "Das Dschungelbuch": {"p": ["KiKA-Player"], "f": 40, "u": "https://www.kika.de/das-dschungelbuch/videos/achtundzwanzig-der-falsche-kranke-100"}, "Odo - Kleine Eule ganz groß": {"p": ["KiKA-Player"], "f": 40, "u": "https://www.kika.de/odo/videos/einundfuenfzig-der-eulenblick-100"}, "Pirate Academy - Nichts für Landratten": {"p": ["KiKA-Player"], "f": 39, "u": "https://www.kika.de/pirate-academy/videos/die-zerreissprobe-106"}, "Eine lausige Hexe": {"p": ["KiKA-Player"], "f": 39, "u": "https://www.kika.de/eine-lausige-hexe/videos/dreizehn-ruhm-und-rache-100"}, "Löwenzahn mit Fritz Fuchs": {"p": ["ZDFtivi"], "f": 39, "u": "https://www.zdf.de/video/magazine/loewenzahn-mit-fritz-fuchs-100/satellit-ufo-alarm-im-elchwinkel-100"}, "Pettersson und Findus": {"p": ["KiKA-Player"], "f": 37, "u": "https://www.kika.de/pettersson-und-findus/videos/neunzehn-namenstag-fuer-alle-100"}, "Weißt du eigentlich, wie lieb ich dich hab?": {"p": ["KiKA-Player"], "f": 36, "u": "https://www.kika.de/weisst-du-eigentlich-wie-lieb-ich-dich-hab/videos/einundzwanzig-die-gutenacht-geschichte-100"}, "Team Timster": {"p": ["KiKA-Player"], "f": 36, "u": "https://www.kika.de/team-timster/videos/einhundertvierundsiebzig-pro-gamer-wie-wird-man-das-102"}, "Paula, Anna und die wilden Tiere": {"p": ["ARD Mediathek"], "f": 36, "u": "https://www.ardmediathek.de/video/Y3JpZDovL2JyLmRlL3ZpZGVvL2I0ZjY1YjkzLWEyODctNDI3ZC1iZTFkLTk5NDQ5ZjZjNGQxOA"}, "KiKA LIVE": {"p": ["KiKA-Player"], "f": 35, "u": "https://www.kika.de/kika-live/videos/flickzy-beim-e-sport-turnier-102"}, "Ein Fall für die Erdmännchen": {"p": ["KiKA-Player"], "f": 33, "u": "https://www.kika.de/ein-fall-fuer-die-erdmaennchen/videos/platte-reifen-s-e-100"}, "Super Wings": {"p": ["KiKA-Player"], "f": 33, "u": "https://www.kika.de/super-wings/videos/chaos-auf-dem-bauernhof-110"}, "Belle und Sebastian": {"p": ["KiKA-Player"], "f": 32, "u": "https://www.kika.de/belle-und-sebastian/videos/zwoelf-die-schoene-und-der-mops-100"}, "Anna, Nina, Pia und die wilden Tiere": {"p": ["ARD Mediathek"], "f": 32, "u": "https://www.ardmediathek.de/video/Y3JpZDovL2JyLmRlL3ZpZGVvLzVjZTFhZTY3LTY0MTktNGVlMi1hNmYzLTg1ZTE3ZGYzZDkwMQ"}, "Wir Kinder aus dem Möwenweg": {"p": ["KiKA-Player"], "f": 29, "u": "https://www.kika.de/wir-kinder-aus-dem-moewenweg/videos/wir-fangen-maeuse-104"}, "Lieselotte": {"p": ["KiKA-Player"], "f": 28, "u": "https://www.kika.de/lieselotte/videos/lieselotte-hat-den-dreh-raus-104"}, "Schleich pur": {"p": ["ARD Mediathek"], "f": 28, "u": "https://www.ardmediathek.de/video/Y3JpZDovL2JyLmRlL2Jyb2FkY2FzdC9GMjAyNVdPMDI1ODE4QTAvc2VjdGlvbi8xYjVmZTVkNy1lNTUwLTQ3ODItYmI4NS01ZGU3MzAyZTAyNDc"}, "TOM und das Erdbeermarmeladebrot mit Honig": {"p": ["KiKA-Player"], "f": 27, "u": "https://www.kika.de/tom-und-das-erdbeermarmeladebrot-mit-honig/videos/tom-und-der-streit-130"}, "Zacki und die Zoobande": {"p": ["KiKA-Player"], "f": 26, "u": "https://www.kika.de/zacki-und-die-zoobande/videos/bruno-muss-niesen-110"}, "Zoés Zauberschrank": {"p": ["KiKA-Player"], "f": 26, "u": "https://www.kika.de/zoes-zauberschrank/videos/ein-drache-weiss-nicht-weiter-104"}, "Wendy": {"p": ["KiKA-Player"], "f": 26, "u": "https://www.kika.de/wendy/videos/sieben-erwischt-100"}, "Lenas Hof": {"p": ["KiKA-Player"], "f": 26, "u": "https://www.kika.de/lenas-hof/videos/zwei-maeuse-sehen-fern-102"}, "Die Werkel-Ferkel": {"p": ["KiKA-Player"], "f": 26, "u": "https://www.kika.de/die-werkel-ferkel/videos/der-jurticopter-102"}, "Bibi und Tina": {"p": ["KiKA-Player"], "f": 25, "u": "https://www.kika.de/bibi-und-tina/videos/tante-paula-auf-dem-schloss-102"}, "H2O - Abenteuer Meerjungfrau": {"p": ["KiKA-Player"], "f": 24, "u": "https://www.kika.de/h2o-abenteuer-meerjungfrau/videos/die-geheimnisvolle-alge-104"}, "Die Checker-Webshow": {"p": ["ARD Mediathek", "KiKA-Player"], "f": 24, "u": "https://www.ardmediathek.de/video/Y3JpZDovL2JyLmRlL2Jyb2FkY2FzdC8yNDI0YWVmZi1mNDlhLTRjMDItOTdiYi1iZTUwZWQ0NzRjYzBfb25saW5lYnJvYWRjYXN0"}, "Sesamstraße": {"p": ["ARD Mediathek", "KiKA-Player"], "f": 21, "u": "https://www.ardmediathek.de/video/Y3JpZDovL25kci5kZS9kZGRmNmZhMi01NWJkLTQyNDAtYjE1Zi0wYWVmZWI2MzRlNDg"}, "Sonntagsmärchen": {"p": ["KiKA-Player"], "f": 20, "u": "https://www.kika.de/sonntagsmaerchen/videos/die-galoschen-des-gluecks-102"}, "Peter Pan": {"p": ["KiKA-Player"], "f": 20, "u": "https://www.kika.de/peter-pan/videos/neunundvierzig-kinozauber-100"}, "Sam & Julia im Mäusehaus": {"p": ["KiKA-Player"], "f": 19, "u": "https://www.kika.de/sam-julia-im-maeusehaus/videos/der-kinderladen-102"}, "Törtel": {"p": ["KiKA-Player"], "f": 18, "u": "https://www.kika.de/toertel/videos/ach-du-lieber-schwan-102"}, "Grisu - Der kleine Drache": {"p": ["KiKA-Player"], "f": 18, "u": "https://www.kika.de/grisu/videos/achtzehn-der-schluessel-zum-glueck-100"}, "Marcus Level": {"p": ["KiKA-Player"], "f": 18, "u": "https://www.kika.de/marcus-level/videos/zweiundvierzig-mission-jahrhundertraub-100"}, "Rudis Rasselbande": {"p": ["KiKA-Player"], "f": 17, "u": "https://www.kika.de/rudi/rudis-rasselbande/videos/wuermer-stinken-102"}, "1, 2 oder 3": {"p": ["KiKA-Player"], "f": 16, "u": "https://www.kika.de/1-2-oder-3/videos/fussball-next-level-102"}, "Super Happy Magic Forest": {"p": ["KiKA-Player"], "f": 16, "u": "https://www.kika.de/super-happy-magic-forest/videos/die-schnecke-zorgoth-102"}, "Petronella Apfelmus": {"p": ["KiKA-Player"], "f": 16, "u": "https://www.kika.de/petronella-apfelmus/videos/das-ueberraschungs-picknick-110"}, "Die beste Klasse Deutschlands": {"p": ["KiKA-Player"], "f": 16, "u": "https://www.kika.de/die-beste-klasse-deutschlands/extras/maria-ziffy-in-der-prager-metro-100"}, "Ab nach Alicante": {"p": ["KiKA-Player"], "f": 16, "u": "https://www.kika.de/die-wg/mixed-wg-alicante/videos/abschied-unter-traenen-102"}, "Die Muskeltiere": {"p": ["KiKA-Player"], "f": 16, "u": "https://www.kika.de/die-muskeltiere/videos/ein-heisser-tanz-102"}, "Filme": {"p": ["KiKA-Player"], "f": 14, "u": "https://www.kika.de/filme/videos/prinzessin-emmy-102"}, "Mumintal": {"p": ["KiKA-Player"], "f": 14, "u": "https://www.kika.de/mumintal/videos/dreizehn-mittsommerzauber-100"}, "Der kleine Nick und die Ferien": {"p": ["KiKA-Player"], "f": 13, "u": "https://www.kika.de/der-kleine-nick-und-die-ferien/videos/die-maus-s-evierzehn-100"}, "STORY TIME": {"p": ["KiKA-Player"], "f": 13, "u": "https://www.kika.de/story-time/videos/muay-thai-aidan-trainiert-fuer-die-wm-102"}, "KiKA Sport": {"p": ["KiKA-Player"], "f": 13, "u": "https://www.kika.de/kika-sport/mach-mit/kommentieren-deutschlandtour-116"}, "stark!": {"p": ["KiKA-Player"], "f": 13, "u": "https://www.kika.de/stark/videos/nathan-klima-schuetzen-mit-zahlen-102"}, "Anna, Paula, Pia und die wilden Tiere / wilde Natur": {"p": ["ARD Mediathek"], "f": 13, "u": "https://www.ardmediathek.de/video/Y3JpZDovL2JyLmRlL3ZpZGVvLzljNGZjMmQ5LWQ4OTgtNDE4Zi04N2Y5LWRmOTY5Yzk2NzZkOA"}, "Bobo Siebenschläfer": {"p": ["KiKA-Player"], "f": 12, "u": "https://www.kika.de/bobo-siebenschlaefer/videos/bobo-malt-mit-fingerfarben-110"}, "Vegesaurier": {"p": ["KiKA-Player"], "f": 12, "u": "https://www.kika.de/sendungen/sendereihen/v/vegesaurier/videos/tanzparty-im-schnee-102"}, "Josefine, Törtel und die Tiere": {"p": ["KiKA-Player"], "f": 12, "u": "https://www.kika.de/josefine-toertel-und-die-tiere/videos/der-igelfreund-102"}, "Löwenzahn mit Peter Lustig": {"p": ["KiKA-Player", "ZDFtivi"], "f": 12, "u": "https://www.kika.de/loewenzahn-mit-peter-lustig/videos/neun-fluss-100"}, "Wilde Tiere Reportagen": {"p": ["KiKA-Player"], "f": 12, "u": "https://www.kika.de/wilde-tierwelt/die-wilden-tiere/anna-und-die-wilden-tiere/videos/sushi-der-schuhschnabel-100"}, "Unsere Ferien auf Saltkrokan": {"p": ["KiKA-Player"], "f": 12, "u": "https://www.kika.de/unsere-ferien-auf-saltkrokan/videos/das-letzte-kapitel-102"}, "KiKA Award": {"p": ["KiKA-Player"], "f": 12, "u": "https://www.kika.de/kika-award/videos/kika-award-highlights-rueckblick-mit-noel-102"}, "Spellbound - Verzaubert in Paris": {"p": ["KiKA-Player"], "f": 11, "u": "https://www.kika.de/spellbound-verzaubert-in-paris/videos/magische-machtprobe-102"}, "Taylors Welt der Tiere": {"p": ["KiKA-Player"], "f": 10, "u": "https://www.kika.de/taylors-welt-der-tiere/videos/ein-flaeschchen-fuer-lucy-102"}, "SingAlarm": {"p": ["KiKA-Player"], "f": 10, "u": "https://www.kika.de/singalarm/videos/sechs-dino-songs-100"}, "Tanoshii": {"p": ["KiKA-Player"], "f": 10, "u": "https://www.kika.de/tanoshii/videos/knockout-justnero-und-imahairyoldman-vs-harut-und-anigents-102"}, "Dein Song 2026": {"p": ["KiKA-Player"], "f": 10, "u": "https://www.kika.de/dein-song/mach-mit/voting-constantin-flugmodus-an-100"}, "Sommer.Sonne.Elternfrei.": {"p": ["KiKA-Player"], "f": 10, "u": "https://www.kika.de/die-wg/jungs-gardasee/videos/zwanzig-die-jungs-wg-in-italien-102"}, "Ritter Rost": {"p": ["KiKA-Player"], "f": 10, "u": "https://www.kika.de/ritter-rost/videos/sechsundzwanzig-die-abschlusspruefung-100"}, "Die Abenteuer-Checker Staffel 1": {"p": ["ORF ON"], "f": 10, "u": "https://on.orf.at/video/14266244/die-abenteuerchecker-survival-camp"}, "TickTack Zeitreise mit Lisa & Lena": {"p": ["KiKA-Player"], "f": 9, "u": "https://www.kika.de/ticktack-zeitreise-mit-lisa-und-lena/videos/radiogeschichte-102"}, "Tigerenten Club": {"p": ["KiKA-Player"], "f": 9, "u": "https://www.kika.de/tigerenten-club/tigerenten-club/videos/roboter-action-die-bohlebots-im-tigerenten-cub-100"}, "Schau in meine Welt!": {"p": ["KiKA-Player"], "f": 9, "u": "https://www.kika.de/schau-in-meine-welt/videos/lisa-und-die-schimpansen-106"}, "ICH bin ICH": {"p": ["KiKA-Player"], "f": 8, "u": "https://www.kika.de/ich-bin-ich/videos/einundfuenfzig-pelle-rasmus-und-leo-bauen-einen-staudamm-100"}, "Animanimals": {"p": ["KiKA-Player"], "f": 8, "u": "https://www.kika.de/animanimals/videos/fuenfunddreissig-marienkaefer-100"}, "Urlaub ohne Eltern": {"p": ["KiKA-Player"], "f": 8, "u": "https://www.kika.de/die-wg/maedchen-mallorca/videos/acht-die-maedchen-wg-urlaub-ohne-eltern-100"}, "Checkpoint": {"p": ["KiKA-Player"], "f": 8, "u": "https://www.kika.de/checkpoint/videos/-auf-dem-bau-falschspieler-und-riesenflummi-100"}, "Zum ersten Mal": {"p": ["KiKA-Player"], "f": 8, "u": "https://www.kika.de/zum-ersten-mal/videos/sturmfrei-132"}, "Goat Girl": {"p": ["KiKA-Player"], "f": 8, "u": "https://www.kika.de/goat-girl/videos/dreiundzwanzig-kyles-berufung-100"}, "TanzAlarm": {"p": ["KiKA-Player"], "f": 7, "u": "https://www.kika.de/tanzalarm/videos/kochloeffelkonzert-108"}, "Sesamstraße Magazin": {"p": ["ARD Mediathek"], "f": 7, "u": "https://www.ardmediathek.de/video/Y3JpZDovL25kci5kZS9kZGRmNmZhMi01NWJkLTQyNDAtYjE1Zi0wYWVmZWI2MzRlNDg"}, "FC Internat - Fußball ist unser Leben": {"p": ["KiKA-Player"], "f": 6, "u": "https://www.kika.de/fc-internat-fussball-ist-unser-leben/kennenlernen/leonie-steckbrief-100"}, "Minus Drei und die wilde Lucy": {"p": ["KiKA-Player"], "f": 6, "u": "https://www.kika.de/minus-drei-und-die-wilde-lucy/videos/meso-weiss-es-102"}, "Rudis Rabenteuer": {"p": ["KiKA-Player"], "f": 5, "u": "https://www.kika.de/rudi/rudis-rabenteuer/videos/die-maeusefantenfeuerwehr-102"}, "Surviving Summer": {"p": ["KiKA-Player"], "f": 5, "u": "https://www.kika.de/surviving-summer/videos/kein-druck-102"}, "Anna, Nina, Pia und die Haustiere": {"p": ["KiKA-Player"], "f": 5, "u": "https://www.kika.de/wilde-tierwelt/die-haustiere/nina-und-die-haustiere/videos/zwerggarnelen-102"}, "Löwenzähnchen": {"p": ["KiKA-Player"], "f": 5, "u": "https://www.kika.de/loewenzaehnchen/videos/strauss-102"}, "Anna, Paula, Pia und die wilden Tiere": {"p": ["ARD Mediathek"], "f": 5, "u": "https://www.ardmediathek.de/video/Y3JpZDovL2JyLmRlL3ZpZGVvLzE2ZTI2YTFhLTY3ZWMtNGIwMy1hYWRiLTRlMGVmMTAzNjUzYg"}, "Sommer.Son­ne.Elternfrei.": {"p": ["KiKA-Player"], "f": 4, "u": "https://www.kika.de/die-wg/maedchen-gardasee/videos/vier-die-maedchen-wg-sommer-sonne-elternfrei-100"}, "starting point": {"p": ["KiKA-Player"], "f": 4, "u": "https://www.kika.de/kinderredaktionsrat/mach-mit/bewirb-dich-152"}, "Maulwurf Moley": {"p": ["KiKA-Player"], "f": 4, "u": "https://www.kika.de/maulwurf-moley/videos/dem-geheimnis-auf-der-spur-104"}, "Feuerwehrmann Sam": {"p": ["KiKA-Player"], "f": 4, "u": "https://www.kika.de/feuerwehrmann-sam/videos/ein-wirklich-scharfer-snack-102"}, "First Day": {"p": ["KiKA-Player"], "f": 4, "u": "https://www.kika.de/first-day-ich-bin-hannah/videos/alles-ist-moeglich-folge-vier-100"}, "Simon Superhase": {"p": ["KiKA-Player"], "f": 4, "u": "https://www.kika.de/simon-superhase/videos/rettet-den-ozean-102"}, "4 1/2 Freunde": {"p": ["KiKA-Player"], "f": 4, "u": "https://www.kika.de/4-12-freunde/videos/hausmeister-des-grauens-104"}, "Ein Fall für TKKG": {"p": ["KiKA-Player"], "f": 4, "u": "https://www.kika.de/ein-fall-fuer-tkkg/videos/fuenfundzwanzig-wer-raubte-das-millionenpferd-100"}, "Anna und die wilden Tiere": {"p": ["3sat"], "f": 4, "u": "https://www.3sat.de/dokumentation/anna-und-die-wilden-tiere/anna-und-die-wilden-tiere-im-revier-der-tiger-100.html"}, "Schloss Einstein und die Pfefferkörner auf Gangsterjagd": {"p": ["KiKA-Player"], "f": 4, "u": "https://www.kika.de/schloss-einstein/schloss-einstein-und-die-pfefferkoerner-auf-gangsterjagd/videos/folge-zwei-auf-gangsterjagd-s-ezwei-102"}, "Meister Eder und sein Pumuckl": {"p": ["ARD Mediathek"], "f": 4, "u": "https://www.ardmediathek.de/video/Y3JpZDovL2JyLmRlL3ZpZGVvLzVhZTUxYzEwLTA2NzgtNGU5ZC04ZmYyLTg4MmVlYzMxYTE1ZC9icm9hZGNhc3Q"}, "Augsburger Puppenkiste": {"p": ["3sat"], "f": 4, "u": "https://www.3sat.de/film/augsburger-puppenkiste/kleiner-koenig-kalle-wirsch-3-die-falle-100.html"}, "Shaun, das Schaf": {"p": ["ARD Mediathek"], "f": 4, "u": "https://www.ardmediathek.de/video/Y3JpZDovL2Rhc2Vyc3RlLmRlL3NoYXVuLWRhcy1zY2hhZi8zNmUyOTYxZC04NjMzLTRkOTEtYTIwOC0zN2NkNGY4M2M0MjA"}, "Tom Sawyer": {"p": ["KiKA-Player"], "f": 3, "u": "https://www.kika.de/tom-sawyer/videos/wie-tom-zu-indianer-joes-komplizen-wurde-106"}, "Glücksbärchis - Willkommen im Wolkenland": {"p": ["KiKA-Player"], "f": 3, "u": "https://www.kika.de/gluecksbaerchis-willkommen-im-wolkenland/videos/fuenfzehn-teilen-macht-spass-100"}, "Trio - Die Kepler Diamanten": {"p": ["KiKA-Player"], "f": 3, "u": "https://www.kika.de/trio-die-kepler-diamanten/videos/der-einbruch-110"}, "Stark mit Fidi": {"p": ["KiKA-Player"], "f": 3, "u": "https://www.kika.de/stark-mit-fidi/videos/gabriel-will-was-erzaehlen-102"}, "Nö-Nö Schnabeltier": {"p": ["KiKA-Player"], "f": 2, "u": "https://www.kika.de/noe-noe-schnabeltier/videos/ich-will-heute-gefeiert-werden-132"}, "Die Kinder von Bullerbü": {"p": ["KiKA-Player"], "f": 2, "u": "https://www.kika.de/die-kinder-von-bullerbue/videos/die-kinder-von-bullerbue-spinat-und-schwarze-schuhcreme-100"}, "Zeig mir Feiertage!": {"p": ["KiKA-Player"], "f": 2, "u": "https://www.kika.de/zeig-mir-feiertage/videos/zeig-mir-pfingsten-100"}, "Blinky Bill": {"p": ["KiKA-Player"], "f": 2, "u": "https://www.kika.de/blinky-bill/videos/blinky-bill-das-meer-der-weissen-drachen-106"}, "Kicken wie ein Mädchen": {"p": ["KiKA-Player"], "f": 2, "u": "https://www.kika.de/kicken-wie-ein-maedchen/videos/leidenschaft-102"}, "Magic Pranks - Ausgetrickst mit den Ehrlich Brothers": {"p": ["KiKA-Player"], "f": 2, "u": "https://www.kika.de/magic-pranks-102/videos/zwillingsprank-und-sushi-kochkurs-102"}, "Tib und Tumtum": {"p": ["KiKA-Player"], "f": 2, "u": "https://www.kika.de/tib-tumtum/videos/sechsundzwanzig-das-grosse-rote-biest-100"}, "Sesamstraße präsentiert: Eine Möhre für Zwei": {"p": ["ARD Mediathek"], "f": 2, "u": "https://www.ndr.de/fernsehen/sendungen/Der-perfekte-Freund,sendung309118.html"}, "Die Schlümpfe": {"p": ["KiKA-Player"], "f": 1, "u": "https://www.kika.de/die-schluempfe/videos/einhundertsechsunddreissig-diskomania-100"}, "Mascha und der Bär": {"p": ["KiKA-Player"], "f": 1, "u": "https://www.kika.de/mascha-und-der-baer/mascha-und-der-baer/videos/sechsundsechzig-baelle-fuer-alle-faelle-102"}, "Abgetaucht! - Meine falschen Ferien": {"p": ["KiKA-Player"], "f": 1, "u": "https://www.kika.de/abgetaucht-meine-falschen-ferien/videos/abgetaucht-meine-falschen-ferien-114"}, "Kikaninchen und Freunde": {"p": ["KiKA-Player"], "f": 1, "u": "https://www.kika.de/kikaninchen-und-freunde/videos/vom-ballspielen-skaten-und-seilspringen-102"}, "Astrobrot": {"p": ["KiKA-Player"], "f": 1, "u": "https://www.kika.de/bernd-das-brot/musik/bergmelodielied-100"}, "CHECK IN - Marinas Rätsel-Abenteuer": {"p": ["KiKA-Player"], "f": 1, "u": "https://www.kika.de/checker-welt/check-in-marinas-raetsel-abenteuer/videos/schreckgespenst-im-gruselhaus-102"}, "Leo da Vinci": {"p": ["KiKA-Player"], "f": 1, "u": "https://www.kika.de/leo-da-vinci/videos/das-maedchen-und-der-stier-108"}, "Edmund und Luzie": {"p": ["KiKA-Player"], "f": 1, "u": "https://www.kika.de/edmund-und-luzie/videos/die-geschichtensteine-112"}, "Die Abenteuer-Checker Staffel 2": {"p": ["ORF ON"], "f": 1, "u": "https://on.orf.at/video/14327167/die-abenteuerchecker-fussball"}, "Vom kleinen Maulwurf, der wissen wollte, wer ihm auf den Kopf gemacht hat": {"p": ["ORF ON"], "f": 1, "u": "https://on.orf.at/video/14316467/vom-kleinen-maulwurf-der-wissen-wollte-wer-ihm-auf-den-kopf-gemacht-hat"}, "Shaun, das Schaf - Rettet den Baum": {"p": ["ARD Mediathek"], "f": 1, "u": "https://www.ardmediathek.de/video/Y3JpZDovL2Rhc2Vyc3RlLmRlL3NoYXVuLCBkYXMgc2NoYWYvMzFiMjJmYzMtZGJhMC00OWYxLWJiMWYtOTM2Y2ZlNGMyNTY4"}};
 
 
 /* =================================================================== */
@@ -1949,12 +2007,113 @@ const MARKETS = [{c:"DE",f:"\uD83C\uDDE9\uD83C\uDDEA",n:"Deutschland"},
                  {c:"CH",f:"\uD83C\uDDE8\uD83C\uDDED",n:"Schweiz"}];
 
 const GROUPS = [
-  {id:"all", label:"Alle"},
-  {id:"a3",  label:"Vorschule · 3–5",  color:"#15A554"},
-  {id:"a6",  label:"6–9 Jahre",        color:"#2563EB"},
-  {id:"a10", label:"10–13 Jahre",      color:"#B7791F"}
+  {id:"all", k:"f_alle"},
+  {id:"a3",  k:"f_a3",  color:"#15A554"},
+  {id:"a6",  k:"f_a6",  color:"#2563EB"},
+  {id:"a10", k:"f_a10", color:"#B7791F"}
 ];
 const GENRES = ["Zeichentrick","Anime","Serie","Jugendserie","Fantasyserie","Wissen","Vorlesen","Musik & Tanz","Film"];
+
+/* =================================================================== */
+/*  Sprachen — Bedienoberfläche zweisprachig, Inhalte bleiben deutsch   */
+/*  (es geht um deutsches Fernsehen; Titel und Beschreibungen zu        */
+/*   übersetzen wäre irreführend)                                       */
+/* =================================================================== */
+const I18N = {
+ de:{
+  nav_live:"Heute", nav_med:"Mediathek",
+  land:"Land wählen", en_hint:"Interface switched to English",
+  such_live:"Sendung, Folge oder Sender suchen …",
+  such_med:"Titel, Genre oder Anbieter suchen …",
+  f_alle:"Alle", f_a3:"Vorschule · 3–5", f_a6:"6–9 Jahre", f_a10:"10–13 Jahre",
+  f_retro:"Kennst du noch?", f_tipp:"Elterntipp",
+  o_free:"Nur kostenlos", o_past:"Vergangene anzeigen", o_imdb:"Nur IMDb über 8",
+  o_sort:"Sortieren", s_az:"A – Z", s_jahr_ab:"Jahr, neueste zuerst",
+  s_jahr_auf:"Jahr, älteste zuerst", s_alter:"Alter, aufsteigend", s_imdb:"IMDb-Bewertung",
+  von:"von", ausgeblendet:"ausgeblendet", tipps_n:"Tipps",
+  laeuft:"läuft", vorbei:"vorbei", ab:"ab", kostenlos:"Kostenlos", nichtfrei:"nicht frei",
+  wo:"Wo es läuft", kein_sender:"Noch kein Sender hinterlegt",
+  alter:"Altersempfehlung", redaktionell:"redaktionell", jahren:"Jahren",
+  laufzeit:"Laufzeit", werbung:"Werbung", werbefrei:"werbefrei",
+  mit_werbung:"mit Werbeunterbrechungen", nachsehen:"Später nachsehen",
+  nachsehen_ja:"ja, in der Mediathek", folgen_abrufbar:"Folgen abrufbar",
+  nachsehen_wahrsch:"wahrscheinlich ja — öffentlich-rechtliche Sender stellen ihr Programm meist für 7 bis 30 Tage online",
+  nachsehen_nein:"nicht bekannt — für diesen Sender haben wir noch keine Mediathek-Quelle",
+  hinsehen:"hinsehen", ansehen:"ansehen", imdb_von:"von 10", imdb_stimmen:"bei %s Stimmen",
+  imdb_ansehen:"bei IMDb ansehen", imdb_nach:"bei IMDb nachschlagen",
+  kennst:"Kennst du noch?", passt:"Passt das zu meinem Kind?", elterncheck:"Eltern-Check",
+  keine_einschaetzung:"Noch keine Einschätzung hinterlegt.",
+  weitere_laender:"Sender in weiteren Ländern",
+  kalender:"In Kalender", teilen:"Teilen", gemerkt:"gemerkt", entfernt:"entfernt",
+  link_kopiert:"Link kopiert", termin:"Termin heruntergeladen",
+  heute:"HEUTE", morgen:"MORGEN", nichts:"Nichts gefunden.",
+  leer_tt:"Keine Sendungen für diese Auswahl", leer_tx:"Anderen Filter wählen.",
+  weitere_anb:"Weitere Anbieter", in_impl:"in Implementierung",
+  prov_note:"Für diese Anbieter ist noch keine Quelle angebunden — in Implementierung. Ihre Inhalte sind bis dahin ausgeblendet.",
+  anmelden:"Anmelden", benutzer:"Benutzername", passwort:"Passwort",
+  registrieren:"Registrieren", reg_hint:"Registrierung ist während der Testphase deaktiviert.",
+  test_note:"Die Nutzerverwaltung befindet sich in der Testphase. Anmelden können sich derzeit nur Konten, die wir manuell angelegt haben.",
+  tipp_tt:"Elterntipps",
+  tipp_tx:"Empfehlungen aus der Community für Dinge, die unsere automatischen Quellen nicht sehen — kostenlose YouTube-Kanäle, Podcasts, Einstellungen. Die Nutzerverwaltung ist in der Testphase; bis eigene Einsendungen freigeschaltet sind, stammen die Tipps aus der Redaktion.",
+  dagegen:"Was dagegen spricht:",
+  imprint:"Impressum", privacy:"Datenschutz", about:"Über uns",
+  consent:"Wir messen anonym, welche Seiten genutzt werden. Cookies dafür werden erst nach deiner Einwilligung gesetzt.",
+  c_no:"Ablehnen", c_yes:"Einverstanden",
+  anbieter_h:"Die Anbieter", anbieter_s:"Kinderbereich im Vergleich",
+  inhalt_de:""
+ },
+ en:{
+  nav_live:"Today", nav_med:"Library",
+  land:"Choose country", en_hint:"Programme details stay in German",
+  such_live:"Search shows, episodes or channels …",
+  such_med:"Search titles, genres or providers …",
+  f_alle:"All", f_a3:"Preschool · 3–5", f_a6:"Ages 6–9", f_a10:"Ages 10–13",
+  f_retro:"Remember this?", f_tipp:"Parent tip",
+  o_free:"Free only", o_past:"Show past", o_imdb:"IMDb above 8",
+  o_sort:"Sort", s_az:"A – Z", s_jahr_ab:"Year, newest first",
+  s_jahr_auf:"Year, oldest first", s_alter:"Age, ascending", s_imdb:"IMDb rating",
+  von:"of", ausgeblendet:"hidden", tipps_n:"tips",
+  laeuft:"on air", vorbei:"ended", ab:"age", kostenlos:"Free", nichtfrei:"not free",
+  wo:"Where to watch", kein_sender:"No channel on file yet",
+  alter:"Age guidance", redaktionell:"editorial", jahren:"and up",
+  laufzeit:"Running time", werbung:"Advertising", werbefrei:"ad-free",
+  mit_werbung:"with commercial breaks", nachsehen:"Catch up later",
+  nachsehen_ja:"yes, in the media library", folgen_abrufbar:"episodes available",
+  nachsehen_wahrsch:"most likely — German public broadcasters usually keep their programmes online for 7 to 30 days",
+  nachsehen_nein:"unknown — no media library source for this channel yet",
+  hinsehen:"open", ansehen:"watch", imdb_von:"of 10", imdb_stimmen:"from %s votes",
+  imdb_ansehen:"view on IMDb", imdb_nach:"look up on IMDb",
+  kennst:"Remember this?", passt:"Is this right for my child?", elterncheck:"Parent check",
+  keine_einschaetzung:"No assessment on file yet.",
+  weitere_laender:"Channels in other countries",
+  kalender:"Add to calendar", teilen:"Share", gemerkt:"saved", entfernt:"removed",
+  link_kopiert:"Link copied", termin:"Calendar file downloaded",
+  heute:"TODAY", morgen:"TOMORROW", nichts:"Nothing found.",
+  leer_tt:"No programmes for this selection", leer_tx:"Try a different filter.",
+  weitere_anb:"More providers", in_impl:"being implemented",
+  prov_note:"No source connected for these providers yet — being implemented. Their content is hidden until then.",
+  anmelden:"Sign in", benutzer:"Username", passwort:"Password",
+  registrieren:"Register", reg_hint:"Registration is disabled during the test phase.",
+  test_note:"User accounts are in a test phase. Only accounts we created manually can sign in at the moment.",
+  tipp_tt:"Parent tips",
+  tipp_tx:"Community recommendations for things our automated sources cannot see — free YouTube channels, podcasts, settings. User accounts are in a test phase; until submissions open up, the tips come from the editorial team.",
+  dagegen:"What speaks against it:",
+  imprint:"Imprint", privacy:"Privacy", about:"About",
+  consent:"We measure anonymously which pages are used. Cookies for this are only set after your consent.",
+  c_no:"Decline", c_yes:"Accept",
+  anbieter_h:"The providers", anbieter_s:"kids sections compared",
+  inhalt_de:"Titles, descriptions and parent assessments stay in German — this is German television."
+ }
+};
+let LANG = LS.get("tvk_lang","de");
+window.t = function t(k){ return (I18N[LANG] && I18N[LANG][k]) || I18N.de[k] || k; };
+function applyI18n(){
+  document.documentElement.lang = LANG;
+  $$("[data-i18n]").forEach(e=>{ e.textContent = t(e.dataset.i18n); });
+  $$("[data-i18n-ph]").forEach(e=>{ e.placeholder = t(e.dataset.i18nPh); });
+  const hw=$("#langHint"); if(hw) hw.textContent = LANG==="en" ? t("inhalt_de") : "";
+}
+
 const SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.4M12 19v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.6 12h2.4M19 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>';
 const MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></svg>';
 function setTheme(t){ document.documentElement.setAttribute("data-theme",t);
@@ -1994,25 +2153,32 @@ const LEGAL = {
 /* Optionen als echte Checkboxen — Tastatur, Screenreader, Browser-Semantik */
 function buildOptions(host, onChange){
   if(!host) return;
-  host.innerHTML =
-    '<label class="opt"><input type="checkbox" id="optFree" checked>' +
-      '<span>Nur kostenlos</span></label>' +
-    '<label class="opt"><input type="checkbox" id="optPast">' +
-      '<span>Vergangene Sendungen anzeigen</span></label>' +
-    '<span class="opt-cnt" id="optCount"></span>';
   host.addEventListener("change", ()=> onChange && onChange({
     free: host.querySelector("#optFree").checked,
     past: host.querySelector("#optPast").checked
   }));
 }
 
+/* Sonderfilter in eigener Reihe: Kennst du noch? und Elterntipp */
+function buildSpecial(host, onChange){
+  if(!host) return;
+  host.innerHTML =
+    '<button class="fchip retrochip" data-s="retro" aria-pressed="false">Kennst du noch?</button>' +
+    '<button class="fchip tippchip" data-s="tipps" aria-pressed="false">Elterntipp</button>';
+  host.addEventListener("click", e=>{
+    const b=e.target.closest(".fchip"); if(!b) return;
+    const an = b.getAttribute("aria-pressed") !== "true";
+    $$(".fchip",host).forEach(x=>x.setAttribute("aria-pressed","false"));
+    b.setAttribute("aria-pressed", String(an));
+    onChange && onChange(an ? b.dataset.s : "all");
+  });
+}
+
 function buildFilters(host, onChange){
   if(!host) return;
   host.innerHTML =
     GROUPS.map(g=>`<button class="fchip${g.id!=="all"?" tmode":""}" data-g="${g.id}" aria-pressed="${g.id==="all"}">`+
-      (g.color?`<span class="cdot" style="background:${g.color}"></span>`:"")+g.label+`</button>`).join("") +
-    '<button class="fchip retrochip" data-g="retro" aria-pressed="false">Kennst du noch?</button>' +
-    '<button class="fchip tippchip" data-g="tipps" aria-pressed="false">Elterntipp</button>' +
+      (g.color?`<span class="cdot" style="background:${g.color}"></span>`:"")+t(g.k)+`</button>`).join("") +
     GENRES.map(x=>`<button class="fchip" data-g="genre:${x}" aria-pressed="false">${x}</button>`).join("");
   host.addEventListener("click", e=>{
     const b=e.target.closest(".fchip"); if(!b) return;
@@ -2118,8 +2284,8 @@ function rowHTML(s){
   const free = (s.ch||[]).filter(c=>c.free);
   const best = free[0] || (s.ch||[])[0];
   const badge = best ? (best.free
-      ? `<span class="freebest tv">▣ Kostenlos · ${best.n}</span>`
-      : `<span class="freebest pay">Abo · ${best.n}</span>`) : "";
+      ? `<span class="freebest tv">▣ ${t("kostenlos")} · ${best.n}</span>`
+      : `<span class="freebest pay">${t("nichtfrei")} · ${best.n}</span>`) : "";
   const sc = typeof s.score==="number" ? s.score : null;
   const col = sc===null ? "" : (sc>=70?"#15A554": sc>=45?"#f59e0b":"#E5484D");
 
@@ -2128,7 +2294,7 @@ function rowHTML(s){
   const [pc1,pc2] = pairFor(s.title);
   const styleVars = `--c1:${pc1};--c2:${pc2};`+
     `--w1:${hexA(pc1,.22)};--w2:${hexA(pc2,.20)};`+
-    `--w1d:${hexA(pc1,.30)};--w2d:${hexA(pc2,.26)}`;
+    `--w1d:${hexA(pc1,.14)};--w2d:${hexA(pc2,.11)}`;
 
   return `
 <div class="row${free.length?" free":""}${past?" past":""}${now?" playing":""}" style="${styleVars}" data-k="${s.day}|${s.time}|${s.title}|${s.sub||""}|${s.genre||""}|${(s.ch||[]).map(c=>c.n).join(" ")}">
@@ -2139,53 +2305,65 @@ function rowHTML(s){
         <span class="favstar" data-follow="${s.title}" role="button" tabindex="0" aria-pressed="false"
               aria-label="${s.title} merken" title="${s.title} merken">☆</span></div>
       ${s.sub?`<div class="t subline">${s.sub}</div>`:""}
-      <div class="meta">${now?'<span class="nowtag">läuft</span>':""}${past?'<span class="pasttag">vorbei</span>':""}<span class="comp">${s.channel?s.channel+" · ":""}${s.genre||""}</span>${imdbBadge(s)}${s.retro?`<span class="retro">seit ${s.retro.y}</span>`:""}
-        ${s.age!==undefined?`<span class="agetag">ab ${s.age}</span>`:""}
+      <div class="meta">${now?'<span class="nowtag">'+t("laeuft")+'</span>':""}${past?'<span class="pasttag">'+t("vorbei")+'</span>':""}<span class="comp">${s.channel?s.channel+" · ":""}${s.genre||""}</span>${imdbBadge(s)}${s.retro?`<span class="retro">${LANG==="en"?"since":"seit"} ${s.retro.y}</span>`:""}
+        ${s.age!==undefined?`<span class="agetag">${t("ab")} ${s.age}</span>`:""}
         ${(s.fsk!==null&&s.fsk!==undefined)?`<span class="fsktag">FSK ${s.fsk}</span>`:""}${badge}</div>
     </div>
     <div class="rh-right"><span class="chev">${RCHEV}</span></div>
   </button>
   <div class="panel"><div class="panel-in"><div class="panel-pad">
 
-    <div class="dh"><span class="ff">🇩🇪</span>Wo es läuft</div>
+    <div class="dh"><span class="ff">🇩🇪</span>${t("wo")}</div>
     <div class="chlist">${(s.ch||[]).map(c=>
       `<div class="chrow"><span class="nm">${c.u?`<a class="streamlink" href="${c.u}" target="_blank" rel="noopener">${c.n}</a>`:c.n}`+
       `${c.note?`<span class="chnote">${c.note}</span>`:""}</span>`+
-      `<span class="tag ${c.free?"fta":"pay"}">${c.free?"Kostenlos":"nicht frei"}</span></div>`).join("")
-      || `<div class="chrow"><span class="none">Noch kein Sender hinterlegt</span></div>`}</div>
+      `<span class="tag ${c.free?"fta":"pay"}">${c.free?t("kostenlos"):t("nichtfrei")}</span></div>`).join("")
+      || `<div class="chrow"><span class="none">${t("kein_sender")}</span></div>`}</div>
 
     <div class="agebox">
-      <div class="arow"><span class="alb">Altersempfehlung</span>
-        <span class="aval">ab ${s.age} Jahren${s.est?'<span class="estmark">redaktionell</span>':''}</span></div>
-      <div class="arow"><span class="alb">Laufzeit</span><span class="aval">${s.dur||"—"}</span></div>
-      <div class="arow"><span class="alb">Werbung</span><span class="aval">${s.ads===false?"werbefrei":(s.ads===true?"mit Werbeunterbrechungen":"—")}</span></div>
-      ${s.retro?`<div class="arow"><span class="alb">Kennst du noch?</span><span class="aval">${s.retro.n}</span></div>`:""}
+      <div class="arow"><span class="alb">${t("alter")}</span>
+        <span class="aval">${t("ab")} ${s.age} ${t("jahren")}${s.est?`<span class="estmark">${t("redaktionell")}</span>`:""}</span></div>
+      <div class="arow"><span class="alb">${t("laufzeit")}</span><span class="aval">${s.dur||"—"}</span></div>
+      <div class="arow"><span class="alb">${t("werbung")}</span><span class="aval">${s.ads===false?t("werbefrei"):(s.ads===true?t("mit_werbung"):"—")}</span></div>
+      ${s.retro?`<div class="arow"><span class="alb">${t("kennst")}</span><span class="aval">${s.retro.n}</span></div>`:""}
+      <div class="arow"><span class="alb">${t("nachsehen")}</span><span class="aval">${(()=>{
+        const m = (typeof NACHSEHEN!=="undefined") ? NACHSEHEN[s.title] : null;
+        if(m) return `${t("nachsehen_ja")} — ${m.p.join(LANG==="en"?" and ":" und ")}${m.f?` (${m.f} ${t("folgen_abrufbar")})`:""}` +
+          (m.u?` · <a href="${m.u}" target="_blank" rel="noopener">${t("hinsehen")}</a>`:"");
+        return (s.ch||[]).some(c=>/KiKA|ZDF|ARD|WDR|BR|MDR|RBB|3sat/.test(c.n))
+          ? t("nachsehen_wahrsch")
+          : t("nachsehen_nein");
+      })()}</span></div>
       <div class="arow"><span class="alb">IMDb</span><span class="aval">${
         (s.imdb && s.imdb.r)
-          ? `<b>${String(s.imdb.r).replace(".",",")}</b> von 10 <span class="votes">bei ${(s.imdb.v||0).toLocaleString("de-DE")} Stimmen</span> · <a href="${imdbUrl(s)}" target="_blank" rel="noopener">bei IMDb ansehen</a>`
-          : `<a href="${imdbUrl(s)}" target="_blank" rel="noopener">bei IMDb nachschlagen</a>`}</span></div>
+          ? `<b>${String(s.imdb.r).replace(".",",")}</b> ${t("imdb_von")} <span class="votes">${t("imdb_stimmen").replace("%s",(s.imdb.v||0).toLocaleString(LANG==="en"?"en-US":"de-DE"))}</span> · <a href="${imdbUrl(s)}" target="_blank" rel="noopener">${t("imdb_ansehen")}</a>`
+          : `<a href="${imdbUrl(s)}" target="_blank" rel="noopener">${t("imdb_nach")}</a>`}</span></div>
     </div>
 
     ${(s.more||[]).length?`
-    <button class="morebtn" data-more aria-expanded="false"><span class="mlbl">Sender in weiteren Ländern</span>${MCHEV}</button>
+    <button class="morebtn" data-more aria-expanded="false"><span class="mlbl">${t("weitere_laender")}</span>${MCHEV}</button>
     <div class="morewrap"><div class="sendlist">${s.more.map(m=>
       `<div class="sendrow"><span class="sflag">${m.f}</span><span class="schans">`+
       m.ch.map(c=>`<span class="ch ${c.free?"fta":"pay"}">${c.n}</span>`).join("")+
       `</span></div>`).join("")}</div></div>`:""}
 
-    <button class="morebtn lh-btn" data-more aria-expanded="false"><span class="mlbl">Passt das zu meinem Kind?</span>${MCHEV}</button>
+    <button class="morebtn lh-btn" data-more aria-expanded="false"><span class="mlbl">${t("passt")}</span>${MCHEV}</button>
     <div class="morewrap"><div class="lohntwrap">
-      ${sc!==null?`<div class="lh-score"><div class="lh-sc-top"><span class="lh-sc-lbl">Eltern-Check</span>`+
+      ${sc!==null?`<div class="lh-score"><div class="lh-sc-top"><span class="lh-sc-lbl">${t("elterncheck")}</span>`+
         `<b class="lh-sc-val" style="color:${col}">${sc}</b><span class="lh-sc-max">/100</span></div>`+
         `<div class="lh-sc-bar"><span style="width:${sc}%;background:${col}"></span></div></div>`:""}
-      <p class="lh-txt">${s.note||"Noch keine Einschätzung hinterlegt."}</p>
+      ${s.detail ? `
+        <p class="lh-txt lang">${s.detail.lang}</p>
+        <div class="lh-flags">${s.detail.flags.map(f=>`<span class="lh-flag">${f}</span>`).join("")}</div>
+        <p class="lh-reden"><b>Zum Nachbesprechen:</b> ${s.detail.reden}</p>`
+      : `<p class="lh-txt">${s.note || t("keine_einschaetzung")}</p>`}
     </div></div>
 
     <div class="actwrap"><div class="actrow main">
       <button class="sharebtn calbtn" data-cal data-title="${s.title}" data-day="${s.day}" data-time="${s.time}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4"></path></svg><span>In Kalender</span></button>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4"></path></svg><span>${t("kalender")}</span></button>
       <button class="sharebtn" data-share data-title="${s.title}" data-text="${s.title} · ${s.time} Uhr auf ${best?best.n:""} (TVKinderprogramm.de)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.6"></circle><circle cx="6" cy="12" r="2.6"></circle><circle cx="18" cy="19" r="2.6"></circle><path d="M8.3 10.7l7.4-4.3M8.3 13.3l7.4 4.3"></path></svg><span>Teilen</span></button>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.6"></circle><circle cx="6" cy="12" r="2.6"></circle><circle cx="18" cy="19" r="2.6"></circle><path d="M8.3 10.7l7.4-4.3M8.3 13.3l7.4 4.3"></path></svg><span>${t("teilen")}</span></button>
     </div></div>
 
   </div></div></div>
@@ -2199,12 +2377,12 @@ function renderBoard(board, list, emptyHTML){
   list.forEach(s=>{
     if(s.day!==day){ day=s.day;
       const i = order.indexOf(day);
-      const tag = i===0 ? '<span class="dtag">HEUTE</span>'
-                : i===1 ? '<span class="dtag tm">MORGEN</span>' : '';
+      const tag = i===0 ? '<span class="dtag">'+t("heute")+'</span>'
+                : i===1 ? '<span class="dtag tm">'+t("morgen")+'</span>' : '';
       html += `<div class="daybar">${tag}<span class="d">${day}</span><span class="ln"></span></div>`; }
     html += rowHTML(s);
   });
-  board.innerHTML = html + `<div class="empty" style="display:none">Nichts gefunden.</div>`;
+  board.innerHTML = html + `<div class="empty" style="display:none">${t("nichts")}</div>`;
   markFavs();
 }
 
@@ -2250,15 +2428,15 @@ document.addEventListener("click", e=>{
     const w=more.nextElementSibling; if(w) w.classList.toggle("show",!open); return; }
   const st=e.target.closest(".favstar");
   if(st){ const f=LS.get("tvk_favs",[]); const i=f.indexOf(st.dataset.follow);
-    if(i>=0){ f.splice(i,1); st.classList.remove("on"); st.textContent="☆"; st.setAttribute("aria-pressed","false"); toast(st.dataset.follow+" entfernt"); }
-    else { f.push(st.dataset.follow); st.classList.add("on"); st.textContent="★"; st.setAttribute("aria-pressed","true"); toast(st.dataset.follow+" gemerkt"); }
+    if(i>=0){ f.splice(i,1); st.classList.remove("on"); st.textContent="☆"; st.setAttribute("aria-pressed","false"); toast(st.dataset.follow+" "+t("entfernt")); }
+    else { f.push(st.dataset.follow); st.classList.add("on"); st.textContent="★"; st.setAttribute("aria-pressed","true"); toast(st.dataset.follow+" "+t("gemerkt")); }
     LS.set("tvk_favs",f); return; }
   const sh=e.target.closest("[data-share]");
   if(sh){ const d={title:sh.dataset.title,text:sh.dataset.text,url:location.origin};
     if(navigator.share) navigator.share(d).catch(()=>{});
-    else { navigator.clipboard && navigator.clipboard.writeText(d.text+" "+d.url); toast("Link kopiert"); } return; }
+    else { navigator.clipboard && navigator.clipboard.writeText(d.text+" "+d.url); toast(t("link_kopiert")); } return; }
   const cal=e.target.closest("[data-cal]");
-  if(cal){ ics(cal.dataset); cal.classList.add("done"); toast("Termin heruntergeladen"); }
+  if(cal){ ics(cal.dataset); cal.classList.add("done"); toast(t("termin")); }
 });
 document.addEventListener("keydown", e=>{
   if((e.key==="Enter"||e.key===" ") && e.target.classList && e.target.classList.contains("favstar")){
@@ -2292,11 +2470,18 @@ document.addEventListener("keydown", e=>{
       mp.hidden=true; mb.setAttribute("aria-expanded","false"); } });
 
   const seg=$(".seg.lang");
-  if(seg) seg.addEventListener("click", e=>{
-    const b=e.target.closest("button[data-lang]"); if(!b) return;
-    $$("button",seg).forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
-    if(b.dataset.lang==="en") toast("English version coming soon");
-  });
+  if(seg){
+    $$("button",seg).forEach(x=>x.setAttribute("aria-pressed", String(x.dataset.lang===LANG)));
+    seg.addEventListener("click", e=>{
+      const b=e.target.closest("button[data-lang]"); if(!b) return;
+      LANG=b.dataset.lang; LS.set("tvk_lang",LANG);
+      $$("button",seg).forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
+      applyI18n();
+      if(typeof window.reRender==="function") window.reRender();
+      if(LANG==="en") toast(t("en_hint"));
+    });
+  }
+  applyI18n();
 
   const cb=$("#consent");
   if(LS.get("tvk_consent",null)===null){ cb.classList.remove("hide");
@@ -2338,33 +2523,68 @@ document.addEventListener("keydown", e=>{
 
 
 const board = document.getElementById("liveBoard");
-const EMPTY_LIVE = '<div class="soonbox"><span class="ic">\ud83d\udcfa</span><div>' +
-  '<b style="display:block;color:var(--ink);font-family:Archivo,sans-serif;font-size:14px;margin-bottom:3px">Keine Sendungen fuer diese Auswahl</b>' +
-  '<span style="font-size:12.5px;line-height:1.55">Anderen Sender oder Altersfilter waehlen.</span></div></div>';
 
-let fGroup = "all", fFree = true, fPast = false;
+function zeigeTippsIndex(){
+  board.innerHTML =
+    '<div class="testbanner"><b>Elterntipps</b>' +
+    'Empfehlungen für Dinge, die unsere automatischen Quellen nicht sehen — ' +
+    'kostenlose YouTube-Kanäle, Podcasts, Einstellungen. Die Nutzerverwaltung ist in der ' +
+    'Testphase; bis eigene Einsendungen freigeschaltet sind, stammen die Tipps aus der Redaktion.</div>' +
+    TIPPS.map(tippKarteIndex).join("");
+  const c=document.getElementById("optCount");
+  if(c) c.textContent = TIPPS.length + " Tipps";
+}
+
+function tippKarteIndex(t){
+  const [c1,c2]=pairFor(t.titel);
+  return `<div class="row tipprow" style="--c1:${c1};--c2:${c2};--w1:${hexA(c1,.22)};--w2:${hexA(c2,.20)};--w1d:${hexA(c1,.15)};--w2d:${hexA(c2,.11)}">
+    <div class="mrow">
+      <span class="stick" style="--s1:${c1};--s2:${c2}"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.6l-1.5-1.36C5.3 14.5 2 11.5 2 7.9A5.6 5.6 0 0 1 7.6 2.3c1.8 0 3.5.84 4.4 2.16A5.4 5.4 0 0 1 16.4 2.3 5.6 5.6 0 0 1 22 7.9c0 3.6-3.3 6.6-8.5 11.34z"/></svg></span>
+      <span class="mmain"><b>${t.titel}</b>
+        <span class="mmeta"><span class="comp">${t.quelle}</span><span class="agetag">ab ${t.alter}</span>${
+          t.kostenlos?'<span class="freebest tv">▣ Kostenlos</span>':""}<span class="folgen">${t.dauer}</span></span>
+        <p class="tipptext">${t.text}</p>
+        <p class="tipphaken"><b>Was dagegen spricht:</b> ${t.haken}</p>
+        <span class="pvrow"><span class="tippvon">${t.von}</span>${
+          t.url?`<a class="pvlink" href="${t.url}" target="_blank" rel="noopener">ansehen →</a>`:""}</span>
+      </span></div></div>`;
+}
+const EMPTY_LIVE = ()=> '<div class="soonbox"><span class="ic">\ud83d\udcfa</span><div>' +
+  '<b style="display:block;color:var(--ink);font-family:Archivo,sans-serif;font-size:14px;margin-bottom:3px">'+t("leer_tt")+'</b>' +
+  '<span style="font-size:12.5px;line-height:1.55">'+t("leer_tx")+'</span></div></div>';
+
+let fGroup = "all", fFree = true, fPast = false, fSpecial = "all";
 
 function apply(){
+  if(fSpecial === "tipps"){ zeigeTippsIndex(); return; }
   let list = SHOWS;
+  if(fSpecial === "retro") list = list.filter(s=>!!s.retro);
   if(fFree) list = list.filter(s=>(s.ch||[]).some(c=>c.free));
   if(!fPast) list = list.filter(s=>!isPast(s));
   list = list.filter(s=>(s.age||0) < 16);   /* ab 16 wird nie angezeigt */
-  if(fGroup==="retro") list = list.filter(s=>!!s.retro);
-  else if(fGroup.indexOf("genre:")===0) list = list.filter(s=>s.genre===fGroup.slice(6));
+  if(fRetro) list = list.filter(s=>!!s.retro);
+  if(fGroup.indexOf("genre:")===0) list = list.filter(s=>s.genre===fGroup.slice(6));
   else if(fGroup !== "all") list = list.filter(s=>s.grp===fGroup);
-  renderBoard(board, list, EMPTY_LIVE);
+  renderBoard(board, list, EMPTY_LIVE());
   const c = document.getElementById("optCount");
   if(c){ const weg = SHOWS.length - list.length;
-    c.textContent = list.length + " von " + SHOWS.length + (weg ? " · " + weg + " ausgeblendet" : ""); }
+    c.textContent = list.length + " " + t("von") + " " + SHOWS.length + (weg ? " · " + weg + " " + t("ausgeblendet") : ""); }
 }
 
 /* Minütlich nachziehen, damit gelaufene Sendungen von selbst verschwinden */
 setInterval(()=>{ if(!fPast) apply(); }, 60000);
 
 buildOptions(document.getElementById("liveOpts"), o=>{ fFree=o.free; fPast=o.past; apply(); });
+buildSpecial(document.getElementById("liveSpecial"), v=>{ fSpecial=v; apply(); });
+let fRetro=false;
+document.getElementById("optRetro").addEventListener("click", function(){
+  fRetro = this.getAttribute("aria-pressed") !== "true";
+  this.setAttribute("aria-pressed", String(fRetro)); apply();
+});
 buildFilters(document.getElementById("liveFilters"), g=>{ fGroup=g; apply(); });
 apply();
 initSearch(document.getElementById("liveSearch"), board);
+window.reRender = ()=>{ buildFilters(document.getElementById("liveFilters"), g=>{ fGroup=g; apply(); }); apply(); };
 
 </script>
 </body>
