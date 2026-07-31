@@ -1356,6 +1356,30 @@
     .switches{gap:4px}
     .switches .seg.lang button{padding:0 7px} }
 
+  /* Chip-Zeile: einzeilig, auf dem Handy seitlich wischbar */
+  .chiprow{display:flex; gap:7px; flex-wrap:nowrap; overflow-x:auto; padding:2px 2px 7px;
+    scrollbar-width:none; -webkit-overflow-scrolling:touch}
+  .chiprow::-webkit-scrollbar{display:none}
+  .chiprow .fchip{flex:0 0 auto}
+  .chipsep{flex:0 0 auto; width:1px; align-self:stretch; margin:4px 3px; background:var(--line2)}
+
+  /* Mehr-Knopf und Hinweiszeile der Tipps */
+  .mehrbtn{display:block; width:100%; margin:2px 0 14px; padding:11px 14px;
+    border:1px solid var(--line2); border-radius:var(--r-ctl); background:var(--surface);
+    color:var(--ink); font-family:"Inter",sans-serif; font-weight:650; font-size:13px; cursor:pointer}
+  .mehrbtn:hover{border-color:#F1571A; color:#C94108}
+  html[data-theme="dark"] .mehrbtn:hover{color:#FF9A5C; border-color:rgba(255,122,61,.5)}
+  .mehrbtn:disabled{cursor:default; opacity:.75}
+  .mehrbtn:disabled:hover{border-color:var(--line2); color:var(--ink)}
+
+  /* Toast: unaufdringlich, unten mittig */
+  .toast{position:fixed; left:50%; bottom:20px; transform:translate(-50%, 10px);
+    background:var(--ink); color:var(--surface); font-size:13px; font-weight:600;
+    padding:10px 16px; border-radius:var(--r); box-shadow:0 6px 22px -6px rgba(0,0,0,.35);
+    opacity:0; pointer-events:none; transition:opacity .22s ease, transform .22s ease;
+    max-width:88vw; text-align:center; z-index:60}
+  .toast.an{opacity:1; transform:translate(-50%, 0)}
+
   /* Kopf: kleines Maskottchen + einheitlicher Schriftzug */
 
   /* Überschrift nur für Suchmaschinen und Screenreader */
@@ -3454,6 +3478,13 @@ const I18N = {
   jetzt_frei:"Gerade kostenlos",
   tzhint:"Alle Sendezeiten in deutscher Zeit (Europe/Berlin).",
   cl_b:"Und für die Großen?",
+  toast_bald:"Disney+, Netflix & Co. folgen bald",
+  int_ab:"Abenteuer & Action", int_ti:"Tiere & Natur", int_ma:"Magie & Fantasie",
+  int_la:"Lachen & Quatsch", int_wi:"Wissen & Entdecken",
+  tipps_h2:"Unsere Tipps für euch", mehr5:"5 weitere zeigen",
+  wenig_tipps:"Dazu haben wir gerade nur %s Tipps: hier noch Ideen aus ähnlichen Kategorien",
+  alle_gezeigt:"Das war's: schau morgen wieder vorbei!",
+  kat_h2:"Der ganze Katalog", titel_n:"Titel",
   cl_s:"Alle Spiele heute im TV, Stream und Radio: auf TVFussball.de",
   inhalt_de:""
  },
@@ -3501,6 +3532,13 @@ const I18N = {
   jetzt_frei:"Free right now",
   tzhint:"All broadcast times in German local time (Europe/Berlin).",
   cl_b:"And for the grown-ups?",
+  toast_bald:"Disney+, Netflix & Co. are coming soon",
+  int_ab:"Adventure & Action", int_ti:"Animals & Nature", int_ma:"Magic & Fantasy",
+  int_la:"Laughs & Silliness", int_wi:"Learning & Discovery",
+  tipps_h2:"Our picks for you", mehr5:"Show 5 more",
+  wenig_tipps:"We only have %s picks for that right now: adding ideas from similar categories",
+  alle_gezeigt:"That's all: check back tomorrow!",
+  kat_h2:"The full catalogue", titel_n:"titles",
   cl_s:"Every match on German TV, stream and radio: on TVFussball.de",
   inhalt_de:"Episode descriptions supplied by the German broadcasters remain in German."
  }
@@ -4192,6 +4230,7 @@ initSearch(document.getElementById("liveSearch"), board);
 window.reRender = ()=>{ buildFilters(document.getElementById("liveFilters"), g=>{ fGroup=g; apply(); }); apply(); };
 
 </script>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <!-- Cloudflare Web Analytics: cookiefrei, kein Local Storage, keine Fingerprints -->
 <script defer type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
   data-cf-beacon='{"token": "60f94c580ceb4df180fd401c94267269"}'></script>
