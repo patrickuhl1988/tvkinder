@@ -2328,7 +2328,7 @@
 </nav>
 
 <div class="consent hide" id="consent">
-  <p data-i18n="consent">Wir messen anonym, welche Seiten genutzt werden. Cookies dafür werden erst nach deiner Einwilligung gesetzt.</p>
+  <p data-i18n="consent">Wir messen anonym, welche Seiten genutzt werden — cookiefrei über Cloudflare Web Analytics. Weitere Dienste laden wir erst nach deiner Einwilligung.</p>
   <div class="cbtns">
     <button id="consentNo" data-i18n="c_no">Ablehnen</button>
     <button class="ok" id="consentYes" data-i18n="c_yes">Einverstanden</button>
@@ -3458,7 +3458,7 @@ const I18N = {
   tipp_tx:"Empfehlungen aus der Community für Dinge, die unsere automatischen Quellen nicht sehen — kostenlose YouTube-Kanäle, Podcasts, Einstellungen. Die Nutzerverwaltung ist in der Testphase; bis eigene Einsendungen freigeschaltet sind, stammen die Tipps aus der Redaktion.",
   dagegen:"Was dagegen spricht:",
   imprint:"Impressum", privacy:"Datenschutz", about:"Über uns",
-  consent:"Wir messen anonym, welche Seiten genutzt werden. Cookies dafür werden erst nach deiner Einwilligung gesetzt.",
+  consent:"Wir messen anonym, welche Seiten genutzt werden — cookiefrei über Cloudflare Web Analytics. Weitere Dienste laden wir erst nach deiner Einwilligung.",
   c_no:"Ablehnen", c_yes:"Einverstanden",
   anbieter_h:"Die Anbieter", anbieter_s:"Kinderbereich im Vergleich",
   fussnote:"TVKinderprogramm.de überträgt selbst keine Sendungen. Wir verweisen nur auf legale Sender und Mediatheken und betten ausschließlich offizielle, freigegebene Videos ein. Altersempfehlungen sind redaktionell und ersetzen keine FSK-Freigabe. Programmangaben ohne Gewähr — verbindlich ist das Programm des Senders.",
@@ -3503,7 +3503,7 @@ const I18N = {
   tipp_tx:"Community recommendations for things our automated sources cannot see — free YouTube channels, podcasts, settings. User accounts are in a test phase; until submissions open up, the tips come from the editorial team.",
   dagegen:"What speaks against it:",
   imprint:"Imprint", privacy:"Privacy", about:"About",
-  consent:"We measure anonymously which pages are used. Cookies for this are only set after your consent.",
+  consent:"We measure anonymously which pages are used — cookie-free via Cloudflare Web Analytics. Any further services load only after your consent.",
   c_no:"Decline", c_yes:"Accept",
   anbieter_h:"The providers", anbieter_s:"kids sections compared",
   fussnote:"TVKinderprogramm.de does not broadcast anything itself. We only point to legal channels and media libraries and embed officially released videos. Age guidance is editorial and does not replace an official rating. Schedules without guarantee — the channel's own listing is binding.",
@@ -3578,7 +3578,20 @@ const LEGAL_DE = {
   privacy:{t:"Datenschutz",h:`<h4>Überblick</h4>
     <p>Die Seite ist ohne Konto nutzbar. Gemerkte Sendungen, Land und Farbschema werden
     ausschließlich lokal im Browser gespeichert und nicht übertragen.</p>
-    <h4>Reichweitenmessung</h4><p>Analytics wird erst nach ausdrücklicher Einwilligung geladen.</p>
+    <h4>Reichweitenmessung</h4>
+    <p>Wir nutzen <strong>Cloudflare Web Analytics</strong> (Cloudflare Inc., 101 Townsend St,
+    San Francisco, CA 94107, USA). Der Dienst arbeitet <strong>ohne Cookies</strong>, ohne
+    Local Storage und ohne Fingerprinting. Erhoben werden nur aggregierte Angaben wie
+    aufgerufene Seite, Verweisquelle, ungefähre Herkunftsregion, Gerätetyp und Ladezeit.
+    Es findet keine geräteübergreifende Wiedererkennung statt, es werden keine Profile
+    gebildet und die Daten werden nicht an Dritte weitergegeben.</p>
+    <p>Da kein Zugriff auf Informationen im Endgerät erfolgt, ist nach § 25 Abs. 1 TTDSG
+    keine Einwilligung erforderlich. Rechtsgrundlage für die Verarbeitung ist unser
+    berechtigtes Interesse an einer datensparsamen Reichweitenmessung
+    (Art. 6 Abs. 1 lit. f DSGVO). Weitere Dienste laden wir erst nach ausdrücklicher
+    Einwilligung über den Hinweis beim ersten Besuch.</p>
+    <p>Datenschutzerklärung von Cloudflare:
+    <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></p>
     <h4>Kinder</h4><p>Das Angebot richtet sich an Eltern und Betreuungspersonen. Es werden keine
     Daten von Kindern erhoben, keine personalisierte Werbung ausgespielt und keine Profile gebildet.</p>`},
   about:{t:"Über uns",h:`<h4>Was diese Seite macht</h4>
@@ -3617,7 +3630,14 @@ const LEGAL_EN = {
   privacy:{t:"Privacy",h:`<h4>Overview</h4>
     <p>The site works without an account. Saved shows, country and colour scheme are stored
     locally in your browser only and never transmitted.</p>
-    <h4>Analytics</h4><p>Analytics is loaded only after explicit consent.</p>
+    <h4>Analytics</h4>
+    <p>We use <strong>Cloudflare Web Analytics</strong> (Cloudflare Inc., San Francisco, USA).
+    It works <strong>without cookies</strong>, without local storage and without fingerprinting.
+    Only aggregated data is collected: page visited, referrer, approximate region, device type
+    and load time. No cross-site tracking, no profiling, no sharing with third parties.</p>
+    <p>Since no information is accessed on your device, no consent is required under
+    § 25 (1) TTDSG. The legal basis is our legitimate interest in privacy-friendly audience
+    measurement (Art. 6 (1) (f) GDPR). Any further services load only after explicit consent.</p>
     <h4>Children</h4><p>This service is aimed at parents and carers. No data is collected from
     children, no personalised advertising is served and no profiles are built.</p>`},
   about:{t:"About",h:`<h4>What this site does</h4>
@@ -4133,5 +4153,9 @@ initSearch(document.getElementById("liveSearch"), board);
 window.reRender = ()=>{ buildFilters(document.getElementById("liveFilters"), g=>{ fGroup=g; apply(); }); apply(); };
 
 </script>
+<!-- Cloudflare Web Analytics — cookiefrei, kein Local Storage, keine Fingerprints -->
+<script defer type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+  data-cf-beacon='{"token": "60f94c580ceb4df180fd401c94267269"}'></script>
+<!-- Ende Cloudflare Web Analytics -->
 </body>
 </html>
