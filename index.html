@@ -1328,21 +1328,35 @@
   html[data-theme="dark"] .fchip.tippchip::after{background:#FF9A5C; color:#2A1206}
   .fchip.tippchip[aria-pressed="true"]::after{background:#FFF3E8; color:#C94108}
 
+  /* Kopfzeile: eine Reihe, eine Höhe, ein Raster.
+     Alle Bedienelemente exakt 32px hoch, das Maskottchen läuft mit der
+     Versalhöhe des Schriftzugs (24px zu 17px Schrift), damit Bild und Text
+     wie EIN Logo wirken statt wie zwei Nachbarn. */
+  .hbar{display:flex; align-items:center; gap:10px; min-height:56px}
+  .logo{display:flex; align-items:center; gap:7px; min-width:0; flex:1 1 auto}
+  .logotv{width:24px; height:24px; display:block; flex:0 0 auto;
+    transform:translateY(-1px);            /* optischer Ausgleich zur x-Höhe */
+    filter:drop-shadow(0 1px 1.5px rgba(58,42,32,.16))}
+  .logo .wordmark{font-family:"Archivo",sans-serif; font-weight:800; font-size:17px;
+    letter-spacing:-.015em; line-height:1; color:var(--ink);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .switches{display:flex; align-items:center; gap:6px; flex:0 0 auto}
+  .switches .seg.lang{height:32px; box-sizing:border-box; padding:2px;
+    display:flex; align-items:stretch; border-radius:var(--r-ctl)}
+  .switches .seg.lang button{height:auto; padding:0 9px; font-size:11.5px;
+    border-radius:calc(var(--r-ctl) - 1px)}
+  .switches .mktbtn, .switches .themebtn{width:32px; height:32px;
+    box-sizing:border-box; border-radius:var(--r-ctl);
+    display:grid; place-items:center; padding:0}
+  .switches .mktbtn-flag{font-size:16px; line-height:1}
+  .switches .themebtn svg{width:17px; height:17px}
+  @media (max-width:374px){
+    .logotv{width:21px; height:21px}
+    .logo .wordmark{font-size:14.5px}
+    .switches{gap:4px}
+    .switches .seg.lang button{padding:0 7px} }
+
   /* Kopf: kleines Maskottchen + einheitlicher Schriftzug */
-  .logo{display:flex; align-items:center; gap:8px; min-width:0; flex:1 1 auto}
-  .logo .wordmark{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-  .switches{flex:0 0 auto}
-  @media (max-width:374px){ .logo .wordmark{font-size:13px} }
-  .logotv{width:30px; height:30px; display:block; flex:0 0 auto;
-    filter:drop-shadow(0 1px 2px rgba(58,42,32,.18))}
-  .logo .wordmark{font-family:"Archivo",sans-serif; font-weight:800;
-    font-size:19px; letter-spacing:-.015em; color:var(--ink)}
-  @media (max-width:400px){ .logotv{width:26px; height:26px}
-    .logo .wordmark{font-size:16.5px} }
-  @media (max-width:345px){ .logo .wordmark{font-size:12px; letter-spacing:-.03em}
-    .logotv{width:20px; height:20px}
-    .logo{gap:5px}
-    .switches{gap:4px} }
 
   /* Überschrift nur für Suchmaschinen und Screenreader */
   .srh1{position:absolute; width:1px; height:1px; padding:0; margin:-1px;
@@ -1825,7 +1839,7 @@
       <button class="fchip retrochip" id="optRetro" aria-pressed="false" data-i18n="f_retro">Kennst du noch?</button>
     </div>
     <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" data-i18n-ph="such_live" placeholder="Sendung, Folge oder Sender suchen …"></div>
-    <div class="board" id="liveBoard"><div class="daybar"><span class="dtag">HEUTE</span><span class="d">Donnerstag, 30.07.2026</span><span class="ln"></span></div>
+    <div class="board" id="liveBoard"><div class="daybar"><span class="d">Donnerstag, 30.07.2026</span><span class="ln"></span></div>
 <article class="prerow"><h3><span class="pretime">19:00</span> Infomercial</h3><p class="premeta">RiC · Serie · ab 6 · 60 Min</p><p class="predesc">Das TV-Shopping-Erlebnis bietet innovative, qualitativ hochwertige Produkte, die den Alltag erleicht</p></article>
 <article class="prerow"><h3><span class="pretime">19:10</span> Willkommen bei den Louds: Das neue Comedy-Duo / Die Fahrprüfung</h3><p class="premeta">Nickelodeon · Zeichentrick · ab 6 · 25 Min · IMDb 6,9</p><p class="predesc">Luan denkt, Mr. Coconuts übt Rache, weil sie ihn in ihrer Aufführung durch Lola ersetzt. // Um ins O</p></article>
 <article class="prerow"><h3><span class="pretime">19:15</span> Modern Family: Botox und Benehmen</h3><p class="premeta">Disney Channel · Serie · ab 6 · 25 Min</p><p class="predesc">Alex&#x27; Zeit an der Middle School geht zu Ende und sie wurde auserwählt, als Jahrgangsbeste die Abschl</p></article>
@@ -1864,7 +1878,7 @@
 <article class="prerow"><h3><span class="pretime">23:10</span> CSI: Miami: In Flammen</h3><p class="premeta">Super RTL · Serie · ab 10 · 25 Min</p><p class="predesc">In den Everglades bricht ein riesiges Feuer aus. Bestimmte Anzeichen sprechen dafür, dass das Feuer </p></article>
 <article class="prerow"><h3><span class="pretime">23:15</span> Immer wieder Jim: Joggen kann gefährlich sein!</h3><p class="premeta">Disney Channel · Serie · ab 10 · 30 Min</p><p class="predesc">Weil Cheryl neuerdings ein größeres Interesse an Sicherheit und Gesundheit hat, führt sie neue Regel</p></article>
 <article class="prerow"><h3><span class="pretime">23:45</span> Immer wieder Jim: Friede ohne Worte</h3><p class="premeta">Disney Channel · Serie · ab 10 · 25 Min</p><p class="predesc">Cheryl und Jim haben endlich wieder einen Abend nur für sich alleine. Sie beschließen, ein Dinner zu</p></article>
-<div class="daybar"><span class="dtag">MORGEN</span><span class="d">Freitag, 31.07.2026</span><span class="ln"></span></div>
+<div class="daybar"><span class="dtag">HEUTE</span><span class="d">Freitag, 31.07.2026</span><span class="ln"></span></div>
 <article class="prerow"><h3><span class="pretime">04:00</span> Jack London: Abenteuer Südsee: Das Attentat</h3><p class="premeta">RiC · Serie · ab 3 · 47 Min</p><p class="predesc">In einer Bar wird ein Seemann durch Messerstiche tödlich verletzt. Bevor er stirbt, kann er David Gr</p></article>
 <article class="prerow"><h3><span class="pretime">04:15</span> SpongeBob Schwammkopf: Der Müll-Entsorger / Die Krosse Cafeteria</h3><p class="premeta">Nickelodeon · Zeichentrick · ab 3 · 20 Min</p><p class="predesc">SpongeBob macht sich an die Arbeit, in der Goo-Lagune Müll aufzusammeln. Nachdem er alles geschafft </p></article>
 <article class="prerow"><h3><span class="pretime">04:35</span> SpongeBob Schwammkopf: Die Welle zurück</h3><p class="premeta">Nickelodeon · Zeichentrick · ab 3 · 25 Min</p><p class="predesc">Beim Versuch, den Surfern in der Goo-Lagune Burger zu verkaufen, werden Mr. Krabs, SpongeBob und Tha</p></article>
@@ -2199,7 +2213,7 @@
 <article class="prerow"><h3><span class="pretime">22:10</span> Die Chroniken von Narnia: Prinz Kaspian von Narnia (Wiederholung)</h3><p class="premeta">Disney Channel · Film · ab 10 · 180 Min · IMDb 6,5</p><p class="predesc">Zweite Ausstrahlung des Tages, Beginn 22:10 und Ende um 1:10 nachts. Praktisch nur zum Aufnehmen.</p></article>
 <article class="prerow"><h3><span class="pretime">23:00</span> Infomercial</h3><p class="premeta">RiC · Serie · ab 10 · 25 Min</p><p class="predesc">Das TV-Shopping-Erlebnis bietet innovative, qualitativ hochwertige Produkte, die den Alltag erleicht</p></article>
 <article class="prerow"><h3><span class="pretime">23:50</span> Without a Trace - Spurlos verschwunden: Das Leben der anderen</h3><p class="premeta">Super RTL · Serie · ab 10 · 25 Min</p><p class="predesc">Der Privatermittler Scott Lucas ist nicht mehr auffindbar. Jacks Team geht zunächst davon aus, dass </p></article>
-<div class="daybar"><span class="d">Samstag, 01.08.2026</span><span class="ln"></span></div>
+<div class="daybar"><span class="dtag">MORGEN</span><span class="d">Samstag, 01.08.2026</span><span class="ln"></span></div>
 <article class="prerow"><h3><span class="pretime">08:15</span> Tom Turbo: Das Geheimnis des Pinguins</h3><p class="premeta">ORF 1 · Film · ab 6 · 25 Min · IMDb 7,1</p><p class="predesc">Interaktive Krimiserie: Tom Turbo stellt zwischendurch Fragen und wartet auf Antworten: Kinder rufen ins Zimmer, was sie gesehen haben. Genau 25 Minu</p></article>
 <article class="prerow"><h3><span class="pretime">08:20</span> Bolt: Ein Hund für alle Fälle</h3><p class="premeta">Disney Channel · Film · ab 6 · 85 Min · IMDb 6,8</p><p class="predesc">Ein Hund glaubt, seine Serienrolle sei echt, und muss lernen, dass er ganz normal ist. Das Thema: jemand verliert seine vermeintlichen Superkräfte un</p></article>
 <article class="prerow"><h3><span class="pretime">09:35</span> Pippi Langstrumpf: Pippi auf großer Ballonfahrt</h3><p class="premeta">ZDF · Film · ab 6 · 25 Min · IMDb 7,0</p><p class="predesc">Der Klassiker in Serienlänge, ruhig und ohne Schnittgewitter. Pippi macht, was sie will, und das ist Teil des Reizes: manche Kinder testen danach Gre</p></article>
@@ -3790,6 +3804,14 @@ function berlinJetzt(){
   return { tag: +p.year*10000 + +p.month*100 + +p.day,
            min: (+p.hour%24)*60 + +p.minute };
 }
+function berlinMorgenTag(){
+  /* Morgen als Kalendertag in Berlin: heutiges Datum nehmen, auf 12 Uhr UTC
+     verankern, 24h addieren: robust auch an Monatsgrenzen und Zeitumstellung. */
+  const n = berlinJetzt();
+  const y = Math.floor(n.tag/10000), m = Math.floor(n.tag/100)%100, d = n.tag%100;
+  const t = new Date(Date.UTC(y, m-1, d, 12) + 86400000);
+  return t.getUTCFullYear()*10000 + (t.getUTCMonth()+1)*100 + t.getUTCDate();
+}
 function tagNr(day){
   const m = (day||"").match(/(\d{2})\.(\d{2})\.(\d{4})/);
   return m ? +m[3]*10000 + +m[2]*100 + +m[1] : 0;
@@ -3946,11 +3968,11 @@ function renderBoard(board, list, emptyHTML){
   let html="", day=null, crossGesetzt=false;
   list.forEach(s=>{
     if(s.day!==day){ day=s.day;
-      const i = order.indexOf(day);
-      /* TVFussball-Hinweis: genau einmal, nach dem heutigen Block */
-      if(i>=1 && !crossGesetzt){ html += crosslinkHTML(); crossGesetzt=true; }
-      const tag = i===0 ? '<span class="dtag">'+t("heute")+'</span>'
-                : i===1 ? '<span class="dtag tm">'+t("morgen")+'</span>' : '';
+      const tn = tagNr(day), heute = berlinJetzt().tag, morgen = berlinMorgenTag();
+      /* TVFussball-Hinweis: genau einmal, vor dem ersten Tag nach heute */
+      if(tn>heute && !crossGesetzt){ html += crosslinkHTML(); crossGesetzt=true; }
+      const tag = tn===heute  ? '<span class="dtag">'+t("heute")+'</span>'
+                : tn===morgen ? '<span class="dtag tm">'+t("morgen")+'</span>' : '';
       html += `<div class="daybar">${tag}<span class="d">${dname(day)}</span><span class="ln"></span></div>`; }
     html += rowHTML(s);
   });
