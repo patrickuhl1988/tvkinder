@@ -2288,6 +2288,7 @@
     <a href="#" data-legal="about" data-i18n="about">Über uns</a>
     <span class="lnote" id="attrib"></span>
     <span class="lnote" id="langHint"></span>
+    <span class="lnote" data-i18n="tzhint">Alle Sendezeiten in deutscher Zeit.</span>
     <span class="lnote" data-i18n="fussnote">TVKinderprogramm.de überträgt selbst keine Sendungen. Wir verweisen nur auf legale Sender und Mediatheken und betten ausschließlich offizielle, freigegebene Videos ein. Altersempfehlungen sind redaktionell und ersetzen keine FSK-Freigabe. Programmangaben ohne Gewähr — verbindlich ist das Programm des Senders.</span>
   </footer>
 
@@ -3462,6 +3463,7 @@ const I18N = {
   anbieter_h:"Die Anbieter", anbieter_s:"Kinderbereich im Vergleich",
   fussnote:"TVKinderprogramm.de überträgt selbst keine Sendungen. Wir verweisen nur auf legale Sender und Mediatheken und betten ausschließlich offizielle, freigegebene Videos ein. Altersempfehlungen sind redaktionell und ersetzen keine FSK-Freigabe. Programmangaben ohne Gewähr — verbindlich ist das Programm des Senders.",
   jetzt_frei:"Gerade kostenlos",
+  tzhint:"Alle Sendezeiten in deutscher Zeit (Europe/Berlin).",
   inhalt_de:""
  },
  en:{
@@ -3506,6 +3508,7 @@ const I18N = {
   anbieter_h:"The providers", anbieter_s:"kids sections compared",
   fussnote:"TVKinderprogramm.de does not broadcast anything itself. We only point to legal channels and media libraries and embed officially released videos. Age guidance is editorial and does not replace an official rating. Schedules without guarantee — the channel's own listing is binding.",
   jetzt_frei:"Free right now",
+  tzhint:"All broadcast times in German local time (Europe/Berlin).",
   inhalt_de:"Titles, descriptions and parent assessments stay in German — this is German television."
  }
 };
@@ -3745,18 +3748,44 @@ const GLYPH = {
 };
 const GLYPH_DEFAULT = '<path d="M8.6 5.6l10 6.4-10 6.4z"/>';
 
-/* --- Zeitrechnung: Ende einer Sendung, "läuft gerade", "vorbei" --------- */
-function startTs(s){
-  const m = (s.day||"").match(/(\d{2})\.(\d{2})\.(\d{4})/);
-  if(!m) return null;
-  const [hh,mm] = (s.time||"0:0").split(":").map(Number);
-  return new Date(+m[3], +m[2]-1, +m[1], hh, mm, 0, 0).getTime();
+/* --- Zeitrechnung -------------------------------------------------------
+   Alle Sendezeiten sind deutsche Ortszeit (so liefern es die Sender).
+   Der Vergleich "läuft gerade" / "vorbei" muss deshalb ebenfalls in
+   deutscher Zeit stattfinden — sonst sieht jemand in Bangkok oder New York
+   ein falsches Programm. Wir vergleichen Wanduhrzeiten, nicht Zeitstempel:
+   das umgeht Sommerzeit-Rechnerei komplett.
+   --------------------------------------------------------------------- */
+function berlinJetzt(){
+  const f = new Intl.DateTimeFormat("de-DE", {timeZone:"Europe/Berlin",
+    year:"numeric", month:"2-digit", day:"2-digit",
+    hour:"2-digit", minute:"2-digit", hour12:false});
+  const p = {};
+  f.formatToParts(new Date()).forEach(x=>{ if(x.type!=="literal") p[x.type]=x.value; });
+  return { tag: +p.year*10000 + +p.month*100 + +p.day,
+           min: (+p.hour%24)*60 + +p.minute };
+}
+function tagNr(day){
+  const m = (day||"").match(/(\d{2})\.(\d{2})\.(\d{4})/);
+  return m ? +m[3]*10000 + +m[2]*100 + +m[1] : 0;
 }
 function durMin(s){ const m=(s.dur||"").match(/(\d+)/); return m?+m[1]:0; }
-function endTs(s){ const t=startTs(s); return t===null?null:t + durMin(s)*60000; }
-function isPast(s){ const e=endTs(s); return e!==null && e <= Date.now(); }
-function isNow(s){ const a=startTs(s), b=endTs(s), n=Date.now(); return a!==null && a<=n && n<b; }
-function hhmm(ts){ const d=new Date(ts); return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); }
+function startMin(s){ return parseInt(s.time.slice(0,2),10)*60 + parseInt(s.time.slice(3),10); }
+function endMin(s){ return startMin(s) + durMin(s); }
+function isPast(s){
+  const n = berlinJetzt(), t = tagNr(s.day);
+  if(t < n.tag) return true;
+  if(t > n.tag) return false;
+  return endMin(s) <= n.min;
+}
+function isNow(s){
+  const n = berlinJetzt();
+  if(tagNr(s.day) !== n.tag) return false;
+  return startMin(s) <= n.min && n.min < endMin(s);
+}
+function hhmm(min){
+  const m = ((min % 1440) + 1440) % 1440;
+  return String(Math.floor(m/60)).padStart(2,"0") + ":" + String(m%60).padStart(2,"0");
+}
 
 function imdbUrl(s){
   return s.imdb && s.imdb.id
@@ -3787,7 +3816,7 @@ function rowHTML(s){
   const col = sc===null ? "" : (sc>=70?"#15A554": sc>=45?"#f59e0b":"#E5484D");
 
   const past = isPast(s), now = isNow(s);
-  const e = endTs(s);
+  const e = endMin(s);
   const [pc1,pc2] = pairFor(s.title);
   const styleVars = `--c1:${pc1};--c2:${pc2};`+
     `--w1:${hexA(pc1,.22)};--w2:${hexA(pc2,.20)};`+
