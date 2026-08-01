@@ -1328,6 +1328,15 @@
   html[data-theme="dark"] .fchip.tippchip::after{background:#FF9A5C; color:#2A1206}
   .fchip.tippchip[aria-pressed="true"]::after{background:#FFF3E8; color:#C94108}
 
+  /* Markenbanner im Kopf: läuft über die volle verfügbare Breite,
+     die Schalter rechts stehen fest, das Banner gibt nach. */
+  .logo .logobanner{display:block; height:52px; width:auto; max-width:100%;
+    object-fit:contain; object-position:left center; border-radius:10px}
+  @media (min-width:700px){ .logo .logobanner{height:60px} }
+  @media (max-width:400px){ .logo .logobanner{height:44px} }
+  @media (max-width:345px){ .logo .logobanner{height:38px} }
+  html[data-theme="dark"] .logo .logobanner{box-shadow:0 1px 6px rgba(0,0,0,.35)}
+
   /* Kopfzeile: eine Reihe, eine Höhe, ein Raster.
      Alle Bedienelemente exakt 32px hoch, das Maskottchen läuft mit der
      Versalhöhe des Schriftzugs (24px zu 17px Schrift), damit Bild und Text
@@ -1355,6 +1364,15 @@
     .logo .wordmark{font-size:14.5px}
     .switches{gap:4px}
     .switches .seg.lang button{padding:0 7px} }
+
+  .section-eyebrow.tipphead{display:flex; align-items:center; gap:10px}
+  .section-eyebrow.tipphead h2{flex:1 1 auto; min-width:0}
+  .mehrbtn.klein{width:auto; margin:0; padding:8px 12px; font-size:12px; flex:0 0 auto}
+  .tippnote{font-size:12.5px; color:var(--muted); margin:0 2px 8px; min-height:0}
+  .tippnote:empty{display:none}
+
+  .panelprov{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 12px}
+  .panelprov:empty{display:none}
 
   /* Chip-Zeile: einzeilig, auf dem Handy seitlich wischbar */
   .chiprow{display:flex; gap:7px; flex-wrap:nowrap; overflow-x:auto; padding:2px 2px 7px;
@@ -1785,7 +1803,8 @@
   .tipptext{font-size:13.5px; color:var(--ink); line-height:1.55; margin:9px 0 0}
   .tipphaken{font-size:12.5px; color:var(--muted); line-height:1.5; margin:7px 0 0}
   .tipphaken b{color:var(--ink); font-weight:700}
-  .tippvon{font-size:11.5px; color:var(--faint); font-style:italic}
+  .tippvon{margin-top:8px; }
+  .unbenutzt-tippvon{font-size:11.5px; color:var(--faint); font-style:italic}
   .tipprow .mmeta{margin-top:7px}
 
   /* --- Anmeldung ------------------------------------------------------- */
@@ -1838,7 +1857,7 @@
 
 <header>
   <div class="hbar">
-    <a class="logo" href="index.html" aria-label="TVKinderprogramm.de – zur Startseite"><img class="logotv" src="maskottchen.png" width="30" height="30" alt="TV"><span class="wordmark">kinderprogramm.de</span></a>
+    <a class="logo" href="index.html" aria-label="TVKinderprogramm.de – zur Startseite"><img class="logobanner" src="headerlogo.png" height="120" alt="TVKinderprogramm.de"></a>
     <div class="switches">
       <div class="seg lang" role="group" aria-label="Sprache">
         <button data-lang="de" aria-pressed="true">DE</button>
@@ -1902,7 +1921,7 @@
 <article class="prerow"><h3><span class="pretime">23:10</span> CSI: Miami: In Flammen</h3><p class="premeta">Super RTL · Serie · ab 10 · 25 Min</p><p class="predesc">In den Everglades bricht ein riesiges Feuer aus. Bestimmte Anzeichen sprechen dafür, dass das Feuer </p></article>
 <article class="prerow"><h3><span class="pretime">23:15</span> Immer wieder Jim: Joggen kann gefährlich sein!</h3><p class="premeta">Disney Channel · Serie · ab 10 · 30 Min</p><p class="predesc">Weil Cheryl neuerdings ein größeres Interesse an Sicherheit und Gesundheit hat, führt sie neue Regel</p></article>
 <article class="prerow"><h3><span class="pretime">23:45</span> Immer wieder Jim: Friede ohne Worte</h3><p class="premeta">Disney Channel · Serie · ab 10 · 25 Min</p><p class="predesc">Cheryl und Jim haben endlich wieder einen Abend nur für sich alleine. Sie beschließen, ein Dinner zu</p></article>
-<div class="daybar"><span class="dtag">HEUTE</span><span class="d">Freitag, 31.07.2026</span><span class="ln"></span></div>
+<div class="daybar"><span class="d">Freitag, 31.07.2026</span><span class="ln"></span></div>
 <article class="prerow"><h3><span class="pretime">04:00</span> Jack London: Abenteuer Südsee: Das Attentat</h3><p class="premeta">RiC · Serie · ab 3 · 47 Min</p><p class="predesc">In einer Bar wird ein Seemann durch Messerstiche tödlich verletzt. Bevor er stirbt, kann er David Gr</p></article>
 <article class="prerow"><h3><span class="pretime">04:15</span> SpongeBob Schwammkopf: Der Müll-Entsorger / Die Krosse Cafeteria</h3><p class="premeta">Nickelodeon · Zeichentrick · ab 3 · 20 Min</p><p class="predesc">SpongeBob macht sich an die Arbeit, in der Goo-Lagune Müll aufzusammeln. Nachdem er alles geschafft </p></article>
 <article class="prerow"><h3><span class="pretime">04:35</span> SpongeBob Schwammkopf: Die Welle zurück</h3><p class="premeta">Nickelodeon · Zeichentrick · ab 3 · 25 Min</p><p class="predesc">Beim Versuch, den Surfern in der Goo-Lagune Burger zu verkaufen, werden Mr. Krabs, SpongeBob und Tha</p></article>
@@ -2237,7 +2256,7 @@
 <article class="prerow"><h3><span class="pretime">22:10</span> Die Chroniken von Narnia: Prinz Kaspian von Narnia (Wiederholung)</h3><p class="premeta">Disney Channel · Film · ab 10 · 180 Min · IMDb 6,5</p><p class="predesc">Zweite Ausstrahlung des Tages, Beginn 22:10 und Ende um 1:10 nachts. Praktisch nur zum Aufnehmen.</p></article>
 <article class="prerow"><h3><span class="pretime">23:00</span> Infomercial</h3><p class="premeta">RiC · Serie · ab 10 · 25 Min</p><p class="predesc">Das TV-Shopping-Erlebnis bietet innovative, qualitativ hochwertige Produkte, die den Alltag erleicht</p></article>
 <article class="prerow"><h3><span class="pretime">23:50</span> Without a Trace - Spurlos verschwunden: Das Leben der anderen</h3><p class="premeta">Super RTL · Serie · ab 10 · 25 Min</p><p class="predesc">Der Privatermittler Scott Lucas ist nicht mehr auffindbar. Jacks Team geht zunächst davon aus, dass </p></article>
-<div class="daybar"><span class="dtag">MORGEN</span><span class="d">Samstag, 01.08.2026</span><span class="ln"></span></div>
+<div class="daybar"><span class="dtag">HEUTE</span><span class="d">Samstag, 01.08.2026</span><span class="ln"></span></div>
 <article class="prerow"><h3><span class="pretime">08:15</span> Tom Turbo: Das Geheimnis des Pinguins</h3><p class="premeta">ORF 1 · Film · ab 6 · 25 Min · IMDb 7,1</p><p class="predesc">Interaktive Krimiserie: Tom Turbo stellt zwischendurch Fragen und wartet auf Antworten: Kinder rufen ins Zimmer, was sie gesehen haben. Genau 25 Minu</p></article>
 <article class="prerow"><h3><span class="pretime">08:20</span> Bolt: Ein Hund für alle Fälle</h3><p class="premeta">Disney Channel · Film · ab 6 · 85 Min · IMDb 6,8</p><p class="predesc">Ein Hund glaubt, seine Serienrolle sei echt, und muss lernen, dass er ganz normal ist. Das Thema: jemand verliert seine vermeintlichen Superkräfte un</p></article>
 <article class="prerow"><h3><span class="pretime">09:35</span> Pippi Langstrumpf: Pippi auf großer Ballonfahrt</h3><p class="premeta">ZDF · Film · ab 6 · 25 Min · IMDb 7,0</p><p class="predesc">Der Klassiker in Serienlänge, ruhig und ohne Schnittgewitter. Pippi macht, was sie will, und das ist Teil des Reizes: manche Kinder testen danach Gre</p></article>
@@ -2249,7 +2268,7 @@
 <article class="prerow"><h3><span class="pretime">20:15</span> Arielle, die Meerjungfrau</h3><p class="premeta">Disney Channel · Film · ab 6 · 100 Min · IMDb 7,6</p><p class="predesc">Disneys Klassiker über eine Meerjungfrau, die Mensch werden will. Die Meerhexe Ursula ist für unter Sechsjährige der kritische Punkt: große Gestalt, d</p></article>
 <article class="prerow"><h3><span class="pretime">22:10</span> Pünktchen und Anton</h3><p class="premeta">S-RTL · Film · ab 8 · 130 Min · IMDb 7,0</p><p class="predesc">Caroline Links Kästner-Verfilmung über zwei Kinder aus sehr unterschiedlichen Verhältnissen. Soziale Ungleichheit wird ohne erhobenen Zeigefinger geze</p></article>
 <article class="prerow"><h3><span class="pretime">22:35</span> Der Schuh des Manitu: Extra Large</h3><p class="premeta">SAT.1 · Film · ab 12 · 110 Min · IMDb 6,7</p><p class="predesc">Steht in der Liste, weil die Quelle ihn als Familienfilm führt. Das ist er nicht. Westernparodie mit derbem Humor, Anspielungen für Erwachsene und ein</p></article>
-<div class="daybar"><span class="d">Sonntag, 02.08.2026</span><span class="ln"></span></div>
+<div class="daybar"><span class="dtag">MORGEN</span><span class="d">Sonntag, 02.08.2026</span><span class="ln"></span></div>
 <article class="prerow"><h3><span class="pretime">04:00</span> Mary Poppins&#x27; Rückkehr</h3><p class="premeta">ORF 1 · Film · ab 6 · 120 Min · IMDb 6,6</p><p class="predesc">Fortsetzung des Klassikers mit Emily Blunt, aufwendig ausgestattet und mit vielen Musiknummern. Im Kern geht es um eine Familie nach dem Tod der Mutte</p></article>
 <article class="prerow"><h3><span class="pretime">06:30</span> Ostwind (3): Aufbruch nach Ora</h3><p class="premeta">WDR · Film · ab 8 · 100 Min · IMDb 6,1</p><p class="predesc">Dritter Teil der Pferdefilmreihe, diesmal mit einer Reise nach Andalusien. Freundschaft, Verantwortung für ein Tier und das Aushalten von Konflikten u</p></article>
 <article class="prerow"><h3><span class="pretime">08:35</span> Arielle, die Meerjungfrau</h3><p class="premeta">Disney Channel · Film · ab 6 · 80 Min · IMDb 7,6</p><p class="predesc">Disneys Klassiker über eine Meerjungfrau, die Mensch werden will. Die Meerhexe Ursula ist für unter Sechsjährige der kritische Punkt: große Gestalt, d</p></article>
@@ -3484,7 +3503,7 @@ const I18N = {
   tipps_h2:"Unsere Tipps für euch", mehr5:"5 weitere zeigen",
   wenig_tipps:"Dazu haben wir gerade nur %s Tipps: hier noch Ideen aus ähnlichen Kategorien",
   alle_gezeigt:"Das war's: schau morgen wieder vorbei!",
-  kat_h2:"Der ganze Katalog", titel_n:"Titel",
+  kat_h2:"Der ganze Katalog", titel_n:"Titel", tipp_l:"Tipp", dagegen:"Was dagegen spricht:",
   cl_s:"Alle Spiele heute im TV, Stream und Radio: auf TVFussball.de",
   inhalt_de:""
  },
@@ -3538,7 +3557,7 @@ const I18N = {
   tipps_h2:"Our picks for you", mehr5:"Show 5 more",
   wenig_tipps:"We only have %s picks for that right now: adding ideas from similar categories",
   alle_gezeigt:"That's all: check back tomorrow!",
-  kat_h2:"The full catalogue", titel_n:"titles",
+  kat_h2:"The full catalogue", titel_n:"titles", tipp_l:"Tip", dagegen:"What speaks against it:",
   cl_s:"Every match on German TV, stream and radio: on TVFussball.de",
   inhalt_de:"Episode descriptions supplied by the German broadcasters remain in German."
  }
@@ -4164,23 +4183,36 @@ function zeigeTippsIndex(){
     'kostenlose YouTube-Kanäle, Podcasts, Einstellungen. Die Nutzerverwaltung ist in der ' +
     'Testphase; bis eigene Einsendungen freigeschaltet sind, stammen die Tipps aus der Redaktion.</div>' +
     TIPPS.filter(x=>!x.seite||x.seite==="beide"||x.seite==="index").map(tippKarteIndex).join("");
+  const erster=board.querySelector(".tipprow"); 
+  if(erster){ erster.classList.add("open"); erster.querySelector(".rowhead").setAttribute("aria-expanded","true"); }
   const c=document.getElementById("optCount");
   if(c) c.textContent = TIPPS.length + " Tipps";
 }
 
 function tippKarteIndex(tp){
   const [c1,c2]=pairFor(tp.titel);
-  return `<div class="row tipprow" style="--c1:${c1};--c2:${c2};--w1:${hexA(c1,.22)};--w2:${hexA(c2,.20)};--w1d:${hexA(c1,.15)};--w2d:${hexA(c2,.11)}">
-    <div class="mrow">
-      <span class="stick" style="--s1:${c1};--s2:${c2}"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.6l-1.5-1.36C5.3 14.5 2 11.5 2 7.9A5.6 5.6 0 0 1 7.6 2.3c1.8 0 3.5.84 4.4 2.16A5.4 5.4 0 0 1 16.4 2.3 5.6 5.6 0 0 1 22 7.9c0 3.6-3.3 6.6-8.5 11.34z"/></svg></span>
-      <span class="mmain"><b>${tp.titel}</b>
-        <span class="mmeta"><span class="comp">${tp.quelle}</span><span class="agetag">ab ${tp.alter}</span>${
-          tp.kostenlos?'<span class="freebest tv">▣ Kostenlos</span>':""}<span class="folgen">${tp.dauer}</span></span>
-        <p class="tipptext">${tp.text}</p>
-        <p class="tipphaken"><b>Was dagegen spricht:</b> ${tp.haken}</p>
-        <span class="pvrow"><span class="tippvon">${tp.von}</span>${
-          tp.url?`<a class="pvlink" href="${tp.url}" target="_blank" rel="noopener">ansehen →</a>`:""}</span>
-      </span></div></div>`;
+  const vars=`--c1:${c1};--c2:${c2};--w1:${hexA(c1,.22)};--w2:${hexA(c2,.20)};--w1d:${hexA(c1,.15)};--w2d:${hexA(c2,.11)}`;
+  return `
+<div class="row tipprow free" style="${vars}" data-k="${tp.titel}|${tp.quelle}|${tp.von}">
+  <button class="rowhead" aria-expanded="false">
+    <div class="time"><span class="t-start">♥</span><span class="t-dur">${t("tipp_l")}</span></div>
+    <div class="teams">
+      <div class="t"><span class="stick" style="--s1:${c1};--s2:${c2}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.6l-1.5-1.36C5.3 14.5 2 11.5 2 7.9A5.6 5.6 0 0 1 7.6 2.3c1.8 0 3.5.84 4.4 2.16A5.4 5.4 0 0 1 16.4 2.3 5.6 5.6 0 0 1 22 7.9c0 3.6-3.3 6.6-8.5 11.34z"/></svg></span><span>${tp.titel}</span></div>
+      <div class="meta"><span class="comp">${tp.quelle}</span><span class="agetag">${t("ab")} ${tp.alter}</span>${
+        tp.kostenlos?`<span class="freebest tv">▣ ${t("kostenlos")}</span>`:""}${
+        tp.dauer && tp.dauer!=="–" && tp.dauer!=="-" ? `<span class="folgen">${tp.dauer}</span>`:""}</div>
+    </div>
+    <div class="rh-right"><span class="chev">${RCHEV}</span></div>
+  </button>
+  <div class="panel"><div class="panel-in"><div class="panel-pad">
+    <div class="lh">
+      <p class="lh-txt">${tp.text}</p>
+      <p class="lh-reden"><b>${t("dagegen")}</b> ${tp.haken}</p>
+      <p class="tippvon">${tp.von}</p>
+    </div>
+    ${tp.url?`<div class="actrow"><a class="sharebtn" href="${tp.url}" target="_blank" rel="noopener"><span>${t("ansehen")}</span></a></div>`:""}
+  </div></div></div>
+</div>`;
 }
 const EMPTY_LIVE = ()=> '<div class="soonbox"><span class="ic">\ud83d\udcfa</span><div>' +
   '<b style="display:block;color:var(--ink);font-family:Archivo,sans-serif;font-size:14px;margin-bottom:3px">'+t("leer_tt")+'</b>' +

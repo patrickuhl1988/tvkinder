@@ -1328,6 +1328,15 @@
   html[data-theme="dark"] .fchip.tippchip::after{background:#FF9A5C; color:#2A1206}
   .fchip.tippchip[aria-pressed="true"]::after{background:#FFF3E8; color:#C94108}
 
+  /* Markenbanner im Kopf: läuft über die volle verfügbare Breite,
+     die Schalter rechts stehen fest, das Banner gibt nach. */
+  .logo .logobanner{display:block; height:52px; width:auto; max-width:100%;
+    object-fit:contain; object-position:left center; border-radius:10px}
+  @media (min-width:700px){ .logo .logobanner{height:60px} }
+  @media (max-width:400px){ .logo .logobanner{height:44px} }
+  @media (max-width:345px){ .logo .logobanner{height:38px} }
+  html[data-theme="dark"] .logo .logobanner{box-shadow:0 1px 6px rgba(0,0,0,.35)}
+
   /* Kopfzeile: eine Reihe, eine Höhe, ein Raster.
      Alle Bedienelemente exakt 32px hoch, das Maskottchen läuft mit der
      Versalhöhe des Schriftzugs (24px zu 17px Schrift), damit Bild und Text
@@ -1355,6 +1364,12 @@
     .logo .wordmark{font-size:14.5px}
     .switches{gap:4px}
     .switches .seg.lang button{padding:0 7px} }
+
+  .section-eyebrow.tipphead{display:flex; align-items:center; gap:10px}
+  .section-eyebrow.tipphead h2{flex:1 1 auto; min-width:0}
+  .mehrbtn.klein{width:auto; margin:0; padding:8px 12px; font-size:12px; flex:0 0 auto}
+  .tippnote{font-size:12.5px; color:var(--muted); margin:0 2px 8px; min-height:0}
+  .tippnote:empty{display:none}
 
   .panelprov{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 12px}
   .panelprov:empty{display:none}
@@ -1788,7 +1803,8 @@
   .tipptext{font-size:13.5px; color:var(--ink); line-height:1.55; margin:9px 0 0}
   .tipphaken{font-size:12.5px; color:var(--muted); line-height:1.5; margin:7px 0 0}
   .tipphaken b{color:var(--ink); font-weight:700}
-  .tippvon{font-size:11.5px; color:var(--faint); font-style:italic}
+  .tippvon{margin-top:8px; }
+  .unbenutzt-tippvon{font-size:11.5px; color:var(--faint); font-style:italic}
   .tipprow .mmeta{margin-top:7px}
 
   /* --- Anmeldung ------------------------------------------------------- */
@@ -1841,7 +1857,7 @@
 
 <header>
   <div class="hbar">
-    <a class="logo" href="index.html" aria-label="TVKinderprogramm.de – zur Startseite"><img class="logotv" src="maskottchen.png" width="30" height="30" alt="TV"><span class="wordmark">kinderprogramm.de</span></a>
+    <a class="logo" href="index.html" aria-label="TVKinderprogramm.de – zur Startseite"><img class="logobanner" src="headerlogo.png" height="120" alt="TVKinderprogramm.de"></a>
     <div class="switches">
       <div class="seg lang" role="group" aria-label="Sprache">
         <button data-lang="de" aria-pressed="true">DE</button>
@@ -1855,6 +1871,7 @@
 <div class="wrap">
   <section class="tabpane active" id="pane-mediathek" role="tabpanel">
 
+    <div class="fsearch"><span class="ic">⌕</span><input id="medSearchTop" type="text" data-i18n-ph="such_med" placeholder="Titel, Genre oder Anbieter suchen …"></div>
     <a class="crosslink" href="https://tvfussball.de" target="_blank" rel="noopener">
       <span class="cl-ic" aria-hidden="true">TV</span>
       <span class="cl-txt"><b data-i18n="cl_b">Und für die Großen?</b><span data-i18n="cl_s">Alle Spiele heute im TV, Stream und Radio: auf TVFussball.de</span></span>
@@ -1876,9 +1893,10 @@
       <button class="fchip" data-i="la" aria-pressed="false" data-i18n="int_la">Lachen &amp; Quatsch</button>
       <button class="fchip" data-i="wi" aria-pressed="false" data-i18n="int_wi">Wissen &amp; Entdecken</button>
     </div>
-    <div class="section-eyebrow"><h2 data-i18n="tipps_h2">Unsere Tipps für euch</h2><span class="cnt" id="tippNote" aria-live="polite"></span></div>
+    <div class="section-eyebrow tipphead"><h2 data-i18n="tipps_h2">Unsere Tipps für euch</h2>
+      <button class="mehrbtn klein" id="tippMehr" data-i18n="mehr5">5 weitere zeigen</button></div>
+    <div class="tippnote" id="tippNote" aria-live="polite"></div>
     <div class="board" id="tippBoard"></div>
-    <button class="mehrbtn" id="tippMehr" data-i18n="mehr5">5 weitere zeigen</button>
     <div class="fsearch"><span class="ic">⌕</span><input id="medSearch" type="text" data-i18n-ph="such_med" placeholder="Titel, Genre oder Anbieter suchen …"></div>
     <div class="section-eyebrow"><h2 data-i18n="kat_h2">Der ganze Katalog</h2><span class="cnt" id="katCount"></span></div>
 <div class="pvlegend">
@@ -2559,7 +2577,7 @@ const I18N = {
   tipps_h2:"Unsere Tipps für euch", mehr5:"5 weitere zeigen",
   wenig_tipps:"Dazu haben wir gerade nur %s Tipps: hier noch Ideen aus ähnlichen Kategorien",
   alle_gezeigt:"Das war's: schau morgen wieder vorbei!",
-  kat_h2:"Der ganze Katalog", titel_n:"Titel",
+  kat_h2:"Der ganze Katalog", titel_n:"Titel", tipp_l:"Tipp", dagegen:"Was dagegen spricht:",
   cl_s:"Alle Spiele heute im TV, Stream und Radio: auf TVFussball.de",
   inhalt_de:""
  },
@@ -2613,7 +2631,7 @@ const I18N = {
   tipps_h2:"Our picks for you", mehr5:"Show 5 more",
   wenig_tipps:"We only have %s picks for that right now: adding ideas from similar categories",
   alle_gezeigt:"That's all: check back tomorrow!",
-  kat_h2:"The full catalogue", titel_n:"titles",
+  kat_h2:"The full catalogue", titel_n:"titles", tipp_l:"Tip", dagegen:"What speaks against it:",
   cl_s:"Every match on German TV, stream and radio: on TVFussball.de",
   inhalt_de:"Episode descriptions supplied by the German broadcasters remain in German."
  }
@@ -3266,53 +3284,59 @@ const mBoard = document.getElementById("medBoard");
 
 function mcard(e){
   const [c1,c2] = pairFor(e.title);
-  const g = GLYPH[e.genre] || GLYPH_DEFAULT;
   const prov = e.prov.filter(p=>p.ok).map(p=>{
     const c = p.c || "#7A6153";
     const style = `--pv:${c};--pv-bg:${hexA(c,.11)};--pv-bd:${hexA(c,.38)};`+
                   `--pv-tx:${darkenTo(c,.185)};--pv-bgd:${hexA(c,.17)};--pv-txd:${lightenTo(c,.42)}`;
     return `<span class="pv${p.sure?" sure":""}" style="${style}"><i></i>${p.n}${p.sure?"":" *"}</span>`;
   }).join("");
-  const key = [e.title, e.sub||"", e.genre, e.year||"", e.neu||"",
+  const frei1 = e.prov.find(p=>p.ok && p.frei);
+  const badge = frei1 ? `<span class="freebest tv">▣ ${t("kostenlos")} · ${frei1.n}</span>` : "";
+  const key = [e.title, e.sub||"", e.genre, e.year||"",
                e.prov.map(p=>p.n).join(" ")].join("|");
   const vars = `--c1:${c1};--c2:${c2};--w1:${hexA(c1,.22)};--w2:${hexA(c2,.20)};`+
                `--w1d:${hexA(c1,.14)};--w2d:${hexA(c2,.11)}`;
   const rate = (e.imdb&&e.imdb.r) ? String(e.imdb.r).replace(".",",") : null;
-  /* Übersichtskachel wie auf der Startseite: Icon, Titel, EINE Badge-Zeile.
-     Anbieter, Jahr, Folgen und Links wohnen im Aufklapp-Panel. */
-  return `<div class="row" data-k="${key}" style="${vars}">
-    <div class="rowhead" role="button" tabindex="0" aria-expanded="false">
-      <span class="stick" style="--s1:${c1};--s2:${c2}"><svg viewBox="0 0 24 24" fill="currentColor">${g}</svg></span>
-      <span class="mmain">
-        <b>${e.title}</b>
-        <span class="mmeta"><span class="agetag">${t("ab")} ${e.age}</span><span class="comp">${gname(e.genre)}</span>${
-          rate?`<span class="imdb"><b>IMDb</b>${rate}</span>`:""}${
-          e.retro?`<span class="retro">${LANG==="en"?"since":"seit"} ${e.retro.y}</span>`:""}</span>
-      </span>
-      <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6-6 6"/></svg></span>
+  /* Zeitzelle der Startseite wird hier zur Folgenzelle: großer Wert oben,
+     Einheit darunter. So bleiben beide Boards im selben Raster. */
+  const zc1 = e.folgen ? e.folgen : (e.year || "Film");
+  const zc2 = e.folgen ? (LANG==="en"?"episodes":"Folgen")
+            : (e.year ? (LANG==="en"?"since":"seit") : "");
+  return `
+<div class="row free" style="${vars}" data-k="${key}">
+  <button class="rowhead" aria-expanded="false">
+    <div class="time"><span class="t-start">${zc1}</span><span class="t-dur">${zc2}</span></div>
+    <div class="teams">
+      <div class="t">${sticker({title:e.title, genre:e.genre})}<span>${e.title}</span></div>
+      ${e.sub?`<div class="t subline">${e.sub}</div>`:""}
+      <div class="meta"><span class="comp">${gname(e.genre)}</span>${
+        rate?`<span class="imdb"><b>IMDb</b>${rate}</span>`:""}${
+        e.retro?`<span class="retro">${LANG==="en"?"since":"seit"} ${e.retro.y}</span>`:""}<span class="agetag">${t("ab")} ${e.age}</span>${badge}</div>
     </div>
-    <div class="panel"><div class="panel-in"><div class="panel-pad">
-      <div class="lh"><div class="lh-h">${t("passt")}</div>
-        ${e.kurz?`<p class="lh-txt lang">${e.kurz}</p>`:""}
-        ${e.sub?`<p class="lh-txt">${e.sub}</p>`:""}
-        ${e.note?`<p class="lh-reden"><b>${LANG==="en"?"Latest episode:":"Aktuelle Folge:"}</b> ${e.note}</p>`:""}
-      </div>
-      <div class="pvrow panelprov">${prov}</div>
-      <div class="agebox">
-        <div class="arow"><span class="alb">${t("alter")}</span><span class="aval">${t("ab")} ${e.age} ${t("jahren")}<span class="est">${t("redaktionell")}</span></span></div>
-        ${e.year?`<div class="arow"><span class="alb">${LANG==="en"?"Since":"Seit"}</span><span class="aval">${e.year}</span></div>`:""}
-        ${e.folgen?`<div class="arow"><span class="alb">${LANG==="en"?"Episodes":"Folgen"}</span><span class="aval">${e.folgen}${e.dauer?` · ${LANG==="en"?"approx.":"ca."} ${e.dauer} ${LANG==="en"?"min each":"Min je Folge"}`:""}</span></div>`:""}
-        <div class="arow sp-sicher"><span class="alb">${t("nachsehen")}</span><span class="aval"><span class="spdot"></span>${
-          t("nachsehen_ja")}: ${e.prov.filter(p=>p.ok).map(p=>p.n).join(LANG==="en"?" and ":" und ")}</span></div>
-        ${e.retro?`<div class="arow"><span class="alb">${t("kennst")}</span><span class="aval">${e.retro.n}</span></div>`:""}
-        <div class="arow"><span class="alb">IMDb</span><span class="aval">${
-          rate?`<b>${rate}</b> ${t("imdb_von")} <span class="votes">${t("imdb_stimmen").replace("%s",(e.imdb.v||0).toLocaleString("de-DE"))}</span> · <a href="https://www.imdb.com/title/${e.imdb.id}/" target="_blank" rel="noopener">${t("imdb_ansehen")}</a>`
-              :`<a href="https://www.imdb.com/find/?q=${encodeURIComponent(e.title)}&s=tt" target="_blank" rel="noopener">${t("imdb_nach")}</a>`}</span></div>
-      </div>
-      ${e.url?`<div class="actrow"><a class="sharebtn" href="${e.url}" target="_blank" rel="noopener"><span>${t("ansehen")}</span></a></div>`:""}
-    </div></div></div>
-  </div>`;
+    <div class="rh-right"><span class="chev">${RCHEV}</span></div>
+  </button>
+  <div class="panel"><div class="panel-in"><div class="panel-pad">
+    <div class="lh"><div class="lh-h">${t("passt")}</div>
+      ${e.kurz?`<p class="lh-txt lang">${e.kurz}</p>`:""}
+      ${e.note?`<p class="lh-reden"><b>${LANG==="en"?"Latest episode:":"Aktuelle Folge:"}</b> ${e.note}</p>`:""}
+    </div>
+    <div class="pvrow panelprov">${prov}</div>
+    <div class="agebox">
+      <div class="arow"><span class="alb">${t("alter")}</span><span class="aval">${t("ab")} ${e.age} ${t("jahren")}<span class="est">${t("redaktionell")}</span></span></div>
+      ${e.year?`<div class="arow"><span class="alb">${LANG==="en"?"Since":"Seit"}</span><span class="aval">${e.year}</span></div>`:""}
+      ${e.folgen?`<div class="arow"><span class="alb">${LANG==="en"?"Episodes":"Folgen"}</span><span class="aval">${e.folgen}${e.dauer?` · ${LANG==="en"?"approx.":"ca."} ${e.dauer} ${LANG==="en"?"min each":"Min je Folge"}`:""}</span></div>`:""}
+      <div class="arow sp-sicher"><span class="alb">${t("nachsehen")}</span><span class="aval"><span class="spdot"></span>${
+        t("nachsehen_ja")}: ${e.prov.filter(p=>p.ok).map(p=>p.n).join(LANG==="en"?" and ":" und ")}</span></div>
+      ${e.retro?`<div class="arow"><span class="alb">${t("kennst")}</span><span class="aval">${e.retro.n}</span></div>`:""}
+      <div class="arow"><span class="alb">IMDb</span><span class="aval">${
+        rate?`<b>${rate}</b> ${t("imdb_von")} <span class="votes">${t("imdb_stimmen").replace("%s",(e.imdb.v||0).toLocaleString("de-DE"))}</span> · <a href="https://www.imdb.com/title/${e.imdb.id}/" target="_blank" rel="noopener">${t("imdb_ansehen")}</a>`
+            :`<a href="https://www.imdb.com/find/?q=${encodeURIComponent(e.title)}&s=tt" target="_blank" rel="noopener">${t("imdb_nach")}</a>`}</span></div>
+    </div>
+    ${e.url?`<div class="actrow"><a class="sharebtn" href="${e.url}" target="_blank" rel="noopener"><span>${t("ansehen")}</span></a></div>`:""}
+  </div></div></div>
+</div>`;
 }
+
 
 
 /* ---- Kostenfrei-Schalter: fest an, Hinweis statt Abschalten ---- */
@@ -3406,7 +3430,11 @@ function katalogZeigen(){
 chipsAnzeigen();
 katalogZeigen();
 tippsZeigen(true);
-initSearch(document.getElementById("medSearch"), mBoard);
+const suchOben=document.getElementById("medSearchTop"), suchUnten=document.getElementById("medSearch");
+initSearch(suchOben, mBoard);
+initSearch(suchUnten, mBoard);
+suchOben.addEventListener("input", ()=>{ suchUnten.value=suchOben.value; });
+suchUnten.addEventListener("input", ()=>{ suchOben.value=suchUnten.value; });
 window.reRender = ()=>{
   katalogZeigen();
   /* sichtbare Tippkarten in der neuen Sprache neu zeichnen, Bestand behalten */
