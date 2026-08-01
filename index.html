@@ -1368,6 +1368,9 @@
   .section-eyebrow.tipphead{display:flex; align-items:center; gap:10px}
   .section-eyebrow.tipphead h2{flex:1 1 auto; min-width:0}
   .mehrbtn.klein{width:auto; margin:0; padding:8px 12px; font-size:12px; flex:0 0 auto}
+  .intro{font-size:13px; color:var(--muted); line-height:1.65; margin:14px 2px 4px}
+  .intro b{color:var(--ink); font-weight:750}
+
   .seotext{margin:30px 2px 12px; padding-top:18px; border-top:1px solid var(--line)}
   .seotext h2{font-family:"Archivo",sans-serif; font-weight:800; font-size:15px;
     letter-spacing:-.01em; color:var(--ink); margin-bottom:8px}
@@ -1876,6 +1879,7 @@
 <div class="wrap">
   <section class="tabpane active" id="pane-live" role="tabpanel">
     <h1 class="srh1">Kinderprogramm heute: KiKA, Toggo plus und Kinderfilme mit Altersempfehlung und Eltern-Check</h1>
+    <p class="intro" data-i18n="intro_idx"><b>TVKinderprogramm.de</b> zeigt das laufende Kinderfernsehen auf einen Blick: alle Kindersender und die Kinderstrecken der großen Programme, mit Sendezeit, Laufzeit und redaktioneller Altersempfehlung. Zu jeder Sendung gibt es einen Eltern-Check mit Einschätzung, IMDb-Wertung und dem Hinweis, ob sich die Folge später kostenlos in der Mediathek nachsehen lässt.</p>
     <div class="filters" id="liveFilters"></div>
     <div class="opts" id="liveOpts">
       <label class="opt"><input type="checkbox" id="optFree" checked><span data-i18n="o_free">Nur kostenlos</span></label>
@@ -3330,6 +3334,7 @@ const I18N = {
   fussnote:"TVKinderprogramm.de überträgt selbst keine Sendungen. Wir verweisen nur auf legale Sender und Mediatheken und betten ausschließlich offizielle, freigegebene Videos ein. Altersempfehlungen sind redaktionell und ersetzen keine FSK-Freigabe. Programmangaben ohne Gewähr: verbindlich ist das Programm des Senders.",
   jetzt_frei:"Gerade kostenlos",
   tzhint:"Alle Sendezeiten in deutscher Zeit (Europe/Berlin).",
+  intro_idx:"<b>TVKinderprogramm.de</b> zeigt das laufende Kinderfernsehen auf einen Blick: alle Kindersender und die Kinderstrecken der großen Programme, mit Sendezeit, Laufzeit und redaktioneller Altersempfehlung. Zu jeder Sendung gibt es einen Eltern-Check mit Einschätzung, IMDb-Wertung und dem Hinweis, ob sich die Folge später kostenlos in der Mediathek nachsehen lässt.",
   cl_b:"Und für die Großen?",
   toast_bald:"Disney+, Netflix & Co. folgen bald",
   int_ab:"Abenteuer & Action", int_ti:"Tiere & Natur", int_ma:"Magie & Fantasie",
@@ -3388,6 +3393,7 @@ const I18N = {
   fussnote:"TVKinderprogramm.de does not broadcast anything itself. We only point to legal channels and media libraries and embed officially released videos. Age guidance is editorial and does not replace an official rating. Schedules without guarantee: the channel's own listing is binding.",
   jetzt_frei:"Free right now",
   tzhint:"All broadcast times in German local time (Europe/Berlin).",
+  intro_idx:"<b>TVKinderprogramm.de</b> shows German children's television at a glance: every kids' channel plus the children's slots of the major networks, with airtime, running time and an editorial age recommendation. Each show comes with a parent check: an assessment, the IMDb rating, and whether the episode can be watched later for free in the media libraries.",
   cl_b:"And for the grown-ups?",
   toast_bald:"Disney+, Netflix & Co. are coming soon",
   int_ab:"Adventure & Action", int_ti:"Animals & Nature", int_ma:"Magic & Fantasy",
@@ -3446,7 +3452,10 @@ function uebersetzeDaten(){
 function applyI18n(){
   uebersetzeDaten();
   document.documentElement.lang = LANG;
-  $$("[data-i18n]").forEach(e=>{ e.textContent = t(e.dataset.i18n); });
+  $$("[data-i18n]").forEach(e=>{
+    if(e.classList.contains("intro")) e.innerHTML = t(e.dataset.i18n);
+    else e.textContent = t(e.dataset.i18n);
+  });
   $$("[data-i18n-ph]").forEach(e=>{ e.placeholder = t(e.dataset.i18nPh); });
   const hw=$("#langHint"); if(hw) hw.textContent = LANG==="en" ? t("inhalt_de") : "";
 }
