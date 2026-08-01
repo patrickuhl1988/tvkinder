@@ -2655,7 +2655,8 @@ const I18N = {
   fussnote:"TVKinderprogramm.de überträgt selbst keine Sendungen. Wir verweisen nur auf legale Sender und Mediatheken und betten ausschließlich offizielle, freigegebene Videos ein. Altersempfehlungen sind redaktionell und ersetzen keine FSK-Freigabe. Programmangaben ohne Gewähr: verbindlich ist das Programm des Senders.",
   jetzt_frei:"Gerade kostenlos",
   tzhint:"Alle Sendezeiten in deutscher Zeit (Europe/Berlin).",
-  intro_idx:"<b>TVKinderprogramm.de</b> zeigt das laufende Kinderfernsehen auf einen Blick: alle Kindersender und die Kinderstrecken der großen Programme, mit Sendezeit, Laufzeit und redaktioneller Altersempfehlung. Zu jeder Sendung gibt es einen Eltern-Check mit Einschätzung, IMDb-Wertung und dem Hinweis, ob sich die Folge später kostenlos in der Mediathek nachsehen lässt.",
+  lv_jetzt:"im Browser öffnen", lv_konto:"kostenlos bei Joyn, Konto nötig", lv_abo:"über RTL+, Abo nötig",
+  intro_idx:"<b>TVKinderprogramm.de</b> beantwortet die einfache Frage: <b>Was läuft heute für Kinder im TV?</b> Hier steht das komplette Kinderprogramm von heute und morgen auf einen Blick: KiKA, Super RTL (Toggo), Disney Channel, Nickelodeon und RiC, dazu die Kinderstrecken von ARD, ZDF und den Dritten sowie Kinderfilme im Free-TV. Jede Sendung mit Sendezeit, Altersempfehlung und Eltern-Check, und dem Hinweis, ob sie kostenlos in der Mediathek läuft.",
   cl_b:"Und für die Großen?",
   toast_bald:"Disney+, Netflix & Co. folgen bald",
   int_ab:"Abenteuer & Action", int_ti:"Tiere & Natur", int_ma:"Magie & Fantasie",
@@ -2715,7 +2716,8 @@ const I18N = {
   fussnote:"TVKinderprogramm.de does not broadcast anything itself. We only point to legal channels and media libraries and embed officially released videos. Age guidance is editorial and does not replace an official rating. Schedules without guarantee: the channel's own listing is binding.",
   jetzt_frei:"Free right now",
   tzhint:"All broadcast times in German local time (Europe/Berlin).",
-  intro_idx:"<b>TVKinderprogramm.de</b> shows German children's television at a glance: every kids' channel plus the children's slots of the major networks, with airtime, running time and an editorial age recommendation. Each show comes with a parent check: an assessment, the IMDb rating, and whether the episode can be watched later for free in the media libraries.",
+  lv_jetzt:"open in browser", lv_konto:"free on Joyn, account required", lv_abo:"via RTL+, subscription required",
+  intro_idx:"<b>TVKinderprogramm.de</b> answers one simple question: <b>What is on TV for kids today?</b> The complete German children's schedule for today and tomorrow at a glance: KiKA, Super RTL (Toggo), Disney Channel, Nickelodeon and RiC, plus the children's slots on ARD, ZDF and the regional networks, and kids' films on free TV. Every show with airtime, age recommendation, a parent check, and whether it streams for free in the media libraries.",
   cl_b:"And for the grown-ups?",
   toast_bald:"Disney+, Netflix & Co. are coming soon",
   int_ab:"Adventure & Action", int_ti:"Animals & Nature", int_ma:"Magic & Fantasy",
@@ -3085,6 +3087,26 @@ function sticker(s){
 
 const CH = c => (typeof CH_INFO!=="undefined" && CH_INFO[c.n]) ? CH_INFO[c.n] : {u:"",note:""};
 
+/* Offizielle Livestreams je Sender. ard = ARD-Mediathek-Live, zdf = ZDF-Live,
+   joyn = kostenlos mit Konto, rtlplus = Abo nötig. Ohne Eintrag: kein Link. */
+const LIVESTREAM = (()=>{
+  const ard=["https://www.ardmediathek.de/live",null],
+        zdf=["https://www.zdf.de/live-tv",null],
+        joyn=["https://www.joyn.de/live-tv","konto"],
+        rtl=["https://plus.rtl.de","abo"];
+  return {
+    "KiKA":["https://www.kika.de/live",null],
+    "Super RTL":["https://www.toggo.de/livestream",null],
+    "S-RTL":["https://www.toggo.de/livestream",null],
+    "Toggo plus":["https://www.toggo.de/livestream",null],
+    "ARD":ard,"WDR":ard,"NDR":ard,"BR":ard,"SWR":ard,"MDR":ard,"RBB":ard,"HR":ard,"ONE":ard,
+    "ZDF":zdf,"ZDFneo":zdf,"3sat":zdf,
+    "arte":["https://www.arte.tv/de/live/",null],
+    "SAT.1":joyn,"ProSieben":joyn,"Kabel Eins":joyn,"ProSieben Maxx":joyn,"sixx":joyn,
+    "RTL":rtl,"VOX":rtl,"RTLzwei":rtl,"Nitro":rtl
+  };
+})();
+
 function rowHTML(s){
   const free = (s.ch||[]).filter(c=>c.free);
   const best = free[0] || (s.ch||[])[0];
@@ -3141,6 +3163,12 @@ function rowHTML(s){
           : (oerr ? t("nachsehen_wahrsch") : t("nachsehen_nein"));
         return `<div class="arow sp-${stufe}"><span class="alb">${t("nachsehen")}</span>` +
                `<span class="aval"><span class="spdot"></span>${txt}</span></div>`;
+      })()}
+      ${(()=>{ const lv=LIVESTREAM[s.channel]; if(!lv) return "";
+        const zusatz = lv[1]==="konto" ? " · <span class=\"votes\">"+t("lv_konto")+"</span>"
+                     : lv[1]==="abo"   ? " · <span class=\"votes\">"+t("lv_abo")+"</span>" : "";
+        return `<div class="arow"><span class="alb">Livestream</span><span class="aval">`+
+               `<a href="${lv[0]}" target="_blank" rel="noopener">${t("lv_jetzt")} (${s.channel})</a>${zusatz}</span></div>`;
       })()}
       <div class="arow"><span class="alb">IMDb</span><span class="aval">${
         (s.imdb && s.imdb.r)
