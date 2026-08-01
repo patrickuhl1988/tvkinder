@@ -1330,14 +1330,12 @@
 
   /* Markenbanner im Kopf: läuft über die volle verfügbare Breite,
      die Schalter rechts stehen fest, das Banner gibt nach. */
-  .logo .logobanner{display:block; height:52px; width:auto; max-width:100%;
+  .logo .logobanner{display:block; height:54px; width:auto; max-width:100%;
     object-fit:contain; object-position:left center; border-radius:10px}
-  @media (min-width:700px){ .logo .logobanner{height:60px} }
-  @media (max-width:400px){ .logo .logobanner{height:44px} }
-  @media (max-width:345px){ .logo .logobanner{height:38px} }
-  /* Dunkelmodus: brauner Schriftzug braucht helle Unterlage: Sticker-Optik */
-  html[data-theme="dark"] .logo .logobanner{background:#FDF6F0; box-sizing:border-box;
-    padding:4px 9px; box-shadow:0 1px 6px rgba(0,0,0,.4)}
+  @media (min-width:700px){ .logo .logobanner{height:66px} }
+  @media (max-width:400px){ .logo .logobanner{height:46px} }
+  @media (max-width:345px){ .logo .logobanner{height:40px} }
+  html[data-theme="dark"] .logo .logobanner{filter:drop-shadow(0 1px 4px rgba(0,0,0,.45))}
 
   /* Kopfzeile: eine Reihe, eine Höhe, ein Raster.
      Alle Bedienelemente exakt 32px hoch, das Maskottchen läuft mit der
@@ -1864,7 +1862,7 @@
 
 <header>
   <div class="hbar">
-    <a class="logo" href="index.html" aria-label="TVKinderprogramm.de – zur Startseite"><img class="logobanner" src="headerlogo.png" height="120" alt="TVKinderprogramm.de"></a>
+    <a class="logo" href="index.html" aria-label="TVKinderprogramm.de – zur Startseite"><img class="logobanner" src="headerbild.png" height="160" alt="TVKinderprogramm.de: Kinderprogramm im Überblick"></a>
     <div class="switches">
       <div class="seg lang" role="group" aria-label="Sprache">
         <button data-lang="de" aria-pressed="true">DE</button>
@@ -2291,13 +2289,11 @@ const MEDIA = [
   {title:"Die Patrick Star Show",sub:"Doktor Patrick / Die Star-Pyjama-Party",genre:"Zeichentrick",genres:["Zeichentrick"],ints:["la"],age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"Paramount+",sure:false,c:"#0064FF",ok:false,frei:false}],folgen:null,dauer:null,neu:"",url:"",kurz:"",note:"Nachdem Patrick versehentlich einen Arztkittel anzieht, ist er überzeugt davon, ein echter Arzt zu s"},
   {title:"Wylde Pak",sub:"Sommer-Chuseok / Die schreckliche Familie Plover",genre:"Zeichentrick",genres:["Zeichentrick"],ints:["la"],age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"Paramount+",sure:false,c:"#0064FF",ok:false,frei:false}],folgen:null,dauer:null,neu:"",url:"",kurz:"",note:"Um sich vorm Zahnarzt zu drücken, besteht Lily darauf, das Erntedankfest Chuseok im Sommer zu feiern"},
   {title:"Max und die Halbritter",sub:"Im Land der Gnome",genre:"Zeichentrick",genres:["Zeichentrick"],ints:["ab"],age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"Paramount+",sure:false,c:"#0064FF",ok:false,frei:false}],folgen:null,dauer:null,neu:"",url:"",kurz:"",note:"Max und die Halbritter fliegen in das Dorf Tresk, um nach den verschwundenen Gnomen zu suchen und en"},
-  {title:"T&T",sub:"Der blinde Passagier",genre:"Serie",genres:["Serie"],ints:["ab"],age:3,grp:"a3",year:null,imdb:null,retro:null,prov:[{n:"RiC Mediathek",sure:false,c:"#7A6153",ok:false,frei:false}],folgen:null,dauer:null,neu:"",url:"",kurz:"",note:"T.S. Turner sucht nach einem weggelaufenen Jungen."},
   {title:"Marvin das steppende Pferd",sub:"Du siehst es, du siehst es nicht / Wenn die Sterne leuchten",genre:"Zeichentrick",genres:["Zeichentrick"],ints:["ti","ma"],age:3,grp:"a3",year:null,imdb:null,retro:null,prov:[{n:"RiC Mediathek",sure:false,c:"#7A6153",ok:false,frei:false}],folgen:null,dauer:null,neu:"",url:"",kurz:"",note:"Eddy und Marvin arbeiten an einer Zaubernummer. Stripes wird ängstlich und verlässt die Nummer. Mit "},
   {title:"Urmel",sub:"Sherlock Urmel",genre:"Zeichentrick",genres:["Zeichentrick"],ints:["ma"],age:3,grp:"a3",year:null,imdb:null,retro:null,prov:[{n:"RiC Mediathek",sure:false,c:"#7A6153",ok:false,frei:false}],folgen:null,dauer:null,neu:"",url:"",kurz:"",note:"Auf Titiwu verschwinden plötzlich Gegenstände. Ein Fall für Urmel und Ping! Als begeisterte Anhänger"},
   {title:"Die sieben kleinen Monster",sub:"Gespensternacht",genre:"Zeichentrick",genres:["Zeichentrick"],ints:["ma"],age:3,grp:"a3",year:null,imdb:null,retro:null,prov:[{n:"RiC Mediathek",sure:false,c:"#7A6153",ok:false,frei:false}],folgen:null,dauer:null,neu:"",url:"",kurz:"",note:"Als bei Gewitter der Strom ausfällt, fürchten sich die kleinen Monster sehr. Um die anderen völlig z"},
   {title:"Babies and the Bear",sub:"Ein Nickerchen / ... und mehr!",genre:"Zeichentrick",genres:["Zeichentrick"],ints:["la"],age:3,grp:"a3",year:null,imdb:null,retro:null,prov:[{n:"RiC Mediathek",sure:false,c:"#7A6153",ok:false,frei:false}],folgen:null,dauer:null,neu:"",url:"",kurz:"",note:"Treflik liegt da und scheint unglücklich zu sein. Der Schnuller, der ihm ständig aus dem Mund fällt,"},
   {title:"The Treflik Family",sub:"Die Maus",genre:"Zeichentrick",genres:["Zeichentrick"],ints:["la"],age:3,grp:"a3",year:null,imdb:null,retro:null,prov:[{n:"RiC Mediathek",sure:false,c:"#7A6153",ok:false,frei:false}],folgen:null,dauer:null,neu:"",url:"",kurz:"",note:"Treflinka stößt auf eine kleine, graue Maus. Kurz daraufhin beschließt sie, die Maus mitzunehmen. We"},
-  {title:"Infomercial",sub:"",genre:"Serie",genres:["Serie"],ints:["ab"],age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"RiC Mediathek",sure:false,c:"#7A6153",ok:false,frei:false}],folgen:null,dauer:null,neu:"",url:"",kurz:"",note:"Das TV-Shopping-Erlebnis bietet innovative, qualitativ hochwertige Produkte, die den Alltag erleicht"},
   {title:"Enid Blyton - Abenteuer",sub:"Das Tal der Abenteuer - Teil 3",genre:"Serie",genres:["Serie"],ints:["ti","ab"],age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"RiC Mediathek",sure:false,c:"#7A6153",ok:false,frei:false}],folgen:null,dauer:null,neu:"",url:"",kurz:"",note:"Mit ihrem Spürsinn gelingt es den Kindern schließlich, dem Geheimnis des Gefangenen auf die Spur zu "},
   {title:"Rescue Heroes",sub:"Gefahr am Gipfel",genre:"Zeichentrick",genres:["Zeichentrick"],ints:["ab"],age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"RiC Mediathek",sure:false,c:"#7A6153",ok:false,frei:false}],folgen:null,dauer:null,neu:"",url:"",kurz:"",note:"Ein Bergsteigerteam auf dem Mount Everest befindet sich in höchster Lebensgefahr. Doch die Rettung n"},
   {title:"Crocadoo - Die coolen Krokos kommen",sub:"Die Krokodil-Olympiade",genre:"Zeichentrick",genres:["Zeichentrick"],ints:["la"],age:6,grp:"a6",year:null,imdb:null,retro:null,prov:[{n:"RiC Mediathek",sure:false,c:"#7A6153",ok:false,frei:false}],folgen:null,dauer:null,neu:"",url:"",kurz:"",note:"Der Sieger der Krokodil-Olympiade muss zum entscheidenden Kampf antreten. Dieser entscheidet darüber"},
