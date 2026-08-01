@@ -1335,7 +1335,9 @@
   @media (min-width:700px){ .logo .logobanner{height:60px} }
   @media (max-width:400px){ .logo .logobanner{height:44px} }
   @media (max-width:345px){ .logo .logobanner{height:38px} }
-  html[data-theme="dark"] .logo .logobanner{box-shadow:0 1px 6px rgba(0,0,0,.35)}
+  /* Dunkelmodus: brauner Schriftzug braucht helle Unterlage: Sticker-Optik */
+  html[data-theme="dark"] .logo .logobanner{background:#FDF6F0; box-sizing:border-box;
+    padding:4px 9px; box-shadow:0 1px 6px rgba(0,0,0,.4)}
 
   /* Kopfzeile: eine Reihe, eine Höhe, ein Raster.
      Alle Bedienelemente exakt 32px hoch, das Maskottchen läuft mit der
