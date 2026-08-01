@@ -1376,6 +1376,11 @@
     letter-spacing:-.01em; color:var(--ink); margin-bottom:8px}
   .seotext p{font-size:12.5px; color:var(--muted); line-height:1.7; margin:0 0 10px}
 
+  .fgroup{margin:2px 0 7px}
+  .fglabel{display:block; font-family:"JetBrains Mono",monospace; font-size:10px;
+    letter-spacing:.09em; text-transform:uppercase; font-weight:700;
+    color:var(--muted); margin:0 2px 5px}
+
   .tippnote{font-size:12.5px; color:var(--muted); margin:0 2px 8px; min-height:0}
   .tippnote:empty{display:none}
 
@@ -1880,47 +1885,58 @@
   <section class="tabpane active" id="pane-mediathek" role="tabpanel">
 
     <div class="fsearch"><span class="ic">⌕</span><input id="medSearchTop" type="text" data-i18n-ph="such_med" placeholder="Titel, Genre oder Anbieter suchen …"></div>
-    <a class="crosslink" href="https://tvfussball.de" target="_blank" rel="noopener">
-      <span class="cl-ic" aria-hidden="true">TV</span>
-      <span class="cl-txt"><b data-i18n="cl_b">Und für die Großen?</b><span data-i18n="cl_s">Alle Spiele heute im TV, Stream und Radio: auf TVFussball.de</span></span>
-      <span class="cl-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
-    </a>
     <h1 class="srh1">Kinderserien und -filme in den Mediatheken: kostenlos abrufbar, mit Altersempfehlung und IMDb-Bewertung</h1>
-    <div class="opts">
-      <label class="opt"><input type="checkbox" id="medFrei" checked><span data-i18n="o_free">Nur kostenfrei</span></label>
-      <span class="opt-cnt" id="medCount"></span>
-    </div>
-    <div class="chiprow" id="medChips" role="group" aria-label="Filter">
+    <div class="fgroup"><span class="fglabel" data-i18n="grp_alter">Alter</span>
+    <div class="chiprow" id="medChips" role="group" aria-label="Alter">
       <button class="fchip tmode" data-a="a3" aria-pressed="false">3–5</button>
       <button class="fchip tmode" data-a="a6" aria-pressed="false">6–9</button>
       <button class="fchip tmode" data-a="a10" aria-pressed="false">10–13</button>
-      <span class="chipsep" aria-hidden="true"></span>
+    </div></div>
+    <div class="fgroup"><span class="fglabel" data-i18n="grp_genre">Genre</span>
+    <div class="chiprow" id="medGenres" role="group" aria-label="Genre">
       <button class="fchip" data-i="ab" aria-pressed="false" data-i18n="int_ab">Abenteuer &amp; Action</button>
       <button class="fchip" data-i="ti" aria-pressed="false" data-i18n="int_ti">Tiere &amp; Natur</button>
       <button class="fchip" data-i="ma" aria-pressed="false" data-i18n="int_ma">Magie &amp; Fantasie</button>
       <button class="fchip" data-i="la" aria-pressed="false" data-i18n="int_la">Lachen &amp; Quatsch</button>
       <button class="fchip" data-i="wi" aria-pressed="false" data-i18n="int_wi">Wissen &amp; Entdecken</button>
-    </div>
+    </div></div>
+    <div class="fgroup"><span class="fglabel" data-i18n="grp_sonst">Sonstiges</span>
     <div class="opts specialrow">
       <button class="fchip tippchip" id="medTipp" aria-pressed="false" data-i18n="f_tipp">Elterntipp</button>
-    </div>
+      <label class="opt"><input type="checkbox" id="medFrei" checked><span data-i18n="o_free">Nur kostenfrei</span></label>
+      <span class="opt-cnt" id="medCount"></span>
+    </div></div>
     <div class="section-eyebrow tipphead"><h2 data-i18n="tipps_h2">Unsere Tipps für euch</h2>
       <button class="mehrbtn klein" id="tippMehr" data-i18n="mehr5">5 weitere zeigen</button></div>
     <div class="tippnote" id="tippNote" aria-live="polite"></div>
     <div class="board" id="tippBoard"></div>
-    <div class="fsearch"><span class="ic">⌕</span><input id="medSearch" type="text" data-i18n-ph="such_med" placeholder="Titel, Genre oder Anbieter suchen …"></div>
+    <a class="crosslink" href="https://tvfussball.de" target="_blank" rel="noopener">
+      <span class="cl-ic" aria-hidden="true">TV</span>
+      <span class="cl-txt"><b data-i18n="cl_b">Und für die Großen?</b><span data-i18n="cl_s">Alle Spiele heute im TV, Stream und Radio: auf TVFussball.de</span></span>
+      <span class="cl-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+    </a>
+
     <div class="section-eyebrow"><h2 data-i18n="kat_h2">Der ganze Katalog</h2><span class="cnt" id="katCount"></span></div>
-<section class="seotext">
-  <h2 data-i18n="seo_med_h">Kinderserien und Kinderfilme kostenlos in den Mediatheken</h2>
-  <p data-i18n="seo_med_1">TVKinderprogramm.de sammelt Kinderserien und Kinderfilme, die in den kostenlosen Mediatheken der öffentlich-rechtlichen Sender abrufbar sind: im KiKA-Player, in der ARD Mediathek, bei ZDFtivi und bei 3sat. Jeder Titel trägt eine redaktionelle Altersempfehlung (ab 3, ab 6 oder ab 10 Jahren), dazu Folgenzahl, Laufzeit und, wo vorhanden, die IMDb-Bewertung mit Stimmenzahl.</p>
-  <p data-i18n="seo_med_2">Die Angebote der öffentlich-rechtlichen Mediatheken sind werbefrei und ohne Anmeldung nutzbar: ein Unterschied zu YouTube und den Apps der Privatsender. Über die Filter oben lassen sich Titel nach Altersgruppe und Interessen wie Tiere und Natur, Wissen und Entdecken oder Magie und Fantasie eingrenzen. Die Tipps werden bei jedem Besuch neu gemischt.</p>
-  <p data-i18n="seo_med_3">Verfügbarkeiten in den Mediatheken ändern sich laufend; verbindlich ist stets die Angabe des jeweiligen Anbieters. Kostenpflichtige Dienste wie Disney+, Netflix und Prime Video werden derzeit nicht gelistet, folgen aber. Das laufende Fernsehprogramm der Kindersender zeigt die Startseite.</p>
-</section>
-<div class="pvlegend">
-      <span class="ex solid"><i></i>Sender-Mediathek</span>
-      <span class="ex dash"><i></i>meist dort *</span>
-      <span>Farbe und Punkt zeigen den Anbieter.</span>
-    </div>
+    <div class="fsearch"><span class="ic">⌕</span><input id="medSearch" type="text" data-i18n-ph="such_med" placeholder="Titel, Genre oder Anbieter suchen …"></div>
+    <div class="fgroup"><span class="fglabel" data-i18n="grp_alter">Alter</span>
+    <div class="chiprow" id="katAlter" role="group" aria-label="Alter">
+      <button class="fchip tmode" data-a="a3" aria-pressed="false">3–5</button>
+      <button class="fchip tmode" data-a="a6" aria-pressed="false">6–9</button>
+      <button class="fchip tmode" data-a="a10" aria-pressed="false">10–13</button>
+    </div></div>
+    <div class="fgroup"><span class="fglabel" data-i18n="grp_genre">Genre</span>
+    <div class="chiprow" id="katGenres" role="group" aria-label="Genre">
+      <button class="fchip" data-i="ab" aria-pressed="false" data-i18n="int_ab">Abenteuer &amp; Action</button>
+      <button class="fchip" data-i="ti" aria-pressed="false" data-i18n="int_ti">Tiere &amp; Natur</button>
+      <button class="fchip" data-i="ma" aria-pressed="false" data-i18n="int_ma">Magie &amp; Fantasie</button>
+      <button class="fchip" data-i="la" aria-pressed="false" data-i18n="int_la">Lachen &amp; Quatsch</button>
+      <button class="fchip" data-i="wi" aria-pressed="false" data-i18n="int_wi">Wissen &amp; Entdecken</button>
+    </div></div>
+    <div class="fgroup"><span class="fglabel" data-i18n="grp_sonst">Sonstiges</span>
+    <div class="opts specialrow">
+      <button class="fchip tippchip" id="katTipp" aria-pressed="false" data-i18n="f_tipp">Elterntipp</button>
+      <label class="opt"><input type="checkbox" id="katFrei" checked><span data-i18n="o_free">Nur kostenfrei</span></label>
+    </div></div>
     <div class="board" id="medBoard"><article class="prerow"><h3>Die Biene Maja</h3><p class="premeta">Zeichentrick · ab 3 · 1975 · 300 Folgen · IMDb 6,7 · KiKA-Player, ZDFtivi</p><p class="predesc">deutsch-japanische Zeichentrickserie (1975–1980)</p></article>
 <article class="prerow"><h3>Wissen macht Ah!</h3><p class="premeta">Wissen · ab 8 · 300 Folgen · IMDb 7,6 · ARD Mediathek, KiKA-Player</p><p class="predesc">Diese Folge von &quot;Wissen macht Ah!&quot; kümmert sich um Menschen und Maschinen. Wie zum Beispiel bei Clarissa, die einen neuen Kollegen im Studio begrüßt. Was ist das denn? Die Sendung </p></article>
 <article class="prerow"><h3>Unser Sandmännchen</h3><p class="premeta">Vorlesen · ab 3 · 1959 · 300 Folgen · IMDb 7,3 · ARD Mediathek, KiKA-Player</p><p class="predesc">Kindersendung seit 1959, zunächst im Fernsehen der DDR, seit 1990 in der Bundesrepublik</p></article>
@@ -2100,6 +2116,14 @@
     <div class="section-eyebrow"><h2 data-i18n="anbieter_h">Die Anbieter</h2><span class="cnt" data-i18n="anbieter_s">Kinderbereich im Vergleich</span></div>
     <div class="board" id="medFree"></div>
     <div class="board" id="medPaid"></div>
+
+<section class="seotext">
+  <h2 data-i18n="seo_med_h">Kinderserien und Kinderfilme kostenlos in den Mediatheken</h2>
+  <p data-i18n="seo_med_1">TVKinderprogramm.de sammelt Kinderserien und Kinderfilme, die in den kostenlosen Mediatheken der öffentlich-rechtlichen Sender abrufbar sind: im KiKA-Player, in der ARD Mediathek, bei ZDFtivi und bei 3sat. Jeder Titel trägt eine redaktionelle Altersempfehlung (ab 3, ab 6 oder ab 10 Jahren), dazu Folgenzahl, Laufzeit und, wo vorhanden, die IMDb-Bewertung mit Stimmenzahl.</p>
+  <p data-i18n="seo_med_2">Die Angebote der öffentlich-rechtlichen Mediatheken sind werbefrei und ohne Anmeldung nutzbar: ein Unterschied zu YouTube und den Apps der Privatsender. Über die Filter oben lassen sich Titel nach Altersgruppe und Interessen wie Tiere und Natur, Wissen und Entdecken oder Magie und Fantasie eingrenzen. Die Tipps werden bei jedem Besuch neu gemischt.</p>
+  <p data-i18n="seo_med_3">Verfügbarkeiten in den Mediatheken ändern sich laufend; verbindlich ist stets die Angabe des jeweiligen Anbieters. Kostenpflichtige Dienste wie Disney+, Netflix und Prime Video werden derzeit nicht gelistet, folgen aber. Das laufende Fernsehprogramm der Kindersender zeigt die Startseite.</p>
+</section>
+
 
     <details class="wmsec">
       <summary>
@@ -2639,6 +2663,7 @@ const I18N = {
   tipps_h2:"Unsere Tipps für euch", mehr5:"5 weitere zeigen",
   wenig_tipps:"Dazu haben wir gerade nur %s Tipps: hier noch Ideen aus ähnlichen Kategorien",
   alle_gezeigt:"Das war's: schau morgen wieder vorbei!",
+  grp_alter:"Alter", grp_genre:"Genre", grp_sonst:"Sonstiges",
   kat_h2:"Der ganze Katalog", titel_n:"Titel", tipp_l:"Tipp", dagegen:"Was dagegen spricht:",
   seo_med_h:"Kinderserien und Kinderfilme kostenlos in den Mediatheken",
   seo_med_1:"TVKinderprogramm.de sammelt Kinderserien und Kinderfilme, die in den kostenlosen Mediatheken der öffentlich-rechtlichen Sender abrufbar sind: im KiKA-Player, in der ARD Mediathek, bei ZDFtivi und bei 3sat. Jeder Titel trägt eine redaktionelle Altersempfehlung (ab 3, ab 6 oder ab 10 Jahren), dazu Folgenzahl, Laufzeit und, wo vorhanden, die IMDb-Bewertung mit Stimmenzahl.",
@@ -2698,6 +2723,7 @@ const I18N = {
   tipps_h2:"Our picks for you", mehr5:"Show 5 more",
   wenig_tipps:"We only have %s picks for that right now: adding ideas from similar categories",
   alle_gezeigt:"That's all: check back tomorrow!",
+  grp_alter:"Age", grp_genre:"Genre", grp_sonst:"More",
   kat_h2:"The full catalogue", titel_n:"titles", tipp_l:"Tip", dagegen:"What speaks against it:",
   seo_med_h:"Children's series and films, free in the German media libraries",
   seo_med_1:"TVKinderprogramm.de collects children's series and films available in the free media libraries of the German public broadcasters: the KiKA player, the ARD Mediathek, ZDFtivi and 3sat. Every title carries an editorial age recommendation (3+, 6+ or 10+), plus episode count, running time and, where available, the IMDb rating with vote count.",
@@ -3445,33 +3471,46 @@ function toast(txt){
   el.textContent=txt; el.classList.add("an");
   clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove("an"), 3000);
 }
-document.getElementById("medFrei").addEventListener("change", e=>{
+["medFrei","katFrei"].forEach(id=>document.getElementById(id).addEventListener("change", e=>{
   if(!e.target.checked){ e.target.checked=true; toast(t("toast_bald")); }
-});
+}));
 
 /* ---- Filterchips: Alter (Einfachauswahl) + Interessen (Mehrfach) ---- */
-let fAge=null, fInts=new Set();
+let fAge=null, fInts=new Set(), kAge=null, kInts=new Set();
 const SPEICHER="tvk_med_filter";
 try{
   const g=JSON.parse(localStorage.getItem(SPEICHER)||"null");
-  if(g){ fAge=g.a||null; fInts=new Set(g.i||[]); }
+  if(g){ fAge=g.a||null; fInts=new Set(g.i||[]); kAge=g.ka||null; kInts=new Set(g.ki||[]); }
 }catch(_){}
 
 function chipsAnzeigen(){
   document.querySelectorAll("#medChips .fchip[data-a]").forEach(b=>
     b.setAttribute("aria-pressed", String(b.dataset.a===fAge)));
-  document.querySelectorAll("#medChips .fchip[data-i]").forEach(b=>
+  document.querySelectorAll("#medGenres .fchip[data-i]").forEach(b=>
     b.setAttribute("aria-pressed", String(fInts.has(b.dataset.i))));
+  document.querySelectorAll("#katAlter .fchip[data-a]").forEach(b=>
+    b.setAttribute("aria-pressed", String(b.dataset.a===kAge)));
+  document.querySelectorAll("#katGenres .fchip[data-i]").forEach(b=>
+    b.setAttribute("aria-pressed", String(kInts.has(b.dataset.i))));
+  const kt=document.getElementById("katTipp"), mt=document.getElementById("medTipp");
+  if(kt&&mt){ const an=String(typeof fElterntipp!=="undefined"&&fElterntipp);
+    kt.setAttribute("aria-pressed",an); mt.setAttribute("aria-pressed",an); }
 }
 function chipsSpeichern(){
-  try{ localStorage.setItem(SPEICHER, JSON.stringify({a:fAge, i:[...fInts]})); }catch(_){}
+  try{ localStorage.setItem(SPEICHER, JSON.stringify({a:fAge, i:[...fInts], ka:kAge, ki:[...kInts]})); }catch(_){}
 }
-document.getElementById("medChips").addEventListener("click", e=>{
-  const b=e.target.closest(".fchip"); if(!b) return;
-  if(b.dataset.a) fAge = (fAge===b.dataset.a) ? null : b.dataset.a;
-  if(b.dataset.i){ fInts.has(b.dataset.i) ? fInts.delete(b.dataset.i) : fInts.add(b.dataset.i); }
-  chipsAnzeigen(); chipsSpeichern(); tippsZeigen(true);
-});
+function chipKlick(e, zustand, danach){
+  const b=e.target.closest(".fchip"); if(!b || b.id) return;
+  if(b.dataset.a) zustand.age = (zustand.age===b.dataset.a) ? null : b.dataset.a;
+  if(b.dataset.i){ zustand.ints.has(b.dataset.i) ? zustand.ints.delete(b.dataset.i) : zustand.ints.add(b.dataset.i); }
+  danach();
+}
+const topZustand={get age(){return fAge}, set age(v){fAge=v}, get ints(){return fInts}};
+const katZustand={get age(){return kAge}, set age(v){kAge=v}, get ints(){return kInts}};
+["medChips","medGenres"].forEach(id=>document.getElementById(id).addEventListener("click",
+  e=>chipKlick(e, topZustand, ()=>{ chipsAnzeigen(); chipsSpeichern(); tippsZeigen(true); })));
+["katAlter","katGenres"].forEach(id=>document.getElementById(id).addEventListener("click",
+  e=>chipKlick(e, katZustand, ()=>{ chipsAnzeigen(); chipsSpeichern(); katalogZeigen(); })));
 
 /* ---- Tipps: Treffer mischen, ohne Wiederholung in der Sitzung ---- */
 const gezeigt = new Set();
@@ -3487,7 +3526,19 @@ function mischen(a){
   for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
   return a;
 }
+function tippAlter(tp){ return tp.alter<6 ? "a3" : (tp.alter<10 ? "a6" : "a10"); }
 function tippPoolBauen(){
+  if(typeof fElterntipp!=="undefined" && fElterntipp){
+    /* Elterntipp aktiv: die Vorschläge kommen aus den Elterntipps selbst.
+       Altersfilter greift, Interessen passen hier nicht und bleiben außen vor. */
+    const alle = TIPPS.filter(x=>!x.seite||x.seite==="beide"||x.seite==="mediathek")
+                      .filter(x=>!gezeigt.has("tipp:"+x.titel));
+    const treffer = mischen(alle.filter(x=>!fAge || tippAlter(x)===fAge));
+    const rest = mischen(alle.filter(x=>fAge && tippAlter(x)!==fAge));
+    tippTreffer = treffer.length;
+    tippRest = treffer.concat(rest);
+    return;
+  }
   const frisch = MEDIA.filter(e=>kat(e) && !gezeigt.has(deTitel(e)));
   const treffer = mischen(frisch.filter(passt));
   /* Auffüllreihenfolge: thematisch nächstliegend zuerst */
@@ -3509,10 +3560,15 @@ function tippsZeigen(neuAufbau){
   if(neuAufbau){ note.textContent=""; tippPoolBauen(); }
   /* Immer genau fünf Karten: der Knopf blättert weiter statt anzuhängen */
   host.innerHTML=""; sichtbareTipps=[];
+  const elternModus = (typeof fElterntipp!=="undefined" && fElterntipp);
   const naechste = tippRest.splice(0,5);
-  naechste.forEach(e=>{ gezeigt.add(deTitel(e)); sichtbareTipps.push(e); });
-  host.innerHTML = naechste.map(mcard).join("");
-  if(neuAufbau && (fAge||fInts.size) && tippTreffer<5)
+  naechste.forEach(e=>{ gezeigt.add(elternModus ? "tipp:"+e.titel : deTitel(e)); sichtbareTipps.push(e); });
+  host.innerHTML = naechste.map(elternModus ? tippKarteIndex : mcard).join("");
+  if(!naechste.length){
+    /* Sitzung ausgeschöpft: freundlich sagen statt leer stehen lassen */
+    host.innerHTML = '<div class="tippnote" style="padding:10px 2px">'+t("alle_gezeigt")+'</div>';
+    note.textContent="";
+  } else if(neuAufbau && (fAge||fInts.size) && tippTreffer<5 && tippTreffer>0)
     note.textContent = t("wenig_tipps").replace("%s", tippTreffer);
   if(!tippRest.length){ btn.disabled=true; btn.textContent=t("alle_gezeigt"); }
   else { btn.disabled=false; btn.textContent=t("mehr5"); }
@@ -3530,7 +3586,10 @@ function katalogZeigen(){
     document.getElementById("katCount").textContent = tipps.length + " " + t("tipps_n");
     return;
   }
-  const l = MEDIA.filter(kat).slice().sort((a,b)=>a.title.localeCompare(b.title, LANG==="en"?"en":"de"));
+  let l = MEDIA.filter(kat);
+  if(kAge) l = l.filter(e=>e.grp===kAge);
+  if(kInts.size) l = l.filter(e=>(e.ints||[]).some(c=>kInts.has(c)));
+  l = l.slice().sort((a,b)=>a.title.localeCompare(b.title, LANG==="en"?"en":"de"));
   mBoard.innerHTML = l.map(mcard).join("") + '<div class="empty" style="display:none">'+t("nichts")+'</div>';
   document.getElementById("katCount").textContent = l.length + " " + t("titel_n");
   const mc=document.getElementById("medCount");
@@ -3538,11 +3597,14 @@ function katalogZeigen(){
 }
 
 let fElterntipp=false;
-document.getElementById("medTipp").addEventListener("click", function(){
-  fElterntipp = this.getAttribute("aria-pressed")!=="true";
-  this.setAttribute("aria-pressed", String(fElterntipp));
+function elterntippUmschalten(){
+  fElterntipp = !fElterntipp;
+  chipsAnzeigen();
   katalogZeigen();
-});
+  tippsZeigen(true);
+}
+document.getElementById("medTipp").addEventListener("click", elterntippUmschalten);
+document.getElementById("katTipp").addEventListener("click", elterntippUmschalten);
 
 chipsAnzeigen();
 katalogZeigen();
@@ -3555,7 +3617,8 @@ suchUnten.addEventListener("input", ()=>{ suchOben.value=suchUnten.value; });
 window.reRender = ()=>{
   katalogZeigen();
   /* sichtbare Tippkarten in der neuen Sprache neu zeichnen, Bestand behalten */
-  document.getElementById("tippBoard").innerHTML = sichtbareTipps.map(mcard).join("");
+  const em = (typeof fElterntipp!=="undefined" && fElterntipp);
+  document.getElementById("tippBoard").innerHTML = sichtbareTipps.map(em ? tippKarteIndex : mcard).join("");
   ersterTippAuf();
   const btn=document.getElementById("tippMehr");
   btn.textContent = tippRest.length ? t("mehr5") : t("alle_gezeigt");
