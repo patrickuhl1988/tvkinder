@@ -1,0 +1,222 @@
+# -*- coding: utf-8 -*-
+"""
+en_texts.py: English versions of the curated editorial content.
+
+Wikidata and IMDb cover titles and short catalogue descriptions; everything
+here was written by the editor, so the English versions are proper
+translations rather than machine output. The imported German episode
+descriptions from the broadcasters have no English source and stay German.
+"""
+
+# Kurzbewertungen der 31 Filme (films_data.FILMS note-Feld), Schlüssel = Titel
+FILM_NOTES_EN = {
+    "Tom Turbo": "Interactive detective series: the talking bike solves cases together with the audience. Calm pace, no threat, always a friendly ending.",
+    "Bolt": "A TV dog believes his superpowers are real and crosses the USA to find his owner. Warm-hearted; the separation theme and a fire scene near the end can hit small children harder than expected.",
+    "Pippi Langstrumpf": "The Swedish 1969 classic. Slow by today's standards and exactly therefore relaxing. Content is harmless, a few scenes show their age.",
+    "Hans im Glück": "Grimm fairy tale as live action: Hans trades his way down from gold to nothing and ends up happiest. Very calm, no scary figures.",
+    "Findet Dorie": "Dory searches for her parents while fighting her forgetfulness. Warm and funny with a serious core; flashbacks of little Dory losing her parents can be a lot for children with separation anxiety.",
+    "Minions": "Non-stop slapstick, plot as pretext. Very loud, very fast, harmless: but not ideal right before bedtime.",
+    "Charlie & Louise": "Twins separated by divorce swap roles to reunite their parents. Takes the topic seriously; can feel very close to home for children of separated families.",
+    "Arielle, die Meerjungfrau": "Disney classic of 1989. The sea witch Ursula grows huge in a dark, loud finale that has startled many younger children.",
+    "Pünktchen und Anton": "Caroline Link's Kästner adaptation about two children from very different backgrounds. Strong material, emotionally more demanding than a cartoon episode.",
+    "Der Schuh des Manitu": "Not a children's film despite the family label: a western parody aimed at adults, with humour that has aged poorly. Airs at 22:35.",
+    "Mary Poppins' Rückkehr": "The sequel opens after the mother's death; the family grieves and may lose their home. Warm, beautifully made: children who have experienced loss may find it very close.",
+    "Ostwind (3)": "Third part of the horse film series. Responsibility, letting go, and a few scenes of danger for the horses without drastic images. Works without knowing the earlier parts.",
+    "Das Märchen von der silbernen Brücke": "New ARD fairy tale from 2024, repeated this summer. Classic structure, lavish production, gentle pace, one hour long.",
+    "Himmel und Huhn": "A little chicken becomes the town's laughing stock after a false alarm, then has to save the world. Underneath the noise sits an honest father-son story about not being believed.",
+    "Angry Birds – Der Film": "Film of the app. Anger is played as a punchline and in the end even as the solution: entertaining, but a mixed message for children working on their own tempers.",
+    "Ritter Rost 2": "German animated musical, friendly throughout, conflicts resolve in song. Ad-free Sunday noon slot on KiKA.",
+    "Dornröschen": "Grimm adaptation from the ARD fairy-tale series, one hour, calmly staged. The curse and the hundred-year sleep stay visually restrained.",
+    "Heidi": "Heidi is taken from the Alps to Frankfurt and suffers real homesickness: the emotional core, not shortened. The separation from her grandfather hits younger children hardest.",
+    "Der Zauberlehrling": "Fairy-tale film noticeably darker than usual: the apothecary is a real threat, and the story deals with greed and betrayal. Good from eight, too much for some six-year-olds.",
+    "Der König der Löwen 2": "The sequel is more serious than part one: a savanna fire, a battle between two prides and one death. The prejudice theme around outcast Kovu is well told.",
+    "Jim Knopf und Lukas der Lokomotivführer": "Lavish Michael Ende adaptation. The dragon Frau Mahlzahn genuinely frightens preschoolers; the question of Jim's origins is handled with care. Over two hours.",
+    "Baymax": "An inflatable care robot and a grieving boy: the hero's brother dies early in the film. Warm, funny, and one of the better films about loss. Some action scenes are intense.",
+    "Die Chroniken von Narnia": "Fantasy battle epic. Large-scale fights and menacing creatures: made for ages ten and up, not for the afternoon audience.",
+    "Das Dschungelbuch": "The Disney classic. Shere Khan and Kaa provide moments of real menace, the songs carry everything else.",
+    "Das doppelte Lottchen": "Kästner's twin story. Separation of the parents is the engine of the plot and is treated honestly.",
+    "Tom Sawyer": "Adventure on the Mississippi with a genuinely creepy villain in Injun Joe and a night scene in the cave that startles younger viewers.",
+    "Die Schlümpfe": "Village life in blue: short episodes, mild slapstick, Gargamel as a comic villain without real menace.",
+    "Robin Hood": "The animated fox version: light, musical, chases instead of violence.",
+    "Der kleine Rabe Socke": "Preschool cinema: small mishaps, big friendship, nothing to brace for.",
+    "Pettersson und Findus": "An old man, a talking cat, gentle everyday adventures. As calm as children's film gets.",
+    "Urmel aus dem Eis": "Augsburger Puppenkiste classic: slow, warm, and wonderfully old-fashioned.",
+}
+
+# Ausführliche Einschätzungen (detail_data.DETAIL), gleiche Struktur
+DETAILS_EN = {
+    "Tom Turbo": dict(
+        lang="Interactive crime series: the bike Tom Turbo solves a case together with the children watching, who are asked directly into the camera to help. No speed, no threat, cases always resolve kindly. Ideal for children who like to think along and dare to shout out; passive viewers may get bored.",
+        flags=["calm", "join-in format", "no danger"],
+        reden="Which clue would you have followed first?"),
+    "Bolt": dict(
+        lang="A series dog believes his TV role is real and crosses the USA to reach his owner. At its core this is a separation-and-homecoming story, and it lands harder than expected: Bolt briefly believes Penny has given up on him. The finale includes a studio fire with real danger for both. Fine from six; younger children better watch accompanied.",
+        flags=["separation", "fire scene at the end", "warm-hearted"],
+        reden="How did Bolt realise he matters even without superpowers?"),
+    "Pippi Langstrumpf": dict(
+        lang="The Swedish 1969 adaptation, cut into series length. Pace and images are slow by today's habits, and precisely that makes it restful. Pippi lives alone, has money and makes fun of adults: some children try that out afterwards. Harmless in content, though a few scenes and terms show their era.",
+        flags=["slow", "role model with edges", "classic"],
+        reden="What do you like about Pippi ignoring the rules, and what not?"),
+    "Hans im Glück": dict(
+        lang="Grimm tale as live action: Hans trades step by step from a lump of gold down to nothing and ends up the happiest of all. Very calmly told, no threatening figures, clear structure. The moral is tricky: younger children often read it as 'Hans is stupid', which makes for a good conversation.",
+        flags=["very calm", "fairy-tale moral", "no scares"],
+        reden="Was Hans really happy in the end, or just talked into it?"),
+    "Findet Dorie": dict(
+        lang="Dory searches for her parents while fighting her forgetfulness. The film is warm and funny but has a serious core: flashbacks show little Dory losing her parents, and her panic when she loses the thread is convincingly played. For children with separation anxiety this can be a lot. Usually fine from six; sensitive four-year-olds better with company.",
+        flags=["searching for parents", "sad flashbacks", "disability as a theme"],
+        reden="Dory cannot remember anything and still makes it. How did she do that?"),
+    "Minions": dict(
+        lang="Slapstick on a conveyor belt, plot as a pretext. The Minions search for a new master villain and end up with Scarlet Overkill. Very loud, very fast, practically no quiet moments: unfavourable right before bedtime. Content is harmless, all violence is cartoon violence without consequences. Children love it, parents often find it exhausting.",
+        flags=["very loud", "high pace", "little plot"],
+        reden="Do we need something quiet after the film before bed?"),
+    "Charlie & Louise": dict(
+        lang="Twins who grew up separately with mother and father meet by chance at summer camp and swap roles to bring their parents back together. The separation theme is taken seriously and not narrated away. For children from separated families this can come very close, in the good and in the difficult sense. The tone is warm, the ending conciliatory.",
+        flags=["parental separation", "role swap", "calmly told"],
+        reden="Why didn't the two simply tell their parents?"),
+    "Arielle, die Meerjungfrau": dict(
+        lang="Disney classic of 1989 with strong images and lasting songs. The sea witch Ursula is the sticking point for smaller children: she grows huge at the end, the scene is dark and loud and has lifted many a child off the sofa. Then there is the story itself: Ariel gives up her voice to be with a man, which is well worth unpacking with older children.",
+        flags=["Ursula frightens", "dark finale", "conflict with the father"],
+        reden="Did Ariel have another way besides giving away her voice?"),
+    "Pünktchen und Anton": dict(
+        lang="Caroline Link's Kästner adaptation about two children from very different circumstances. Anton cares for his sick mother and works at night while Pünktchen's parents are hardly ever home: both are shown without sugar-coating. Strong material, well accessible for primary-school children, but emotionally more demanding than a cartoon episode. The 22:10 slot argues for recording anyway.",
+        flags=["social inequality", "sick parent", "late slot"],
+        reden="What does Anton have that Pünktchen lacks, and the other way round?"),
+    "Der Schuh des Manitu": dict(
+        lang="Not a children's film even if the listing files it under family. A western parody aimed at adults, with humour about origin and sexuality that partly feels uncomfortable today. Airs at 22:35 and is on this page for completeness only.",
+        flags=["not a children's film", "innuendo", "22:35"],
+        reden="Not suitable for watching together with children."),
+    "Mary Poppins' Rückkehr": dict(
+        lang="The sequel opens after the mother's death: the Banks family grieves and is about to lose their home. That is the frame for the musical and animation numbers, and it is not brushed aside. For children who have experienced loss themselves the film can come very close. Otherwise warm and beautifully designed; the 4 a.m. slot makes it a recording matter anyway.",
+        flags=["death of the mother", "grief", "4 a.m. slot"],
+        reden="What helps the family in the film to become cheerful again?"),
+    "Ostwind (3)": dict(
+        lang="Third part of the horse film series. Mika sets off for Andalusia with Ostwind; it is about responsibility, letting go, and about well-meant not being well-done. A few scenes put the horses in danger, but without drastic images. Works without knowing the first two parts. A good pick for Sunday morning.",
+        flags=["animals in danger", "friendship", "no prior knowledge needed"],
+        reden="When do you have to let an animal go even though you love it?"),
+    "Das Märchen von der silbernen Brücke": dict(
+        lang="New ARD fairy tale from 2024, here as a summer repeat. Classic structure with trial, adversary and happy ending, lavishly produced and told at a gentle pace. No scares beyond the usual fairy-tale measure. One hour keeps it manageable even for six-year-olds.",
+        flags=["classic fairy tale", "one hour", "no jump scares"],
+        reden="Which trial was the hardest, and would you have passed it?"),
+    "Himmel und Huhn": dict(
+        lang="A little chicken becomes the whole town's laughing stock after a false alarm and then has to save Earth from aliens. Beneath the commotion lies a father-son story: the father does not believe his child for a long time, and that is honestly uncomfortable to watch. High pace, dense gags. Surprisingly touching for children currently fighting for recognition themselves.",
+        flags=["father does not believe", "high pace", "being laughed at"],
+        reden="How does it feel when nobody believes you?"),
+    "Angry Birds – Der Film": dict(
+        lang="Film of the game app. The hero is a bird with an anger problem, and the film tells anger largely as a punchline rather than a theme: in the end it is even the rescue. Add some crude gags and a lot of destruction. Entertaining but thin, and a mixed role model for children working on their own outbursts.",
+        flags=["anger as a gag", "much destruction", "crude jokes"],
+        reden="When does anger actually help, and when does it make things worse?"),
+    "Ritter Rost 2": dict(
+        lang="German animated film with many songs, built like a musical. Scrapland is broke and Ritter Rost has to save: the story stays friendly throughout, conflicts resolve in song. Ad-free Sunday noon slot on KiKA. For children who love music, one of the most relaxed ways to fill eighty minutes.",
+        flags=["much music", "ad-free", "no threat"],
+        reden="Which song stuck?"),
+    "Dornröschen": dict(
+        lang="Grimm adaptation from the ARD fairy-tale series, one hour long and calmly staged. The thirteenth fairy's curse and the hundred-year sleep are the only dark moments and stay visually restrained. Solid fairy-tale fare for six-year-olds, no surprises in either direction.",
+        flags=["curse", "calmly staged", "short"],
+        reden="Why was the thirteenth fairy so angry?"),
+    "Heidi": dict(
+        lang="Heidi is taken from the Alps to Frankfurt and suffers massively from homesickness: that is the emotional core and it is not shortened. Add Klara in her wheelchair and the strict Fräulein Rottenmeier. Beautifully filmed and calmly told, but the separation from the grandfather hits younger children hardest.",
+        flags=["homesickness", "separation", "disability as a theme"],
+        reden="What would have helped Heidi feel better in Frankfurt?"),
+    "Der Zauberlehrling": dict(
+        lang="Fairy-tale film about a boy who ends up with the wrong master and gets caught in a power struggle. Noticeably darker than the usual ARD fairy tales: the apothecary Zacharias is a real threat, and the story deals with greed and betrayal. Good for eight-year-olds; too much for some six-year-olds.",
+        flags=["darker than usual", "threatening adversary", "power struggle"],
+        reden="When could Valentin have noticed earlier that something was wrong?"),
+    "Der König der Löwen 2": dict(
+        lang="The sequel centres on Kiara and Kovu, whose mother Zira is out for revenge. The tone is more serious than part one: a savanna fire, a battle between two prides and one death. Kovu carries a scar and is treated as an outcast: the prejudice theme is well laid out. For sensitive children the fight scenes are the sticking point.",
+        flags=["fights", "savanna fire", "exclusion", "one death"],
+        reden="Why did everyone distrust Kovu although he had done nothing?"),
+    "Jim Knopf und Lukas der Lokomotivführer": dict(
+        lang="Lavish adaptation of the Michael Ende classic with real locations. The sticking point is Frau Mahlzahn: the dragon is big, loud and seriously frightening for preschoolers, even though she is tamed in the end. Add the question of Jim's origins, told with a light touch. Fine from six, but at over two hours plus ad breaks a long evening: the 20:15 airing ends around 22:30.",
+        flags=["dragon frightens", "over two hours", "origins as a theme"],
+        reden="How did Jim find out where he belongs?"),
+    "Baymax": dict(
+        lang="A boy loses his older brother early in the film, and an inflatable care robot helps him through the grief: this is one of the better children's films about loss, warm and very funny at the same time. The superhero action in the second half is intense in places. From six with company, from eight alone.",
+        flags=["death of the brother", "grief", "intense action"],
+        reden="What did Baymax do that actually helped Hiro?"),
+}
+
+# Elterntipps (tipps_data.TIPPS), Reihenfolge identisch zur deutschen Liste
+TIPPS_EN = [
+    dict(titel="Peppa Pig: official YouTube channel", quelle="YouTube",
+         text="Full episodes, official, free and without subscription. For preschoolers the most reliable free option: short episodes, calm pace, always a good ending.",
+         haken="Ad-funded, so pre-roll ads. And autoplay queues random channels afterwards: switch it off first.",
+         von="Sandra, 2 children (4 and 6)", dauer="5 min per episode"),
+    dict(titel="Nicole's toy and doll videos", quelle="YouTube",
+         text="Nicole plays through everyday scenes with dolls: shopping, doctor, breakfast. My daughter often re-enacts the same scenes with her own dolls afterwards.",
+         haken="Large stretches are effectively toy advertising, brands in shot and title. If you don't want that, skip it.",
+         von="Kerstin, daughter 4", dauer="5–20 min"),
+    dict(titel="PAW Patrol: official German channel", quelle="YouTube",
+         text="Full episodes and compilations, free. Handy when Toggo isn't on and you still need an episode.",
+         haken="High pace, loud music, lots of merchandise around it. Not ideal as a daily habit.",
+         von="Micha, son 5", dauer="10–20 min"),
+    dict(titel="Ohrenbär: bedtime stories from rbb", quelle="ARD Audiothek",
+         text="Ad-free read-aloud stories, a new one every day, huge archive. Our rescue for car rides and the half hour before sleep, entirely without a screen.",
+         haken="No picture means some children need a few tries before they settle into it.",
+         von="Anne, 3 children", dauer="10 min"),
+    dict(titel="Die Maus for listening", quelle="ARD Audiothek",
+         text="The famous fact stories as a podcast. Explains just as well as on TV but works while drawing, building or on the train.",
+         haken="Without pictures some topics lack the visual: for tech episodes the video is worth it afterwards.",
+         von="Tobias, son 7", dauer="20–30 min"),
+    dict(titel="Kakadu: children's podcast by Deutschlandfunk Kultur", quelle="ARD Audiothek",
+         text="Takes children's questions seriously and answers at length without getting silly. Good for the age group slowly outgrowing KiKA.",
+         haken="Needs attention. Doesn't work as background noise.",
+         von="Julia, daughter 9", dauer="25 min"),
+    dict(titel="Cocomelon in German", quelle="YouTube",
+         text="Children's songs with enormous reach, and yes, it works: the little ones are hooked instantly.",
+         haken="That is exactly the problem. Very high cut frequency and constant stimulus; media educators advise against the hour-long compilations. We pick single songs instead.",
+         von="Nadine, son 2", dauer="2–60 min"),
+    dict(titel="Switch YouTube Kids to approved content only", quelle="Einstellung",
+         text="In the YouTube Kids app under content settings there is a mode that only plays channels you approved yourself. That ends the strange recommendations for good.",
+         haken="You have to approve every channel individually. Half an hour of work once, then peace.",
+         von="Stefan, 2 children", dauer="5 min setup"),
+    dict(titel="Flimmo: programme guidance for parents", quelle="Ratgeber",
+         text="Free assessments of individual shows by media educators: what scares, what overwhelms, what fits which age. When unsure about a title, there is usually something solid here.",
+         haken="Not every new title is covered; streaming series in particular have gaps.",
+         von="Redaktion", dauer="–"),
+    dict(titel="Augsburger Puppenkiste in the ARD Mediathek", quelle="ARD Mediathek",
+         text="Jim Button, Urmel, the robber Hotzenplotz: the old marionette versions appear in waves and cost nothing. Slow storytelling, no rapid cuts, and children watch surprisingly spellbound.",
+         haken="Picture and sound are old; some children find it odd at first. Availability rotates, it pays to search.",
+         von="Bernd, grandchildren 5 and 8", dauer="25 min"),
+    dict(titel="The good films air at night: record them", quelle="Programmhinweis",
+         text="This weekend four watchable films sit outside any children's hours: Pünktchen und Anton at 22:10, Narnia at 22:10, Mary Poppins Returns at 4 a.m. and Jim Button at 1 a.m. We programme the recorder once on Sunday and have two weeks of supply.",
+         haken="No recorder? Check the public broadcasters' media libraries; private channels often don't put films online at all.",
+         von="Katrin, 2 children (7 and 10)", dauer="–"),
+    dict(titel="Saturday 20:15 three children's films run at once", quelle="Programmhinweis",
+         text="Minions on VOX, Charlie & Louise on Super RTL and The Little Mermaid on Disney Channel, all at the same minute. We pick one together in the afternoon: it spares the argument at showtime and the children feel involved.",
+         haken="Only works if the decision holds. Switch once and the ritual is gone.",
+         von="Ole, son 8", dauer="–"),
+    dict(titel="Turn on subtitles, also for hearing children", quelle="Einstellung",
+         text="ARD, ZDF and KiKA offer subtitles via the remote. Our eldest has been reading along for half a year and is noticeably more fluent, on the side, without it looking like practice.",
+         haken="In fast cartoons the subtitles barely keep up and rather distract. Works well with calm films and fairy tales.",
+         von="Franziska, daughter 7", dauer="5 min setup"),
+    dict(titel="The two-episode rule", quelle="Ritual",
+         text="Agree beforehand on how many episodes, not how many minutes. Children can count episodes, not minutes. The arguing stopped for us because the ending is fixed before the start.",
+         haken="Doesn't apply to films. There only checking the running time helps, and it is listed here for every show.",
+         von="Mehmet, 3 children", dauer="–"),
+    dict(titel="KiRaKa: the WDR children's radio channel", quelle="Radio",
+         text="Ad-free children's radio around the clock with audio plays, news and music. For Saturday morning, when the children are up early and you are not: it runs on the side without anyone staring at a screen.",
+         haken="Not everything suits the youngest; towards noon it skews older.",
+         von="Bettina, son 6", dauer="continuous"),
+    dict(titel="Planet Schule by SWR and WDR", quelle="Mediathek",
+         text="Films and explainers actually made for the classroom: science, history, languages. Ad-free, no account, and titles stay available instead of vanishing after days.",
+         haken="The tone is school-like. During holidays you need to be in the mood.",
+         von="Daniel, daughter 9", dauer="15–45 min"),
+    dict(titel="fragFINN and Blinde Kuh as the start page", quelle="Einstellung",
+         text="Two children's search engines that only return editorially checked sites. We set fragFINN as the start page in the browser's child profile; nobody lands on adult sites by accident any more.",
+         haken="The index is smaller than Google's. For homework on niche topics it sometimes isn't enough.",
+         von="Sabine, 2 children", dauer="10 min setup"),
+    dict(titel="HanisauLand by the Federal Agency for Civic Education", quelle="Mediathek",
+         text="Politics explained for children with comics, a lexicon and short films. When something in the news raises questions, we usually find an explanation here that our son understands.",
+         haken="Not entertainment. Only works when a question is already there.",
+         von="Jonas, son 10", dauer="5–20 min"),
+    dict(titel="ANTON: learning app for primary school", quelle="App",
+         text="German, maths and general knowledge along the curriculum, free and without ads. Used by many schools themselves. A round of ANTON regularly replaces an episode of TV without feeling like punishment.",
+         haken="It is and remains practice. Selling it as a reward doesn't work for long.",
+         von="Christine, daughter 8", dauer="10–20 min"),
+    dict(titel="Kindersache by the German Children's Fund", quelle="Mediathek",
+         text="News, film tips and explainers written for children with no commercial interest, plus a section on children's rights that hardly exists elsewhere.",
+         haken="The site looks a bit dated, which puts some children off at first.",
+         von="Redaktion", dauer="5–15 min"),
+    dict(titel="Peppa Pig: official YouTube channel (backup slot)", quelle="YouTube",
+         text="", haken="", von="", dauer=""),
+]

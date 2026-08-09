@@ -1,0 +1,410 @@
+{
+ "ALVINNN!!! und die Chipmunks": {
+  "id": "tt3496230",
+  "r": 4.7,
+  "votes": 2118,
+  "imdbTitle": "Alvinnn!!! And the Chipmunks",
+  "year": "2015",
+  "kind": "tvSeries"
+ },
+ "Angry Birds – Der Film": {
+  "id": "tt1985949",
+  "r": 6.3,
+  "votes": 119850,
+  "imdbTitle": "The Angry Birds Movie",
+  "year": "2016",
+  "kind": "movie"
+ },
+ "Arielle, die Meerjungfrau": {
+  "id": "tt0097757",
+  "r": 7.6,
+  "votes": 313918,
+  "imdbTitle": "The Little Mermaid",
+  "year": "1989",
+  "kind": "movie"
+ },
+ "Arthur und die Freunde der Tafelrunde": {
+  "id": "tt10151988",
+  "r": 7.6,
+  "votes": 48,
+  "imdbTitle": "Arthur et les enfants de la Table Ronde",
+  "year": "2018",
+  "kind": "tvSeries"
+ },
+ "Baymax": {
+  "id": "tt2245084",
+  "r": 7.8,
+  "votes": 558341,
+  "imdbTitle": "Big Hero 6",
+  "year": "2014",
+  "kind": "movie"
+ },
+ "Bolt": {
+  "id": "tt0397892",
+  "r": 6.8,
+  "votes": 249890,
+  "imdbTitle": "Bolt",
+  "year": "2008",
+  "kind": "movie"
+ },
+ "Crazy Fun Park": {
+  "id": "tt16267464",
+  "r": 6.8,
+  "votes": 2456,
+  "imdbTitle": "Crazy Fun Park",
+  "year": "2023",
+  "kind": "tvSeries"
+ },
+ "Das Märchen von der silbernen Brücke": {
+  "id": "tt35053195",
+  "r": 5.5,
+  "votes": 27,
+  "imdbTitle": "Das Märchen von der silbernen Brücke",
+  "year": "2024",
+  "kind": "tvMovie"
+ },
+ "Das doppelte Lottchen": {
+  "id": "tt5843312",
+  "r": 6.2,
+  "votes": 250,
+  "imdbTitle": "Das doppelte Lottchen",
+  "year": "2017",
+  "kind": "tvMovie"
+ },
+ "Der König der Löwen 2": {
+  "id": "tt0120131",
+  "r": 6.4,
+  "votes": 83622,
+  "imdbTitle": "The Lion King II: Simba's Pride",
+  "year": "1998",
+  "kind": "video"
+ },
+ "Der Schuh des Manitu": {
+  "id": "tt0248408",
+  "r": 6.7,
+  "votes": 23276,
+  "imdbTitle": "Manitou's Shoe",
+  "year": "2001",
+  "kind": "movie"
+ },
+ "Der Zauberlehrling": {
+  "id": "tt6756506",
+  "r": 6.3,
+  "votes": 93,
+  "imdbTitle": "Der Zauberlehrling",
+  "year": "2017",
+  "kind": "tvMovie"
+ },
+ "Die Chroniken von Narnia": {
+  "id": "tt0499448",
+  "r": 6.5,
+  "votes": 240593,
+  "imdbTitle": "The Chronicles of Narnia: Prince Caspian",
+  "year": "2008",
+  "kind": "movie"
+ },
+ "Die Nektons – Abenteurer der Tiefe": {
+  "id": "tt4991910",
+  "r": 7.8,
+  "votes": 1153,
+  "imdbTitle": "The Deep",
+  "year": "2015",
+  "kind": "tvSeries"
+ },
+ "Die Schlümpfe": {
+  "id": "tt0081933",
+  "r": 7.2,
+  "votes": 23737,
+  "imdbTitle": "The Smurfs",
+  "year": "1981",
+  "kind": "tvSeries"
+ },
+ "Dornröschen": {
+  "id": "tt1451618",
+  "r": 6.0,
+  "votes": 239,
+  "imdbTitle": "Sleeping Beauty",
+  "year": "2009",
+  "kind": "tvMovie"
+ },
+ "Feuerwehrmann Sam": {
+  "id": "tt0329829",
+  "r": 6.0,
+  "votes": 2654,
+  "imdbTitle": "Fireman Sam",
+  "year": "1987",
+  "kind": "tvSeries"
+ },
+ "Findet Dorie": {
+  "id": "tt2277860",
+  "r": 7.2,
+  "votes": 337412,
+  "imdbTitle": "Finding Dory",
+  "year": "2016",
+  "kind": "movie"
+ },
+ "Garfield": {
+  "id": "tt1470837",
+  "r": 5.8,
+  "votes": 4397,
+  "imdbTitle": "The Garfield Show",
+  "year": "2008",
+  "kind": "tvSeries"
+ },
+ "H2O – Plötzlich Meerjungfrau": {
+  "id": "tt0491603",
+  "r": 7.3,
+  "votes": 21952,
+  "imdbTitle": "H2O: Just Add Water",
+  "year": "2006",
+  "kind": "tvSeries"
+ },
+ "Hans im Glück": {
+  "id": "tt0164630",
+  "r": 4.6,
+  "votes": 76,
+  "imdbTitle": "Hans im Glück",
+  "year": "1999",
+  "kind": "movie"
+ },
+ "Heidi": {
+  "id": "tt3700392",
+  "r": 7.5,
+  "votes": 8490,
+  "imdbTitle": "Heidi",
+  "year": "2015",
+  "kind": "movie"
+ },
+ "Himmel und Huhn": {
+  "id": "tt0371606",
+  "r": 5.7,
+  "votes": 110141,
+  "imdbTitle": "Chicken Little",
+  "year": "2005",
+  "kind": "movie"
+ },
+ "Jade Armor": {
+  "id": "tt14396930",
+  "r": 6.6,
+  "votes": 166,
+  "imdbTitle": "Jade Armor",
+  "year": "2022",
+  "kind": "tvSeries"
+ },
+ "Jim Knopf und Lukas der Lokomotivführer": {
+  "id": "tt3072732",
+  "r": 6.3,
+  "votes": 3177,
+  "imdbTitle": "Jim Button and Luke the Engine Driver",
+  "year": "2018",
+  "kind": "movie"
+ },
+ "Löwenzahn": {
+  "id": "tt0135097",
+  "r": 8.0,
+  "votes": 961,
+  "imdbTitle": "Löwenzahn",
+  "year": "1981",
+  "kind": "tvSeries"
+ },
+ "Mary Poppins' Rückkehr": {
+  "id": "tt5028340",
+  "r": 6.6,
+  "votes": 101469,
+  "imdbTitle": "Mary Poppins Returns",
+  "year": "2018",
+  "kind": "movie"
+ },
+ "Minions": {
+  "id": "tt2293640",
+  "r": 6.4,
+  "votes": 287839,
+  "imdbTitle": "Minions",
+  "year": "2015",
+  "kind": "movie"
+ },
+ "Monster Loving Maniacs": {
+  "id": "tt13926902",
+  "r": 7.8,
+  "votes": 129,
+  "imdbTitle": "Monster Loving Maniacs",
+  "year": "2022",
+  "kind": "tvSeries"
+ },
+ "Mr. Magoo": {
+  "id": "tt10544020",
+  "r": 6.8,
+  "votes": 103,
+  "imdbTitle": "Mr. Magoo",
+  "year": "2019",
+  "kind": "tvSeries"
+ },
+ "Ninjago – Aufstieg der Drachen": {
+  "id": "tt27502465",
+  "r": 7.9,
+  "votes": 2791,
+  "imdbTitle": "Ninjago: Dragons Rising",
+  "year": "2023",
+  "kind": "tvSeries"
+ },
+ "Ostwind (3)": {
+  "id": "tt5311972",
+  "r": 6.1,
+  "votes": 886,
+  "imdbTitle": "Windstorm 3",
+  "year": "2017",
+  "kind": "movie"
+ },
+ "Pippi Langstrumpf": {
+  "id": "tt0366905",
+  "r": 7.0,
+  "votes": 5986,
+  "imdbTitle": "Pippi Longstocking",
+  "year": "1969",
+  "kind": "movie"
+ },
+ "Pokémon": {
+  "id": "tt0168366",
+  "r": 7.6,
+  "votes": 56719,
+  "imdbTitle": "Pokémon",
+  "year": "1997",
+  "kind": "tvSeries"
+ },
+ "Pokémon Horizonte: Die Serie": {
+  "id": "tt26692417",
+  "r": 7.5,
+  "votes": 1815,
+  "imdbTitle": "Pokémon Horizons: The Series",
+  "year": "2023",
+  "kind": "tvSeries"
+ },
+ "Pünktchen und Anton": {
+  "id": "tt0161935",
+  "r": 7.0,
+  "votes": 1121,
+  "imdbTitle": "Annaluise & Anton",
+  "year": "1999",
+  "kind": "movie"
+ },
+ "Ritter Rost 2": {
+  "id": "tt6198412",
+  "r": 5.4,
+  "votes": 112,
+  "imdbTitle": "Knight Rusty 2: Full Metal Racket",
+  "year": "2017",
+  "kind": "movie"
+ },
+ "Schloss Einstein": {
+  "id": "tt0244361",
+  "r": 5.7,
+  "votes": 499,
+  "imdbTitle": "Schloss Einstein",
+  "year": "1998",
+  "kind": "tvSeries"
+ },
+ "Sherlock Yack – Der Zoodetektiv": {
+  "id": "tt2111893",
+  "r": 6.9,
+  "votes": 199,
+  "imdbTitle": "Sherlock Yack: Zoo-Detective",
+  "year": "2011",
+  "kind": "tvSeries"
+ },
+ "Tom Turbo": {
+  "id": "tt3094424",
+  "r": 7.1,
+  "votes": 25,
+  "imdbTitle": "Tom Turbo",
+  "year": "2013",
+  "kind": "movie"
+ },
+ "Voll zu spät!": {
+  "id": "tt8610392",
+  "r": 6.8,
+  "votes": 150,
+  "imdbTitle": "Nate Is Late",
+  "year": "2018",
+  "kind": "tvSeries"
+ },
+ "Willkommen bei den Louds": {
+  "id": "tt4859164",
+  "r": 6.9,
+  "votes": 10615,
+  "imdbTitle": "The Loud House",
+  "year": "2015",
+  "kind": "tvSeries"
+ },
+ "Willkommen bei den echten Louds": {
+  "id": "tt22495072",
+  "r": 5.4,
+  "votes": 896,
+  "imdbTitle": "The Really Loud House",
+  "year": "2022",
+  "kind": "tvSeries"
+ },
+ "Woozle Goozle": {
+  "id": "tt2657206",
+  "r": 8.0,
+  "votes": 68,
+  "imdbTitle": "Woozle Goozle",
+  "year": "2013",
+  "kind": "tvSeries"
+ },
+ "Zacki und die Zoobande": {
+  "id": "tt6386520",
+  "r": 7.0,
+  "votes": 17,
+  "imdbTitle": "Ziggy and the Zoo Tram",
+  "year": "2016",
+  "kind": "tvSeries"
+ },
+ "logo!": {
+  "id": "tt0246372",
+  "r": 6.5,
+  "votes": 36,
+  "imdbTitle": "Logo!",
+  "year": "1988",
+  "kind": "tvSeries"
+ },
+ "Charlie & Louise": {
+  "id": "tt0106548",
+  "r": 5.7,
+  "votes": 756,
+  "imdbTitle": "Charlie & Louise - Das doppelte Lottchen",
+  "year": "1994",
+  "kind": "movie"
+ },
+ "Unser Sandmännchen": {
+  "id": "tt0434733",
+  "r": 7.3,
+  "votes": 224,
+  "imdbTitle": "Unser Sandmännchen",
+  "year": "1959",
+  "kind": "tvSeries"
+ },
+ "Der kleine Nick und die Ferien": {
+  "id": "tt1264904",
+  "r": 7.1,
+  "votes": 14994,
+  "imdbTitle": "Little Nicholas",
+  "year": "2009",
+  "kind": "movie"
+ },
+ "Mia and Me": {
+  "id": "tt2203143",
+  "r": 6.8,
+  "votes": 1409,
+  "imdbTitle": "Mia and Me",
+  "year": "2012",
+  "kind": "tvSeries"
+ },
+ "Die Regeln von Floor": {
+  "id": "tt8180660",
+  "r": 8.8,
+  "votes": 346,
+  "imdbTitle": "De regels van Floor",
+  "year": "2018",
+  "kind": "tvSeries"
+ }
+}
