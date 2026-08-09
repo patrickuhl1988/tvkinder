@@ -90,7 +90,7 @@ ADD_CSS = """
     .switches{gap:4px}
     .switches .seg.lang button{padding:0 7px} }
 
-  .section-eyebrow.tipphead{display:flex; align-items:center; gap:10px}
+  .section-eyebrow.tipphead{display:flex; align-items:center; gap:10px; flex-wrap:wrap; row-gap:8px}
   .section-eyebrow.tipphead h2{flex:1 1 auto; min-width:0}
   .mehrbtn.klein{width:auto; margin:0; padding:8px 12px; font-size:12px; flex:0 0 auto}
   .intro{font-size:13px; color:var(--muted); line-height:1.65; margin:14px 2px 4px}
@@ -106,6 +106,23 @@ ADD_CSS = """
     letter-spacing:.09em; text-transform:uppercase; font-weight:700;
     color:var(--muted); margin:0 2px 5px}
 
+  .kinorow{border:1px solid var(--line2); border-radius:14px; background:var(--surface);
+    padding:12px 14px 13px; margin:0 0 10px}
+  .kinorow h3{font-family:"Archivo",sans-serif; font-size:14.5px; font-weight:800;
+    letter-spacing:-.01em; color:var(--ink); margin:0 0 7px}
+  .kinometa{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px}
+  .kinobadge{font-family:"JetBrains Mono",monospace; font-size:10px; font-weight:600;
+    letter-spacing:.05em; color:var(--muted); border:1px solid var(--line2);
+    border-radius:var(--r-ctl); padding:3px 7px}
+  .kinobadge.neu{color:#8A5A00; border-color:#D9A94E; background:rgba(217,169,78,.14)}
+  .kinodesc{font-size:12.5px; color:var(--muted); line-height:1.62; margin:0 0 10px}
+  .trailerbtn{display:inline-flex; align-items:center; gap:7px; padding:8px 13px;
+    border:1px solid var(--line2); border-radius:var(--r-ctl); background:none;
+    color:var(--ink); font-family:"Inter",sans-serif; font-size:12px; font-weight:650;
+    text-decoration:none}
+  .trailerbtn svg{width:13px; height:13px; color:#F1571A}
+  .trailerbtn:hover{border-color:#F1571A}
+
   .tippnote{font-size:12.5px; color:var(--muted); margin:0 2px 8px; min-height:0}
   .tippnote:empty{display:none}
 
@@ -114,8 +131,8 @@ ADD_CSS = """
 
   /* Aufklappbarer Filterblock der Startseite */
   .imgbtn{flex:0 0 auto; padding:0; border:0; background:none; cursor:pointer; line-height:0}
-  .imgbtn img{height:40px; width:auto; display:block; border-radius:9px;
-    box-shadow:0 1px 4px rgba(58,42,32,.18); transition:transform .12s}
+  .imgbtn img{height:44px; width:auto; display:block; border-radius:0;
+    filter:drop-shadow(0 1px 3px rgba(58,42,32,.22)); transition:transform .12s}
   .imgbtn:hover img{transform:translateY(-1px)}
   .imgbtn:disabled{opacity:.55; cursor:default}
   .imgbtn.ohnebild{padding:8px 12px; border:1px solid var(--line2); border-radius:var(--r-ctl);
@@ -622,7 +639,7 @@ NAV = [
     ("live", "index.html", "Heute",
      '<rect x="2.5" y="4.5" width="19" height="12.5" rx="2.6"/><path d="M8 20.5h8M12 17v3.5"/>'
      '<path d="M10.7 9.1l3.4 2-3.4 2z" fill="currentColor" stroke="none"/>'),
-    ("mediathek", "mediathek-kinder.html", "Mediathek",
+    ("mediathek", "mediathek-kinder.html", "Streaming & Kino",
      '<rect x="3" y="4.6" width="18" height="14.8" rx="2"/>'
      '<path d="M10.3 9.2l4.6 2.8-4.6 2.8z" fill="currentColor" stroke="none"/>'),
 ]
@@ -817,7 +834,7 @@ const GENRES = ["Zeichentrick","Anime","Serie","Jugendserie","Fantasyserie","Wis
 /* =================================================================== */
 const I18N = {
  de:{
-  nav_live:"Heute", nav_med:"Mediathek",
+  nav_live:"Heute", nav_med:"Streaming & Kino",
   land:"Land wählen", en_hint:"Interface switched to English",
   such_live:"Sendung, Folge oder Sender suchen …",
   such_med:"Titel, Genre oder Anbieter suchen …",
@@ -856,6 +873,9 @@ const I18N = {
   consent:"Wir messen anonym, welche Seiten genutzt werden — cookiefrei über Cloudflare Web Analytics. Weitere Dienste laden wir erst nach deiner Einwilligung.",
   c_no:"Ablehnen", c_yes:"Einverstanden",
   anbieter_h:"Die Anbieter", anbieter_s:"Kinderbereich im Vergleich",
+  kino_h2:"Aktuell im Kino", kino_s:"Kinderfilme auf der großen Leinwand",
+  kino_zeigen:"Filme anzeigen", kino_trailer:"Trailer ansehen",
+  kino_ab:"Kinostart", kino_offen:"FSK folgt", alter_alle:"Alle",
   fussnote:"TVKinderprogramm.de überträgt selbst keine Sendungen. Wir verweisen nur auf legale Sender und Mediatheken und betten ausschließlich offizielle, freigegebene Videos ein. Altersempfehlungen sind redaktionell und ersetzen keine FSK-Freigabe. Programmangaben ohne Gewähr — verbindlich ist das Programm des Senders.",
   jetzt_frei:"Gerade kostenlos",
   tzhint:"Alle Sendezeiten in deutscher Zeit (Europe/Berlin).",
@@ -865,15 +885,15 @@ const I18N = {
   toast_bald:"Disney+, Netflix & Co. folgen bald",
   int_ab:"Abenteuer & Action", int_ti:"Tiere & Natur", int_ma:"Magie & Fantasie",
   int_la:"Lachen & Quatsch", int_wi:"Wissen & Entdecken",
-  tipps_h2:"Tipps von Eltern für Eltern", mehr5:"5 weitere zeigen",
+  tipps_h2:"Mediathek-Tipps", mehr5:"5 weitere zeigen",
   wenig_tipps:"Dazu haben wir gerade nur %s Tipps: hier noch Ideen aus ähnlichen Kategorien",
   alle_gezeigt:"Das war's: schau morgen wieder vorbei!",
   grp_alter:"Alter", grp_genre:"Genre", grp_sonst:"Sonstiges", grp_suche:"Suche",
   filter_zeigen:"Filter & Suche", tipps_start:"5 Tipps anzeigen",
   mm_b:"Kurze Pause?", mm_s:"Mühle Meister: der Brettspiel-Klassiker als kostenlose App im Play Store",
-  intro_med:"<b>Kostenlose Kinderserien und Kinderfilme</b> aus den Mediatheken von KiKA, ARD, ZDF & Co.: mit Altersempfehlung, Eltern-Check und Tipps von Eltern für Eltern.",
+  intro_med:"<b>Kostenlose Kinderserien und Kinderfilme</b> aus den Mediatheken von KiKA, ARD, ZDF & Co.: mit Altersempfehlung und Eltern-Check. Dazu: die aktuellen Kinderfilme im Kino.",
   kat_start:"Katalog anzeigen", mehr30:"%s weitere anzeigen", anb_start:"Vergleich anzeigen",
-  kat_h2:"Der ganze Katalog", titel_n:"Titel", tipp_l:"Tipp", dagegen:"Was dagegen spricht:",
+  kat_h2:"Kostenfreie Mediathek-Inhalte", titel_n:"Titel", tipp_l:"Tipp", dagegen:"Was dagegen spricht:",
   seo_med_h:"Kinderserien und Kinderfilme kostenlos in den Mediatheken",
   seo_med_1:"TVKinderprogramm.de sammelt Kinderserien und Kinderfilme, die in den kostenlosen Mediatheken der öffentlich-rechtlichen Sender abrufbar sind: im KiKA-Player, in der ARD Mediathek, bei ZDFtivi und bei 3sat. Jeder Titel trägt eine redaktionelle Altersempfehlung (ab 3, ab 6 oder ab 10 Jahren), dazu Folgenzahl, Laufzeit und, wo vorhanden, die IMDb-Bewertung mit Stimmenzahl.",
   seo_med_2:"Die Angebote der öffentlich-rechtlichen Mediatheken sind werbefrei und ohne Anmeldung nutzbar: ein Unterschied zu YouTube und den Apps der Privatsender. Über die Filter oben lassen sich Titel nach Altersgruppe und Interessen wie Tiere und Natur, Wissen und Entdecken oder Magie und Fantasie eingrenzen. Die Tipps werden bei jedem Besuch neu gemischt.",
@@ -882,7 +902,7 @@ const I18N = {
   inhalt_de:""
  },
  en:{
-  nav_live:"Today", nav_med:"Library",
+  nav_live:"Today", nav_med:"Streaming & cinema",
   land:"Choose country", en_hint:"Programme details stay in German",
   such_live:"Search shows, episodes or channels …",
   such_med:"Search titles, genres or providers …",
@@ -921,6 +941,9 @@ const I18N = {
   consent:"We measure anonymously which pages are used — cookie-free via Cloudflare Web Analytics. Any further services load only after your consent.",
   c_no:"Decline", c_yes:"Accept",
   anbieter_h:"The providers", anbieter_s:"kids sections compared",
+  kino_h2:"Now in cinemas", kino_s:"kids films on the big screen",
+  kino_zeigen:"Show films", kino_trailer:"Watch trailer",
+  kino_ab:"In cinemas from", kino_offen:"rating pending", alter_alle:"All",
   fussnote:"TVKinderprogramm.de does not broadcast anything itself. We only point to legal channels and media libraries and embed officially released videos. Age guidance is editorial and does not replace an official rating. Schedules without guarantee — the channel's own listing is binding.",
   jetzt_frei:"Free right now",
   tzhint:"All broadcast times in German local time (Europe/Berlin).",
@@ -930,15 +953,15 @@ const I18N = {
   toast_bald:"Disney+, Netflix & Co. are coming soon",
   int_ab:"Adventure & Action", int_ti:"Animals & Nature", int_ma:"Magic & Fantasy",
   int_la:"Laughs & Silliness", int_wi:"Learning & Discovery",
-  tipps_h2:"Tips from parents, for parents", mehr5:"Show 5 more",
+  tipps_h2:"Library tips", mehr5:"Show 5 more",
   wenig_tipps:"We only have %s picks for that right now: adding ideas from similar categories",
   alle_gezeigt:"That's all: check back tomorrow!",
   grp_alter:"Age", grp_genre:"Genre", grp_sonst:"More", grp_suche:"Search",
   filter_zeigen:"Filter & search", tipps_start:"Show 5 tips",
   mm_b:"Quick break?", mm_s:"Mühle Meister: the classic mill board game, free on Google Play",
-  intro_med:"<b>Free children's series and films</b> from the German public media libraries (KiKA, ARD, ZDF and more): with age recommendations, a parent check and tips from parents for parents.",
+  intro_med:"<b>Free children's series and films</b> from the German public media libraries (KiKA, ARD, ZDF and more): with age recommendations and a parent check. Plus: kids films now showing in cinemas.",
   kat_start:"Show catalogue", mehr30:"Show %s more", anb_start:"Show comparison",
-  kat_h2:"The full catalogue", titel_n:"titles", tipp_l:"Tip", dagegen:"What speaks against it:",
+  kat_h2:"Free library content", titel_n:"titles", tipp_l:"Tip", dagegen:"What speaks against it:",
   seo_med_h:"Children's series and films, free in the German media libraries",
   seo_med_1:"TVKinderprogramm.de collects children's series and films available in the free media libraries of the German public broadcasters: the KiKA player, the ARD Mediathek, ZDFtivi and 3sat. Every title carries an editorial age recommendation (3+, 6+ or 10+), plus episode count, running time and, where available, the IMDb rating with vote count.",
   seo_med_2:"The public media libraries are ad-free and need no account: a real difference to YouTube and the commercial broadcasters' apps. Use the filters above to narrow titles by age group and interests such as animals and nature, learning and discovery, or magic and fantasy. The picks are reshuffled on every visit.",
@@ -1806,6 +1829,14 @@ def media_itemlist_ld():
             + "</script>")
 
 
+def kino_js():
+    """Aktuelle Kinofilme als JS-Konstante fuer die Mediathek-Seite."""
+    import json, kino_data
+    return ("const KINO = "
+            + json.dumps(kino_data.KINO, ensure_ascii=False, separators=(",", ":"))
+            + ";\nconst KINO_STAND = " + json.dumps(kino_data.STAND) + ";")
+
+
 def providers_js():
     rows = []
     for p in D.MEDIA_PROVIDERS:
@@ -1933,6 +1964,7 @@ PAGES["live"] = dict(
       <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" data-i18n-ph="such_live" placeholder="Sendung, Folge oder Sender suchen …"></div></div>
       <div class="fgroup"><span class="fglabel" data-i18n="grp_alter">Alter</span>
       <div class="chiprow" id="idxAlter" role="group" aria-label="Alter">
+        <button class="fchip tmode" data-a="all" aria-pressed="true" data-i18n="alter_alle">Alle</button>
         <button class="fchip tmode" data-a="a3" aria-pressed="false">3–5</button>
         <button class="fchip tmode" data-a="a6" aria-pressed="false">6–9</button>
         <button class="fchip tmode" data-a="a10" aria-pressed="false">10–13</button>
@@ -2044,10 +2076,10 @@ PAGES["mediathek"] = dict(
          "im Vergleich mit Netflix, Disney+, Prime Video, WOW und YouTube Kids.",
     prerender=lambda: "",
     cat_ld=media_itemlist_ld,  # Top 80 des Katalogs als ItemList
-    data=lambda: providers_js() + "\n\n" + D.media_js() + "\n\n" + D.tipps_js() + "\n\n" + D.en_js(),
+    data=lambda: kino_js() + "\n\n" + providers_js() + "\n\n" + D.media_js() + "\n\n" + D.tipps_js() + "\n\n" + D.en_js(),
     main="""
     <h1 class="srh1">Kinderserien und -filme in den Mediatheken: kostenlos abrufbar, mit Altersempfehlung und IMDb-Bewertung</h1>
-    <p class="intro" data-i18n="intro_med"><b>Kostenlose Kinderserien und Kinderfilme</b> aus den Mediatheken von KiKA, ARD, ZDF &amp; Co.: mit Altersempfehlung, Eltern-Check und Tipps von Eltern für Eltern.</p>
+    <p class="intro" data-i18n="intro_med"><b>Kostenlose Kinderserien und Kinderfilme</b> aus den Mediatheken von KiKA, ARD, ZDF &amp; Co.: mit Altersempfehlung und Eltern-Check. Dazu: die aktuellen Kinderfilme im Kino.</p>
     <a class="crosslink" id="bannerTvf" href="https://tvfussball.de" target="_blank" rel="noopener">
       <span class="cl-ic" aria-hidden="true">TV</span>
       <span class="cl-txt"><b data-i18n="cl_b">Und für die Großen?</b><span data-i18n="cl_s">Alle Spiele heute im TV, Stream und Radio: auf TVFussball.de</span></span>
@@ -2068,6 +2100,7 @@ PAGES["mediathek"] = dict(
       </div>
     <div class="fgroup"><span class="fglabel" data-i18n="grp_alter">Alter</span>
     <div class="chiprow" id="medChips" role="group" aria-label="Alter">
+      <button class="fchip tmode" data-a="" aria-pressed="true" data-i18n="alter_alle">Alle</button>
       <button class="fchip tmode" data-a="a3" aria-pressed="false">3–5</button>
       <button class="fchip tmode" data-a="a6" aria-pressed="false">6–9</button>
       <button class="fchip tmode" data-a="a10" aria-pressed="false">10–13</button>
@@ -2086,11 +2119,15 @@ PAGES["mediathek"] = dict(
       <label class="opt"><input type="checkbox" id="medFrei" checked><span data-i18n="o_free">Nur kostenfrei</span></label>
     </div></div>
     </div></div></div>
-    <div class="section-eyebrow tipphead"><h2 data-i18n="tipps_h2">Tipps von Eltern für Eltern</h2>
+    <div class="section-eyebrow tipphead"><h2 data-i18n="tipps_h2">Mediathek-Tipps</h2>
       <button class="imgbtn" id="tippMehr" title="5 Tipps anzeigen"><img src="elterntipps.png" width="441" height="160" loading="lazy" decoding="async" alt="5 Tipps anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button></div>
     <div class="tippnote" id="tippNote" aria-live="polite"></div>
     <div class="board" id="tippBoard"></div>
-    <div class="section-eyebrow tipphead"><h2 data-i18n="kat_h2">Der ganze Katalog</h2><span class="cnt" id="katCount"></span>
+    <div class="section-eyebrow tipphead"><h2 data-i18n="kino_h2">Aktuell im Kino</h2><span class="cnt" data-i18n="kino_s">Kinderfilme auf der großen Leinwand</span>  <button class="mehrbtn klein" id="kinoStart" data-i18n="kino_zeigen">Filme anzeigen</button></div>
+    <div class="klapp" id="kinoKlapp"><div class="klapp-in">
+    <div class="board" id="kinoBoard"></div>
+    </div></div>
+    <div class="section-eyebrow tipphead"><h2 data-i18n="kat_h2">Kostenfreie Mediathek-Inhalte</h2><span class="cnt" id="katCount"></span>
       <button class="imgbtn" id="katMehrKopf" title="30 weitere anzeigen"><img src="katalog.png" width="400" height="160" loading="lazy" decoding="async" alt="30 weitere anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button></div>
     <div class="board" id="medBoard">{prerender}</div>
     <button class="mehrbtn" id="katMehr" data-i18n="mehr30" style="display:none">30 weitere anzeigen</button>
@@ -2245,7 +2282,7 @@ try{
 
 function chipsAnzeigen(){
   document.querySelectorAll("#medChips .fchip[data-a]").forEach(b=>
-    b.setAttribute("aria-pressed", String(b.dataset.a===fAge)));
+    b.setAttribute("aria-pressed", String((b.dataset.a||null)===fAge)));
   document.querySelectorAll("#medGenres .fchip[data-i]").forEach(b=>
     b.setAttribute("aria-pressed", String(fInts.has(b.dataset.i))));
   const mt=document.getElementById("medTipp");
@@ -2256,7 +2293,7 @@ function chipsSpeichern(){
 }
 function chipKlick(e, zustand, danach){
   const b=e.target.closest(".fchip"); if(!b || b.id) return;
-  if(b.dataset.a) zustand.age = (zustand.age===b.dataset.a) ? null : b.dataset.a;
+  if(b.dataset.a!==undefined) zustand.age = (b.dataset.a==="") ? null : ((zustand.age===b.dataset.a) ? null : b.dataset.a);
   if(b.dataset.i){ zustand.ints.has(b.dataset.i) ? zustand.ints.delete(b.dataset.i) : zustand.ints.add(b.dataset.i); }
   danach();
 }
@@ -2397,8 +2434,40 @@ document.getElementById("anbStart").addEventListener("click", function(){
   document.getElementById("anbKlapp").classList.add("auf");
   this.style.display="none";
 });
+
+/* ---- Aktuell im Kino ---- */
+function trailerUrl(titel){
+  const w = (typeof LANG!=="undefined" && LANG==="en") ? "Trailer Englisch" : "Trailer Deutsch";
+  return "https://www.youtube.com/results?search_query=" + encodeURIComponent(titel + " " + w);
+}
+function kinoZeigen(){
+  const kb=document.getElementById("kinoBoard"); if(!kb) return;
+  const en = (typeof LANG!=="undefined" && LANG==="en");
+  const heute=new Date(); heute.setHours(0,0,0,0);
+  const dat = s=>{ const m=s.split("."); return new Date(+m[2], +m[1]-1, +m[0]); };
+  kb.innerHTML = KINO.map(f=>{
+    const zukunft = dat(f.start) > heute;
+    const b=[];
+    b.push('<span class="kinobadge">'+(f.fsk!=="" ? "FSK "+f.fsk : t("kino_offen"))+"</span>");
+    if(f.dauer) b.push('<span class="kinobadge">'+f.dauer+" Min</span>");
+    if(zukunft) b.push('<span class="kinobadge neu">'+t("kino_ab")+" "+f.start+"</span>");
+    return '<article class="kinorow">'+
+      "<h3>"+f.t+"</h3>"+
+      '<p class="kinometa">'+b.join("")+"</p>"+
+      '<p class="kinodesc">'+(en ? f.kurz_en : f.kurz)+"</p>"+
+      '<a class="trailerbtn" target="_blank" rel="noopener" href="'+trailerUrl(f.t)+'">'+
+      '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5l10 6.5-10 6.5z"/></svg>'+
+      t("kino_trailer")+"</a></article>";
+  }).join("");
+}
+document.getElementById("kinoStart").addEventListener("click", function(){
+  kinoZeigen();
+  document.getElementById("kinoKlapp").classList.add("auf");
+  this.style.display="none";
+});
 window.reRender = ()=>{
   katalogZeigen();
+  if(document.getElementById("kinoKlapp").classList.contains("auf")) kinoZeigen();
   /* sichtbare Tippkarten in der neuen Sprache neu zeichnen, Bestand behalten */
   const em = (typeof fElterntipp!=="undefined" && fElterntipp);
   document.getElementById("tippBoard").innerHTML = sichtbareTipps.map(em ? tippKarteIndex : mcard).join("");
