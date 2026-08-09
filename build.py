@@ -45,16 +45,13 @@ ADD_CSS = """
 
   /* Sonderfilter-Reihe, Elterntipp als Empfehlung hervorgehoben */
   .opts.specialrow{padding-top:0; margin-top:-2px}
-  .fchip.tippchip{background:linear-gradient(135deg,rgba(241,87,26,.13),rgba(216,67,12,.09));
-    border-color:rgba(216,67,12,.45); color:#C94108; font-weight:750;
-    box-shadow:0 1px 0 rgba(216,67,12,.10)}
-  .fchip.tippchip::after{content:"Empfehlung"; margin-left:7px; font-size:9px; font-weight:800;
-    letter-spacing:.06em; text-transform:uppercase; padding:2px 6px; border-radius:2px;
-    background:#C94108; color:#FFF3E8}
-  html[data-theme="dark"] .fchip.tippchip{background:rgba(255,122,61,.14);
-    border-color:rgba(255,154,92,.5); color:#FF9A5C}
-  html[data-theme="dark"] .fchip.tippchip::after{background:#FF9A5C; color:#2A1206}
-  .fchip.tippchip[aria-pressed="true"]::after{background:#FFF3E8; color:#C94108}
+  .fchip.tippchip{background:var(--surface); border-color:var(--line2); color:var(--ink);
+    font-weight:650; box-shadow:none}
+  .fchip.tippchip[aria-pressed="true"]{
+    background:linear-gradient(135deg,#FF7A3D,#F1571A 55%,#D8430C); border-color:#D8430C; color:#FFF3E8}
+  html[data-theme="dark"] .fchip.tippchip{background:var(--surface);
+    border-color:var(--line2); color:var(--ink)}
+  html[data-theme="dark"] .fchip.tippchip[aria-pressed="true"]{color:#FFF3E8}
 
   /* Markenbanner im Kopf: läuft über die volle verfügbare Breite,
      die Schalter rechts stehen fest, das Banner gibt nach. */
@@ -115,8 +112,47 @@ ADD_CSS = """
   .panelprov{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 12px}
   .panelprov:empty{display:none}
 
+  /* Aufklappbarer Filterblock der Startseite */
+  .imgbtn{flex:0 0 auto; padding:0; border:0; background:none; cursor:pointer; line-height:0}
+  .imgbtn img{height:40px; width:auto; display:block; border-radius:9px;
+    box-shadow:0 1px 4px rgba(58,42,32,.18); transition:transform .12s}
+  .imgbtn:hover img{transform:translateY(-1px)}
+  .imgbtn:disabled{opacity:.55; cursor:default}
+  .imgbtn.ohnebild{padding:8px 12px; border:1px solid var(--line2); border-radius:var(--r-ctl);
+    background:var(--surface); color:var(--ink); font-family:"Inter",sans-serif;
+    font-size:12px; font-weight:650; line-height:1.2}
+
+  .crosslink.muehle .cl-ic.mm{background:linear-gradient(135deg,#7A5B3A,#4C3216);
+    display:grid; place-items:center}
+  .crosslink.muehle .cl-ic.mm svg{width:20px; height:20px; color:#F2E4CF}
+  .crosslink[hidden]{display:none}
+
+  .filtertoggle{display:inline-flex; align-items:center; gap:7px; margin:10px 0 8px}
+  .filtertoggle svg{width:14px; height:14px; transition:transform .2s}
+  .filtertoggle[aria-expanded="true"] svg{transform:rotate(180deg)}
+  .klapp{display:grid; grid-template-rows:0fr; transition:grid-template-rows .26s ease}
+  .klapp.auf{grid-template-rows:1fr}
+  .klapp-in{overflow:hidden; min-height:0}
+  .klapp-pad{margin:2px 0 10px; padding:12px 12px 6px;
+    border:1px solid var(--line); border-radius:12px; background:var(--surface)}
+  html[data-theme="dark"] .klapp-pad{background:rgba(255,255,255,.03)}
+  .klapp-pad .fsearch{margin-top:0}
+
+  /* Ankreuz-Schalter im selben Kleid wie die Filterchips: ein Guss */
+  .chiprow .opt span, .opts .opt span{overflow:visible; flex:0 0 auto; min-width:max-content}
+  .chiprow .opt, .opts .opt{display:inline-flex; align-items:center; gap:0; flex:0 0 auto;
+    padding:7px 12px; border:1px solid var(--line2); border-radius:3px; background:var(--surface);
+    font-family:"Inter",sans-serif; font-size:12px; font-weight:650; color:var(--ink);
+    cursor:pointer; user-select:none}
+  .chiprow .opt input, .opts .opt input{position:absolute; opacity:0; pointer-events:none;
+    width:1px; height:1px; margin:0; -webkit-appearance:none; appearance:none}
+  .chiprow .opt:has(input:checked), .opts .opt:has(input:checked){color:#fff; border-color:transparent;
+    background:linear-gradient(135deg,#FF7A3D,#F1571A 55%,#D8430C)}
+  html[data-theme="dark"] .chiprow .opt:has(input:checked),
+  html[data-theme="dark"] .opts .opt:has(input:checked){color:#FFF3EA}
+
   /* Chip-Zeile: einzeilig, auf dem Handy seitlich wischbar */
-  .chiprow{display:flex; gap:7px; flex-wrap:nowrap; overflow-x:auto; padding:2px 2px 7px;
+  .chiprow{display:flex; align-items:center; gap:7px; flex-wrap:nowrap; overflow-x:auto; padding:2px 2px 7px;
     scrollbar-width:none; -webkit-overflow-scrolling:touch}
   .chiprow::-webkit-scrollbar{display:none}
   .chiprow .fchip{flex:0 0 auto}
@@ -529,12 +565,11 @@ ADD_CSS = """
     border-color:#D8430C !important; color:#FFF3E8 !important}
   .fchip .fcount{opacity:.55}
   .fchip[aria-pressed="true"] .fcount{opacity:.8}
-  .fchip.retrochip::before{content:"↺"; margin-right:6px; font-weight:800; color:#8A5A0B}
-  .fchip.tippchip::before{content:"♥"; margin-right:6px; font-weight:800; color:#C94108}
-  html[data-theme="dark"] .fchip.retrochip::before{color:#F2CE76}
-  html[data-theme="dark"] .fchip.tippchip::before{color:#FF9A5C}
-  .fchip.retrochip[aria-pressed="true"]::before,
-  .fchip.tippchip[aria-pressed="true"]::before{color:#FFF3E8}
+  .fchip.retrochip{background:var(--surface); border-color:var(--line2); color:var(--ink); font-weight:650}
+  .fchip.retrochip[aria-pressed="true"]{
+    background:linear-gradient(135deg,#FF7A3D,#F1571A 55%,#D8430C); border-color:#D8430C; color:#FFF3E8}
+  html[data-theme="dark"] .fchip.retrochip{background:var(--surface); border-color:var(--line2); color:var(--ink)}
+  html[data-theme="dark"] .fchip.retrochip[aria-pressed="true"]{color:#FFF3E8}
   .fchip.leer{opacity:.4}
 
   .testbanner{border:1px dashed var(--line2); border-radius:var(--r); background:var(--bg2);
@@ -796,7 +831,7 @@ const I18N = {
   nachsehen_nein:"nicht bekannt — für diesen Sender haben wir noch keine Mediathek-Quelle",
   hinsehen:"hinsehen", ansehen:"ansehen", imdb_von:"von 10", imdb_stimmen:"bei %s Stimmen",
   imdb_ansehen:"bei IMDb ansehen", imdb_nach:"bei IMDb nachschlagen",
-  kennst:"Kennst du noch?", passt:"Passt das zu meinem Kind?", elterncheck:"Eltern-Check",
+  kennst:"Kennst du noch?", passt:"Passt das zu meinem Kind?", elterncheck:"Passt das zu meinem Kind? Der Eltern-Check",
   keine_einschaetzung:"Noch keine Einschätzung hinterlegt.",
   weitere_laender:"Sender in weiteren Ländern",
   kalender:"In Kalender", teilen:"Teilen", gemerkt:"gemerkt", entfernt:"entfernt",
@@ -819,15 +854,19 @@ const I18N = {
   jetzt_frei:"Gerade kostenlos",
   tzhint:"Alle Sendezeiten in deutscher Zeit (Europe/Berlin).",
   lv_jetzt:"im Browser öffnen", lv_konto:"kostenlos bei Joyn, Konto nötig", lv_abo:"über RTL+, Abo nötig",
-  intro_idx:"<b>TVKinderprogramm.de</b> beantwortet die einfache Frage: <b>Was läuft heute für Kinder im TV?</b> Hier steht das komplette Kinderprogramm von heute und morgen auf einen Blick: KiKA, Super RTL (Toggo), Disney Channel, Nickelodeon und RiC, dazu die Kinderstrecken von ARD, ZDF und den Dritten sowie Kinderfilme im Free-TV. Jede Sendung mit Sendezeit, Altersempfehlung und Eltern-Check, und dem Hinweis, ob sie kostenlos in der Mediathek läuft.",
+  intro_idx:"<b>TVKinderprogramm.de</b> beantwortet eine einfache Frage: <b>Was läuft heute für Kinder im TV?</b> Alle Kindersendungen mit Altersempfehlung, Eltern-Check und kostenlosen Mediathek-Links.",
   cl_b:"Und für die Großen?",
   toast_bald:"Disney+, Netflix & Co. folgen bald",
   int_ab:"Abenteuer & Action", int_ti:"Tiere & Natur", int_ma:"Magie & Fantasie",
   int_la:"Lachen & Quatsch", int_wi:"Wissen & Entdecken",
-  tipps_h2:"Unsere Tipps für euch", mehr5:"5 weitere zeigen",
+  tipps_h2:"Tipps von Eltern für Eltern", mehr5:"5 weitere zeigen",
   wenig_tipps:"Dazu haben wir gerade nur %s Tipps: hier noch Ideen aus ähnlichen Kategorien",
   alle_gezeigt:"Das war's: schau morgen wieder vorbei!",
-  grp_alter:"Alter", grp_genre:"Genre", grp_sonst:"Sonstiges",
+  grp_alter:"Alter", grp_genre:"Genre", grp_sonst:"Sonstiges", grp_suche:"Suche",
+  filter_zeigen:"Filter & Suche", tipps_start:"5 Tipps anzeigen",
+  mm_b:"Kurze Pause?", mm_s:"Mühle Meister: der Brettspiel-Klassiker als kostenlose App im Play Store",
+  intro_med:"<b>Kostenlose Kinderserien und Kinderfilme</b> aus den Mediatheken von KiKA, ARD, ZDF & Co.: mit Altersempfehlung, Eltern-Check und Tipps von Eltern für Eltern.",
+  kat_start:"Katalog anzeigen", mehr30:"%s weitere anzeigen", anb_start:"Vergleich anzeigen",
   kat_h2:"Der ganze Katalog", titel_n:"Titel", tipp_l:"Tipp", dagegen:"Was dagegen spricht:",
   seo_med_h:"Kinderserien und Kinderfilme kostenlos in den Mediatheken",
   seo_med_1:"TVKinderprogramm.de sammelt Kinderserien und Kinderfilme, die in den kostenlosen Mediatheken der öffentlich-rechtlichen Sender abrufbar sind: im KiKA-Player, in der ARD Mediathek, bei ZDFtivi und bei 3sat. Jeder Titel trägt eine redaktionelle Altersempfehlung (ab 3, ab 6 oder ab 10 Jahren), dazu Folgenzahl, Laufzeit und, wo vorhanden, die IMDb-Bewertung mit Stimmenzahl.",
@@ -857,7 +896,7 @@ const I18N = {
   nachsehen_nein:"unknown — no media library source for this channel yet",
   hinsehen:"open", ansehen:"watch", imdb_von:"of 10", imdb_stimmen:"from %s votes",
   imdb_ansehen:"view on IMDb", imdb_nach:"look up on IMDb",
-  kennst:"Remember this?", passt:"Is this right for my child?", elterncheck:"Parent check",
+  kennst:"Remember this?", passt:"Is this right for my child?", elterncheck:"Is this right for my child? The parent check",
   keine_einschaetzung:"No assessment on file yet.",
   weitere_laender:"Channels in other countries",
   kalender:"Add to calendar", teilen:"Share", gemerkt:"saved", entfernt:"removed",
@@ -880,15 +919,19 @@ const I18N = {
   jetzt_frei:"Free right now",
   tzhint:"All broadcast times in German local time (Europe/Berlin).",
   lv_jetzt:"open in browser", lv_konto:"free on Joyn, account required", lv_abo:"via RTL+, subscription required",
-  intro_idx:"<b>TVKinderprogramm.de</b> answers one simple question: <b>What is on TV for kids today?</b> The complete German children's schedule for today and tomorrow at a glance: KiKA, Super RTL (Toggo), Disney Channel, Nickelodeon and RiC, plus the children's slots on ARD, ZDF and the regional networks, and kids' films on free TV. Every show with airtime, age recommendation, a parent check, and whether it streams for free in the media libraries.",
+  intro_idx:"<b>TVKinderprogramm.de</b> answers one simple question: <b>What is on TV for kids today?</b> Every children's show with an age recommendation, a parent check and free media-library links.",
   cl_b:"And for the grown-ups?",
   toast_bald:"Disney+, Netflix & Co. are coming soon",
   int_ab:"Adventure & Action", int_ti:"Animals & Nature", int_ma:"Magic & Fantasy",
   int_la:"Laughs & Silliness", int_wi:"Learning & Discovery",
-  tipps_h2:"Our picks for you", mehr5:"Show 5 more",
+  tipps_h2:"Tips from parents, for parents", mehr5:"Show 5 more",
   wenig_tipps:"We only have %s picks for that right now: adding ideas from similar categories",
   alle_gezeigt:"That's all: check back tomorrow!",
-  grp_alter:"Age", grp_genre:"Genre", grp_sonst:"More",
+  grp_alter:"Age", grp_genre:"Genre", grp_sonst:"More", grp_suche:"Search",
+  filter_zeigen:"Filter & search", tipps_start:"Show 5 tips",
+  mm_b:"Quick break?", mm_s:"Mühle Meister: the classic mill board game, free on Google Play",
+  intro_med:"<b>Free children's series and films</b> from the German public media libraries (KiKA, ARD, ZDF and more): with age recommendations, a parent check and tips from parents for parents.",
+  kat_start:"Show catalogue", mehr30:"Show %s more", anb_start:"Show comparison",
   kat_h2:"The full catalogue", titel_n:"titles", tipp_l:"Tip", dagegen:"What speaks against it:",
   seo_med_h:"Children's series and films, free in the German media libraries",
   seo_med_1:"TVKinderprogramm.de collects children's series and films available in the free media libraries of the German public broadcasters: the KiKA player, the ARD Mediathek, ZDFtivi and 3sat. Every title carries an editorial age recommendation (3+, 6+ or 10+), plus episode count, running time and, where available, the IMDb rating with vote count.",
@@ -1053,7 +1096,7 @@ const LEGAL_EN = {
     and load time. No cross-site tracking, no profiling, no sharing with third parties.</p>
     <p>Since no information is accessed on your device, no consent is required under
     § 25 (1) TTDSG. The legal basis is our legitimate interest in privacy-friendly audience
-    measurement (Art. 6 (1) (f) GDPR). Any further services load only after explicit consent.</p>
+    measurement (Art. 6 (1) (f) GDPR). After your consent via the notice below we additionally use Google Analytics 4 (Google Ireland Ltd.), which sets cookies and processes usage data; the legal basis is Art. 6 (1) (a) GDPR and consent can be withdrawn at any time by clearing the site data.</p>
     <h4>Children</h4><p>This service is aimed at parents and carers. No data is collected from
     children, no personalised advertising is served and no profiles are built.</p>`},
   about:{t:"About",h:`<h4>What this site does</h4>
@@ -1291,9 +1334,7 @@ function rowHTML(s){
   <button class="rowhead" aria-expanded="false">
     <div class="time"><span class="t-start">${s.time}</span><span class="t-dur">${s.dur||""}</span></div>
     <div class="teams">
-      <div class="t">${sticker(s)}<span>${s.title}</span>
-        <span class="favstar" data-follow="${s.title}" role="button" tabindex="0" aria-pressed="false"
-              aria-label="${s.title} merken" title="${s.title} merken">☆</span></div>
+      <div class="t">${sticker(s)}<span>${s.title}</span></div>
       ${s.sub?`<div class="t subline">${s.sub}</div>`:""}
       <div class="meta">${now?'<span class="nowtag">'+t("laeuft")+'</span>':""}${past?'<span class="pasttag">'+t("vorbei")+'</span>':""}<span class="comp">${s.channel?s.channel+" · ":""}${gname(s.genre)}</span>${imdbBadge(s)}${s.retro?`<span class="retro">${LANG==="en"?"since":"seit"} ${s.retro.y}</span>`:""}
         ${s.age!==undefined?`<span class="agetag">${t("ab")} ${s.age}</span>`:""}
@@ -1316,17 +1357,6 @@ function rowHTML(s){
       <div class="arow"><span class="alb">${t("laufzeit")}</span><span class="aval">${s.dur||"—"}</span></div>
       <div class="arow"><span class="alb">${t("werbung")}</span><span class="aval">${s.ads===false?t("werbefrei"):(s.ads===true?t("mit_werbung"):"—")}</span></div>
       ${s.retro?`<div class="arow"><span class="alb">${t("kennst")}</span><span class="aval">${s.retro.n}</span></div>`:""}
-      ${(()=>{
-        const m = (typeof NACHSEHEN!=="undefined") ? NACHSEHEN[s.title] : null;
-        const oerr = (s.ch||[]).some(c=>/KiKA|ZDF|ARD|WDR|BR|MDR|RBB|3sat/.test(c.n));
-        const stufe = m ? "sicher" : (oerr ? "regel" : "unsicher");
-        const txt = m
-          ? `${t("nachsehen_ja")} — ${m.p.join(LANG==="en"?" and ":" und ")}${m.f?` (${m.f} ${m.f===1?(LANG==="en"?"episode available":"Folge abrufbar"):t("folgen_abrufbar")})`:""}` +
-            (m.u?` · <a href="${m.u}" target="_blank" rel="noopener">${t("hinsehen")}</a>`:"")
-          : (oerr ? t("nachsehen_wahrsch") : t("nachsehen_nein"));
-        return `<div class="arow sp-${stufe}"><span class="alb">${t("nachsehen")}</span>` +
-               `<span class="aval"><span class="spdot"></span>${txt}</span></div>`;
-      })()}
       ${(()=>{ const lv=LIVESTREAM[s.channel]; if(!lv) return "";
         const zusatz = lv[1]==="konto" ? " · <span class=\"votes\">"+t("lv_konto")+"</span>"
                      : lv[1]==="abo"   ? " · <span class=\"votes\">"+t("lv_abo")+"</span>" : "";
@@ -1346,8 +1376,7 @@ function rowHTML(s){
       m.ch.map(c=>`<span class="ch ${c.free?"fta":"pay"}">${c.n}</span>`).join("")+
       `</span></div>`).join("")}</div></div>`:""}
 
-    <button class="morebtn lh-btn" data-more aria-expanded="false"><span class="mlbl">${t("passt")}</span>${MCHEV}</button>
-    <div class="morewrap"><div class="lohntwrap">
+    <div class="lohntwrap">
       ${sc!==null?`<div class="lh-score"><div class="lh-sc-top"><span class="lh-sc-lbl">${t("elterncheck")}</span>`+
         `<b class="lh-sc-val" style="color:${col}">${sc}</b><span class="lh-sc-max">/100</span></div>`+
         `<div class="lh-sc-bar"><span style="width:${sc}%;background:${col}"></span></div></div>`:""}
@@ -1356,7 +1385,7 @@ function rowHTML(s){
         <div class="lh-flags">${s.detail.flags.map(f=>`<span class="lh-flag">${f}</span>`).join("")}</div>
         <p class="lh-reden"><b>Zum Nachbesprechen:</b> ${s.detail.reden}</p>`
       : `<p class="lh-txt">${s.note || t("keine_einschaetzung")}</p>`}
-    </div></div>
+    </div>
 
     <div class="actwrap"><div class="actrow main">
       <button class="sharebtn calbtn" data-cal data-title="${s.title}" data-day="${s.day}" data-time="${s.time}">
@@ -1391,15 +1420,12 @@ function renderBoard(board, list, emptyHTML){
   list.forEach(s=>{
     if(s.day!==day){ day=s.day;
       const tn = tagNr(day), heute = berlinJetzt().tag, morgen = berlinMorgenTag();
-      /* TVFussball-Hinweis: genau einmal, vor dem ersten Tag nach heute */
-      if(tn>heute && !crossGesetzt){ html += crosslinkHTML(); crossGesetzt=true; }
       const tag = tn===heute  ? '<span class="dtag">'+t("heute")+'</span>'
                 : tn===morgen ? '<span class="dtag tm">'+t("morgen")+'</span>' : '';
       html += `<div class="daybar">${tag}<span class="d">${dname(day)}</span><span class="ln"></span></div>`; }
     html += rowHTML(s);
   });
-  if(!crossGesetzt) html += crosslinkHTML();   /* nur ein Tag sichtbar: dann darunter */
-  board.innerHTML = html + `<div class="empty" style="display:none">${t("nichts")}</div>`;
+  board.innerHTML = html;
   markFavs();
 }
 
@@ -1500,9 +1526,24 @@ document.addEventListener("keydown", e=>{
   }
   applyI18n();
 
+  /* Google Analytics (G-P0C7K19KSH): setzt Cookies, lädt deshalb erst
+     nach Einwilligung — genau wie es der Hinweis verspricht. */
+  function ladeGtag(){
+    if(window.gtagGeladen) return; window.gtagGeladen=true;
+    const sc=document.createElement("script");
+    sc.async=true; sc.src="https://www.googletagmanager.com/gtag/js?id=G-P0C7K19KSH";
+    document.head.appendChild(sc);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag("js", new Date());
+    gtag("config", "G-P0C7K19KSH");
+  }
+  if(LS.get("tvk_consent",null)===true) ladeGtag();
+
   const cb=$("#consent");
   if(LS.get("tvk_consent",null)===null){ cb.classList.remove("hide");
-    const done=v=>{ LS.set("tvk_consent",v); cb.classList.add("hide"); };
+    const done=v=>{ LS.set("tvk_consent",v); cb.classList.add("hide");
+      if(v===true) ladeGtag(); };
     $("#consentYes").addEventListener("click",()=>done(true));
     $("#consentNo").addEventListener("click",()=>done(false)); }
 
@@ -1562,6 +1603,22 @@ function tippKarteIndex(tp){
   </div></div></div>
 </div>`;
 }
+
+/* Aufklappbarer Filterbereich (Startseite und Mediathek) */
+const _ft=document.getElementById("filterToggle");
+if(_ft) _ft.addEventListener("click", function(){
+  const auf = this.getAttribute("aria-expanded")!=="true";
+  this.setAttribute("aria-expanded", String(auf));
+  document.getElementById("filterKlapp").classList.toggle("auf", auf);
+});
+
+
+/* Eigenwerbung: ein Banner pro Seitenaufruf, 1 von 4 zeigt die Mühle-App */
+(function(){
+  const tvf=document.getElementById("bannerTvf"), mm=document.getElementById("bannerMuehle");
+  if(tvf && mm && Math.random()<0.25){ tvf.hidden=true; mm.hidden=false; }
+})();
+
 """
 
 
@@ -1769,18 +1826,37 @@ PAGES["live"] = dict(
     seo_ld=lambda: "",
     prerender=lambda: "",
     main="""    <h1 class="srh1">Kinderprogramm heute: KiKA, Toggo plus und Kinderfilme mit Altersempfehlung und Eltern-Check</h1>
-    <p class="intro" data-i18n="intro_idx"><b>TVKinderprogramm.de</b> beantwortet die einfache Frage: <b>Was läuft heute für Kinder im TV?</b> Hier steht das komplette Kinderprogramm von heute und morgen auf einen Blick: KiKA, Super RTL (Toggo), Disney Channel, Nickelodeon und RiC, dazu die Kinderstrecken von ARD, ZDF und den Dritten sowie Kinderfilme im Free-TV. Jede Sendung mit Sendezeit, Altersempfehlung und Eltern-Check, und dem Hinweis, ob sie kostenlos in der Mediathek läuft.</p>
-    <div class="filters" id="liveFilters"></div>
-    <div class="opts" id="liveOpts">
-      <label class="opt"><input type="checkbox" id="optFree" checked><span data-i18n="o_free">Nur kostenlos</span></label>
-      <label class="opt"><input type="checkbox" id="optPast"><span data-i18n="o_past">Vergangene anzeigen</span></label>
-      <span class="opt-cnt" id="optCount"></span>
-    </div>
-    <div class="opts specialrow">
-      <button class="fchip tippchip" id="optTipp" aria-pressed="false" data-i18n="f_tipp">Elterntipp</button>
-      <button class="fchip retrochip" id="optRetro" aria-pressed="false" data-i18n="f_retro">Kennst du noch?</button>
-    </div>
-    <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" data-i18n-ph="such_live" placeholder="Sendung, Folge oder Sender suchen …"></div>
+    <p class="intro" data-i18n="intro_idx"><b>TVKinderprogramm.de</b> beantwortet eine einfache Frage: <b>Was läuft heute für Kinder im TV?</b> Alle Kindersendungen mit Altersempfehlung, Eltern-Check und kostenlosen Mediathek-Links.</p>
+    <a class="crosslink" id="bannerTvf" href="https://tvfussball.de" target="_blank" rel="noopener">
+      <span class="cl-ic" aria-hidden="true">TV</span>
+      <span class="cl-txt"><b data-i18n="cl_b">Und für die Großen?</b><span data-i18n="cl_s">Alle Spiele heute im TV, Stream und Radio: auf TVFussball.de</span></span>
+      <span class="cl-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+    </a>
+    <a class="crosslink muehle" id="bannerMuehle" href="https://play.google.com/store/apps/details?id=app.muehle.muehle&amp;utm_source=emea_Med" target="_blank" rel="noopener" hidden>
+      <span class="cl-ic mm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="5" r="2.2"/><circle cx="12" cy="5" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="5" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="12" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/></svg></span>
+      <span class="cl-txt"><b data-i18n="mm_b">Kurze Pause?</b><span data-i18n="mm_s">Mühle Meister: der Brettspiel-Klassiker als kostenlose App im Play Store</span></span>
+      <span class="cl-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+    </a>
+    <button class="fchip filtertoggle" id="filterToggle" aria-expanded="false">
+      <span data-i18n="filter_zeigen">Filter &amp; Suche</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="klapp" id="filterKlapp"><div class="klapp-in"><div class="klapp-pad">
+      <div class="fgroup">
+      <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" data-i18n-ph="such_live" placeholder="Sendung, Folge oder Sender suchen …"></div></div>
+      <div class="fgroup"><span class="fglabel" data-i18n="grp_alter">Alter</span>
+      <div class="chiprow" id="idxAlter" role="group" aria-label="Alter">
+        <button class="fchip tmode" data-a="a3" aria-pressed="false">3–5</button>
+        <button class="fchip tmode" data-a="a6" aria-pressed="false">6–9</button>
+        <button class="fchip tmode" data-a="a10" aria-pressed="false">10–13</button>
+      </div></div>
+      <div class="fgroup"><span class="fglabel" data-i18n="grp_sonst">Sonstiges</span>
+      <div class="chiprow" id="liveOpts">
+        <label class="opt"><input type="checkbox" id="optFree" checked><span data-i18n="o_free">Nur kostenlos</span></label>
+        <button class="fchip tippchip" id="optTipp" aria-pressed="false" data-i18n="f_tipp">Elterntipp</button>
+        <button class="fchip retrochip" id="optRetro" aria-pressed="false" data-i18n="f_retro">Kennst du noch?</button>
+      </div></div>
+    </div></div></div>
     <div class="board" id="liveBoard">{prerender}</div>
     <noscript><p class="nojs">Diese Seite zeigt das Kinderprogramm oben als Liste. Filter, Suche und die Detailangaben brauchen JavaScript.</p></noscript>
 
@@ -1836,12 +1912,7 @@ function apply(){
   if(fRetro) list = list.filter(s=>!!s.retro);
   if(fGroup.indexOf("genre:")===0) list = list.filter(s=>(s.genres||[s.genre]).includes(fGroup.slice(6)));
   else if(fGroup !== "all") list = list.filter(s=>s.grp===fGroup);
-  updateChipCounts(document.getElementById("liveFilters"),
-    SHOWS.filter(s=>(!fFree||(s.ch||[]).some(c=>c.free)) && (fPast||!isPast(s)) && (s.age||0)<16));
   renderBoard(board, list, EMPTY_LIVE());
-  const c = document.getElementById("optCount");
-  if(c){ const weg = SHOWS.length - list.length;
-    c.textContent = list.length + " " + t("von") + " " + SHOWS.length + (weg ? " · " + weg + " " + t("ausgeblendet") : ""); }
 }
 
 /* Minütlich nachziehen, damit gelaufene Sendungen von selbst verschwinden */
@@ -1861,10 +1932,22 @@ document.getElementById("optTipp").addEventListener("click", function(){
   if(fTipp){ document.getElementById("optRetro").setAttribute("aria-pressed","false"); fRetro=false; }
   apply();
 });
-buildFilters(document.getElementById("liveFilters"), g=>{ fGroup=g; apply(); });
+document.getElementById("idxAlter").addEventListener("click", e=>{
+  const b=e.target.closest(".fchip"); if(!b) return;
+  fGroup = (fGroup===b.dataset.a) ? "all" : b.dataset.a;
+  document.querySelectorAll("#idxAlter .fchip").forEach(x=>
+    x.setAttribute("aria-pressed", String(x.dataset.a===fGroup)));
+  apply();
+});
 apply();
 initSearch(document.getElementById("liveSearch"), board);
-window.reRender = ()=>{ buildFilters(document.getElementById("liveFilters"), g=>{ fGroup=g; apply(); }); apply(); };
+window.reRender = ()=>{ document.getElementById("idxAlter").addEventListener("click", e=>{
+  const b=e.target.closest(".fchip"); if(!b) return;
+  fGroup = (fGroup===b.dataset.a) ? "all" : b.dataset.a;
+  document.querySelectorAll("#idxAlter .fchip").forEach(x=>
+    x.setAttribute("aria-pressed", String(x.dataset.a===fGroup)));
+  apply();
+}); apply(); };
 """)
 
 PAGES["mediathek"] = dict(
@@ -1876,8 +1959,26 @@ PAGES["mediathek"] = dict(
     cat_ld=lambda: "",  # Katalog-Schema abgeschaltet; Rückweg: media_itemlist_ld
     data=lambda: providers_js() + "\n\n" + D.media_js() + "\n\n" + D.tipps_js() + "\n\n" + D.en_js(),
     main="""
-    <div class="fsearch"><span class="ic">⌕</span><input id="medSearchTop" type="text" data-i18n-ph="such_med" placeholder="Titel, Genre oder Anbieter suchen …"></div>
     <h1 class="srh1">Kinderserien und -filme in den Mediatheken: kostenlos abrufbar, mit Altersempfehlung und IMDb-Bewertung</h1>
+    <p class="intro" data-i18n="intro_med"><b>Kostenlose Kinderserien und Kinderfilme</b> aus den Mediatheken von KiKA, ARD, ZDF &amp; Co.: mit Altersempfehlung, Eltern-Check und Tipps von Eltern für Eltern.</p>
+    <a class="crosslink" id="bannerTvf" href="https://tvfussball.de" target="_blank" rel="noopener">
+      <span class="cl-ic" aria-hidden="true">TV</span>
+      <span class="cl-txt"><b data-i18n="cl_b">Und für die Großen?</b><span data-i18n="cl_s">Alle Spiele heute im TV, Stream und Radio: auf TVFussball.de</span></span>
+      <span class="cl-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+    </a>
+    <a class="crosslink muehle" id="bannerMuehle" href="https://play.google.com/store/apps/details?id=app.muehle.muehle&amp;utm_source=emea_Med" target="_blank" rel="noopener" hidden>
+      <span class="cl-ic mm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="5" r="2.2"/><circle cx="12" cy="5" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="5" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="12" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/></svg></span>
+      <span class="cl-txt"><b data-i18n="mm_b">Kurze Pause?</b><span data-i18n="mm_s">Mühle Meister: der Brettspiel-Klassiker als kostenlose App im Play Store</span></span>
+      <span class="cl-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+    </a>
+    <button class="fchip filtertoggle" id="filterToggle" aria-expanded="false">
+      <span data-i18n="filter_zeigen">Filter &amp; Suche</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6-6 6"/></svg>
+    </button>
+    <div class="klapp" id="filterKlapp"><div class="klapp-in"><div class="klapp-pad">
+      <div class="fgroup">
+    <div class="fsearch"><span class="ic">⌕</span><input id="medSearchTop" type="text" data-i18n-ph="such_med" placeholder="Titel, Genre oder Anbieter suchen …"></div>
+      </div>
     <div class="fgroup"><span class="fglabel" data-i18n="grp_alter">Alter</span>
     <div class="chiprow" id="medChips" role="group" aria-label="Alter">
       <button class="fchip tmode" data-a="a3" aria-pressed="false">3–5</button>
@@ -1893,48 +1994,27 @@ PAGES["mediathek"] = dict(
       <button class="fchip" data-i="wi" aria-pressed="false" data-i18n="int_wi">Wissen &amp; Entdecken</button>
     </div></div>
     <div class="fgroup"><span class="fglabel" data-i18n="grp_sonst">Sonstiges</span>
-    <div class="opts specialrow">
+    <div class="chiprow">
       <button class="fchip tippchip" id="medTipp" aria-pressed="false" data-i18n="f_tipp">Elterntipp</button>
       <label class="opt"><input type="checkbox" id="medFrei" checked><span data-i18n="o_free">Nur kostenfrei</span></label>
-      <span class="opt-cnt" id="medCount"></span>
     </div></div>
-    <div class="section-eyebrow tipphead"><h2 data-i18n="tipps_h2">Unsere Tipps für euch</h2>
-      <button class="mehrbtn klein" id="tippMehr" data-i18n="mehr5">5 weitere zeigen</button></div>
+    </div></div></div>
+    <div class="section-eyebrow tipphead"><h2 data-i18n="tipps_h2">Tipps von Eltern für Eltern</h2>
+      <button class="imgbtn" id="tippMehr" title="5 Tipps anzeigen"><img src="elterntipps.png" alt="5 Tipps anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button></div>
     <div class="tippnote" id="tippNote" aria-live="polite"></div>
     <div class="board" id="tippBoard"></div>
-    <a class="crosslink" href="https://tvfussball.de" target="_blank" rel="noopener">
-      <span class="cl-ic" aria-hidden="true">TV</span>
-      <span class="cl-txt"><b data-i18n="cl_b">Und für die Großen?</b><span data-i18n="cl_s">Alle Spiele heute im TV, Stream und Radio: auf TVFussball.de</span></span>
-      <span class="cl-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
-    </a>
-
-    <div class="section-eyebrow"><h2 data-i18n="kat_h2">Der ganze Katalog</h2><span class="cnt" id="katCount"></span></div>
-    <div class="fsearch"><span class="ic">⌕</span><input id="medSearch" type="text" data-i18n-ph="such_med" placeholder="Titel, Genre oder Anbieter suchen …"></div>
-    <div class="fgroup"><span class="fglabel" data-i18n="grp_alter">Alter</span>
-    <div class="chiprow" id="katAlter" role="group" aria-label="Alter">
-      <button class="fchip tmode" data-a="a3" aria-pressed="false">3–5</button>
-      <button class="fchip tmode" data-a="a6" aria-pressed="false">6–9</button>
-      <button class="fchip tmode" data-a="a10" aria-pressed="false">10–13</button>
-    </div></div>
-    <div class="fgroup"><span class="fglabel" data-i18n="grp_genre">Genre</span>
-    <div class="chiprow" id="katGenres" role="group" aria-label="Genre">
-      <button class="fchip" data-i="ab" aria-pressed="false" data-i18n="int_ab">Abenteuer &amp; Action</button>
-      <button class="fchip" data-i="ti" aria-pressed="false" data-i18n="int_ti">Tiere &amp; Natur</button>
-      <button class="fchip" data-i="ma" aria-pressed="false" data-i18n="int_ma">Magie &amp; Fantasie</button>
-      <button class="fchip" data-i="la" aria-pressed="false" data-i18n="int_la">Lachen &amp; Quatsch</button>
-      <button class="fchip" data-i="wi" aria-pressed="false" data-i18n="int_wi">Wissen &amp; Entdecken</button>
-    </div></div>
-    <div class="fgroup"><span class="fglabel" data-i18n="grp_sonst">Sonstiges</span>
-    <div class="opts specialrow">
-      <button class="fchip tippchip" id="katTipp" aria-pressed="false" data-i18n="f_tipp">Elterntipp</button>
-      <label class="opt"><input type="checkbox" id="katFrei" checked><span data-i18n="o_free">Nur kostenfrei</span></label>
-    </div></div>
+    <div class="section-eyebrow tipphead"><h2 data-i18n="kat_h2">Der ganze Katalog</h2><span class="cnt" id="katCount"></span>
+      <button class="imgbtn" id="katMehrKopf" title="30 weitere anzeigen"><img src="katalog.png" alt="30 weitere anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button></div>
     <div class="board" id="medBoard">{prerender}</div>
+    <button class="mehrbtn" id="katMehr" data-i18n="mehr30" style="display:none">30 weitere anzeigen</button>
+
     <noscript><p class="nojs">Der Katalog steht oben als Liste. Filter, Sortierung und Suche brauchen JavaScript.</p></noscript>
 
-    <div class="section-eyebrow"><h2 data-i18n="anbieter_h">Die Anbieter</h2><span class="cnt" data-i18n="anbieter_s">Kinderbereich im Vergleich</span></div>
+    <div class="section-eyebrow tipphead"><h2 data-i18n="anbieter_h">Die Anbieter</h2><span class="cnt" data-i18n="anbieter_s">Kinderbereich im Vergleich</span>  <button class="mehrbtn klein" id="anbStart" data-i18n="anb_start">Vergleich anzeigen</button></div>
+    <div class="klapp" id="anbKlapp"><div class="klapp-in">
     <div class="board" id="medFree"></div>
     <div class="board" id="medPaid"></div>
+    </div></div>
 
 <section class="seotext">
   <h2 data-i18n="seo_med_h">Kinderserien und Kinderfilme kostenlos in den Mediatheken</h2>
@@ -2064,16 +2144,16 @@ function toast(txt){
   el.textContent=txt; el.classList.add("an");
   clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove("an"), 3000);
 }
-["medFrei","katFrei"].forEach(id=>document.getElementById(id).addEventListener("change", e=>{
+["medFrei"].forEach(id=>document.getElementById(id).addEventListener("change", e=>{
   if(!e.target.checked){ e.target.checked=true; toast(t("toast_bald")); }
 }));
 
 /* ---- Filterchips: Alter (Einfachauswahl) + Interessen (Mehrfach) ---- */
-let fAge=null, fInts=new Set(), kAge=null, kInts=new Set();
+let fAge=null, fInts=new Set();
 const SPEICHER="tvk_med_filter";
 try{
   const g=JSON.parse(localStorage.getItem(SPEICHER)||"null");
-  if(g){ fAge=g.a||null; fInts=new Set(g.i||[]); kAge=g.ka||null; kInts=new Set(g.ki||[]); }
+  if(g){ fAge=g.a||null; fInts=new Set(g.i||[]); }
 }catch(_){}
 
 function chipsAnzeigen(){
@@ -2081,16 +2161,11 @@ function chipsAnzeigen(){
     b.setAttribute("aria-pressed", String(b.dataset.a===fAge)));
   document.querySelectorAll("#medGenres .fchip[data-i]").forEach(b=>
     b.setAttribute("aria-pressed", String(fInts.has(b.dataset.i))));
-  document.querySelectorAll("#katAlter .fchip[data-a]").forEach(b=>
-    b.setAttribute("aria-pressed", String(b.dataset.a===kAge)));
-  document.querySelectorAll("#katGenres .fchip[data-i]").forEach(b=>
-    b.setAttribute("aria-pressed", String(kInts.has(b.dataset.i))));
-  const kt=document.getElementById("katTipp"), mt=document.getElementById("medTipp");
-  if(kt&&mt){ const an=String(typeof fElterntipp!=="undefined"&&fElterntipp);
-    kt.setAttribute("aria-pressed",an); mt.setAttribute("aria-pressed",an); }
+  const mt=document.getElementById("medTipp");
+  if(mt) mt.setAttribute("aria-pressed", String(typeof fElterntipp!=="undefined"&&fElterntipp));
 }
 function chipsSpeichern(){
-  try{ localStorage.setItem(SPEICHER, JSON.stringify({a:fAge, i:[...fInts], ka:kAge, ki:[...kInts]})); }catch(_){}
+  try{ localStorage.setItem(SPEICHER, JSON.stringify({a:fAge, i:[...fInts]})); }catch(_){}
 }
 function chipKlick(e, zustand, danach){
   const b=e.target.closest(".fchip"); if(!b || b.id) return;
@@ -2099,11 +2174,9 @@ function chipKlick(e, zustand, danach){
   danach();
 }
 const topZustand={get age(){return fAge}, set age(v){fAge=v}, get ints(){return fInts}};
-const katZustand={get age(){return kAge}, set age(v){kAge=v}, get ints(){return kInts}};
 ["medChips","medGenres"].forEach(id=>document.getElementById(id).addEventListener("click",
-  e=>chipKlick(e, topZustand, ()=>{ chipsAnzeigen(); chipsSpeichern(); tippsZeigen(true); })));
-["katAlter","katGenres"].forEach(id=>document.getElementById(id).addEventListener("click",
-  e=>chipKlick(e, katZustand, ()=>{ chipsAnzeigen(); chipsSpeichern(); katalogZeigen(); })));
+  e=>chipKlick(e, topZustand, ()=>{ chipsAnzeigen(); chipsSpeichern();
+    if(tippOffen) tippsZeigen(true); katalogZeigen(); })));
 
 /* ---- Tipps: Treffer mischen, ohne Wiederholung in der Sitzung ---- */
 const gezeigt = new Set();
@@ -2163,15 +2236,27 @@ function tippsZeigen(neuAufbau){
     note.textContent="";
   } else if(neuAufbau && (fAge||fInts.size) && tippTreffer<5 && tippTreffer>0)
     note.textContent = t("wenig_tipps").replace("%s", tippTreffer);
-  if(!tippRest.length){ btn.disabled=true; btn.textContent=t("alle_gezeigt"); }
-  else { btn.disabled=false; btn.textContent=t("mehr5"); }
+  const label = !tippRest.length ? t("alle_gezeigt") : t("mehr5");
+  btn.disabled = !tippRest.length;
+  btn.title = label;
+  if(btn.classList.contains("ohnebild")) btn.textContent = label;
+  const bimg=btn.querySelector("img"); if(bimg) bimg.alt = label;
   ersterTippAuf();
 }
-document.getElementById("tippMehr").addEventListener("click", ()=>tippsZeigen(false));
+let tippOffen=false;
+document.getElementById("tippMehr").addEventListener("click", ()=>{
+  if(!tippOffen){ tippOffen=true; tippsZeigen(true); }
+  else tippsZeigen(false);
+});
 
 /* ---- Katalog: vollständig, A bis Z; die Suche ignoriert die Chips ---- */
+let katOffen=true, katLimit=10;
 function katalogZeigen(){
+  const mehrBtn=document.getElementById("katMehr"),
+        kopfBtn=document.getElementById("katMehrKopf"),
+        suchtext=(document.getElementById("medSearchTop")||{}).value||"";
   if(typeof fElterntipp!=="undefined" && fElterntipp){
+    mehrBtn.style.display="none"; if(kopfBtn) kopfBtn.style.display="none";
     const tipps=TIPPS.filter(x=>!x.seite||x.seite==="beide"||x.seite==="mediathek");
     mBoard.innerHTML = tipps.map(tippKarteIndex).join("") + '<div class="empty" style="display:none">'+t("nichts")+'</div>';
     const e1=mBoard.querySelector(".tipprow");
@@ -2180,33 +2265,51 @@ function katalogZeigen(){
     return;
   }
   let l = MEDIA.filter(kat);
-  if(kAge) l = l.filter(e=>e.grp===kAge);
-  if(kInts.size) l = l.filter(e=>(e.ints||[]).some(c=>kInts.has(c)));
+  if(fAge) l = l.filter(e=>e.grp===fAge);
+  if(fInts.size) l = l.filter(e=>(e.ints||[]).some(c=>fInts.has(c)));
   l = l.slice().sort((a,b)=>a.title.localeCompare(b.title, LANG==="en"?"en":"de"));
-  mBoard.innerHTML = l.map(mcard).join("") + '<div class="empty" style="display:none">'+t("nichts")+'</div>';
-  document.getElementById("katCount").textContent = l.length + " " + t("titel_n");
+  /* Bei aktiver Suche die volle Liste rendern, sonst seitenweise zu 30 */
+  const seite = suchtext.trim() ? l : l.slice(0, katLimit);
+  mBoard.innerHTML = seite.map(mcard).join("") + '<div class="empty" style="display:none">'+t("nichts")+'</div>';
+  const rest = suchtext.trim() ? 0 : l.length - seite.length;
+  mehrBtn.style.display = rest>0 ? "" : "none";
+  if(kopfBtn) kopfBtn.style.display = rest>0 ? "" : "none";
+  if(rest>0) mehrBtn.textContent = t("mehr30").replace("%s", Math.min(30,rest));
+  document.getElementById("katCount").textContent =
+    (suchtext.trim() ? l.length : Math.min(katLimit,l.length)+" / "+l.length) + " " + t("titel_n");
   const mc=document.getElementById("medCount");
-  if(mc) mc.textContent = l.length + " " + t("titel_n");
+  if(mc) mc.textContent = MEDIA.filter(kat).length + " " + t("titel_n");
 }
+
+document.getElementById("katMehr").addEventListener("click", ()=>{ katLimit+=30; katalogZeigen(); });
+document.getElementById("katMehrKopf").addEventListener("click", ()=>{ katLimit+=30; katalogZeigen(); });
 
 let fElterntipp=false;
 function elterntippUmschalten(){
   fElterntipp = !fElterntipp;
   chipsAnzeigen();
   katalogZeigen();
-  tippsZeigen(true);
+  if(tippOffen) tippsZeigen(true);
 }
 document.getElementById("medTipp").addEventListener("click", elterntippUmschalten);
-document.getElementById("katTipp").addEventListener("click", elterntippUmschalten);
 
 chipsAnzeigen();
 katalogZeigen();
-tippsZeigen(true);
-const suchOben=document.getElementById("medSearchTop"), suchUnten=document.getElementById("medSearch");
+{ const b=document.getElementById("tippMehr"); b.title=t("tipps_start");
+  if(b.classList.contains("ohnebild")) b.textContent=t("tipps_start");
+  const bi=b.querySelector("img"); if(bi) bi.alt=t("tipps_start"); }
+const suchOben=document.getElementById("medSearchTop");
+/* Erst neu zeichnen (bei Suche: volle Liste), DANN filtert initSearch die Zeilen.
+   Reihenfolge der Registrierung entscheidet. */
+suchOben.addEventListener("input", ()=>{
+  if(!katOffen && suchOben.value.trim()) katOffen=true;
+  katalogZeigen();
+});
 initSearch(suchOben, mBoard);
-initSearch(suchUnten, mBoard);
-suchOben.addEventListener("input", ()=>{ suchUnten.value=suchOben.value; });
-suchUnten.addEventListener("input", ()=>{ suchOben.value=suchUnten.value; });
+document.getElementById("anbStart").addEventListener("click", function(){
+  document.getElementById("anbKlapp").classList.add("auf");
+  this.style.display="none";
+});
 window.reRender = ()=>{
   katalogZeigen();
   /* sichtbare Tippkarten in der neuen Sprache neu zeichnen, Bestand behalten */
@@ -2214,7 +2317,7 @@ window.reRender = ()=>{
   document.getElementById("tippBoard").innerHTML = sichtbareTipps.map(em ? tippKarteIndex : mcard).join("");
   ersterTippAuf();
   const btn=document.getElementById("tippMehr");
-  btn.textContent = tippRest.length ? t("mehr5") : t("alle_gezeigt");
+  btn.title = tippRest.length ? t("mehr5") : t("alle_gezeigt");
   chipsAnzeigen();
 };
 """)
