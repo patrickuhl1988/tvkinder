@@ -2,14 +2,10 @@
 User-agent: *
 Allow: /
 
-# Kein Bedarf an Crawling der Hilfsdateien
-Disallow: /build.py
-Disallow: /epg_data.py
-Disallow: /films_data.py
-Disallow: /retro_data.py
-Disallow: /import_epg.py
-Disallow: /import_imdb.py
-Disallow: /make_favicons.py
+# Build-Quellen und Rohdaten brauchen kein Crawling
+Disallow: /*.py$
+Disallow: /*.json$
 Disallow: /orig.css
+Disallow: /index-kinder.html
 
 Sitemap: https://tvkinderprogramm.de/sitemap.xml

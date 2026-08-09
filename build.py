@@ -666,14 +666,21 @@ SHELL = """<!DOCTYPE html>
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{domain}/{canon}">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#FDF6F0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111010" media="(prefers-color-scheme: dark)">
 <meta property="og:url" content="{domain}/{canon}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{brand}">
 <meta property="og:locale" content="de_DE">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="{domain}/icon-512.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{domain}/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{brand}: Was läuft heute für Kinder?">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{domain}/og-image.jpg">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{desc}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -683,12 +690,11 @@ SHELL = """<!DOCTYPE html>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preload" as="image" href="headerbild.png" fetchpriority="high">
 <style>
 {css}
 </style>
-<script type="application/ld+json">
-{{"@context":"https://schema.org","@type":"WebSite","name":"{brand}","url":"{domain}/","inLanguage":"de-DE"}}
-</script>
+{site_ld}
 {seo_ld}
 {cat_ld}
 </head>
@@ -701,7 +707,7 @@ SHELL = """<!DOCTYPE html>
 
 <header>
   <div class="hbar">
-    <a class="logo" href="index.html" aria-label="{brand} – zur Startseite"><img class="logobanner" src="headerbild.png" height="160" alt="TVKinderprogramm.de: Kinderprogramm im Überblick"></a>
+    <a class="logo" href="index.html" aria-label="{brand} – zur Startseite"><img class="logobanner" src="headerbild.png" width="518" height="160" fetchpriority="high" decoding="async" alt="TVKinderprogramm.de: Kinderprogramm im Überblick"></a>
     <div class="switches">
       <div class="seg lang" role="group" aria-label="Sprache">
         <button data-lang="de" aria-pressed="true">DE</button>
@@ -1778,7 +1784,7 @@ def media_itemlist_ld():
     """ItemList für den Katalog — maschinenlesbar für Suchmaschinen."""
     import json, mediathek_data, imdb_data
     items = []
-    for i, m in enumerate(mediathek_data.MVW, 1):
+    for i, m in enumerate(mediathek_data.MVW[:80], 1):
         im = imdb_data.lookup(m["title"])
         w = {"@type": "TVSeries", "name": m["title"], "genre": m["genre"],
              "inLanguage": "de", "typicalAgeRange": "%s-13" % m["age"]}
@@ -1812,18 +1818,99 @@ def providers_js():
     return "const PROVIDERS = [\n  " + ",\n  ".join(rows) + "\n];"
 
 
+
+
+def site_ld(pg):
+    """WebSite + Organization + WebPage mit Tagesdatum: ein Graph pro Seite."""
+    import json, datetime, zoneinfo
+    heute = datetime.datetime.now(zoneinfo.ZoneInfo("Europe/Berlin")).date().isoformat()
+    website = {"@type": "WebSite", "@id": DOMAIN + "/#website",
+               "name": BRAND, "url": DOMAIN + "/", "inLanguage": "de-DE",
+               "alternateName": ["TV Kinderprogramm", "Kinderprogramm heute"],
+               "description": "Das TV-Programm für Kinder: alle Sendungen mit "
+                              "Altersempfehlung, Eltern-Check und kostenlosen "
+                              "Mediathek-Links, täglich aktualisiert.",
+               "publisher": {"@id": DOMAIN + "/#org"}}
+    org = {"@type": "Organization", "@id": DOMAIN + "/#org",
+           "name": BRAND, "url": DOMAIN + "/",
+           "logo": {"@type": "ImageObject", "url": DOMAIN + "/icon-512.png",
+                    "width": 512, "height": 512}}
+    page = {"@type": "CollectionPage" if pg["page"] == "mediathek" else "WebPage",
+            "@id": DOMAIN + "/" + pg["canon"] + "#webpage",
+            "url": DOMAIN + "/" + pg["canon"],
+            "name": pg["title"].replace(" \u2014 ", ": "),
+            "description": pg["desc"],
+            "inLanguage": "de-DE", "dateModified": heute,
+            "isPartOf": {"@id": DOMAIN + "/#website"},
+            "primaryImageOfPage": {"@type": "ImageObject",
+                                   "url": DOMAIN + "/og-image.jpg",
+                                   "width": 1200, "height": 630}}
+    graph = [website, org, page]
+    if pg["page"] == "mediathek":
+        graph.append({"@type": "BreadcrumbList",
+                      "itemListElement": [
+                          {"@type": "ListItem", "position": 1, "name": "Startseite",
+                           "item": DOMAIN + "/"},
+                          {"@type": "ListItem", "position": 2,
+                           "name": "Mediatheken und Streaming",
+                           "item": DOMAIN + "/mediathek-kinder.html"}]})
+    return ('<script type="application/ld+json">'
+            + json.dumps({"@context": "https://schema.org", "@graph": graph},
+                         ensure_ascii=False, separators=(",", ":"))
+            + "</script>")
+
+
+def faq_ld():
+    """FAQ-Schema fuer die Startseite: entspricht dem sichtbaren Text der
+    aufklappbaren Info-Abschnitte und dem Intro."""
+    import json
+    try:
+        n = sum(len(t) for _, _, t in D._alle_tage())
+    except Exception:
+        n = 0
+    a1 = ("TVKinderprogramm.de zeigt das komplette Kinderprogramm von heute und "
+          "den nächsten Tagen: alle Sendungen auf KiKA, Super RTL (Toggo und "
+          "Toggolino), Nickelodeon, Disney Channel, Toggo plus und RiC, dazu "
+          "Kindersendungen und Kinderfilme in den Vollprogrammen von ARD, ZDF "
+          "und weiteren Sendern.")
+    if n:
+        a1 += " Aktuell stehen über %d Sendungen im Programmfenster." % (n // 100 * 100)
+    fragen = [
+        ("Was läuft heute für Kinder im TV?", a1),
+        ("Welche Kindersender kann man kostenlos sehen?",
+         "KiKA sendet täglich von 6 bis 21 Uhr werbefrei und komplett kostenlos. "
+         "Auch Super RTL, Nickelodeon, Toggo plus und RiC sind im Free-TV "
+         "empfangbar. Die grüne Kante an einer Programmzeile bedeutet: Es gibt "
+         "eine kostenlose Möglichkeit, die Sendung zu sehen, im Free-TV oder in "
+         "einer Mediathek wie dem KiKA-Player, der ARD- oder der ZDF-Mediathek."),
+        ("Was bedeutet die Altersempfehlung, und was ist der Unterschied zur FSK?",
+         "Die Angabe wie 'ab 6' ist eine redaktionelle Einschätzung anhand von "
+         "Tempo, Lautstärke und Konfliktdichte der Sendung. Eine FSK-Freigabe "
+         "existiert dagegen nur fuer Kinofilme und Bildträger; einzelne "
+         "Serienfolgen im Fernsehen tragen keine FSK. Bei Kinderfilmen wird die "
+         "FSK-Stufe zusätzlich als eigenes Feld angezeigt."),
+    ]
+    items = [{"@type": "Question", "name": q,
+              "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in fragen]
+    return ('<script type="application/ld+json" id="tvkFaq">'
+            + json.dumps({"@context": "https://schema.org", "@type": "FAQPage",
+                          "mainEntity": items},
+                         ensure_ascii=False, separators=(",", ":"))
+            + "</script>")
+
+
 PAGES = {}
 
 PAGES["live"] = dict(
     file="index.html", canon="", page="live",
-    title="TVKinderprogramm.de — Was läuft heute für Kinder?",
-    desc="Wo läuft heute Kinderprogramm? Alle Sendungen mit Sender, Startzeit, Laufzeit, "
-         "Altersempfehlung und Freigabe — mit Fokus auf kostenlose Angebote.",
+    title="Kinderprogramm heute: Was läuft für Kinder im TV? | TVKinderprogramm.de",
+    desc="Das TV-Programm für Kinder heute und morgen: alle Sendungen auf KiKA, Toggo, "
+         "Nick und Co. mit Startzeit, Altersempfehlung und Eltern-Check. Täglich aktualisiert.",
     data=lambda: D.shows_js() + "\n\n" + D.kanaele_js() + "\n\n" + D.tipps_js() + "\n\n" + D.en_js(),
     # Sendungstexte bewusst nicht statisch ausliefern: nur Intro, h1 und
     # Beschreibung sind für Google sichtbar, die Liste kommt per JavaScript.
     # Rückweg: seo_ld=broadcast_ld, prerender=prerender_shows wieder eintragen.
-    seo_ld=lambda: "",
+    seo_ld=faq_ld,
     prerender=lambda: "",
     main="""    <h1 class="srh1">Kinderprogramm heute: KiKA, Toggo plus und Kinderfilme mit Altersempfehlung und Eltern-Check</h1>
     <p class="intro" data-i18n="intro_idx"><b>TVKinderprogramm.de</b> beantwortet eine einfache Frage: <b>Was läuft heute für Kinder im TV?</b> Alle Kindersendungen mit Altersempfehlung, Eltern-Check und kostenlosen Mediathek-Links.</p>
@@ -1952,11 +2039,11 @@ window.reRender = ()=>{ document.getElementById("idxAlter").addEventListener("cl
 
 PAGES["mediathek"] = dict(
     file="mediathek-kinder.html", canon="mediathek-kinder.html", page="mediathek",
-    title="Kinderprogramm bei Netflix, Disney+, Prime & Co. | TVKinderprogramm.de",
-    desc="Welche Streaming-Anbieter haben einen Kinderbereich? Netflix, Prime Video, Disney+, "
-         "WOW, YouTube Kids und die kostenlosen Mediatheken im Überblick.",
+    title="Kinderserien kostenlos streamen: KiKA, Netflix, Disney+ und Co. | TVKinderprogramm.de",
+    desc="Kinderserien und Kinderfilme kostenlos streamen: KiKA-Player, ARD und ZDF Mediathek "
+         "im Vergleich mit Netflix, Disney+, Prime Video, WOW und YouTube Kids.",
     prerender=lambda: "",
-    cat_ld=lambda: "",  # Katalog-Schema abgeschaltet; Rückweg: media_itemlist_ld
+    cat_ld=media_itemlist_ld,  # Top 80 des Katalogs als ItemList
     data=lambda: providers_js() + "\n\n" + D.media_js() + "\n\n" + D.tipps_js() + "\n\n" + D.en_js(),
     main="""
     <h1 class="srh1">Kinderserien und -filme in den Mediatheken: kostenlos abrufbar, mit Altersempfehlung und IMDb-Bewertung</h1>
@@ -2000,11 +2087,11 @@ PAGES["mediathek"] = dict(
     </div></div>
     </div></div></div>
     <div class="section-eyebrow tipphead"><h2 data-i18n="tipps_h2">Tipps von Eltern für Eltern</h2>
-      <button class="imgbtn" id="tippMehr" title="5 Tipps anzeigen"><img src="elterntipps.png" alt="5 Tipps anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button></div>
+      <button class="imgbtn" id="tippMehr" title="5 Tipps anzeigen"><img src="elterntipps.png" width="441" height="160" loading="lazy" decoding="async" alt="5 Tipps anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button></div>
     <div class="tippnote" id="tippNote" aria-live="polite"></div>
     <div class="board" id="tippBoard"></div>
     <div class="section-eyebrow tipphead"><h2 data-i18n="kat_h2">Der ganze Katalog</h2><span class="cnt" id="katCount"></span>
-      <button class="imgbtn" id="katMehrKopf" title="30 weitere anzeigen"><img src="katalog.png" alt="30 weitere anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button></div>
+      <button class="imgbtn" id="katMehrKopf" title="30 weitere anzeigen"><img src="katalog.png" width="400" height="160" loading="lazy" decoding="async" alt="30 weitere anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button></div>
     <div class="board" id="medBoard">{prerender}</div>
     <button class="mehrbtn" id="katMehr" data-i18n="mehr30" style="display:none">30 weitere anzeigen</button>
 
@@ -2332,6 +2419,7 @@ def main():
             css=css, main=p["main"].replace("{prerender}", p.get("prerender", lambda: "")()),
             nav=nav_html(p["page"]),
             data_js=p["data"](), shell_js=shell_js, page_js=p["page_js"],
+            site_ld=site_ld(p),
             seo_ld=p.get("seo_ld", lambda: "")(),
             cat_ld=p.get("cat_ld", lambda: "")(),
         )
