@@ -1,0 +1,72 @@
+name: Tagesupdate TV-Programm
+
+on:
+  schedule:
+    # 04:30 UTC = 06:30 deutscher Sommerzeit, vor dem Frühstück fertig
+    - cron: "30 4 * * *"
+  workflow_dispatch: {}   # Knopf für manuelles Auslösen zum Testen
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code holen
+        uses: actions/checkout@v4
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Datumsfenster berechnen (Berliner Zeit)
+        id: tage
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import datetime, zoneinfo
+          heute = datetime.datetime.now(zoneinfo.ZoneInfo("Europe/Berlin")).date()
+          t = [(heute + datetime.timedelta(days=i)).strftime("%d.%m.%Y") for i in range(3)]
+          print("d1=%s" % t[0]); print("d2=%s" % t[1]); print("d3=%s" % t[2])
+          print("iso=%s" % heute.isoformat())
+          PY
+
+      - name: Kindersender importieren
+        run: python3 gen_programm.py ${{ steps.tage.outputs.d1 }} ${{ steps.tage.outputs.d2 }} ${{ steps.tage.outputs.d3 }}
+
+      - name: Vollprogramme nach Kindersendungen durchsuchen
+        run: python3 scan_kinder.py ${{ steps.tage.outputs.d1 }} ${{ steps.tage.outputs.d2 }} ${{ steps.tage.outputs.d3 }}
+
+      - name: Plausibilität prüfen (kein leerer Import wird veröffentlicht)
+        run: |
+          python3 - <<'PY'
+          import programm_data, zusatz_data, sys
+          n = sum(len(t) for _,_,t in programm_data.TAGE)
+          z = sum(len(t) for _,_,t in zusatz_data.TAGE)
+          print(f"Kindersender: {n}, Vollprogramme: {z}")
+          if n < 300:
+              sys.exit("Zu wenige Sendungen: tv.de vermutlich nicht erreichbar, Abbruch ohne Veröffentlichung.")
+          PY
+
+      - name: Seiten bauen
+        run: python3 build.py
+
+      - name: Sitemap-Datum setzen
+        run: |
+          python3 - <<'PY'
+          import pathlib, re
+          p = pathlib.Path("sitemap.xml")
+          s = re.sub(r"<lastmod>\d{4}-\d{2}-\d{2}</lastmod>",
+                     "<lastmod>${{ steps.tage.outputs.iso }}</lastmod>", p.read_text())
+          p.write_text(s)
+          PY
+
+      - name: Veröffentlichen
+        run: |
+          git config user.name "tvk-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html mediathek-kinder.html sitemap.xml programm_data.py zusatz_data.py
+          git diff --cached --quiet && echo "Keine Änderungen." && exit 0
+          git commit -m "Tagesupdate ${{ steps.tage.outputs.d1 }}"
+          git push
