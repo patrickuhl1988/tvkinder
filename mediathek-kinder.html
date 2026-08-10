@@ -1376,6 +1376,69 @@
   .intro b{color:var(--ink); font-weight:750}
 
 
+
+  /* ---- Sendungs-Kacheln 2.0 ---- */
+  .row{position:relative; padding-left:0; background:var(--surface); border:1px solid var(--line);
+    border-radius:16px; box-shadow:var(--shadow); margin:0 0 10px; overflow:hidden}
+  .row.free{box-shadow:var(--shadow)}
+  .row.playing{border-color:rgba(229,72,77,.38)}
+  .row.past{opacity:.55}
+  .rowhead{display:flex; grid-template-columns:none; gap:12px; padding:13px 14px;
+    align-items:flex-start; width:100%; text-align:left}
+  .chtile{width:46px; height:46px; flex:0 0 auto; border-radius:14px; display:grid; place-items:center;
+    color:#fff; font:850 19px "Archivo",sans-serif; letter-spacing:0;
+    background:linear-gradient(145deg, color-mix(in srgb, var(--chc) 78%, #fff), var(--chc));
+    text-shadow:0 1px 2px rgba(0,0,0,.22)}
+  .teams{flex:1 1 auto; min-width:0}
+  .topline{display:flex; align-items:center; gap:8px; margin:1px 0 5px;
+    font:700 10px "JetBrains Mono",monospace; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--muted)}
+  .chname{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .livebadge{display:inline-flex; align-items:center; gap:5px; color:#E5484D; flex:0 0 auto}
+  .livedot{width:7px; height:7px; border-radius:50%; background:#E5484D;
+    box-shadow:0 0 0 0 rgba(229,72,77,.45); animation:tvkpuls 1.7s infinite}
+  @keyframes tvkpuls{70%{box-shadow:0 0 0 6px rgba(229,72,77,0)}100%{box-shadow:0 0 0 0 rgba(229,72,77,0)}}
+  .topzeit{margin-left:auto; flex:0 0 auto; font:800 13.5px "Archivo",sans-serif;
+    letter-spacing:-.01em; color:var(--ink); text-transform:none}
+  .rowhead .t{font-family:"Archivo",sans-serif; font-weight:800; font-size:15px; letter-spacing:-.015em}
+  .rowhead .t.subline{font:600 12px "Inter",sans-serif; color:var(--muted); letter-spacing:0; margin-top:1px}
+  .rowhead .meta{margin-top:7px; display:flex; flex-wrap:wrap; gap:5px 6px; align-items:center}
+  .durtag{font-family:"JetBrains Mono",monospace; font-size:9.5px; font-weight:700;
+    padding:2.5px 7px; border-radius:6px; white-space:nowrap;
+    background:var(--bg2); color:var(--muted); border:1px solid var(--line2)}
+  .liveprog{margin-top:10px; height:5px; border-radius:999px; background:var(--bg2); overflow:hidden}
+  .liveprog span{display:block; height:100%; border-radius:999px;
+    background:linear-gradient(90deg,#F2673A,#FF8B5F)}
+
+  /* ---- Jetzt-Box mit kleinem Alle-Link ---- */
+  .jetztbox{display:block; background:var(--bg2); border:1px solid var(--line);
+    border-radius:20px; padding:13px 12px 4px; margin:16px 0 0}
+  .jetztbox .daybar{background:var(--bg2)}
+  .jetztbox.offen{background:none; border:0; border-radius:0; padding:0; margin:0}
+  .jetztbox.offen .daybar{background:var(--bg)}
+  .allelink{margin-left:auto; flex:0 0 auto; border:0; background:none; cursor:pointer;
+    color:#F2673A; font:800 12.5px "Inter",sans-serif; padding:6px 0; white-space:nowrap}
+  .allelink:hover{text-decoration:underline}
+
+  /* Feinschliff Kacheln: ruhige weisse Karten, normale Schrift, ohne Sticker */
+  .row, .row.free, .row.playing, .row.retro{background:var(--surface) !important;
+    background-image:none !important}
+  .rowhead .teams .t{font-family:"Archivo",sans-serif !important; font-weight:800 !important;
+    font-size:15px !important; letter-spacing:-.015em !important; text-transform:none !important}
+  .rowhead .teams .t.subline{font-family:"Inter",sans-serif !important; font-weight:600 !important;
+    font-size:12px !important; color:var(--muted) !important; text-transform:none !important;
+    letter-spacing:0 !important}
+  .rowhead .stick{display:none !important}
+  .row.playing{border-color:var(--line)}
+  .row.playing .liveprog{margin-top:10px}
+  .row .rowhead, .row .rowhead:hover{background:none !important}
+  .row .rowhead:hover{background:var(--hover) !important}
+  .row.playing, .row.playing.free{border-color:var(--line) !important}
+  .row::after{content:none !important}          /* Deko-Ring aus der Basis aus */
+  .row::before{width:0 !important}              /* alter Farbbalken links aus */
+  .logowort{height:44px}
+  @media (max-width:430px){ .logowort{height:34px} }
+
   /* ---- Redesign 2026: Hero, Feature-Banner, Spiele-Teaser, Footer ---- */
   .hero{margin:8px 2px 16px}
   .filterbar{margin:6px 0 14px}
@@ -2558,7 +2621,7 @@ const I18N = {
   spiel_bald:"Neu",
   jetzt_h2:"Jetzt & als Nächstes",
   jetzt_s:"Die wichtigsten Sendungen der nächsten Stunden",
-  jetzt_alle:"Alle %s Sendungen anzeigen",
+  jetzt_alle:"Alle %s Sendungen →",
   alter_a3:"3–5 Jahre", alter_a6:"6–9 Jahre", alter_a10:"10–13 Jahre",
   slide_tvf:"Für die Großen: alle Spiele heute auf TVFussball.de",
   slide_mm:"Kurze Pause? Mühle Meister – kostenlos im Play Store",
@@ -2645,7 +2708,7 @@ const I18N = {
   spiel_bald:"New",
   jetzt_h2:"Now & up next",
   jetzt_s:"The most important shows of the next hours",
-  jetzt_alle:"Show all %s programmes",
+  jetzt_alle:"All %s programmes →",
   alter_a3:"3–5 years", alter_a6:"6–9 years", alter_a10:"10–13 years",
   slide_tvf:"For the grown-ups: all matches today on TVFussball.de",
   slide_mm:"Quick break? Mühle Meister – free on Google Play",
@@ -3064,13 +3127,13 @@ function rowHTML(s){
   return `
 <div class="row${free.length?" free":""}${past?" past":""}${now?" playing":""}" style="${styleVars}" data-k="${s.day}|${s.time}|${s.title}|${s.sub||""}|${s.genre||""}|${(s.ch||[]).map(c=>c.n).join(" ")}">
   <button class="rowhead" aria-expanded="false">
-    <div class="time"><span class="t-start">${s.time}</span><span class="t-dur">${s.dur||""}</span></div>
+    <span class="chtile" style="--chc:${s.color||"#F2673A"}" aria-hidden="true">${(s.channel||"?").slice(0,1)}</span>
     <div class="teams">
+      <div class="topline"><span class="chname">${s.channel||""}</span>${now?'<span class="livebadge"><span class="livedot"></span>'+t("laeuft")+'</span>':""}${past?'<span class="pasttag">'+t("vorbei")+'</span>':""}<span class="topzeit">${s.time}</span></div>
       <div class="t">${sticker(s)}<span>${s.title}</span></div>
       ${s.sub?`<div class="t subline">${s.sub}</div>`:""}
-      <div class="meta">${now?'<span class="nowtag">'+t("laeuft")+'</span>':""}${past?'<span class="pasttag">'+t("vorbei")+'</span>':""}<span class="comp">${s.channel?s.channel+" · ":""}${gname(s.genre)}</span>${imdbBadge(s)}${s.retro?`<span class="retro">${LANG==="en"?"since":"seit"} ${s.retro.y}</span>`:""}
-        ${s.age!==undefined?`<span class="agetag">${t("ab")} ${s.age}</span>`:""}
-        ${(s.fsk!==null&&s.fsk!==undefined)?`<span class="fsktag">FSK ${s.fsk}</span>`:""}${badge}</div>
+      <div class="meta">${s.age!==undefined?`<span class="agetag">${t("ab")} ${s.age}</span>`:""}${s.dur?`<span class="durtag">${s.dur}</span>`:""}${(s.fsk!==null&&s.fsk!==undefined)?`<span class="fsktag">FSK ${s.fsk}</span>`:""}${badge}<span class="comp">${gname(s.genre)}</span>${imdbBadge(s)}${s.retro?`<span class="retro">${LANG==="en"?"since":"seit"} ${s.retro.y}</span>`:""}</div>
+      ${now?`<div class="liveprog"><span style="width:${Math.min(99,Math.max(2,Math.round((berlinJetzt().min-startMin(s))/Math.max(1,durMin(s))*100)))}%"></span></div>`:""}
     </div>
     <div class="rh-right"><span class="chev">${RCHEV}</span></div>
   </button>
