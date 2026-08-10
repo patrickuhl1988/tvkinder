@@ -717,8 +717,12 @@ CHEV = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width
 
 
 def nav_html(active):
+    if active == "live":
+        return ""                     # Startseite: keine Bottom-Navigation
     rows = []
     for tab, href, label, icon in NAV:
+        if tab == "mediathek":
+            continue                  # eigener Tab wird nicht angezeigt
         rows.append(
             f'  <a class="navitem" role="tab" aria-selected="{"true" if tab == active else "false"}" '
             f'data-tab="{tab}" href="{href}">\n'
@@ -952,6 +956,9 @@ const I18N = {
   spiel_h:"Spiele-Ecke: Memory ist da!",
   spiel_s:"Paare finden mit Tieren, Fahrzeugen und Leckereien – kostenlos im Browser spielen.",
   spiel_bald:"Neu",
+  jetzt_h2:"Jetzt & als Nächstes",
+  jetzt_s:"Die wichtigsten Sendungen der nächsten Stunden",
+  jetzt_alle:"Alle %s Sendungen anzeigen",
   fussnote:"TVKinderprogramm.de überträgt selbst keine Sendungen. Wir verweisen nur auf legale Sender und Mediatheken und betten ausschließlich offizielle, freigegebene Videos ein. Altersempfehlungen sind redaktionell und ersetzen keine FSK-Freigabe. Programmangaben ohne Gewähr — verbindlich ist das Programm des Senders.",
   jetzt_frei:"Gerade kostenlos",
   tzhint:"Alle Sendezeiten in deutscher Zeit (Europe/Berlin).",
@@ -1032,6 +1039,9 @@ const I18N = {
   spiel_h:"Games corner: Memory is here!",
   spiel_s:"Find pairs with animals, vehicles and treats – free in your browser.",
   spiel_bald:"New",
+  jetzt_h2:"Now & up next",
+  jetzt_s:"The most important shows of the next hours",
+  jetzt_alle:"Show all %s programmes",
   fussnote:"TVKinderprogramm.de does not broadcast anything itself. We only point to legal channels and media libraries and embed officially released videos. Age guidance is editorial and does not replace an official rating. Schedules without guarantee — the channel's own listing is binding.",
   jetzt_frei:"Free right now",
   tzhint:"All broadcast times in German local time (Europe/Berlin).",
@@ -2052,6 +2062,7 @@ PAGES["live"] = dict(
         <button class="fchip retrochip" id="optRetro" aria-pressed="false" data-i18n="f_retro">Kennst du noch?</button>
       </div></div>
     </div></div></div>
+    <div class="section-eyebrow tipphead jetzthead"><h2 data-i18n="jetzt_h2">Jetzt &amp; als Nächstes</h2><span class="cnt" data-i18n="jetzt_s">Die wichtigsten Sendungen der nächsten Stunden</span>  <button class="mehrbtn klein" id="alleZeigen">Alle Sendungen anzeigen</button></div>
     <div class="board" id="liveBoard">{prerender}</div>
     <noscript><p class="nojs">Diese Seite zeigt das Kinderprogramm oben als Liste. Filter, Suche und die Detailangaben brauchen JavaScript.</p></noscript>
     <a class="feature" href="mediathek-kinder.html">
@@ -2114,6 +2125,7 @@ const EMPTY_LIVE = ()=> '<div class="soonbox"><span class="ic">\\ud83d\\udcfa</s
   '<span style="font-size:12.5px;line-height:1.55">'+t("leer_tx")+'</span></div></div>';
 
 let fGroup = "all", fFree = true, fPast = false, fSpecial = "all";
+let kompakt = true;                        /* Startansicht: nur die nächsten Sendungen */
 
 function apply(){
   if(typeof fTipp!=="undefined" && fTipp){ zeigeTippsIndex(); return; }
@@ -2126,7 +2138,18 @@ function apply(){
   if(fRetro) list = list.filter(s=>!!s.retro);
   if(fGroup.indexOf("genre:")===0) list = list.filter(s=>(s.genres||[s.genre]).includes(fGroup.slice(6)));
   else if(fGroup !== "all") list = list.filter(s=>s.grp===fGroup);
-  renderBoard(board, list, EMPTY_LIVE());
+  const suche=(document.getElementById("liveSearch").value||"").trim();
+  const teaser = kompakt && fGroup==="all" && !fRetro && !(typeof fTipp!=="undefined"&&fTipp)
+    && fSpecial==="all" && fFree && !fPast && !suche;
+  const jh=document.querySelector(".jetzthead"), jb=document.getElementById("alleZeigen");
+  if(teaser){
+    if(jh) jh.style.display="";
+    if(jb) jb.textContent=t("jetzt_alle").replace("%s", list.length);
+    renderBoard(board, list.slice(0,10), EMPTY_LIVE());
+  } else {
+    if(jh) jh.style.display="none";
+    renderBoard(board, list, EMPTY_LIVE());
+  }
 }
 
 /* Minütlich nachziehen, damit gelaufene Sendungen von selbst verschwinden */
@@ -2153,6 +2176,8 @@ document.getElementById("idxAlter").addEventListener("click", e=>{
     x.setAttribute("aria-pressed", String(x.dataset.a===fGroup)));
   apply();
 });
+document.getElementById("alleZeigen").addEventListener("click", ()=>{ kompakt=false; apply(); });
+document.getElementById("liveSearch").addEventListener("input", apply);
 apply();
 initSearch(document.getElementById("liveSearch"), board);
 window.reRender = ()=>{ document.getElementById("idxAlter").addEventListener("click", e=>{
