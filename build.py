@@ -98,6 +98,57 @@ ADD_CSS = """
 
 
 
+
+  /* ---- Mediathek-Redesign: Hero, Filterkarte, Bereichskoepfe, Kino-Karten ---- */
+  .heromed{background:linear-gradient(180deg, rgba(123,97,209,.12), rgba(123,97,209,0) 82%);
+    border-radius:24px; padding:18px 16px 6px; margin:6px 0 14px}
+  .heromed-grid{display:grid; grid-template-columns:1fr; gap:6px; align-items:center}
+  .heromed .kicker{color:#7B61D1}
+  .heromed .heroh1{font-size:clamp(26px,6vw,44px)}
+  .heromask{width:min(240px,62%); height:auto; justify-self:center; margin-top:4px}
+  @media (min-width:720px){
+    .heromed-grid{grid-template-columns:1.35fr .65fr; gap:18px}
+    .heromask{width:100%; max-width:290px; margin-top:0}
+  }
+  .filtercard{background:var(--surface); border:1px solid var(--line); border-radius:20px;
+    box-shadow:var(--shadow); padding:14px 14px 6px; margin:0 0 16px}
+
+  .section-eyebrow.tipphead.sekkopf{display:flex; align-items:center; gap:11px;
+    flex-wrap:nowrap; row-gap:0; margin:20px 2px 10px}
+  .sekkopf .secht h2{font-size:15px}
+  @media (max-width:420px){ .sekkopf .secht h2{font-size:13.5px} .sekkopf .cnt{display:none} }
+  .secic{flex:0 0 auto; width:38px; height:38px; border-radius:12px; display:grid; place-items:center; color:#fff}
+  .secic svg{width:19px; height:19px}
+  .secic.lila{background:linear-gradient(145deg,#8E77DC,#7B61D1)}
+  .secic.lila2{background:linear-gradient(145deg,#6550A5,#493B73)}
+  .secic.gruen{background:linear-gradient(145deg,#2FB077,#239A68)}
+  .secic.blau{background:linear-gradient(145deg,#54A0E0,#3988D6)}
+  .secht{flex:1 1 auto; min-width:0}
+  .secht h2{margin:0}
+  .secht .cnt{display:block; margin:1px 0 0}
+  .sekkopf .allelink{padding:8px 0}
+
+  .hscroll{display:grid; grid-auto-flow:column; grid-auto-columns:170px; gap:10px;
+    overflow-x:auto; padding:2px 2px 8px; scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch}
+  .kinocard{scroll-snap-align:start; background:var(--surface); border:1px solid var(--line);
+    border-radius:16px; box-shadow:var(--shadow); padding:9px 9px 11px}
+  .kinoart{position:relative; height:120px; border-radius:11px; overflow:hidden;
+    background:linear-gradient(150deg,var(--k1),var(--k2)); display:grid; place-items:center}
+  .kinoart img{width:100%; height:100%; object-fit:cover}
+  .ribbon{position:absolute; left:-26px; top:12px; transform:rotate(-38deg); z-index:2;
+    background:linear-gradient(90deg,#F2673A,#FF8B5F); color:#fff; padding:3px 28px;
+    font:800 9px "JetBrains Mono",monospace; letter-spacing:.09em; text-transform:uppercase}
+  .ribbon.neu{background:linear-gradient(90deg,#239A68,#2FB077)}
+  .fskcircle{position:absolute; right:7px; top:7px; z-index:2; width:26px; height:26px;
+    border-radius:50%; background:rgba(255,255,255,.94); color:#202531; display:grid;
+    place-items:center; font:800 11.5px "Archivo",sans-serif; box-shadow:0 2px 6px rgba(0,0,0,.25)}
+  .kinocard h3{font:800 13px "Archivo",sans-serif; letter-spacing:-.01em; color:var(--ink);
+    margin:9px 1px 3px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+    overflow:hidden; min-height:33px}
+  .kinocard .kmeta{font-size:10.5px; color:var(--muted); margin:0 1px 9px}
+  .kinocard .trailerbtn{padding:7px 11px; font-size:11.5px}
+
   /* ---- Sendungs-Kacheln 2.0 ---- */
   .row{position:relative; padding-left:0; background:var(--surface); border:1px solid var(--line);
     border-radius:16px; box-shadow:var(--shadow); margin:0 0 10px; overflow:hidden}
@@ -2212,7 +2263,8 @@ function apply(){
     if(bx) bx.classList.remove("offen");
     if(jh) jh.style.display="";
     if(jb){ jb.style.display=""; jb.textContent=t("jetzt_alle").replace("%s", list.length); }
-    renderBoard(board, list.slice(0,4), EMPTY_LIVE());
+    const kinder=list.filter(x=>(x.age||0)<=6);
+    renderBoard(board, (kinder.length>=4?kinder:list).slice(0,4), EMPTY_LIVE());
   } else {
     if(bx) bx.classList.add("offen");
     if(jh) jh.style.display="none";
@@ -2286,13 +2338,23 @@ PAGES["mediathek"] = dict(
     cat_ld=media_itemlist_ld,  # Top 80 des Katalogs als ItemList
     data=lambda: kino_js() + "\n\n" + providers_js() + "\n\n" + D.media_js() + "\n\n" + D.tipps_js() + "\n\n" + D.en_js(),
     main="""
-    <h1 class="srh1">Kinderserien und -filme in den Mediatheken: kostenlos abrufbar, mit Altersempfehlung und IMDb-Bewertung</h1>
-    <p class="intro" data-i18n="intro_med"><b>Kostenlose Kinderserien und Kinderfilme</b> aus den Mediatheken von KiKA, ARD, ZDF &amp; Co.: mit Altersempfehlung und Eltern-Check. Dazu: die aktuellen Kinderfilme im Kino.</p>
-    <button class="fchip filtertoggle" id="filterToggle" aria-expanded="false">
-      <span data-i18n="filter_zeigen">Filter &amp; Suche</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6-6 6"/></svg>
-    </button>
-    <div class="klapp" id="filterKlapp"><div class="klapp-in"><div class="klapp-pad">
+    <section class="hero heromed">
+    <div class="heromed-grid">
+    <div class="heromed-txt">
+    <div class="kicker">Streaming &amp; Kino</div>
+    <h1 class="heroh1">Die besten Filme &amp; Serien für Kinder – <em>online &amp; im Kino</em></h1>
+    <p class="lead">Altersgerechte Inhalte aus den kostenlosen Mediatheken und die aktuellen Kinderfilme im Kino – geprüft, übersichtlich und kindgerecht.</p>
+    <div class="stats statsmed">
+      <div class="stat"><strong id="statMed">190+</strong><span>Mediathek-Titel</span></div>
+      <div class="stat"><strong id="statKino">8</strong><span>Kinofilme aktuell</span></div>
+      <div class="stat"><strong>100%</strong><span>kinderfreundlich</span></div>
+      <div class="stat"><strong>0 €</strong><span>kostenlos oder im Abo</span></div>
+    </div>
+    </div>
+    <img class="heromask" src="kino.png" width="640" height="580" alt="Maskottchen mit Popcorn und 3D-Brille im Kino" fetchpriority="high" decoding="async">
+    </div>
+    </section>
+    <div class="filtercard">
       <div class="fgroup">
     <div class="fsearch"><span class="ic">⌕</span><input id="medSearchTop" type="text" data-i18n-ph="such_med" placeholder="Titel, Genre oder Anbieter suchen …"></div>
       </div>
@@ -2316,23 +2378,21 @@ PAGES["mediathek"] = dict(
       <button class="fchip tippchip" id="medTipp" aria-pressed="false" data-i18n="f_tipp">Elterntipp</button>
       <label class="opt"><input type="checkbox" id="medFrei" checked><span data-i18n="o_free">Nur kostenfrei</span></label>
     </div></div>
-    </div></div></div>
-    <div class="section-eyebrow tipphead"><h2 data-i18n="tipps_h2">Mediathek-Tipps</h2>
-      <button class="imgbtn" id="tippMehr" title="5 Tipps anzeigen"><img src="elterntipps.png" width="441" height="160" loading="lazy" decoding="async" alt="5 Tipps anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button><button class="mehrbtn klein" id="tippZu" data-i18n="tipp_zu" style="display:none">Ausblenden</button></div>
+    </div>
+    <div class="section-eyebrow tipphead sekkopf"><span class="secic lila"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5l10 6.5-10 6.5z"/></svg></span><div class="secht"><h2 data-i18n="tipps_h2">Mediathek-Tipps</h2><span class="cnt">Ausgewählte Highlights aus den Mediatheken</span></div><button class="allelink" id="tippMehr">5 Tipps anzeigen →</button><button class="allelink" id="tippZu" style="display:none">Ausblenden</button></div>
     <div class="tippnote" id="tippNote" aria-live="polite"></div>
     <div class="board" id="tippBoard"></div>
-    <div class="section-eyebrow tipphead"><h2 data-i18n="kino_h2">Aktuell im Kino</h2><span class="cnt" data-i18n="kino_s">Kinderfilme auf der großen Leinwand</span>  <button class="mehrbtn klein" id="kinoStart" data-i18n="kino_zeigen">Filme anzeigen</button></div>
+    <div class="section-eyebrow tipphead sekkopf"><span class="secic lila2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 9h18M7 5l2 4M12 5l2 4M17 5l2 4"/></svg></span><div class="secht"><h2 data-i18n="kino_h2">Aktuell im Kino</h2><span class="cnt">Kinderfilme, die jetzt laufen oder bald starten</span></div><button class="allelink" id="kinoStart">Alle Kinofilme →</button></div>
     <div class="klapp" id="kinoKlapp"><div class="klapp-in">
     <div class="board" id="kinoBoard"></div>
     </div></div>
-    <div class="section-eyebrow tipphead"><h2 data-i18n="kat_h2">Kostenfreie Mediathek-Inhalte</h2><span class="cnt" id="katCount"></span>
-      <button class="imgbtn" id="katMehrKopf" title="30 weitere anzeigen"><img src="katalog.png" width="400" height="160" loading="lazy" decoding="async" alt="30 weitere anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button><button class="mehrbtn klein" id="katZu" data-i18n="kat_zu" style="display:none">Einklappen</button></div>
+    <div class="section-eyebrow tipphead sekkopf"><span class="secic gruen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span><div class="secht"><h2 data-i18n="kat_h2">Kostenfreie Mediathek-Inhalte</h2><span class="cnt" id="katCount"></span></div><button class="allelink" id="katMehrKopf">30 weitere →</button><button class="allelink" id="katZu" style="display:none">Einklappen</button></div>
     <div class="board" id="medBoard">{prerender}</div>
     <button class="mehrbtn" id="katMehr" data-i18n="mehr30" style="display:none">30 weitere anzeigen</button>
 
     <noscript><p class="nojs">Der Katalog steht oben als Liste. Filter, Sortierung und Suche brauchen JavaScript.</p></noscript>
 
-    <div class="section-eyebrow tipphead"><h2 data-i18n="anbieter_h">Die Anbieter</h2><span class="cnt" data-i18n="anbieter_s">Kinderbereich im Vergleich</span>  <button class="mehrbtn klein" id="anbStart" data-i18n="anb_start">Vergleich anzeigen</button></div>
+    <div class="section-eyebrow tipphead sekkopf"><span class="secic blau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="7.5" height="16" rx="2"/><rect x="13.5" y="4" width="7.5" height="16" rx="2"/></svg></span><div class="secht"><h2 data-i18n="anbieter_h">Die Anbieter</h2><span class="cnt" data-i18n="anbieter_s">Kinderbereich im Vergleich</span></div><button class="allelink" id="anbStart">Vergleich anzeigen →</button></div>
     <div class="klapp" id="anbKlapp"><div class="klapp-in">
     <div class="board" id="medFree"></div>
     <div class="board" id="medPaid"></div>
@@ -2634,9 +2694,14 @@ suchOben.addEventListener("input", ()=>{
   katalogZeigen();
 });
 initSearch(suchOben, mBoard);
+(function(){ try{
+  if(typeof MEDIA!=="undefined") document.getElementById("statMed").textContent=MEDIA.length;
+  if(typeof KINO!=="undefined") document.getElementById("statKino").textContent=KINO.length;
+}catch(_){} })();
+
 document.getElementById("anbStart").addEventListener("click", function(){
   const auf=document.getElementById("anbKlapp").classList.toggle("auf");
-  this.textContent=t(auf?"anb_zu":"anb_start");
+  this.textContent=auf ? "Ausblenden" : "Vergleich anzeigen \u2192";
 });
 
 /* ---- Aktuell im Kino ---- */
@@ -2646,28 +2711,30 @@ function trailerUrl(titel){
 }
 function kinoZeigen(){
   const kb=document.getElementById("kinoBoard"); if(!kb) return;
-  const en = (typeof LANG!=="undefined" && LANG==="en");
   const heute=new Date(); heute.setHours(0,0,0,0);
-  const dat = s=>{ const m=s.split("."); return new Date(+m[2], +m[1]-1, +m[0]); };
-  kb.innerHTML = KINO.map(f=>{
-    const zukunft = dat(f.start) > heute;
-    const b=[];
-    b.push('<span class="kinobadge">'+(f.fsk!=="" ? "FSK "+f.fsk : t("kino_offen"))+"</span>");
-    if(f.dauer) b.push('<span class="kinobadge">'+f.dauer+" Min</span>");
-    if(zukunft) b.push('<span class="kinobadge neu">'+t("kino_ab")+" "+f.start+"</span>");
-    return '<article class="kinorow">'+
-      "<h3>"+f.t+"</h3>"+
-      '<p class="kinometa">'+b.join("")+"</p>"+
-      '<p class="kinodesc">'+(en ? f.kurz_en : f.kurz)+"</p>"+
+  const dat = x=>{ const m=x.split("."); return new Date(+m[2], +m[1]-1, +m[0]); };
+  const paletten=[["#493B73","#7B61D1"],["#2C4A70","#3988D6"],["#5A3A21","#C97B3A"]];
+  kb.innerHTML = '<div class="hscroll">'+KINO.map((f,i)=>{
+    const st=dat(f.start), zukunft=st>heute;
+    const neu=!zukunft && (heute-st)/864e5<=21;
+    const [k1,k2]=paletten[i%3];
+    return '<article class="kinocard">'+
+      '<div class="kinoart" style="--k1:'+k1+';--k2:'+k2+'">'+
+        (zukunft?'<span class="ribbon">Demn\u00e4chst</span>':(neu?'<span class="ribbon neu">Neu</span>':""))+
+        '<span class="fskcircle">'+(f.fsk!==""?f.fsk:"?")+'</span>'+
+        '<img src="kino-platzhalter.png" alt="" loading="lazy" decoding="async" onerror="this.remove()">'+
+      '</div>'+
+      '<h3>'+f.t+'</h3>'+
+      '<p class="kmeta">'+(f.dauer?f.dauer+" Min \u00b7 ":"")+(zukunft?("Kinostart "+f.start.slice(0,6)):"jetzt im Kino")+'</p>'+
       '<a class="trailerbtn" target="_blank" rel="noopener" href="'+trailerUrl(f.t)+'">'+
-      '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5l10 6.5-10 6.5z"/></svg>'+
-      t("kino_trailer")+"</a></article>";
-  }).join("");
+      '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5l10 6.5-10 6.5z"/></svg>Trailer</a>'+
+      '</article>';
+  }).join("")+"</div>";
 }
 document.getElementById("kinoStart").addEventListener("click", function(){
   const auf=document.getElementById("kinoKlapp").classList.toggle("auf");
   if(auf) kinoZeigen();
-  this.textContent=t(auf?"kino_zu":"kino_zeigen");
+  this.textContent=auf ? "Ausblenden" : "Alle Kinofilme \u2192";
 });
 
 /* ---- Tipps und Katalog wieder einklappen ---- */
@@ -2690,9 +2757,8 @@ window.reRender = ()=>{
   katalogZeigen();
   if(document.getElementById("kinoKlapp").classList.contains("auf")) kinoZeigen();
   const kk=document.getElementById("kinoKlapp"), kb=document.getElementById("kinoStart");
-  if(kk&&kb) kb.textContent=t(kk.classList.contains("auf")?"kino_zu":"kino_zeigen");
   const ak=document.getElementById("anbKlapp"), ab=document.getElementById("anbStart");
-  if(ak&&ab) ab.textContent=t(ak.classList.contains("auf")?"anb_zu":"anb_start");
+
   /* sichtbare Tippkarten in der neuen Sprache neu zeichnen, Bestand behalten */
   const em = (typeof fElterntipp!=="undefined" && fElterntipp);
   document.getElementById("tippBoard").innerHTML = sichtbareTipps.map(em ? tippKarteIndex : mcard).join("");
