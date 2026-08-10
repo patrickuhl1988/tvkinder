@@ -1378,6 +1378,31 @@
 
 
 
+
+  /* ---- Kompakt-Kacheln: alles sichtbar, kein Aufklappen ---- */
+  .kompaktrow .rowhead{cursor:default; padding-bottom:9px}
+  .rowfuss{display:flex; align-items:center; gap:10px; padding:9px 14px 12px;
+    border-top:1px solid var(--line)}
+  .pcheck{flex:1 1 auto; min-width:0; display:flex; align-items:center; gap:6px}
+  .pclbl{font:700 9.5px "JetBrains Mono",monospace; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); white-space:nowrap}
+  .pcval{font:850 14px "Archivo",sans-serif}
+  .pcmax{font-size:10px; color:var(--faint); margin-right:2px}
+  .pcbar{flex:1 1 auto; min-width:34px; height:5px; border-radius:999px;
+    background:var(--bg2); overflow:hidden}
+  .pcbar span{display:block; height:100%; border-radius:999px}
+  .pcleer{flex:1 1 auto}
+  .rowact{display:flex; align-items:center; gap:7px; flex:0 0 auto}
+  .minibtn{width:34px; height:34px; border-radius:10px; border:1px solid var(--line2);
+    background:var(--surface); color:var(--muted); display:grid; place-items:center; cursor:pointer}
+  .minibtn svg{width:16px; height:16px}
+  .minibtn:hover{color:#F2673A; border-color:#F2673A}
+  .schaubtn{display:inline-flex; align-items:center; gap:6px; padding:8px 12px;
+    border-radius:10px; background:linear-gradient(135deg,#F2673A,#FF8B5F); color:#fff;
+    font:700 11.5px "Inter",sans-serif; text-decoration:none; white-space:nowrap}
+  .schaubtn svg{width:12px; height:12px}
+  .durtag.adfrei{color:#1D7A4B; background:rgba(35,154,104,.1); border-color:rgba(35,154,104,.35)}
+
   /* ---- Mediathek-Redesign: Hero, Filterkarte, Bereichskoepfe, Kino-Karten ---- */
   .heromed{background:linear-gradient(180deg, rgba(123,97,209,.12), rgba(123,97,209,0) 82%);
     border-radius:24px; padding:18px 16px 6px; margin:6px 0 14px}
@@ -2687,7 +2712,7 @@ const I18N = {
   spiel_bald:"Neu",
   jetzt_h2:"Jetzt & als Nächstes",
   jetzt_s:"Die wichtigsten Sendungen der nächsten Stunden",
-  jetzt_alle:"Alle %s Sendungen →",
+  jetzt_alle:"%s weitere anzeigen →",
   alter_a3:"3–5 Jahre", alter_a6:"6–9 Jahre", alter_a10:"10–13 Jahre",
   slide_tvf:"Für die Großen: alle Spiele heute auf TVFussball.de",
   slide_mm:"Kurze Pause? Mühle Meister – kostenlos im Play Store",
@@ -2774,7 +2799,7 @@ const I18N = {
   spiel_bald:"New",
   jetzt_h2:"Now & up next",
   jetzt_s:"The most important shows of the next hours",
-  jetzt_alle:"All %s programmes →",
+  jetzt_alle:"%s more →",
   alter_a3:"3–5 years", alter_a6:"6–9 years", alter_a10:"10–13 years",
   slide_tvf:"For the grown-ups: all matches today on TVFussball.de",
   slide_mm:"Quick break? Mühle Meister – free on Google Play",
@@ -3182,80 +3207,29 @@ function rowHTML(s){
       : `<span class="freebest pay">${t("nichtfrei")} · ${best.n}</span>`) : "";
   const sc = typeof s.score==="number" ? s.score : null;
   const col = sc===null ? "" : (sc>=70?"#15A554": sc>=45?"#f59e0b":"#E5484D");
-
   const past = isPast(s), now = isNow(s);
-  const e = endMin(s);
-  const [pc1,pc2] = pairFor(s.title);
-  const styleVars = `--c1:${pc1};--c2:${pc2};`+
-    `--w1:${hexA(pc1,.22)};--w2:${hexA(pc2,.20)};`+
-    `--w1d:${hexA(pc1,.14)};--w2d:${hexA(pc2,.11)}`;
+  const lv = (typeof LIVESTREAM!=="undefined" && LIVESTREAM[s.channel]) ? LIVESTREAM[s.channel] : null;
 
   return `
-<div class="row${free.length?" free":""}${past?" past":""}${now?" playing":""}" style="${styleVars}" data-k="${s.day}|${s.time}|${s.title}|${s.sub||""}|${s.genre||""}|${(s.ch||[]).map(c=>c.n).join(" ")}">
-  <button class="rowhead" aria-expanded="false">
+<div class="row kompaktrow${free.length?" free":""}${past?" past":""}${now?" playing":""}" data-k="${s.day}|${s.time}|${s.title}|${s.sub||""}|${s.genre||""}|${(s.ch||[]).map(c=>c.n).join(" ")}">
+  <div class="rowhead statisch">
     <span class="chtile" style="--chc:${s.color||"#F2673A"}" aria-hidden="true">${(s.channel||"?").slice(0,1)}</span>
     <div class="teams">
       <div class="topline"><span class="chname">${s.channel||""}</span>${now?'<span class="livebadge"><span class="livedot"></span>'+t("laeuft")+'</span>':""}${past?'<span class="pasttag">'+t("vorbei")+'</span>':""}<span class="topzeit">${s.time}</span></div>
-      <div class="t">${sticker(s)}<span>${s.title}</span></div>
+      <div class="t"><span>${s.title}</span></div>
       ${s.sub?`<div class="t subline">${s.sub}</div>`:""}
-      <div class="meta">${s.age!==undefined?`<span class="agetag">${t("ab")} ${s.age}</span>`:""}${s.dur?`<span class="durtag">${s.dur}</span>`:""}${(s.fsk!==null&&s.fsk!==undefined)?`<span class="fsktag">FSK ${s.fsk}</span>`:""}${badge}<span class="comp">${gname(s.genre)}</span>${imdbBadge(s)}${s.retro?`<span class="retro">${LANG==="en"?"since":"seit"} ${s.retro.y}</span>`:""}</div>
+      <div class="meta">${s.age!==undefined?`<span class="agetag">${t("ab")} ${s.age}</span>`:""}${s.dur?`<span class="durtag">${s.dur}</span>`:""}${(s.fsk!==null&&s.fsk!==undefined)?`<span class="fsktag">FSK ${s.fsk}</span>`:""}${s.ads===false?`<span class="durtag adfrei">${t("werbefrei")}</span>`:""}${badge}<span class="comp">${gname(s.genre)}</span>${imdbBadge(s)}${s.retro?`<span class="retro">seit ${s.retro.y}</span>`:""}</div>
       ${now?`<div class="liveprog"><span style="width:${Math.min(99,Math.max(2,Math.round((berlinJetzt().min-startMin(s))/Math.max(1,durMin(s))*100)))}%"></span></div>`:""}
     </div>
-    <div class="rh-right"><span class="chev">${RCHEV}</span></div>
-  </button>
-  <div class="panel"><div class="panel-in"><div class="panel-pad">
-
-    <div class="dh"><span class="ff">🇩🇪</span>${t("wo")}</div>
-    <div class="chlist">${(s.ch||[]).map(c=>
-      `<div class="chrow"><span class="nm">${CH(c).u?`<a class="streamlink" href="${CH(c).u}" target="_blank" rel="noopener">${c.n}</a>`:c.n}`+
-      `${c.note?`<span class="chnote">${c.note}</span>`:""}</span>`+
-      `<span class="tag ${c.free?"fta":"pay"}">${c.free?t("kostenlos"):t("nichtfrei")}</span></div>`).join("")
-      || `<div class="chrow"><span class="none">${t("kein_sender")}</span></div>`}</div>
-
-    <div class="agebox">
-      <div class="arow"><span class="alb">${t("alter")}</span>
-        <span class="aval">${t("ab")} ${s.age} ${t("jahren")}${s.est?`<span class="estmark">${t("redaktionell")}</span>`:""}</span></div>
-      <div class="arow"><span class="alb">${t("laufzeit")}</span><span class="aval">${s.dur||"-"}</span></div>
-      <div class="arow"><span class="alb">${t("werbung")}</span><span class="aval">${s.ads===false?t("werbefrei"):(s.ads===true?t("mit_werbung"):"-")}</span></div>
-      ${s.retro?`<div class="arow"><span class="alb">${t("kennst")}</span><span class="aval">${s.retro.n}</span></div>`:""}
-      ${(()=>{ const lv=LIVESTREAM[s.channel]; if(!lv) return "";
-        const zusatz = lv[1]==="konto" ? " · <span class=\"votes\">"+t("lv_konto")+"</span>"
-                     : lv[1]==="abo"   ? " · <span class=\"votes\">"+t("lv_abo")+"</span>" : "";
-        return `<div class="arow"><span class="alb">Livestream</span><span class="aval">`+
-               `<a href="${lv[0]}" target="_blank" rel="noopener">${t("lv_jetzt")} (${s.channel})</a>${zusatz}</span></div>`;
-      })()}
-      <div class="arow"><span class="alb">IMDb</span><span class="aval">${
-        (s.imdb && s.imdb.r)
-          ? `<b>${String(s.imdb.r).replace(".",",")}</b> ${t("imdb_von")} <span class="votes">${t("imdb_stimmen").replace("%s",(s.imdb.v||0).toLocaleString(LANG==="en"?"en-US":"de-DE"))}</span> · <a href="${imdbUrl(s)}" target="_blank" rel="noopener">${t("imdb_ansehen")}</a>`
-          : `<a href="${imdbUrl(s)}" target="_blank" rel="noopener">${t("imdb_nach")}</a>`}</span></div>
+  </div>
+  <div class="rowfuss">
+    ${sc!==null?`<div class="pcheck"><span class="pclbl">Eltern Check</span><b class="pcval" style="color:${col}">${sc}</b><span class="pcmax">/100</span><span class="pcbar"><span style="width:${sc}%;background:${col}"></span></span></div>`:'<span class="pcleer"></span>'}
+    <div class="rowact">
+      ${now&&lv?`<a class="schaubtn" href="${lv[0]}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5l10 6.5-10 6.5z"/></svg>${t("lv_jetzt")}</a>`:""}
+      <button class="minibtn" data-cal data-title="${s.title}" data-day="${s.day}" data-time="${s.time}" aria-label="${t("kalender")}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg></button>
+      <button class="minibtn" data-share data-title="${s.title}" data-text="${s.title} · ${s.time} Uhr auf ${best?best.n:""} (TVKinderprogramm.de)" aria-label="${t("teilen")}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.7l7.4-4.3M8.3 13.3l7.4 4.3"/></svg></button>
     </div>
-
-    ${(s.more||[]).length?`
-    <button class="morebtn" data-more aria-expanded="false"><span class="mlbl">${t("weitere_laender")}</span>${MCHEV}</button>
-    <div class="morewrap"><div class="sendlist">${s.more.map(m=>
-      `<div class="sendrow"><span class="sflag">${m.f}</span><span class="schans">`+
-      m.ch.map(c=>`<span class="ch ${c.free?"fta":"pay"}">${c.n}</span>`).join("")+
-      `</span></div>`).join("")}</div></div>`:""}
-
-    <div class="lohntwrap">
-      ${sc!==null?`<div class="lh-score"><div class="lh-sc-top"><span class="lh-sc-lbl">${t("elterncheck")}</span>`+
-        `<b class="lh-sc-val" style="color:${col}">${sc}</b><span class="lh-sc-max">/100</span></div>`+
-        `<div class="lh-sc-bar"><span style="width:${sc}%;background:${col}"></span></div></div>`:""}
-      ${s.detail ? `
-        <p class="lh-txt lang">${s.detail.lang}</p>
-        <div class="lh-flags">${s.detail.flags.map(f=>`<span class="lh-flag">${f}</span>`).join("")}</div>
-        <p class="lh-reden"><b>Zum Nachbesprechen:</b> ${s.detail.reden}</p>`
-      : `<p class="lh-txt">${s.note || t("keine_einschaetzung")}</p>`}
-    </div>
-
-    <div class="actwrap"><div class="actrow main">
-      <button class="sharebtn calbtn" data-cal data-title="${s.title}" data-day="${s.day}" data-time="${s.time}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4"></path></svg><span>${t("kalender")}</span></button>
-      <button class="sharebtn" data-share data-title="${s.title}" data-text="${s.title} · ${s.time} Uhr auf ${best?best.n:""} (TVKinderprogramm.de)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.6"></circle><circle cx="6" cy="12" r="2.6"></circle><circle cx="18" cy="19" r="2.6"></circle><path d="M8.3 10.7l7.4-4.3M8.3 13.3l7.4 4.3"></path></svg><span>${t("teilen")}</span></button>
-    </div></div>
-
-  </div></div></div>
+  </div>
 </div>`;
 }
 
@@ -3322,7 +3296,7 @@ function ics(d){
 
 document.addEventListener("click", e=>{
   const head=e.target.closest(".rowhead");
-  if(head && !e.target.closest(".favstar")){
+  if(head && !head.classList.contains("statisch") && !e.target.closest(".favstar")){
     const row=head.closest(".row"); const open=row.classList.toggle("open");
     head.setAttribute("aria-expanded",String(open)); return;
   }
