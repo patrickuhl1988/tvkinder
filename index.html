@@ -1378,6 +1378,9 @@
 
   /* ---- Redesign 2026: Hero, Feature-Banner, Spiele-Teaser, Footer ---- */
   .hero{margin:8px 2px 16px}
+  .filterbar{margin:6px 0 14px}
+  .filterbar .chiprow{margin:0 0 9px}
+  .filterbar .fsearch{margin:0}
   .kicker{font:800 11px "JetBrains Mono",monospace; letter-spacing:.14em;
     text-transform:uppercase; color:#F2673A; margin:0 0 10px}
   .heroh1{font-family:"Archivo",sans-serif; font-weight:850;
@@ -2023,27 +2026,15 @@
       <span class="cl-txt"><b data-i18n="mm_b">Kurze Pause?</b><span data-i18n="mm_s">Mühle Meister: der Brettspiel-Klassiker als kostenlose App im Play Store</span></span>
       <span class="cl-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
     </a>
-    <button class="fchip filtertoggle" id="filterToggle" aria-expanded="false">
-      <span data-i18n="filter_zeigen">Filter &amp; Suche</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-    </button>
-    <div class="klapp" id="filterKlapp"><div class="klapp-in"><div class="klapp-pad">
-      <div class="fgroup">
-      <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" data-i18n-ph="such_live" placeholder="Sendung, Folge oder Sender suchen …"></div></div>
-      <div class="fgroup"><span class="fglabel" data-i18n="grp_alter">Alter</span>
+    <div class="fgroup filterbar">
       <div class="chiprow" id="idxAlter" role="group" aria-label="Alter">
         <button class="fchip tmode" data-a="all" aria-pressed="true" data-i18n="alter_alle">Alle</button>
-        <button class="fchip tmode" data-a="a3" aria-pressed="false">3–5</button>
-        <button class="fchip tmode" data-a="a6" aria-pressed="false">6–9</button>
-        <button class="fchip tmode" data-a="a10" aria-pressed="false">10–13</button>
-      </div></div>
-      <div class="fgroup"><span class="fglabel" data-i18n="grp_sonst">Sonstiges</span>
-      <div class="chiprow" id="liveOpts">
-        <label class="opt"><input type="checkbox" id="optFree" checked><span data-i18n="o_free">Nur kostenlos</span></label>
-        <button class="fchip tippchip" id="optTipp" aria-pressed="false" data-i18n="f_tipp">Elterntipp</button>
-        <button class="fchip retrochip" id="optRetro" aria-pressed="false" data-i18n="f_retro">Kennst du noch?</button>
-      </div></div>
-    </div></div></div>
+        <button class="fchip tmode" data-a="a3" aria-pressed="false" data-i18n="alter_a3">3–5 Jahre</button>
+        <button class="fchip tmode" data-a="a6" aria-pressed="false" data-i18n="alter_a6">6–9 Jahre</button>
+        <button class="fchip tmode" data-a="a10" aria-pressed="false" data-i18n="alter_a10">10–13 Jahre</button>
+      </div>
+      <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" data-i18n-ph="such_live" placeholder="Sendung, Folge oder Sender suchen …"></div>
+    </div>
     <div class="section-eyebrow tipphead jetzthead"><h2 data-i18n="jetzt_h2">Jetzt &amp; als Nächstes</h2><span class="cnt" data-i18n="jetzt_s">Die wichtigsten Sendungen der nächsten Stunden</span>  <button class="mehrbtn klein" id="alleZeigen">Alle Sendungen anzeigen</button></div>
     <div class="board" id="liveBoard"></div>
     <noscript><p class="nojs">Diese Seite zeigt das Kinderprogramm oben als Liste. Filter, Suche und die Detailangaben brauchen JavaScript.</p></noscript>
@@ -3287,6 +3278,7 @@ const I18N = {
   jetzt_h2:"Jetzt & als Nächstes",
   jetzt_s:"Die wichtigsten Sendungen der nächsten Stunden",
   jetzt_alle:"Alle %s Sendungen anzeigen",
+  alter_a3:"3–5 Jahre", alter_a6:"6–9 Jahre", alter_a10:"10–13 Jahre",
   fussnote:"TVKinderprogramm.de überträgt selbst keine Sendungen. Wir verweisen nur auf legale Sender und Mediatheken und betten ausschließlich offizielle, freigegebene Videos ein. Altersempfehlungen sind redaktionell und ersetzen keine FSK-Freigabe. Programmangaben ohne Gewähr: verbindlich ist das Programm des Senders.",
   jetzt_frei:"Gerade kostenlos",
   tzhint:"Alle Sendezeiten in deutscher Zeit (Europe/Berlin).",
@@ -3370,6 +3362,7 @@ const I18N = {
   jetzt_h2:"Now & up next",
   jetzt_s:"The most important shows of the next hours",
   jetzt_alle:"Show all %s programmes",
+  alter_a3:"3–5 years", alter_a6:"6–9 years", alter_a10:"10–13 years",
   fussnote:"TVKinderprogramm.de does not broadcast anything itself. We only point to legal channels and media libraries and embed officially released videos. Age guidance is editorial and does not replace an official rating. Schedules without guarantee: the channel's own listing is binding.",
   jetzt_frei:"Free right now",
   tzhint:"All broadcast times in German local time (Europe/Berlin).",
@@ -4085,23 +4078,17 @@ const EMPTY_LIVE = ()=> '<div class="soonbox"><span class="ic">\ud83d\udcfa</spa
   '<b style="display:block;color:var(--ink);font-family:Archivo,sans-serif;font-size:14px;margin-bottom:3px">'+t("leer_tt")+'</b>' +
   '<span style="font-size:12.5px;line-height:1.55">'+t("leer_tx")+'</span></div></div>';
 
-let fGroup = "all", fFree = true, fPast = false, fSpecial = "all";
+let fGroup = "all", fFree = false, fPast = false, fSpecial = "all";
 let kompakt = true;                        /* Startansicht: nur die nächsten Sendungen */
 
 function apply(){
-  if(typeof fTipp!=="undefined" && fTipp){ zeigeTippsIndex(); return; }
-  if(fSpecial === "tipps"){ zeigeTippsIndex(); return; }
   let list = SHOWS;
-  if(fSpecial === "retro") list = list.filter(s=>!!s.retro);
-  if(fFree) list = list.filter(s=>(s.ch||[]).some(c=>c.free));
   if(!fPast) list = list.filter(s=>!isPast(s));
   list = list.filter(s=>(s.age||0) < 16);   /* ab 16 wird nie angezeigt */
-  if(fRetro) list = list.filter(s=>!!s.retro);
   if(fGroup.indexOf("genre:")===0) list = list.filter(s=>(s.genres||[s.genre]).includes(fGroup.slice(6)));
   else if(fGroup !== "all") list = list.filter(s=>s.grp===fGroup);
   const suche=(document.getElementById("liveSearch").value||"").trim();
-  const teaser = kompakt && fGroup==="all" && !fRetro && !(typeof fTipp!=="undefined"&&fTipp)
-    && fSpecial==="all" && fFree && !fPast && !suche;
+  const teaser = kompakt && fGroup==="all" && !suche;
   const jh=document.querySelector(".jetzthead"), jb=document.getElementById("alleZeigen");
   if(teaser){
     if(jh) jh.style.display="";
@@ -4116,20 +4103,6 @@ function apply(){
 /* Minütlich nachziehen, damit gelaufene Sendungen von selbst verschwinden */
 setInterval(()=>{ if(!fPast) apply(); }, 60000);
 
-buildOptions(document.getElementById("liveOpts"), o=>{ fFree=o.free; fPast=o.past; apply(); });
-buildSpecial(document.getElementById("liveSpecial"), v=>{ fSpecial=v; apply(); });
-let fRetro=false;
-document.getElementById("optRetro").addEventListener("click", function(){
-  fRetro = this.getAttribute("aria-pressed") !== "true";
-  this.setAttribute("aria-pressed", String(fRetro)); apply();
-});
-let fTipp=false;
-document.getElementById("optTipp").addEventListener("click", function(){
-  fTipp = this.getAttribute("aria-pressed") !== "true";
-  this.setAttribute("aria-pressed", String(fTipp));
-  if(fTipp){ document.getElementById("optRetro").setAttribute("aria-pressed","false"); fRetro=false; }
-  apply();
-});
 document.getElementById("idxAlter").addEventListener("click", e=>{
   const b=e.target.closest(".fchip"); if(!b) return;
   fGroup = (fGroup===b.dataset.a) ? "all" : b.dataset.a;
@@ -4141,13 +4114,7 @@ document.getElementById("alleZeigen").addEventListener("click", ()=>{ kompakt=fa
 document.getElementById("liveSearch").addEventListener("input", apply);
 apply();
 initSearch(document.getElementById("liveSearch"), board);
-window.reRender = ()=>{ document.getElementById("idxAlter").addEventListener("click", e=>{
-  const b=e.target.closest(".fchip"); if(!b) return;
-  fGroup = (fGroup===b.dataset.a) ? "all" : b.dataset.a;
-  document.querySelectorAll("#idxAlter .fchip").forEach(x=>
-    x.setAttribute("aria-pressed", String(x.dataset.a===fGroup)));
-  apply();
-}); apply(); };
+window.reRender = ()=>{ apply(); };
 
 </script>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
