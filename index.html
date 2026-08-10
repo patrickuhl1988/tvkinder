@@ -1412,7 +1412,9 @@
   @media(max-width:620px){ .feature{grid-template-columns:1fr; gap:10px} .feature img{max-width:180px} }
 
   .spielteaser{display:flex; align-items:center; gap:14px; margin:14px 0 0;
-    padding:13px 16px; border:1px dashed var(--line2); border-radius:16px; background:var(--surface2)}
+    padding:13px 16px; border:1px dashed var(--line2); border-radius:16px; background:var(--surface2);
+    text-decoration:none}
+  a.spielteaser:hover{border-color:#F2673A; border-style:solid}
   .spielteaser img{width:62px; height:auto; flex:0 0 auto}
   .spielteaser b{display:block; font-family:"Archivo",sans-serif; font-size:14.5px;
     font-weight:800; color:var(--ink); margin-bottom:3px}
@@ -2052,11 +2054,11 @@
       <span><span class="kicker2" data-i18n="feat_kick">Streaming &amp; Kino</span><b data-i18n="feat_h">Wenn im TV gerade nichts passt.</b><span class="fs" data-i18n="feat_s">Kostenlose Mediathek-Tipps und die aktuellen Kinderfilme im Kino – in einem eigenen Bereich.</span><span class="cta" data-i18n="feat_cta">Jetzt entdecken</span></span>
       <img src="kino.png" alt="" width="640" height="580" loading="lazy" decoding="async">
     </a>
-    <div class="spielteaser">
+    <a class="spielteaser" href="memory.html">
       <img src="leer.png" alt="" width="480" height="479" loading="lazy" decoding="async">
-      <span><b data-i18n="spiel_h">Spiele-Ecke kommt bald</b><span class="s" data-i18n="spiel_s">Memory, Schatten-Raten und mehr – wir basteln schon dran.</span></span>
-      <span class="bald" data-i18n="spiel_bald">Bald</span>
-    </div>
+      <span><b data-i18n="spiel_h">Spiele-Ecke: Memory ist da!</b><span class="s" data-i18n="spiel_s">Paare finden mit Tieren, Fahrzeugen und Leckereien – kostenlos im Browser spielen.</span></span>
+      <span class="bald" data-i18n="spiel_bald">Neu</span>
+    </a>
 
     <details class="wmsec">
       <summary>
@@ -3289,9 +3291,9 @@ const I18N = {
   feat_kick:"Streaming & Kino", feat_h:"Wenn im TV gerade nichts passt.",
   feat_s:"Kostenlose Mediathek-Tipps und die aktuellen Kinderfilme im Kino – in einem eigenen Bereich.",
   feat_cta:"Jetzt entdecken",
-  spiel_h:"Spiele-Ecke kommt bald",
-  spiel_s:"Memory, Schatten-Raten und mehr – wir basteln schon dran.",
-  spiel_bald:"Bald",
+  spiel_h:"Spiele-Ecke: Memory ist da!",
+  spiel_s:"Paare finden mit Tieren, Fahrzeugen und Leckereien – kostenlos im Browser spielen.",
+  spiel_bald:"Neu",
   fussnote:"TVKinderprogramm.de überträgt selbst keine Sendungen. Wir verweisen nur auf legale Sender und Mediatheken und betten ausschließlich offizielle, freigegebene Videos ein. Altersempfehlungen sind redaktionell und ersetzen keine FSK-Freigabe. Programmangaben ohne Gewähr: verbindlich ist das Programm des Senders.",
   jetzt_frei:"Gerade kostenlos",
   tzhint:"Alle Sendezeiten in deutscher Zeit (Europe/Berlin).",
@@ -3369,9 +3371,9 @@ const I18N = {
   feat_kick:"Streaming & cinema", feat_h:"When nothing on TV fits right now.",
   feat_s:"Free library tips and the current kids films in cinemas – in their own section.",
   feat_cta:"Explore now",
-  spiel_h:"Games corner coming soon",
-  spiel_s:"Memory, shadow guessing and more – we're working on it.",
-  spiel_bald:"Soon",
+  spiel_h:"Games corner: Memory is here!",
+  spiel_s:"Find pairs with animals, vehicles and treats – free in your browser.",
+  spiel_bald:"New",
   fussnote:"TVKinderprogramm.de does not broadcast anything itself. We only point to legal channels and media libraries and embed officially released videos. Age guidance is editorial and does not replace an official rating. Schedules without guarantee: the channel's own listing is binding.",
   jetzt_frei:"Free right now",
   tzhint:"All broadcast times in German local time (Europe/Berlin).",
