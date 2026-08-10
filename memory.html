@@ -7,8 +7,7 @@
 <meta name="description" content="Memory kostenlos im Browser spielen: Paare finden mit Tieren, Fahrzeugen und Leckereien. Ohne Anmeldung, ohne Werbung, für Kinder ab 3 Jahren.">
 <link rel="canonical" href="https://tvkinderprogramm.de/memory.html">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
-<meta name="theme-color" content="#F7F5F0" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#111010" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F7F5F0">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Memory online spielen: kostenloses Kinderspiel">
 <meta property="og:description" content="Paare finden mit Tieren, Fahrzeugen und Leckereien. Ohne Anmeldung, ohne Werbung.">
@@ -29,14 +28,6 @@
   --orange:#F2673A; --orange2:#FF8B5F;
   --shadow:0 1px 2px rgba(60,45,25,.05), 0 10px 28px -12px rgba(60,45,25,.16);
   --r:16px;
-}
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#111010; --surface:#221F1D; --surface2:#2C2825;
-    --line:rgba(255,246,240,.10); --line2:rgba(255,246,240,.17);
-    --ink:#F6F1EC; --muted:#B9ACA3;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 30px -14px rgba(0,0,0,.6);
-  }
 }
 *{box-sizing:border-box}
 body{margin:0; background:var(--bg); color:var(--ink);
@@ -175,7 +166,7 @@ let rueckenBild = false, gewonnenBild = false;
 ["tiere","fahrzeuge","essen"].forEach(s=>{
   const i=new Image(); i.onload=()=>{bogen[s]=true; if(s===aktSet) neuesSpiel();}; i.src="memory-"+s+".png";
 });
-(function(){ const i=new Image(); i.onload=()=>{rueckenBild=true;}; i.src="memory-ruecken.png"; })();
+(function(){ const i=new Image(); i.onload=()=>{rueckenBild=true; if(zuege===0 && gefunden===0) neuesSpiel();}; i.src="memory-ruecken.png"; })();
 (function(){ const i=new Image(); i.onload=()=>{gewonnenBild=true;}; i.src="memory-gewonnen.png"; })();
 
 let aktSet="tiere", aktPaare=6, zuege=0, gefunden=0, sperre=false, erste=null, fertigAnim=0;
