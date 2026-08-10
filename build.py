@@ -114,6 +114,12 @@ ADD_CSS = """
   @media (min-width:760px){ .kinogrid{grid-template-columns:repeat(4,1fr)} }
   .kinogrid .kinoart{height:150px}
   .jetztbox + .jetztbox{margin-top:16px}
+  .heromed ~ .heroslot{margin:0 0 16px}
+  .anblogo{font:850 26px "Archivo",sans-serif; color:#fff; letter-spacing:-.02em;
+    text-shadow:0 2px 6px rgba(0,0,0,.3)}
+  .kdesc{font-size:10.5px; color:var(--muted); line-height:1.5; margin:0 1px 9px;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+    min-height:31px}
 
   /* ---- Kompakt-Kacheln: alles sichtbar, kein Aufklappen ---- */
   .kompaktrow .rowhead{cursor:default; padding-bottom:9px}
@@ -1730,6 +1736,45 @@ function initSearch(input, board){
   });
 }
 
+/* ---- Hero-Rotation: Eigenwerbung im Bildplatz ---- */
+(function(){
+  const KANDIDATEN=[
+    {img:"hero.jpg", href:null, cap:null, alt:"Familie schaut gemeinsam Kinderprogramm – Illustration"},
+    {img:"banner-tvfussball.jpg", href:"https://tvfussball.de", ext:true, cap:"slide_tvf", alt:"Fußball im Stadion: TVFussball.de für die Großen"},
+    {img:"banner-muehle.jpg", href:"https://play.google.com/store/apps/details?id=app.muehle.muehle&utm_source=tvk_hero", ext:true, cap:"slide_mm", alt:"Mühle Meister: Brettspiel-App kostenlos im Play Store"},
+    {img:"banner-memory.jpg", href:"memory.html", cap:"slide_mem", alt:"Memory online spielen: Paare finden für Kinder"},
+    {img:"banner-abend.jpg", href:null, cap:null, alt:"Gemütlicher Fernsehabend für Kinder – Illustration"}
+  ];
+  const slot=document.getElementById("heroSlot"), bild=document.getElementById("heroBild"),
+        cap=document.getElementById("heroCap");
+  if(!slot||!bild) return;
+  const da=[KANDIDATEN[0]];
+  let geprueft=1;
+  KANDIDATEN.slice(1).forEach(k=>{
+    const i=new Image();
+    i.onload=()=>{ da.push(k); fertig(); };
+    i.onerror=fertig;
+    i.src=k.img;
+  });
+  function fertig(){ geprueft++; if(geprueft===KANDIDATEN.length && da.length>1) start(); }
+  let idx=0;
+  function zeigen(k){
+    bild.style.opacity="0";
+    setTimeout(()=>{
+      bild.src=k.img;
+      if(k.alt) bild.alt=k.alt;
+      if(k.href){ slot.setAttribute("href",k.href);
+        if(k.ext){ slot.setAttribute("target","_blank"); slot.setAttribute("rel","noopener"); }
+        else { slot.removeAttribute("target"); slot.removeAttribute("rel"); }
+        slot.classList.add("klickbar");
+      } else { slot.removeAttribute("href"); slot.removeAttribute("target"); slot.classList.remove("klickbar"); }
+      if(cap){ if(k.cap){ cap.hidden=false; cap.textContent=t(k.cap); } else cap.hidden=true; }
+      bild.style.opacity="1";
+    }, 380);
+  }
+  function start(){ setInterval(()=>{ idx=(idx+1)%da.length; zeigen(da[idx]); }, 6500); }
+})();
+
 function markFavs(){
   const f=LS.get("tvk_favs",[]);
   $$(".favstar").forEach(s=>{
@@ -2304,44 +2349,7 @@ document.getElementById("idxAlter").addEventListener("click", e=>{
 });
 document.getElementById("alleZeigen").addEventListener("click", ()=>{ teaserLimit+=10; apply(); });
 
-/* ---- Hero-Rotation: Eigenwerbung im Bildplatz ---- */
-(function(){
-  const KANDIDATEN=[
-    {img:"hero.jpg", href:null, cap:null, alt:"Familie schaut gemeinsam Kinderprogramm – Illustration"},
-    {img:"banner-tvfussball.jpg", href:"https://tvfussball.de", ext:true, cap:"slide_tvf", alt:"Fußball im Stadion: TVFussball.de für die Großen"},
-    {img:"banner-muehle.jpg", href:"https://play.google.com/store/apps/details?id=app.muehle.muehle&utm_source=tvk_hero", ext:true, cap:"slide_mm", alt:"Mühle Meister: Brettspiel-App kostenlos im Play Store"},
-    {img:"banner-memory.jpg", href:"memory.html", cap:"slide_mem", alt:"Memory online spielen: Paare finden für Kinder"},
-    {img:"banner-abend.jpg", href:null, cap:null, alt:"Gemütlicher Fernsehabend für Kinder – Illustration"}
-  ];
-  const slot=document.getElementById("heroSlot"), bild=document.getElementById("heroBild"),
-        cap=document.getElementById("heroCap");
-  if(!slot||!bild) return;
-  const da=[KANDIDATEN[0]];
-  let geprueft=1;
-  KANDIDATEN.slice(1).forEach(k=>{
-    const i=new Image();
-    i.onload=()=>{ da.push(k); fertig(); };
-    i.onerror=fertig;
-    i.src=k.img;
-  });
-  function fertig(){ geprueft++; if(geprueft===KANDIDATEN.length && da.length>1) start(); }
-  let idx=0;
-  function zeigen(k){
-    bild.style.opacity="0";
-    setTimeout(()=>{
-      bild.src=k.img;
-      if(k.alt) bild.alt=k.alt;
-      if(k.href){ slot.setAttribute("href",k.href);
-        if(k.ext){ slot.setAttribute("target","_blank"); slot.setAttribute("rel","noopener"); }
-        else { slot.removeAttribute("target"); slot.removeAttribute("rel"); }
-        slot.classList.add("klickbar");
-      } else { slot.removeAttribute("href"); slot.removeAttribute("target"); slot.classList.remove("klickbar"); }
-      if(cap){ if(k.cap){ cap.hidden=false; cap.textContent=t(k.cap); } else cap.hidden=true; }
-      bild.style.opacity="1";
-    }, 380);
-  }
-  function start(){ setInterval(()=>{ idx=(idx+1)%da.length; zeigen(da[idx]); }, 6500); }
-})();
+
 document.getElementById("liveSearch").addEventListener("input", apply);
 apply();
 initSearch(document.getElementById("liveSearch"), board);
@@ -2373,6 +2381,10 @@ PAGES["mediathek"] = dict(
     <img class="heromask" src="kino.png" width="640" height="580" alt="Maskottchen mit Popcorn und 3D-Brille im Kino" fetchpriority="high" decoding="async">
     </div>
     </section>
+    <a class="heroslot" id="heroSlot">
+      <img class="heroart" id="heroBild" src="hero.jpg" width="1500" height="701" loading="lazy" decoding="async" alt="TVKinderprogramm – Illustration">
+      <span class="herocap" id="heroCap" hidden></span>
+    </a>
     <div class="filtercard">
     <div class="fgroup"><span class="fglabel" data-i18n="grp_alter">Alter</span>
     <div class="chiprow" id="medChips" role="group" aria-label="Alter">
@@ -2403,17 +2415,12 @@ PAGES["mediathek"] = dict(
 
     <noscript><p class="nojs">Der Katalog steht oben als Liste. Filter, Sortierung und Suche brauchen JavaScript.</p></noscript>
 
-    <div class="section-eyebrow tipphead sekkopf"><span class="secic blau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="7.5" height="16" rx="2"/><rect x="13.5" y="4" width="7.5" height="16" rx="2"/></svg></span><div class="secht"><h2 data-i18n="anbieter_h">Die Anbieter</h2><span class="cnt" data-i18n="anbieter_s">Kinderbereich im Vergleich</span></div><button class="allelink" id="anbStart">Vergleich anzeigen →</button></div>
-    <div class="klapp" id="anbKlapp"><div class="klapp-in">
-    <div class="board" id="medFree"></div>
-    <div class="board" id="medPaid"></div>
-    </div></div>
+    <section class="jetztbox">
+    <div class="section-eyebrow tipphead sekkopf"><span class="secic blau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="7.5" height="16" rx="2"/><rect x="13.5" y="4" width="7.5" height="16" rx="2"/></svg></span><div class="secht"><h2>Die Anbieter</h2><span class="cnt">Kinderbereiche im Vergleich: kostenlos und im Abo</span></div></div>
+    <div class="board" id="anbBoard"></div>
+    <button class="allelink unten" id="anbMehr" style="display:none">4 weitere anzeigen →</button>
+    </section>
 
-<a class="spielteaser" href="memory.html">
-  <img src="leer.png" alt="" width="480" height="479" loading="lazy" decoding="async">
-  <span><b data-i18n="spiel_h">Spiele-Ecke: Memory ist da!</b><span class="s" data-i18n="spiel_s">Paare finden mit Tieren, Fahrzeugen und Leckereien – kostenlos im Browser spielen.</span></span>
-  <span class="bald" data-i18n="spiel_bald">Neu</span>
-</a>
 
 <section class="seotext">
   <h2 data-i18n="seo_med_h">Kinderserien und Kinderfilme kostenlos in den Mediatheken</h2>
@@ -2474,8 +2481,31 @@ function pcard(p){
     'Streaming-Verf\u00fcgbarkeit: <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">TMDB</a>, powered by <a href="https://www.justwatch.com/" target="_blank" rel="noopener">JustWatch</a>.';
 })();
 
-document.getElementById("medFree").innerHTML = PROVIDERS.filter(p=>p.type!=="abo").map(pcard).join("");
-document.getElementById("medPaid").innerHTML = PROVIDERS.filter(p=>p.type==="abo").map(pcard).join("");
+let anbLimit=4;
+function anbKarte(p){
+  const c=PCOL[p.name]||"#C24009";
+  return '<article class="kinocard anbcard">'+
+    '<div class="kinoart" style="background:linear-gradient(150deg,'+c+',color-mix(in srgb, '+c+' 68%, #14161c))">'+
+      (p.type!=="abo"?'<span class="ribbon neu">Kostenlos</span>':'<span class="ribbon">Abo</span>')+
+      '<span class="anblogo">'+p.short+'</span>'+
+    '</div>'+
+    '<h3>'+p.name+'</h3>'+
+    '<p class="kmeta">'+(p.type==="abo"?p.price:"kostenlos")+' \u00b7 Alter '+p.age+'</p>'+
+    '<p class="kdesc">'+p.kids+'</p>'+
+    '<a class="trailerbtn" target="_blank" rel="noopener" href="'+p.u+'">'+
+    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5l10 6.5-10 6.5z"/></svg>Zum Anbieter</a>'+
+    '</article>';
+}
+function anbZeigen(){
+  const b=document.getElementById("anbBoard"); if(!b) return;
+  const pool=PROVIDERS.slice().sort((a,x)=>((a.type==="abo")?1:0)-((x.type==="abo")?1:0));
+  const seite=pool.slice(0,anbLimit);
+  b.innerHTML='<div class="kinogrid">'+seite.map(anbKarte).join("")+'</div>';
+  const km=document.getElementById("anbMehr"), rest=pool.length-seite.length;
+  if(km){ km.style.display=rest>0?"":"none"; km.textContent=Math.min(4,rest)+" weitere anzeigen \u2192"; }
+}
+{ const am=document.getElementById("anbMehr");
+  if(am) am.addEventListener("click", ()=>{ anbLimit+=4; anbZeigen(); }); }
 
 /* ---------- Katalog und Tipps ---------- */
 const mBoard = document.getElementById("medBoard");
@@ -2686,15 +2716,13 @@ function elterntippUmschalten(){
 
 chipsAnzeigen();
 katalogZeigen();
+anbZeigen();
 (function(){ try{
   if(typeof MEDIA!=="undefined") document.getElementById("statMed").textContent=MEDIA.length;
   if(typeof KINO!=="undefined") document.getElementById("statKino").textContent=KINO.length;
 }catch(_){} })();
 
-document.getElementById("anbStart").addEventListener("click", function(){
-  const auf=document.getElementById("anbKlapp").classList.toggle("auf");
-  this.textContent=auf ? "Ausblenden" : "Vergleich anzeigen \u2192";
-});
+
 
 /* ---- Aktuell im Kino ---- */
 function trailerUrl(titel){
