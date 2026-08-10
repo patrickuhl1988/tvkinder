@@ -1419,6 +1419,12 @@
   .allelink{margin-left:auto; flex:0 0 auto; border:0; background:none; cursor:pointer;
     color:#F2673A; font:800 12.5px "Inter",sans-serif; padding:6px 0; white-space:nowrap}
   .allelink:hover{text-decoration:underline}
+  .allelink.unten{display:flex; justify-content:center; width:100%; margin:0 auto 6px;
+    padding:10px 0; min-height:44px; align-items:center; font-size:13px}
+  .footnav{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; font-size:12px}
+  .footnav a{color:var(--ink); font-weight:650; text-decoration:none}
+  .footnav a:hover{color:#F2673A}
+  .footnav span{color:var(--faint)}
 
   /* Feinschliff Kacheln: ruhige weisse Karten, normale Schrift, ohne Sticker */
   .row, .row.free, .row.playing, .row.retro{background:var(--surface) !important;
@@ -2175,6 +2181,7 @@
   </section>
 
   <footer>
+    <nav class="footnav" aria-label="Seiten"><a href="index.html">Kinderprogramm heute</a><span>·</span><a href="mediathek-kinder.html">Kinderserien streamen &amp; Kino</a><span>·</span><a href="memory.html">Memory online spielen</a></nav>
     <a href="#" data-legal="imprint" data-i18n="imprint">Impressum</a>
     <a href="#" data-legal="privacy" data-i18n="privacy">Datenschutz</a>
     <a href="#" data-legal="about" data-i18n="about">Über uns</a>

@@ -140,6 +140,12 @@ ADD_CSS = """
   .allelink{margin-left:auto; flex:0 0 auto; border:0; background:none; cursor:pointer;
     color:#F2673A; font:800 12.5px "Inter",sans-serif; padding:6px 0; white-space:nowrap}
   .allelink:hover{text-decoration:underline}
+  .allelink.unten{display:flex; justify-content:center; width:100%; margin:0 auto 6px;
+    padding:10px 0; min-height:44px; align-items:center; font-size:13px}
+  .footnav{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; font-size:12px}
+  .footnav a{color:var(--ink); font-weight:650; text-decoration:none}
+  .footnav a:hover{color:#F2673A}
+  .footnav span{color:var(--faint)}
 
   /* Feinschliff Kacheln: ruhige weisse Karten, normale Schrift, ohne Sticker */
   .row, .row.free, .row.playing, .row.retro{background:var(--surface) !important;
@@ -859,7 +865,7 @@ SHELL = """<!DOCTYPE html>
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="preload" as="image" href="headerbild.png" fetchpriority="high">
-<style>
+{head_extra}<style>
 {css}
 </style>
 {site_ld}
@@ -885,6 +891,7 @@ SHELL = """<!DOCTYPE html>
   </section>
 
   <footer>
+    <nav class="footnav" aria-label="Seiten"><a href="index.html">Kinderprogramm heute</a><span>·</span><a href="mediathek-kinder.html">Kinderserien streamen &amp; Kino</a><span>·</span><a href="memory.html">Memory online spielen</a></nav>
     <a href="#" data-legal="imprint" data-i18n="imprint">Impressum</a>
     <a href="#" data-legal="privacy" data-i18n="privacy">Datenschutz</a>
     <a href="#" data-legal="about" data-i18n="about">Über uns</a>
@@ -2089,6 +2096,7 @@ PAGES = {}
 
 PAGES["live"] = dict(
     file="index.html", canon="", page="live",
+    head_extra='<link rel="preload" as="image" href="hero.jpg" fetchpriority="high">\n',
     title="Kinderprogramm heute: Was läuft für Kinder im TV? | TVKinderprogramm.de",
     desc="Das TV-Programm für Kinder heute und morgen: alle Sendungen auf KiKA, Toggo, "
          "Nick und Co. mit Startzeit, Altersempfehlung und Eltern-Check. Täglich aktualisiert.",
@@ -2123,8 +2131,9 @@ PAGES["live"] = dict(
       <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" data-i18n-ph="such_live" placeholder="Sendung, Folge oder Sender suchen …"></div>
     </div>
     <section class="jetztbox" id="jetztBox">
-    <div class="section-eyebrow tipphead jetzthead"><h2 data-i18n="jetzt_h2">Jetzt &amp; als Nächstes</h2>  <button class="allelink" id="alleZeigen">Alle anzeigen</button></div>
+    <div class="section-eyebrow tipphead jetzthead"><h2 data-i18n="jetzt_h2">Jetzt &amp; als Nächstes</h2></div>
     <div class="board" id="liveBoard">{prerender}</div>
+    <button class="allelink unten" id="alleZeigen">Alle anzeigen</button>
     </section>
     <noscript><p class="nojs">Diese Seite zeigt das Kinderprogramm oben als Liste. Filter, Suche und die Detailangaben brauchen JavaScript.</p></noscript>
     <a class="feature" href="mediathek-kinder.html">
@@ -2227,11 +2236,11 @@ document.getElementById("alleZeigen").addEventListener("click", ()=>{ kompakt=fa
 /* ---- Hero-Rotation: Eigenwerbung im Bildplatz ---- */
 (function(){
   const KANDIDATEN=[
-    {img:"hero.jpg", href:null, cap:null},
-    {img:"banner-tvfussball.jpg", href:"https://tvfussball.de", ext:true, cap:"slide_tvf"},
-    {img:"banner-muehle.jpg", href:"https://play.google.com/store/apps/details?id=app.muehle.muehle&utm_source=tvk_hero", ext:true, cap:"slide_mm"},
-    {img:"banner-memory.jpg", href:"memory.html", cap:"slide_mem"},
-    {img:"banner-abend.jpg", href:null, cap:null}
+    {img:"hero.jpg", href:null, cap:null, alt:"Familie schaut gemeinsam Kinderprogramm – Illustration"},
+    {img:"banner-tvfussball.jpg", href:"https://tvfussball.de", ext:true, cap:"slide_tvf", alt:"Fußball im Stadion: TVFussball.de für die Großen"},
+    {img:"banner-muehle.jpg", href:"https://play.google.com/store/apps/details?id=app.muehle.muehle&utm_source=tvk_hero", ext:true, cap:"slide_mm", alt:"Mühle Meister: Brettspiel-App kostenlos im Play Store"},
+    {img:"banner-memory.jpg", href:"memory.html", cap:"slide_mem", alt:"Memory online spielen: Paare finden für Kinder"},
+    {img:"banner-abend.jpg", href:null, cap:null, alt:"Gemütlicher Fernsehabend für Kinder – Illustration"}
   ];
   const slot=document.getElementById("heroSlot"), bild=document.getElementById("heroBild"),
         cap=document.getElementById("heroCap");
@@ -2250,6 +2259,7 @@ document.getElementById("alleZeigen").addEventListener("click", ()=>{ kompakt=fa
     bild.style.opacity="0";
     setTimeout(()=>{
       bild.src=k.img;
+      if(k.alt) bild.alt=k.alt;
       if(k.href){ slot.setAttribute("href",k.href);
         if(k.ext){ slot.setAttribute("target","_blank"); slot.setAttribute("rel","noopener"); }
         else { slot.removeAttribute("target"); slot.removeAttribute("rel"); }
@@ -2704,6 +2714,7 @@ def main():
             nav=nav_html(p["page"]),
             data_js=p["data"](), shell_js=shell_js, page_js=p["page_js"],
             site_ld=site_ld(p),
+            head_extra=p.get("head_extra", ""),
             seo_ld=p.get("seo_ld", lambda: "")(),
             cat_ld=p.get("cat_ld", lambda: "")(),
         )
