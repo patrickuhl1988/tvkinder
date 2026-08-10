@@ -32,10 +32,11 @@
 *{box-sizing:border-box}
 body{margin:0; background:var(--bg); color:var(--ink);
   font-family:"Inter",system-ui,sans-serif; -webkit-font-smoothing:antialiased}
-.wrap{width:min(560px, 100% - 24px); margin:0 auto}
+.wrap{width:min(1080px, 100% - 24px); margin:0 auto}
+.spielfeld{width:min(560px,100%); margin:0 auto}
 header{position:sticky; top:0; z-index:20; background:color-mix(in srgb, var(--bg) 86%, transparent);
   backdrop-filter:blur(14px); border-bottom:1px solid var(--line)}
-.hbar{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 0; width:min(960px,100% - 24px); margin:0 auto}
+.hbar{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 0; width:min(1080px,100% - 24px); margin:0 auto}
 .logo img{display:block; height:48px; width:auto}
 .zurueck{display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:var(--muted);
   font-size:12.5px; font-weight:700; border:1px solid var(--line2); border-radius:999px; padding:7px 12px}
@@ -110,6 +111,7 @@ footer a{color:var(--muted)}
   <h1>Memory: <em>Finde die Paare!</em></h1>
   <p class="lead">Tippe zwei Karten an. Passen die Bilder zusammen, bleiben sie offen. Ganz ohne Zeitdruck &#8211; z&#228;hlen tun nur die Z&#252;ge.</p>
 
+  <div class="spielfeld">
   <div class="chips" id="setWahl" role="group" aria-label="Motiv-Set">
     <button class="chip" data-set="tiere" aria-pressed="true">&#129418; Tiere</button>
     <button class="chip" data-set="fahrzeuge" aria-pressed="false">&#128640; Fahrzeuge</button>
@@ -127,6 +129,7 @@ footer a{color:var(--muted)}
   </div>
 
   <div class="brett" id="brett" aria-live="polite"></div>
+  </div>
 
   <section class="seotext">
     <h2>Memory kostenlos online spielen</h2>

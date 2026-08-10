@@ -233,6 +233,33 @@ ADD_CSS = """
   .allelink:hover{text-decoration:underline}
   .allelink.unten{display:flex; justify-content:center; width:100%; margin:0 auto 6px;
     padding:10px 0; min-height:44px; align-items:center; font-size:13px}
+  /* ---- Breites Desktop-Layout wie TVFussball ---- */
+  .wrap, .hbar{max-width:1080px}
+
+  /* ---- Info-Abschnitte (SEO) im neuen Kartenstil ---- */
+  .seotext{border-top:0; padding-top:6px}
+  .seotext h2{font-family:"Archivo",sans-serif; font-weight:850; font-size:17px;
+    letter-spacing:-.02em; color:var(--ink)}
+  details.wmsec{border-radius:18px; margin-top:12px; border:1px solid var(--line)}
+  details.wmsec>summary{padding:15px 16px; gap:13px}
+  .wm-secico{width:40px; height:40px; flex:0 0 auto; border-radius:12px; border:0 !important;
+    background:rgba(242,103,58,.12) !important; color:#F2673A !important;
+    display:grid; place-items:center}
+  .wm-secico svg{width:20px; height:20px}
+  .wm-sectt b{display:block; font-family:"Archivo",sans-serif; font-weight:800;
+    font-size:14.5px; letter-spacing:-.01em; color:var(--ink)}
+  .wm-sectt>span, .wm-sub{color:var(--muted); font-size:12px}
+  .wmchev{width:32px; height:32px; border-radius:10px; border:1px solid var(--line2);
+    background:var(--surface); color:var(--muted); display:grid; place-items:center;
+    transition:transform .2s, color .15s, border-color .15s}
+  details.wmsec>summary:hover .wmchev{color:#F2673A !important; border-color:#F2673A !important;
+    background:var(--surface) !important}
+  details.wmsec[open]>summary .wmchev{transform:rotate(180deg); color:#F2673A !important;
+    background:rgba(242,103,58,.1) !important; border-color:rgba(242,103,58,.4) !important}
+  .wmsec-body{padding:0 16px 18px; color:var(--muted); font-size:13px; line-height:1.7}
+  .wmsec-body p{margin:0 0 10px}
+  details.wmsec::after{content:none !important}   /* Deko-Ring aus der Basis aus */
+
   .footnav{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; font-size:12px}
   .footnav a{color:var(--ink); font-weight:650; text-decoration:none}
   .footnav a:hover{color:#F2673A}
@@ -2241,7 +2268,7 @@ const EMPTY_LIVE = ()=> '<div class="soonbox"><span class="ic">\\ud83d\\udcfa</s
   '<span style="font-size:12.5px;line-height:1.55">'+t("leer_tx")+'</span></div></div>';
 
 let fGroup = "all", fFree = false, fPast = false, fSpecial = "all";
-let kompakt = true;                        /* Startansicht: nur die nächsten Sendungen */
+let teaserLimit = 4;                       /* Startansicht: 4, dann in 10er-Schritten */
 
 function apply(){
   let list = SHOWS;
@@ -2250,24 +2277,18 @@ function apply(){
   if(fGroup.indexOf("genre:")===0) list = list.filter(s=>(s.genres||[s.genre]).includes(fGroup.slice(6)));
   else if(fGroup !== "all") list = list.filter(s=>s.grp===fGroup);
   const suche=(document.getElementById("liveSearch").value||"").trim();
-  const teaser = kompakt && !suche;
-  const jh=document.querySelector(".jetzthead"), jb=document.getElementById("alleZeigen");
-  const bx=document.getElementById("jetztBox");
-  if(teaser){
-    if(bx) bx.classList.remove("offen");
-    if(jh) jh.style.display="";
-    let basis=list;
-    if(fGroup==="all"){ const kinder=list.filter(x=>(x.age||0)<=6); if(kinder.length>=4) basis=kinder; }
-    renderBoard(board, basis.slice(0,4), EMPTY_LIVE());
-    if(jb){ const rest=Math.max(0, list.length-4);
-      jb.textContent=t("jetzt_alle").replace("%s", rest);
-      jb.style.display = rest>0 ? "" : "none"; }
-  } else {
-    if(bx) bx.classList.add("offen");
-    if(jh) jh.style.display="none";
+  const jb=document.getElementById("alleZeigen");
+  if(suche){
     if(jb) jb.style.display="none";
     renderBoard(board, list, EMPTY_LIVE());
+    return;
   }
+  let basis=list;
+  if(fGroup==="all"){ const kinder=list.filter(x=>(x.age||0)<=6); if(kinder.length>=4) basis=kinder; }
+  renderBoard(board, basis.slice(0,teaserLimit), EMPTY_LIVE());
+  const rest=Math.max(0, basis.length - Math.min(teaserLimit, basis.length));
+  if(jb){ jb.style.display = rest>0 ? "" : "none";
+    jb.textContent = Math.min(10,rest)+" weitere anzeigen \u2192"; }
 }
 
 /* Minütlich nachziehen, damit gelaufene Sendungen von selbst verschwinden */
@@ -2275,13 +2296,13 @@ setInterval(()=>{ if(!fPast) apply(); }, 60000);
 
 document.getElementById("idxAlter").addEventListener("click", e=>{
   const b=e.target.closest(".fchip"); if(!b) return;
-  kompakt = true;
+  teaserLimit = 4;
   fGroup = (fGroup===b.dataset.a) ? "all" : b.dataset.a;
   document.querySelectorAll("#idxAlter .fchip").forEach(x=>
     x.setAttribute("aria-pressed", String(x.dataset.a===fGroup)));
   apply();
 });
-document.getElementById("alleZeigen").addEventListener("click", ()=>{ kompakt=false; apply(); });
+document.getElementById("alleZeigen").addEventListener("click", ()=>{ teaserLimit+=10; apply(); });
 
 /* ---- Hero-Rotation: Eigenwerbung im Bildplatz ---- */
 (function(){
