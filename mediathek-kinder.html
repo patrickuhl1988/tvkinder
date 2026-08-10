@@ -1581,8 +1581,13 @@
   .feature b{display:block; font-family:"Archivo",sans-serif; font-size:22px;
     font-weight:850; letter-spacing:-.03em; margin-bottom:7px}
   .feature .fs{display:block; color:#DDD7EE; font-size:13px; line-height:1.6; margin-bottom:13px}
-  .feature .cta{display:inline-flex; background:#fff; color:#322A50; padding:9px 13px;
-    border-radius:11px; font-weight:800; font-size:12.5px}
+  .feature .ctas{display:flex; flex-wrap:wrap; gap:8px; margin-top:13px}
+  .feature .cta{display:inline-flex; background:#fff; color:#322A50; padding:10px 14px;
+    border-radius:11px; font-weight:800; font-size:12.5px; text-decoration:none; min-height:40px;
+    align-items:center}
+  .feature .cta.cta2{background:rgba(255,255,255,.12); color:#fff;
+    border:1px solid rgba(255,255,255,.45)}
+  .feature .cta.cta2:hover{background:rgba(255,255,255,.2)}
   .feature img{width:100%; max-width:240px; height:auto; justify-self:center}
   .feature:hover .cta{background:#F2E9FF}
   @media(max-width:620px){ .feature{grid-template-columns:1fr; gap:10px} .feature img{max-width:180px} }
@@ -2308,11 +2313,7 @@
   </div>
 </div>
 
-<nav class="bottomnav" role="tablist" aria-label="Bereiche">
-  <a class="navitem" role="tab" aria-selected="false" data-tab="live" href="index.html">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="12.5" rx="2.6"/><path d="M8 20.5h8M12 17v3.5"/><path d="M10.7 9.1l3.4 2-3.4 2z" fill="currentColor" stroke="none"/></svg>
-    <span data-i18n="nav_live">Heute</span></a>
-</nav>
+
 
 <div class="consent hide" id="consent">
   <p data-i18n="consent">Wir messen anonym, welche Seiten genutzt werden: cookiefrei über Cloudflare Web Analytics. Weitere Dienste laden wir erst nach deiner Einwilligung.</p>

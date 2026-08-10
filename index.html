@@ -1582,8 +1582,13 @@
   .feature b{display:block; font-family:"Archivo",sans-serif; font-size:22px;
     font-weight:850; letter-spacing:-.03em; margin-bottom:7px}
   .feature .fs{display:block; color:#DDD7EE; font-size:13px; line-height:1.6; margin-bottom:13px}
-  .feature .cta{display:inline-flex; background:#fff; color:#322A50; padding:9px 13px;
-    border-radius:11px; font-weight:800; font-size:12.5px}
+  .feature .ctas{display:flex; flex-wrap:wrap; gap:8px; margin-top:13px}
+  .feature .cta{display:inline-flex; background:#fff; color:#322A50; padding:10px 14px;
+    border-radius:11px; font-weight:800; font-size:12.5px; text-decoration:none; min-height:40px;
+    align-items:center}
+  .feature .cta.cta2{background:rgba(255,255,255,.12); color:#fff;
+    border:1px solid rgba(255,255,255,.45)}
+  .feature .cta.cta2:hover{background:rgba(255,255,255,.2)}
   .feature img{width:100%; max-width:240px; height:auto; justify-self:center}
   .feature:hover .cta{background:#F2E9FF}
   @media(max-width:620px){ .feature{grid-template-columns:1fr; gap:10px} .feature img{max-width:180px} }
@@ -2209,15 +2214,14 @@
     <button class="allelink unten" id="alleZeigen">Alle anzeigen</button>
     </section>
     <noscript><p class="nojs">Diese Seite zeigt das Kinderprogramm oben als Liste. Filter, Suche und die Detailangaben brauchen JavaScript.</p></noscript>
-    <a class="feature" href="mediathek-kinder.html">
-      <span><span class="kicker2" data-i18n="feat_kick">Streaming &amp; Kino</span><b data-i18n="feat_h">Wenn im TV gerade nichts passt.</b><span class="fs" data-i18n="feat_s">Kostenlose Mediathek-Tipps und die aktuellen Kinderfilme im Kino – in einem eigenen Bereich.</span><span class="cta" data-i18n="feat_cta">Jetzt entdecken</span></span>
+    <div class="feature">
+      <span><span class="kicker2">Streaming &amp; Kino</span><b>Wenn im TV gerade nichts passt.</b>
+      <span class="ctas">
+        <a class="cta" href="mediathek-kinder.html">Mediathek- &amp; Kino-Tipps entdecken</a>
+        <a class="cta cta2" href="memory.html">Eine Runde Memory spielen</a>
+      </span></span>
       <img src="kino.png" alt="" width="640" height="580" loading="lazy" decoding="async">
-    </a>
-    <a class="spielteaser" href="memory.html">
-      <img src="leer.png" alt="" width="480" height="479" loading="lazy" decoding="async">
-      <span><b data-i18n="spiel_h">Spiele-Ecke: Memory ist da!</b><span class="s" data-i18n="spiel_s">Paare finden mit Tieren, Fahrzeugen und Leckereien – kostenlos im Browser spielen.</span></span>
-      <span class="bald" data-i18n="spiel_bald">Neu</span>
-    </a>
+    </div>
 
     <details class="wmsec">
       <summary>
