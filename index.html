@@ -1394,8 +1394,22 @@
   .stat strong{display:block; font-family:"Archivo",sans-serif; font-size:20px;
     font-weight:850; letter-spacing:-.03em; color:var(--ink)}
   .stat span{display:block; color:var(--muted); font-size:11.5px; margin-top:2px}
-  .heroart{display:block; width:100%; height:auto; border-radius:var(--r);
-    box-shadow:var(--shadow); border:1px solid var(--line)}
+  .heroslot{position:relative; display:block; text-decoration:none}
+  .heroslot.klickbar{cursor:pointer}
+  .heroart{display:block; width:100%; height:auto; aspect-ratio:1500/701; object-fit:cover;
+    border-radius:var(--r); box-shadow:var(--shadow); border:1px solid var(--line);
+    transition:opacity .38s ease}
+  .herocap{position:absolute; left:12px; bottom:12px; max-width:calc(100% - 24px);
+    background:rgba(32,37,49,.78); color:#fff; backdrop-filter:blur(6px);
+    border-radius:999px; padding:8px 14px; font:650 12px "Inter",sans-serif; line-height:1.35}
+  .allebtn{display:flex; justify-content:center; margin:14px auto 0; border:0; cursor:pointer;
+    background:linear-gradient(135deg,#F2673A,#FF8B5F); color:#fff; border-radius:999px;
+    padding:13px 24px; font:700 13.5px "Inter",sans-serif; min-height:44px; align-items:center;
+    box-shadow:0 10px 24px -10px rgba(242,103,58,.55); transition:transform .12s, box-shadow .12s}
+  .allebtn:hover{transform:translateY(-1px); box-shadow:0 13px 28px -10px rgba(242,103,58,.6)}
+  .logowort{display:block; height:40px; width:auto}
+  @media (max-width:430px){ .logowort{height:32px} }
+  .logo{display:flex; align-items:center; gap:9px}
   html[data-theme="dark"] .heroart{opacity:.94}
 
   .feature{display:grid; grid-template-columns:1.25fr .75fr; gap:18px; align-items:center;
@@ -1998,7 +2012,7 @@
 
 <header>
   <div class="hbar">
-    <a class="logo" href="index.html" aria-label="TVKinderprogramm.de – zur Startseite"><img class="logobanner" src="headerbild.png" width="518" height="160" fetchpriority="high" decoding="async" alt="TVKinderprogramm.de: Kinderprogramm im Überblick"></a>
+    <a class="logo" href="index.html" aria-label="TVKinderprogramm.de – zur Startseite"><img class="logowort" src="logo-schriftzug.png" alt="TVKinderprogramm" height="44" decoding="async" onerror="this.hidden=true"><img class="logobanner" src="headerbild.png" width="518" height="160" fetchpriority="high" decoding="async" alt="TVKinderprogramm.de: Kinderprogramm im Überblick"></a>
   </div>
 </header>
 
@@ -2014,18 +2028,11 @@
       <div class="stat"><strong id="statTipps">25+</strong><span data-i18n="stat_frei">Elterntipps aus der Redaktion</span></div>
       <div class="stat"><strong>3–13</strong><span data-i18n="stat_alter">Jahre Altersfilter</span></div>
     </div>
-    <img class="heroart" src="hero.jpg" width="1500" height="701" fetchpriority="high" decoding="async" alt="Familie schaut gemeinsam Kinderprogramm – Illustration">
+    <a class="heroslot" id="heroSlot">
+      <img class="heroart" id="heroBild" src="hero.jpg" width="1500" height="701" fetchpriority="high" decoding="async" alt="TVKinderprogramm – Illustration">
+      <span class="herocap" id="heroCap" hidden></span>
+    </a>
     </section>
-    <a class="crosslink" id="bannerTvf" href="https://tvfussball.de" target="_blank" rel="noopener">
-      <span class="cl-ic" aria-hidden="true">TV</span>
-      <span class="cl-txt"><b data-i18n="cl_b">Und für die Großen?</b><span data-i18n="cl_s">Alle Spiele heute im TV, Stream und Radio: auf TVFussball.de</span></span>
-      <span class="cl-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
-    </a>
-    <a class="crosslink muehle" id="bannerMuehle" href="https://play.google.com/store/apps/details?id=app.muehle.muehle&amp;utm_source=emea_Med" target="_blank" rel="noopener" hidden>
-      <span class="cl-ic mm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="5" r="2.2"/><circle cx="12" cy="5" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="5" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="12" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/></svg></span>
-      <span class="cl-txt"><b data-i18n="mm_b">Kurze Pause?</b><span data-i18n="mm_s">Mühle Meister: der Brettspiel-Klassiker als kostenlose App im Play Store</span></span>
-      <span class="cl-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
-    </a>
     <div class="fgroup filterbar">
       <div class="chiprow" id="idxAlter" role="group" aria-label="Alter">
         <button class="fchip tmode" data-a="all" aria-pressed="true" data-i18n="alter_alle">Alle</button>
@@ -2035,8 +2042,9 @@
       </div>
       <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" data-i18n-ph="such_live" placeholder="Sendung, Folge oder Sender suchen …"></div>
     </div>
-    <div class="section-eyebrow tipphead jetzthead"><h2 data-i18n="jetzt_h2">Jetzt &amp; als Nächstes</h2><span class="cnt" data-i18n="jetzt_s">Die wichtigsten Sendungen der nächsten Stunden</span>  <button class="mehrbtn klein" id="alleZeigen">Alle Sendungen anzeigen</button></div>
+    <div class="section-eyebrow tipphead jetzthead"><h2 data-i18n="jetzt_h2">Jetzt &amp; als Nächstes</h2></div>
     <div class="board" id="liveBoard"></div>
+    <button class="allebtn" id="alleZeigen">Alle Sendungen anzeigen</button>
     <noscript><p class="nojs">Diese Seite zeigt das Kinderprogramm oben als Liste. Filter, Suche und die Detailangaben brauchen JavaScript.</p></noscript>
     <a class="feature" href="mediathek-kinder.html">
       <span><span class="kicker2" data-i18n="feat_kick">Streaming &amp; Kino</span><b data-i18n="feat_h">Wenn im TV gerade nichts passt.</b><span class="fs" data-i18n="feat_s">Kostenlose Mediathek-Tipps und die aktuellen Kinderfilme im Kino – in einem eigenen Bereich.</span><span class="cta" data-i18n="feat_cta">Jetzt entdecken</span></span>
@@ -3279,6 +3287,9 @@ const I18N = {
   jetzt_s:"Die wichtigsten Sendungen der nächsten Stunden",
   jetzt_alle:"Alle %s Sendungen anzeigen",
   alter_a3:"3–5 Jahre", alter_a6:"6–9 Jahre", alter_a10:"10–13 Jahre",
+  slide_tvf:"Für die Großen: alle Spiele heute auf TVFussball.de",
+  slide_mm:"Kurze Pause? Mühle Meister – kostenlos im Play Store",
+  slide_mem:"Spiele-Ecke: Memory jetzt kostenlos spielen",
   fussnote:"TVKinderprogramm.de überträgt selbst keine Sendungen. Wir verweisen nur auf legale Sender und Mediatheken und betten ausschließlich offizielle, freigegebene Videos ein. Altersempfehlungen sind redaktionell und ersetzen keine FSK-Freigabe. Programmangaben ohne Gewähr: verbindlich ist das Programm des Senders.",
   jetzt_frei:"Gerade kostenlos",
   tzhint:"Alle Sendezeiten in deutscher Zeit (Europe/Berlin).",
@@ -3363,6 +3374,9 @@ const I18N = {
   jetzt_s:"The most important shows of the next hours",
   jetzt_alle:"Show all %s programmes",
   alter_a3:"3–5 years", alter_a6:"6–9 years", alter_a10:"10–13 years",
+  slide_tvf:"For the grown-ups: all matches today on TVFussball.de",
+  slide_mm:"Quick break? Mühle Meister – free on Google Play",
+  slide_mem:"Games corner: play Memory for free now",
   fussnote:"TVKinderprogramm.de does not broadcast anything itself. We only point to legal channels and media libraries and embed officially released videos. Age guidance is editorial and does not replace an official rating. Schedules without guarantee: the channel's own listing is binding.",
   jetzt_frei:"Free right now",
   tzhint:"All broadcast times in German local time (Europe/Berlin).",
@@ -4039,11 +4053,6 @@ if(_ft) _ft.addEventListener("click", function(){
 });
 
 
-/* Eigenwerbung: ein Banner pro Seitenaufruf, 1 von 4 zeigt die Mühle-App */
-(function(){
-  const tvf=document.getElementById("bannerTvf"), mm=document.getElementById("bannerMuehle");
-  if(tvf && mm && Math.random()<0.25){ tvf.hidden=true; mm.hidden=false; }
-})();
 
 
 
@@ -4092,10 +4101,11 @@ function apply(){
   const jh=document.querySelector(".jetzthead"), jb=document.getElementById("alleZeigen");
   if(teaser){
     if(jh) jh.style.display="";
-    if(jb) jb.textContent=t("jetzt_alle").replace("%s", list.length);
-    renderBoard(board, list.slice(0,10), EMPTY_LIVE());
+    if(jb){ jb.style.display=""; jb.textContent=t("jetzt_alle").replace("%s", list.length); }
+    renderBoard(board, list.slice(0,4), EMPTY_LIVE());
   } else {
     if(jh) jh.style.display="none";
+    if(jb) jb.style.display="none";
     renderBoard(board, list, EMPTY_LIVE());
   }
 }
@@ -4111,6 +4121,44 @@ document.getElementById("idxAlter").addEventListener("click", e=>{
   apply();
 });
 document.getElementById("alleZeigen").addEventListener("click", ()=>{ kompakt=false; apply(); });
+
+/* ---- Hero-Rotation: Eigenwerbung im Bildplatz ---- */
+(function(){
+  const KANDIDATEN=[
+    {img:"hero.jpg", href:null, cap:null},
+    {img:"banner-tvfussball.png", href:"https://tvfussball.de", ext:true, cap:"slide_tvf"},
+    {img:"banner-muehle.png", href:"https://play.google.com/store/apps/details?id=app.muehle.muehle&utm_source=tvk_hero", ext:true, cap:"slide_mm"},
+    {img:"banner-memory.png", href:"memory.html", cap:"slide_mem"},
+    {img:"banner-abend.png", href:null, cap:null}
+  ];
+  const slot=document.getElementById("heroSlot"), bild=document.getElementById("heroBild"),
+        cap=document.getElementById("heroCap");
+  if(!slot||!bild) return;
+  const da=[KANDIDATEN[0]];
+  let geprueft=1;
+  KANDIDATEN.slice(1).forEach(k=>{
+    const i=new Image();
+    i.onload=()=>{ da.push(k); fertig(); };
+    i.onerror=fertig;
+    i.src=k.img;
+  });
+  function fertig(){ geprueft++; if(geprueft===KANDIDATEN.length && da.length>1) start(); }
+  let idx=0;
+  function zeigen(k){
+    bild.style.opacity="0";
+    setTimeout(()=>{
+      bild.src=k.img;
+      if(k.href){ slot.setAttribute("href",k.href);
+        if(k.ext){ slot.setAttribute("target","_blank"); slot.setAttribute("rel","noopener"); }
+        else { slot.removeAttribute("target"); slot.removeAttribute("rel"); }
+        slot.classList.add("klickbar");
+      } else { slot.removeAttribute("href"); slot.removeAttribute("target"); slot.classList.remove("klickbar"); }
+      if(cap){ if(k.cap){ cap.hidden=false; cap.textContent=t(k.cap); } else cap.hidden=true; }
+      bild.style.opacity="1";
+    }, 380);
+  }
+  function start(){ setInterval(()=>{ idx=(idx+1)%da.length; zeigen(da[idx]); }, 6500); }
+})();
 document.getElementById("liveSearch").addEventListener("input", apply);
 apply();
 initSearch(document.getElementById("liveSearch"), board);
