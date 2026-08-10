@@ -1,22 +1,11 @@
 # -*- coding: utf-8 -*-
 """Kindersendungen der Vollprogramme.
 
-Erzeugt von scan_kinder.py aus tv.de am 09.08.2026. Auswahl nach Kategorie,
+Erzeugt von scan_kinder.py aus tv.de am 10.08.2026. Auswahl nach Kategorie,
 bekannten Titeln und Beschreibung; Alterswerte heuristisch.
 """
 
 TAGE = [
-    ("Sonntag, 09.08.2026", "SAT.1", [
-        ('17:20', 'Hotel Transsilvanien 4: Eine Monster Verwandlung', '', 'Zeichentrick', 95, 6, 'a6', 55, 'Die Monster aus dem Hotel Transsilvanien bekommen es mit einer defekten Erfindung zu tun, die sie ku'),
-    ]),
-    ("Sonntag, 09.08.2026", "MDR", [
-        ('15:30', 'Die Gänseprinzessin', '', 'Serie', 60, 6, 'a6', 55, 'Die humorvolle und fröhliche Prinzessin Polly hat es nicht leicht. Das Königreich ihrer Eltern befin'),
-        ('16:35', 'Der süße Brei', '', 'Serie', 85, 6, 'a6', 55, 'Eine große Hungersnot bedroht das Land. Schuld daran ist auch der gefürchtete Graf Ruben. Bevor die '),
-        ('18:52', 'Unser Sandmännchen', '', 'Serie', 8, 3, 'a3', 55, 'Frau Elster saß zu lange in der Sonne und wird auch noch böse, als ihr Herr Fuchs nachweist, dass si'),
-    ]),
-    ("Sonntag, 09.08.2026", "RBB", [
-        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Kallis Gute-Nacht-Geschichten: Kalli - Biene'),
-    ]),
     ("Montag, 10.08.2026", "ProSieben Maxx", [
         ('16:45', 'Dr. STONE', 'Auge der Wissenschaft', 'Anime', 25, 12, 'a10', 55, 'Senku und seine Freunde erhalten mysteriöse Signale einer unbekannten Person, die sie "Whyman" nenne'),
         ('17:10', 'Dragon Ball Super', 'Überschreite alle Grenzen! Goku gegen Gohan!', 'Anime', 25, 12, 'a10', 55, 'Durch Piccolos Training strotzt Son Gohan geradezu vor Selbstvertrauen. Siegessicher fordert er sein'),
@@ -25,14 +14,7 @@ TAGE = [
         ('18:30', 'One Piece', "Trueno Bastardo - Kyros' ultimative Attacke!", 'Anime', 25, 12, 'a10', 55, "Diamante verliert angesichts Kyros' Gleichgültigkeit die Fassung. Blutüberströmt nimmt der Krieger d"),
         ('18:55', 'Detektiv Conan', 'Wo ist Nintaro Shinmei? (1)', 'Anime', 25, 12, 'a10', 55, 'Fünf Personen stehen um einen in der Mitte liegenden toten Körper herum, als plötzlich ein Unbekannt'),
     ]),
-    ("Montag, 10.08.2026", "ZDFneo", [
-        ('06:35', 'H2O - Plötzlich Meerjungfrau', 'Dicht auf der Spur', 'Fantasyserie', 25, 10, 'a10', 55, 'Cleo und Lewis entdecken vor der Insel Mako die Jacht von Dr. Denman, der neugierigen Meeresbiologin'),
-        ('07:00', 'H2O - Plötzlich Meerjungfrau', 'In der Falle', 'Fantasyserie', 25, 10, 'a10', 55, 'Aufregung bei den Meerjungfrauen: Der Vollmond soll diesmal eine noch stärkere Wirkung haben als son'),
-    ]),
     ("Montag, 10.08.2026", "WDR", [
-        ('07:10', 'Wissen macht Ah!', 'Schwerkraft leicht gemacht', 'Vorlesen', 25, 3, 'a3', 55, 'Was ist denn das? Mitten im Studio hängt ein Stein in der Luft! Müsste der nicht runterfallen? Und s'),
-        ('07:35', 'POV - Deine Geschichte zählt', 'Jung, mutig, sozial · Wenn Schüler Start-ups gründen', 'Vorlesen', 10, 3, 'a3', 55, 'Leonie (16) fühlt sich in der Schule oft ausgeschlossen. Halt findet sie in Musik, Konzerten und Onl'),
-        ('07:45', 'Campsite', 'Werwolf', 'Jugendserie', 10, 3, 'a3', 55, 'Jemand hat im Chat der Freundesgruppe Gerüchte über Andrine verbreitet: Stimmt es, dass sie in Sebbe'),
         ('07:55', 'Geschichten vom Franz', '', 'Film', 75, 3, 'a3', 55, 'Franz ist neun Jahre alt und wird von allen gehänselt. Dabei ist er doch ein Mann - na ja, so gut wi'),
     ]),
     ("Montag, 10.08.2026", "MDR", [
@@ -40,18 +22,6 @@ TAGE = [
     ]),
     ("Montag, 10.08.2026", "RBB", [
         ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Moppi und MiWau: Die kleine Nachtmusik'),
-    ]),
-    ("Montag, 10.08.2026", "HR", [
-        ('05:15', 'Schau in meine Welt', 'Linus, der Wasserspringer - auf dem Weg zur Meisterschaft', 'Vorlesen', 25, 3, 'a3', 55, 'Linus liebt es, vom Turm zu springen, durch die Luft zu fliegen und ins Wasser einzutauchen. Das mac'),
-        ('06:30', 'Leo da Vinci', 'Der Rubin von Seilan', 'Zeichentrick', 10, 3, 'a3', 55, 'Lorenzo de Medici ruft nach Leo, um ihn damit zu beauftragen, einen wertvollen Rubin für ihn zu find'),
-        ('06:40', 'Leo da Vinci', 'Über den Dächern von Florenz', 'Zeichentrick', 15, 3, 'a3', 55, 'Lisa will Leo von seinem Studium des Buches über die Reisen des Marco Polo ablenken und fordert ihn '),
-    ]),
-    ("Montag, 10.08.2026", "ORF 1", [
-        ('06:00', 'Mister Paper', 'Mister Paper verläuft sich', 'Zeichentrick', 5, 3, 'a3', 55, 'Mister Paper macht einen ausgiebigen Spaziergang mit seiner Katze. Unterwegs dekoriert er die Landsc'),
-        ('06:05', 'Wickie und die starken Männer', 'Die rotäugigen Riesen', 'Zeichentrick', 25, 3, 'a3', 55, 'Eines Tages wird Snorre von Wickie und Ylvi ohnmächtig am Strand in der Nähe des Dorfes gefunden. Er'),
-        ('06:30', 'Servus Kasperl', 'Kasperl & Buffi: Zickzackwumm!', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
-        ('06:55', 'Die Jagd nach dem Kju Wang', 'Die Entführung des Herzogs', 'Zeichentrick', 25, 3, 'a3', 55, 'Im Palast kommt ein Brief mit der Mitteilung an, dass Cirillos Bruder, Sebasto, schwer krank sei und'),
-        ('07:35', 'Garfield', 'Miese Maschinen - Teil 2', 'Zeichentrick', 15, 3, 'a3', 55, 'Jon ist nicht der Einzige, der von seiner künstlichen Intelligenz abhängig ist. Es geht fast allen s'),
     ]),
     ("Montag, 10.08.2026", "SRF 1", [
         ('17:45', 'Pompon der kleine Bär', 'Ich wett ich wär gross', 'Vorlesen', 15, 6, 'a6', 55, 'Pompon will gross sein und geht mit seinem Papa ein Windrad flicken. Es ist anstrengender als gedach'),
@@ -102,5 +72,47 @@ TAGE = [
     ]),
     ("Dienstag, 11.08.2026", "SRF 1", [
         ('17:45', 'Pompon der kleine Bär', 'Nuss oder Ei?', 'Vorlesen', 15, 6, 'a6', 55, 'Pompon und Rita versuchen, die Ursprünge eines geheimnisvollen Eis (oder Nuss) zu ergründen und müss'),
+    ]),
+    ("Mittwoch, 12.08.2026", "ProSieben Maxx", [
+        ('16:45', 'Dr. STONE', 'Treasure Box', 'Anime', 25, 12, 'a10', 55, 'Senku und seine Freunde stechen mit ihrem neu gebauten Schiff Perseus in See. Nun wollen sie die Sch'),
+        ('17:10', 'Dragon Ball Super', 'Eine Krise im 7. Universum! Das Team ist nicht vollzählig!', 'Anime', 25, 12, 'a10', 55, 'Das dritte Universum überlässt bei der Auswahl seiner Kämpfer nichts dem Zufall. Mit besonderen Modi'),
+        ('17:35', 'Detektiv Conan', 'Real 30 Minutes', 'Anime', 25, 12, 'a10', 55, 'Conan und Ran sind mit Kogoro in einem Einkaufszentrum unterwegs und müssen noch etwas Zeit totschla'),
+        ('18:00', 'One Piece', "Mach's gut! - Bellamys Schlag zum Abschied", 'Anime', 30, 12, 'a10', 55, 'Die Lage spitzt sich so weit zu, dass die Marine sich gezwungen sieht, die Bevölkerung zu evakuieren'),
+        ('18:30', 'One Piece', 'Law stirbt! - Ruffys wütender Angriff', 'Anime', 25, 12, 'a10', 55, 'Nur noch zwei von De Flamingos Schergen sind kampffähig, doch auch die Strohhutbande hat Verluste zu'),
+        ('18:55', 'Detektiv Conan', 'Der Serienmörder von Osaka (1)', 'Anime', 25, 12, 'a10', 55, 'Kürzlich gab es zwei Morde in Osaka. Es gibt jedoch jeweils keine Zeugen und auch keine Verbindungen'),
+    ]),
+    ("Mittwoch, 12.08.2026", "WDR", [
+        ('07:35', 'Campsite', 'Gekauft und Bezahlt', 'Jugendserie', 5, 3, 'a3', 55, 'Andrine verteilt in der Clique Süßigkeiten aus dem Supermarkt des Campingplatzes und ihre Freunde si'),
+        ('07:40', 'Campsite', 'Duell', 'Jugendserie', 5, 3, 'a3', 55, 'Anja und Silje haben den ganzen Sommer Zugang zum Ballspielplatz. Hauptsache, sie lassen Lea nicht r'),
+        ('07:45', 'Campsite', 'Ein neuer Slush-Meister', 'Jugendserie', 10, 3, 'a3', 55, 'Theo bewirbt sich um einen Job als Slushie-Verkäufer, aber bei seinen Probeschichten läuft der Verka'),
+        ('07:55', 'Das Camp in der Wildnis', 'Alles nass', 'Vorlesen', 25, 3, 'a3', 55, 'Nichts für schwache Nerven! Die 9. Klässler haben im Kajak nicht nur mit strömendem Regen zu kämpfen'),
+    ]),
+    ("Mittwoch, 12.08.2026", "NDR", [
+        ('06:00', 'Sesamstraße', '', 'Vorlesen', 20, 3, 'a3', 55, 'Bert möchte Elektrostatik erklären. Allerdings entfremdet Ernie den für die Erklärung vorgesehenen L'),
+        ('06:20', 'Schloss Einstein', '1067', 'Jugendserie', 25, 10, 'a10', 55, 'Joshua hält sich für schlauer als das Schatzsuche-Team von Maxi. Er nutzt den Schulausflug ins Stasi'),
+        ('06:45', 'Schloss Einstein', '1068', 'Jugendserie', 25, 10, 'a10', 55, 'Tahmina und Mikka suchen im Wald nach dem Schatz. Statt etwas zu finden, kommen beide jedoch vom Weg'),
+        ('07:10', 'Die Pfefferkörner', 'Stinkbombe', 'Serie', 30, 10, 'a10', 55, 'Hakim wird morgens vor der Schule von einem mysteriösen Angreifer attackiert und verliert kurzzeitig'),
+        ('07:40', 'Die Pfefferkörner', 'Plan Albatros', 'Serie', 35, 10, 'a10', 55, 'Moritz kommt auf seiner Laufrunde zwei Villeneinbrechern in die Quere. Er kann zwar geistesgegenwärt'),
+    ]),
+    ("Mittwoch, 12.08.2026", "MDR", [
+        ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Ein mysteriöses Geräusch hält die Erdmännchen Jan & Henry vom Einschlafen ab.'),
+    ]),
+    ("Mittwoch, 12.08.2026", "RBB", [
+        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Jan & Henry: Das Meerschweinchen'),
+    ]),
+    ("Mittwoch, 12.08.2026", "HR", [
+        ('06:20', 'Leo da Vinci', 'Der Fluchtversuch', 'Zeichentrick', 10, 3, 'a3', 55, 'Um Leo und seinen Freunden schnell folgen zu können, verschaffen sich die beiden Gauner Robert und J'),
+        ('06:30', 'Leo da Vinci', 'Das Buch des Marco Polo', 'Zeichentrick', 15, 3, 'a3', 55, 'Bevor er auf große Abenteuerreise geht, verabschiedet sich Leo wehmütig von seinem geliebten Geheimv'),
+    ]),
+    ("Mittwoch, 12.08.2026", "ORF 1", [
+        ('06:00', 'Mister Paper', 'Mister Paper baut ein Schloss', 'Zeichentrick', 5, 3, 'a3', 55, 'Mister Paper hat sich viel vorgenommen: Er will ein Schloss bauen! Für dieses Großprojekt braucht er'),
+        ('06:05', 'Wickie und die starken Männer', 'Wickie gewinnt einen Freund', 'Zeichentrick', 25, 3, 'a3', 55, 'Auf dem Heimweg von England suchen die Wikinger an der Küste nach Wasser. Sie werden von Sverker und'),
+        ('06:30', 'Servus Kasperl', 'Kasperl & Hopsi: Der hinterlistige Schlaumaier', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
+        ('06:55', 'Die Jagd nach dem Kju Wang', 'Die Zwillinge', 'Zeichentrick', 25, 3, 'a3', 55, 'Ardelia und Herzog Cirillo erhalten eine Einladung zur Hochzeit des Jahres, ein absolutes gesellscha'),
+        ('07:35', 'Vegesaurier', 'Das große Brüllen', 'Zeichentrick', 5, 3, 'a3', 55, 'Ginger und die Erbs-Rexe machen einen Brüllwettbewerb. Weil alle vier gleichzeitig kräftig herumschr'),
+        ('07:40', 'Garfield', 'Miese Maschinen - Teil 4', 'Zeichentrick', 15, 3, 'a3', 55, 'Einer der Widerstandskämpfer gegen die miesen Maschinen reist auf die Erde und bittet Garfield, mit '),
+    ]),
+    ("Mittwoch, 12.08.2026", "SRF 1", [
+        ('17:45', 'Pompon der kleine Bär', 'De gröschti Goldschatz', 'Vorlesen', 15, 6, 'a6', 55, 'Pompon und Linette suchen nach einem Goldschatz und finden ihn bei sich selbst. Mama ist die Beste!'),
     ]),
 ]
