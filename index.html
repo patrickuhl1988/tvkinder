@@ -29,7 +29,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="preload" as="image" href="headerbild.png" fetchpriority="high">
+<link rel="preload" as="image" href="logo-schriftzug.png" fetchpriority="high">
 <link rel="preload" as="image" href="hero.jpg" fetchpriority="high">
 <style>
 
@@ -1428,14 +1428,10 @@
   /* ---- Mediathek-Redesign: Hero, Filterkarte, Bereichskoepfe, Kino-Karten ---- */
   .heromed{background:linear-gradient(180deg, rgba(123,97,209,.12), rgba(123,97,209,0) 82%);
     border-radius:24px; padding:18px 16px 6px; margin:6px 0 14px}
-  .heromed-grid{display:grid; grid-template-columns:1fr; gap:6px; align-items:center}
   .heromed .kicker{color:#7B61D1}
   .heromed .heroh1{font-size:clamp(26px,6vw,44px)}
-  .heromask{width:min(240px,62%); height:auto; justify-self:center; margin-top:4px}
-  @media (min-width:720px){
-    .heromed-grid{grid-template-columns:1.35fr .65fr; gap:18px}
-    .heromask{width:100%; max-width:290px; margin-top:0}
-  }
+  .heromask{display:block; width:min(200px,52%); height:auto; margin:10px auto 14px;
+    filter:drop-shadow(0 14px 26px rgba(73,59,115,.28))}
   .filtercard{background:var(--surface); border:1px solid var(--line); border-radius:20px;
     box-shadow:var(--shadow); padding:14px 14px 6px; margin:0 0 16px}
 
@@ -1523,18 +1519,25 @@
   .wrap, .hbar{max-width:1080px}
 
   /* ---- Info-Abschnitte (SEO) im neuen Kartenstil ---- */
-  .seotext{border-top:0; padding-top:6px}
+  .seotext{border-top:0; padding-top:6px; display:grid; grid-template-columns:1fr; gap:10px}
+  @media (min-width:760px){ .seotext{grid-template-columns:1fr 1fr} }
+  .seotext h2, .seotext p{grid-column:1 / -1}
+  details.wmsec[open]{grid-column:1 / -1}
   .seotext h2{font-family:"Archivo",sans-serif; font-weight:850; font-size:17px;
-    letter-spacing:-.02em; color:var(--ink)}
-  details.wmsec{border-radius:18px; margin-top:12px; border:1px solid var(--line)}
-  details.wmsec>summary{padding:15px 16px; gap:13px}
+    letter-spacing:-.02em; color:var(--ink); margin:14px 0 0}
+  details.wmsec{border-radius:18px; margin-top:0; border:1px solid var(--line);
+    transition:box-shadow .15s}
+  details.wmsec:hover{box-shadow:0 14px 32px -14px rgba(60,45,25,.22)}
+  details.wmsec>summary{padding:16px; gap:13px}
   .wm-secico{width:40px; height:40px; flex:0 0 auto; border-radius:12px; border:0 !important;
     background:rgba(242,103,58,.12) !important; color:#F2673A !important;
     display:grid; place-items:center}
   .wm-secico svg{width:20px; height:20px}
   .wm-sectt b{display:block; font-family:"Archivo",sans-serif; font-weight:800;
-    font-size:14.5px; letter-spacing:-.01em; color:var(--ink)}
-  .wm-sectt>span, .wm-sub{color:var(--muted); font-size:12px}
+    font-size:14.5px; letter-spacing:-.015em; color:var(--ink);
+    text-transform:none !important}
+  .wm-sectt>span, .wm-sub{color:var(--muted); font-size:12px; text-transform:none !important;
+    letter-spacing:0 !important; font-family:"Inter",sans-serif !important}
   .wmchev{width:32px; height:32px; border-radius:10px; border:1px solid var(--line2);
     background:var(--surface); color:var(--muted); display:grid; place-items:center;
     transition:transform .2s, color .15s, border-color .15s}
@@ -1601,8 +1604,8 @@
     padding:13px 24px; font:700 13.5px "Inter",sans-serif; min-height:44px; align-items:center;
     box-shadow:0 10px 24px -10px rgba(242,103,58,.55); transition:transform .12s, box-shadow .12s}
   .allebtn:hover{transform:translateY(-1px); box-shadow:0 13px 28px -10px rgba(242,103,58,.6)}
-  .logowort{display:block; height:40px; width:auto}
-  @media (max-width:430px){ .logowort{height:32px} }
+  .logowort{display:block; height:48px; width:auto}
+  @media (max-width:430px){ .logowort{height:38px} }
   .logo{display:flex; align-items:center; gap:9px}
   html[data-theme="dark"] .heroart{opacity:.94}
 
@@ -2211,14 +2214,13 @@
 
 <header>
   <div class="hbar">
-    <a class="logo" href="index.html" aria-label="TVKinderprogramm.de – zur Startseite"><img class="logowort" src="logo-schriftzug.png" alt="TVKinderprogramm" height="44" decoding="async" onerror="this.hidden=true"><img class="logobanner" src="headerbild.png" width="518" height="160" fetchpriority="high" decoding="async" alt="TVKinderprogramm.de: Kinderprogramm im Überblick"></a>
+    <a class="logo" href="index.html" aria-label="TVKinderprogramm.de – zur Startseite"><img class="logowort" src="logo-schriftzug.png" alt="TVKinderprogramm.de: Kinderprogramm im Überblick" height="52" fetchpriority="high" decoding="async"></a>
   </div>
 </header>
 
 <div class="wrap">
   <section class="tabpane active" id="pane-live" role="tabpanel">
     <section class="hero">
-    <div class="kicker" data-i18n="hero_kick">Kinderprogramm heute</div>
     <h1 class="heroh1" data-i18n="hero_h1">Was läuft heute – <em>und passt zu meinem Kind?</em></h1>
     <p class="lead" data-i18n="hero_lead">Sendezeiten, Altersempfehlungen, kostenlose Mediatheken und aktuelle Kinderfilme – ruhig, übersichtlich und ohne Suchstress.</p>
     <div class="stats">
@@ -2255,7 +2257,7 @@
       </span></span>
       <img src="kino.png" alt="" width="640" height="580" loading="lazy" decoding="async">
     </div>
-
+    <section class="seotext">
     <details class="wmsec">
       <summary>
         <span class="wm-secico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="12.5" rx="2.6"/><path d="M8 20.5h8M12 17v3.5"/></svg></span>
@@ -2278,6 +2280,8 @@
       <p>Eine FSK-Freigabe existiert dagegen nur für Kinofilme und Bildträger. Einzelne Serienfolgen im Fernsehen tragen keine FSK: dort steht deshalb „keine Angabe". Bei Kinderfilmen wird die FSK-Stufe zusätzlich als eigenes Feld angezeigt.</p>
       </div>
     </details>
+    </section>
+
   </section>
 
   <footer>
@@ -4054,7 +4058,8 @@ function initSearch(input, board){
     {img:"banner-tvfussball.jpg", href:"https://tvfussball.de", ext:true, cap:"slide_tvf", alt:"Fußball im Stadion: TVFussball.de für die Großen"},
     {img:"banner-muehle.jpg", href:"https://play.google.com/store/apps/details?id=app.muehle.muehle&utm_source=tvk_hero", ext:true, cap:"slide_mm", alt:"Mühle Meister: Brettspiel-App kostenlos im Play Store"},
     {img:"banner-memory.jpg", href:"memory.html", cap:"slide_mem", alt:"Memory online spielen: Paare finden für Kinder"},
-    {img:"banner-abend.jpg", href:null, cap:null, alt:"Gemütlicher Fernsehabend für Kinder – Illustration"}
+    {img:"banner-abend.jpg", href:null, cap:null, alt:"Gemütlicher Fernsehabend für Kinder – Illustration"},
+    {img:"banner-collage.jpg", href:null, cap:null, alt:"TVKinderprogramm: Maskottchen, Programm und Kinder – Illustration"}
   ];
   const slot=document.getElementById("heroSlot"), bild=document.getElementById("heroBild"),
         cap=document.getElementById("heroCap");

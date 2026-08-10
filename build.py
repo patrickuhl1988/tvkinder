@@ -148,14 +148,10 @@ ADD_CSS = """
   /* ---- Mediathek-Redesign: Hero, Filterkarte, Bereichskoepfe, Kino-Karten ---- */
   .heromed{background:linear-gradient(180deg, rgba(123,97,209,.12), rgba(123,97,209,0) 82%);
     border-radius:24px; padding:18px 16px 6px; margin:6px 0 14px}
-  .heromed-grid{display:grid; grid-template-columns:1fr; gap:6px; align-items:center}
   .heromed .kicker{color:#7B61D1}
   .heromed .heroh1{font-size:clamp(26px,6vw,44px)}
-  .heromask{width:min(240px,62%); height:auto; justify-self:center; margin-top:4px}
-  @media (min-width:720px){
-    .heromed-grid{grid-template-columns:1.35fr .65fr; gap:18px}
-    .heromask{width:100%; max-width:290px; margin-top:0}
-  }
+  .heromask{display:block; width:min(200px,52%); height:auto; margin:10px auto 14px;
+    filter:drop-shadow(0 14px 26px rgba(73,59,115,.28))}
   .filtercard{background:var(--surface); border:1px solid var(--line); border-radius:20px;
     box-shadow:var(--shadow); padding:14px 14px 6px; margin:0 0 16px}
 
@@ -243,18 +239,25 @@ ADD_CSS = """
   .wrap, .hbar{max-width:1080px}
 
   /* ---- Info-Abschnitte (SEO) im neuen Kartenstil ---- */
-  .seotext{border-top:0; padding-top:6px}
+  .seotext{border-top:0; padding-top:6px; display:grid; grid-template-columns:1fr; gap:10px}
+  @media (min-width:760px){ .seotext{grid-template-columns:1fr 1fr} }
+  .seotext h2, .seotext p{grid-column:1 / -1}
+  details.wmsec[open]{grid-column:1 / -1}
   .seotext h2{font-family:"Archivo",sans-serif; font-weight:850; font-size:17px;
-    letter-spacing:-.02em; color:var(--ink)}
-  details.wmsec{border-radius:18px; margin-top:12px; border:1px solid var(--line)}
-  details.wmsec>summary{padding:15px 16px; gap:13px}
+    letter-spacing:-.02em; color:var(--ink); margin:14px 0 0}
+  details.wmsec{border-radius:18px; margin-top:0; border:1px solid var(--line);
+    transition:box-shadow .15s}
+  details.wmsec:hover{box-shadow:0 14px 32px -14px rgba(60,45,25,.22)}
+  details.wmsec>summary{padding:16px; gap:13px}
   .wm-secico{width:40px; height:40px; flex:0 0 auto; border-radius:12px; border:0 !important;
     background:rgba(242,103,58,.12) !important; color:#F2673A !important;
     display:grid; place-items:center}
   .wm-secico svg{width:20px; height:20px}
   .wm-sectt b{display:block; font-family:"Archivo",sans-serif; font-weight:800;
-    font-size:14.5px; letter-spacing:-.01em; color:var(--ink)}
-  .wm-sectt>span, .wm-sub{color:var(--muted); font-size:12px}
+    font-size:14.5px; letter-spacing:-.015em; color:var(--ink);
+    text-transform:none !important}
+  .wm-sectt>span, .wm-sub{color:var(--muted); font-size:12px; text-transform:none !important;
+    letter-spacing:0 !important; font-family:"Inter",sans-serif !important}
   .wmchev{width:32px; height:32px; border-radius:10px; border:1px solid var(--line2);
     background:var(--surface); color:var(--muted); display:grid; place-items:center;
     transition:transform .2s, color .15s, border-color .15s}
@@ -321,8 +324,8 @@ ADD_CSS = """
     padding:13px 24px; font:700 13.5px "Inter",sans-serif; min-height:44px; align-items:center;
     box-shadow:0 10px 24px -10px rgba(242,103,58,.55); transition:transform .12s, box-shadow .12s}
   .allebtn:hover{transform:translateY(-1px); box-shadow:0 13px 28px -10px rgba(242,103,58,.6)}
-  .logowort{display:block; height:40px; width:auto}
-  @media (max-width:430px){ .logowort{height:32px} }
+  .logowort{display:block; height:48px; width:auto}
+  @media (max-width:430px){ .logowort{height:38px} }
   .logo{display:flex; align-items:center; gap:9px}
   html[data-theme="dark"] .heroart{opacity:.94}
 
@@ -994,7 +997,7 @@ SHELL = """<!DOCTYPE html>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="preload" as="image" href="headerbild.png" fetchpriority="high">
+<link rel="preload" as="image" href="logo-schriftzug.png" fetchpriority="high">
 {head_extra}<style>
 {css}
 </style>
@@ -1011,7 +1014,7 @@ SHELL = """<!DOCTYPE html>
 
 <header>
   <div class="hbar">
-    <a class="logo" href="index.html" aria-label="{brand} – zur Startseite"><img class="logowort" src="logo-schriftzug.png" alt="TVKinderprogramm" height="44" decoding="async" onerror="this.hidden=true"><img class="logobanner" src="headerbild.png" width="518" height="160" fetchpriority="high" decoding="async" alt="TVKinderprogramm.de: Kinderprogramm im Überblick"></a>
+    <a class="logo" href="index.html" aria-label="{brand} – zur Startseite"><img class="logowort" src="logo-schriftzug.png" alt="TVKinderprogramm.de: Kinderprogramm im Überblick" height="52" fetchpriority="high" decoding="async"></a>
   </div>
 </header>
 
@@ -1743,7 +1746,8 @@ function initSearch(input, board){
     {img:"banner-tvfussball.jpg", href:"https://tvfussball.de", ext:true, cap:"slide_tvf", alt:"Fußball im Stadion: TVFussball.de für die Großen"},
     {img:"banner-muehle.jpg", href:"https://play.google.com/store/apps/details?id=app.muehle.muehle&utm_source=tvk_hero", ext:true, cap:"slide_mm", alt:"Mühle Meister: Brettspiel-App kostenlos im Play Store"},
     {img:"banner-memory.jpg", href:"memory.html", cap:"slide_mem", alt:"Memory online spielen: Paare finden für Kinder"},
-    {img:"banner-abend.jpg", href:null, cap:null, alt:"Gemütlicher Fernsehabend für Kinder – Illustration"}
+    {img:"banner-abend.jpg", href:null, cap:null, alt:"Gemütlicher Fernsehabend für Kinder – Illustration"},
+    {img:"banner-collage.jpg", href:null, cap:null, alt:"TVKinderprogramm: Maskottchen, Programm und Kinder – Illustration"}
   ];
   const slot=document.getElementById("heroSlot"), bild=document.getElementById("heroBild"),
         cap=document.getElementById("heroCap");
@@ -2225,7 +2229,6 @@ PAGES["live"] = dict(
     seo_ld=faq_ld,
     prerender=lambda: "",
     main="""    <section class="hero">
-    <div class="kicker" data-i18n="hero_kick">Kinderprogramm heute</div>
     <h1 class="heroh1" data-i18n="hero_h1">Was läuft heute – <em>und passt zu meinem Kind?</em></h1>
     <p class="lead" data-i18n="hero_lead">Sendezeiten, Altersempfehlungen, kostenlose Mediatheken und aktuelle Kinderfilme – ruhig, übersichtlich und ohne Suchstress.</p>
     <div class="stats">
@@ -2262,7 +2265,7 @@ PAGES["live"] = dict(
       </span></span>
       <img src="kino.png" alt="" width="640" height="580" loading="lazy" decoding="async">
     </div>
-
+    <section class="seotext">
 """ + seosec('<rect x="2.5" y="4.5" width="19" height="12.5" rx="2.6"/><path d="M8 20.5h8M12 17v3.5"/>',
              "Wo läuft das Kinderprogramm?",
              "KiKA, Super RTL, Nick, Disney Channel",
@@ -2280,7 +2283,9 @@ PAGES["live"] = dict(
                      "im Detail als redaktionell gekennzeichnet.",
                      "Eine FSK-Freigabe existiert dagegen nur für Kinofilme und Bildträger. Einzelne "
                      "Serienfolgen im Fernsehen tragen keine FSK — dort steht deshalb „keine Angabe\". "
-                     "Bei Kinderfilmen wird die FSK-Stufe zusätzlich als eigenes Feld angezeigt."]),
+                     "Bei Kinderfilmen wird die FSK-Stufe zusätzlich als eigenes Feld angezeigt."]) + """
+    </section>
+""",
     page_js="""
 const board = document.getElementById("liveBoard");
 
@@ -2366,19 +2371,15 @@ PAGES["mediathek"] = dict(
     data=lambda: kino_js() + "\n\n" + providers_js() + "\n\n" + D.media_js() + "\n\n" + D.tipps_js() + "\n\n" + D.en_js(),
     main="""
     <section class="hero heromed">
-    <div class="heromed-grid">
-    <div class="heromed-txt">
     <div class="kicker">Streaming &amp; Kino</div>
     <h1 class="heroh1">Die besten Filme &amp; Serien für Kinder – <em>online &amp; im Kino</em></h1>
     <p class="lead">Altersgerechte Inhalte aus den kostenlosen Mediatheken und die aktuellen Kinderfilme im Kino – geprüft, übersichtlich und kindgerecht.</p>
+    <img class="heromask" src="hero-kino-frei.png" width="507" height="560" alt="Maskottchen mit Popcorn und 3D-Brille" fetchpriority="high" decoding="async">
     <div class="stats statsmed">
       <div class="stat"><strong id="statMed">190+</strong><span>Mediathek-Titel</span></div>
       <div class="stat"><strong id="statKino">8</strong><span>Kinofilme aktuell</span></div>
       <div class="stat"><strong>100%</strong><span>kinderfreundlich</span></div>
       <div class="stat"><strong>0 €</strong><span>kostenlos oder im Abo</span></div>
-    </div>
-    </div>
-    <img class="heromask" src="kino.png" width="640" height="580" alt="Maskottchen mit Popcorn und 3D-Brille im Kino" fetchpriority="high" decoding="async">
     </div>
     </section>
     <a class="heroslot" id="heroSlot">
@@ -2427,7 +2428,6 @@ PAGES["mediathek"] = dict(
   <p data-i18n="seo_med_1">TVKinderprogramm.de sammelt Kinderserien und Kinderfilme, die in den kostenlosen Mediatheken der öffentlich-rechtlichen Sender abrufbar sind: im KiKA-Player, in der ARD Mediathek, bei ZDFtivi und bei 3sat. Jeder Titel trägt eine redaktionelle Altersempfehlung (ab 3, ab 6 oder ab 10 Jahren), dazu Folgenzahl, Laufzeit und, wo vorhanden, die IMDb-Bewertung mit Stimmenzahl.</p>
   <p data-i18n="seo_med_2">Die Angebote der öffentlich-rechtlichen Mediatheken sind werbefrei und ohne Anmeldung nutzbar: ein Unterschied zu YouTube und den Apps der Privatsender. Über die Filter oben lassen sich Titel nach Altersgruppe und Interessen wie Tiere und Natur, Wissen und Entdecken oder Magie und Fantasie eingrenzen. Die Tipps werden bei jedem Besuch neu gemischt.</p>
   <p data-i18n="seo_med_3">Verfügbarkeiten in den Mediatheken ändern sich laufend; verbindlich ist stets die Angabe des jeweiligen Anbieters. Kostenpflichtige Dienste wie Disney+, Netflix und Prime Video werden derzeit nicht gelistet, folgen aber. Das laufende Fernsehprogramm der Kindersender zeigt die Startseite.</p>
-</section>
 
 
 """ + seosec('<circle cx="12" cy="12" r="9"/><path d="M10.2 8.6l4.8 3.4-4.8 3.4z" fill="currentColor" stroke="none"/>',
@@ -2451,7 +2451,9 @@ PAGES["mediathek"] = dict(
                      "reduziert, aber nicht immer ganz abgeschaltet — vor dem Abschluss lohnt der "
                      "Blick ins Kleingedruckte.",
                      "Werbefrei und kostenlos sind ausschließlich die öffentlich-rechtlichen "
-                     "Mediatheken: KiKA-Player, ARD Mediathek und ZDFtivi."]),
+                     "Mediatheken: KiKA-Player, ARD Mediathek und ZDFtivi."]) + """
+    </section>
+""",
     page_js="""
 /* ---------- Anbieterkarten ---------- */
 const PCOL={"Netflix":"#E50914","Prime Video":"#00A8E1","Disney+":"#0C2A6B",
