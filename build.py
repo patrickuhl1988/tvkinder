@@ -96,6 +96,71 @@ ADD_CSS = """
   .intro{font-size:13px; color:var(--muted); line-height:1.65; margin:14px 2px 4px}
   .intro b{color:var(--ink); font-weight:750}
 
+
+  /* ---- Redesign 2026: Hero, Feature-Banner, Spiele-Teaser, Footer ---- */
+  .hero{margin:8px 2px 16px}
+  .kicker{font:800 11px "JetBrains Mono",monospace; letter-spacing:.14em;
+    text-transform:uppercase; color:#F2673A; margin:0 0 10px}
+  .heroh1{font-family:"Archivo",sans-serif; font-weight:850;
+    font-size:clamp(30px,7vw,54px); line-height:1.05; letter-spacing:-.028em;
+    color:var(--ink); margin:0 0 12px; max-width:820px}
+  .heroh1 em{font-style:normal; color:#F2673A}
+  .lead{font-size:14.5px; line-height:1.65; color:var(--muted); max-width:680px; margin:0 0 16px}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:9px; margin:0 0 14px}
+  .stat{border:1px solid var(--line); border-radius:14px; background:var(--surface);
+    box-shadow:var(--shadow); padding:11px 13px}
+  .stat strong{display:block; font-family:"Archivo",sans-serif; font-size:20px;
+    font-weight:850; letter-spacing:-.03em; color:var(--ink)}
+  .stat span{display:block; color:var(--muted); font-size:11.5px; margin-top:2px}
+  .heroart{display:block; width:100%; height:auto; border-radius:var(--r);
+    box-shadow:var(--shadow); border:1px solid var(--line)}
+  html[data-theme="dark"] .heroart{opacity:.94}
+
+  .feature{display:grid; grid-template-columns:1.25fr .75fr; gap:18px; align-items:center;
+    margin:22px 0 0; padding:20px 22px; border-radius:20px; text-decoration:none;
+    background:linear-gradient(135deg,#2D2942,#493B73 58%,#6550A5); color:#fff;
+    box-shadow:0 18px 44px -14px rgba(73,59,115,.5)}
+  .feature .kicker2{display:block; font:800 10.5px "JetBrains Mono",monospace;
+    letter-spacing:.13em; text-transform:uppercase; color:#D7CAFE; margin-bottom:8px}
+  .feature b{display:block; font-family:"Archivo",sans-serif; font-size:22px;
+    font-weight:850; letter-spacing:-.03em; margin-bottom:7px}
+  .feature .fs{display:block; color:#DDD7EE; font-size:13px; line-height:1.6; margin-bottom:13px}
+  .feature .cta{display:inline-flex; background:#fff; color:#322A50; padding:9px 13px;
+    border-radius:11px; font-weight:800; font-size:12.5px}
+  .feature img{width:100%; max-width:240px; height:auto; justify-self:center}
+  .feature:hover .cta{background:#F2E9FF}
+  @media(max-width:620px){ .feature{grid-template-columns:1fr; gap:10px} .feature img{max-width:180px} }
+
+  .spielteaser{display:flex; align-items:center; gap:14px; margin:14px 0 0;
+    padding:13px 16px; border:1px dashed var(--line2); border-radius:16px; background:var(--surface2)}
+  .spielteaser img{width:62px; height:auto; flex:0 0 auto}
+  .spielteaser b{display:block; font-family:"Archivo",sans-serif; font-size:14.5px;
+    font-weight:800; color:var(--ink); margin-bottom:3px}
+  .spielteaser .s{display:block; font-size:12.5px; color:var(--muted); line-height:1.55}
+  .spielteaser .bald{margin-left:auto; flex:0 0 auto; font:700 10px "JetBrains Mono",monospace;
+    letter-spacing:.08em; text-transform:uppercase; color:#8A5A00; border:1px solid #D9A94E;
+    background:rgba(217,169,78,.14); border-radius:999px; padding:4px 9px}
+  html[data-theme="dark"] .spielteaser .bald{color:#F0C868; border-color:rgba(240,200,104,.5);
+    background:rgba(240,200,104,.12)}
+
+  .empty::before{content:""; display:block; width:110px; height:110px; margin:6px auto 10px;
+    background:url(leer.png) center/contain no-repeat}
+
+  footer .footlang{display:inline-flex; gap:2px; border:1px solid var(--line2);
+    border-radius:999px; padding:2px; margin-right:8px; vertical-align:middle}
+  footer .footlang button{border:0; background:none; color:var(--muted);
+    font:700 11px "Inter",sans-serif; padding:5px 10px; border-radius:999px; cursor:pointer}
+  footer .footlang button[aria-pressed="true"]{background:var(--surface); color:var(--ink);
+    box-shadow:var(--shadow)}
+
+  #medGenres .fchip[data-i]::before{content:""; display:inline-block; width:19px; height:19px;
+    background:center/contain no-repeat; margin:-3px 5px -4px -2px}
+  #medGenres .fchip[data-i="ab"]::before{background-image:url(interesse-abenteuer.png)}
+  #medGenres .fchip[data-i="ti"]::before{background-image:url(interesse-tiere.png)}
+  #medGenres .fchip[data-i="ma"]::before{background-image:url(interesse-magie.png)}
+  #medGenres .fchip[data-i="la"]::before{background-image:url(interesse-lachen.png)}
+  #medGenres .fchip[data-i="wi"]::before{background-image:url(interesse-wissen.png)}
+
   .seotext{margin:30px 2px 12px; padding-top:18px; border-top:1px solid var(--line)}
   .seotext h2{font-family:"Archivo",sans-serif; font-weight:800; font-size:15px;
     letter-spacing:-.01em; color:var(--ink); margin-bottom:8px}
@@ -256,9 +321,9 @@ ADD_CSS = """
      Struktur und Abstände bleiben identisch zu TVFussball, nur die
      Neutraltöne und der Akzent wechseln. Grün bleibt für „kostenlos".  */
   :root{
-    --bg:#FDF6F0; --bg2:#F8EADF; --surface:#FFFFFF; --surface2:#FDF3EB;
-    --line:#F0DFD1; --line2:#E2C8B4;
-    --ink:#1F1512; --muted:#7A6153; --faint:#A89083;
+    --bg:#F7F5F0; --bg2:#F1EDE6; --surface:#FFFFFF; --surface2:#FFF8F3;
+    --line:#E8E3DB; --line2:#DBD3C7;
+    --ink:#202531; --muted:#6F7683; --faint:#9AA0AB;
     --green:#C24009; --green-soft:rgba(194,64,9,.10); --green-line:rgba(194,64,9,.28);
     --free:#B07408; --free-soft:rgba(176,116,8,.12); --free-line:rgba(176,116,8,.34);
     --free-grad:linear-gradient(135deg,#FFC14D,#F2A413 58%,#D98E0B);
@@ -286,12 +351,12 @@ ADD_CSS = """
   }
 
   /* Hintergrundschein */
-  :root{--glow1:rgba(251,133,0,.10); --glow2:rgba(247,37,133,.05)}
-  html[data-theme="dark"]{--glow1:rgba(251,133,0,.07); --glow2:rgba(247,37,133,.045)}
+  :root{--glow1:rgba(242,103,58,.10); --glow2:rgba(123,97,209,.06)}
+  html[data-theme="dark"]{--glow1:rgba(242,103,58,.07); --glow2:rgba(123,97,209,.05)}
 
   /* Tagestrenner bekommt den warmen Verlauf */
-  .daybar .dtag{background:linear-gradient(135deg,#FB8500,#F72585); border:0}
-  .daybar .dtag.tm{background:transparent; color:#FB8500; border:1px solid rgba(251,133,0,.42)}
+  .daybar .dtag{background:linear-gradient(135deg,#F2673A,#FF8B5F); border:0}
+  .daybar .dtag.tm{background:transparent; color:#F2673A; border:1px solid rgba(242,103,58,.45)}
 
   /* --- Farbbalken links auf jeder Karte -------------------------------- */
   .row{padding-left:6px}
@@ -383,11 +448,12 @@ ADD_CSS = """
      Bewusst nicht auf 0px: ganz kantig plus Haarlinien wäre das nächste
      Klischee. 4px liest sich präzise, nicht steril.
      ===================================================================== */
-  :root{--r:4px; --r-ctl:3px; --r-tag:2px;
-        --shadow:none;
-        --header-shadow:0 1px 0 rgba(90,50,25,.10)}
-  html[data-theme="dark"]{--r:4px; --shadow:none;
-        --header-shadow:0 1px 0 rgba(255,255,255,.07)}
+  :root{--r:16px; --r-ctl:11px; --r-tag:8px;
+        --shadow:0 1px 2px rgba(60,45,25,.05), 0 10px 28px -12px rgba(60,45,25,.16);
+        --header-shadow:0 1px 0 rgba(90,50,25,.06), 0 10px 26px -16px rgba(90,50,25,.18)}
+  html[data-theme="dark"]{--r:16px;
+        --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 30px -14px rgba(0,0,0,.6);
+        --header-shadow:0 6px 24px rgba(0,0,0,.5)}
 
   /* Karten: Kontur statt Schatten */
   .row{border-radius:var(--r); box-shadow:none; padding-left:5px}
@@ -726,11 +792,7 @@ SHELL = """<!DOCTYPE html>
   <div class="hbar">
     <a class="logo" href="index.html" aria-label="{brand} – zur Startseite"><img class="logobanner" src="headerbild.png" width="518" height="160" fetchpriority="high" decoding="async" alt="TVKinderprogramm.de: Kinderprogramm im Überblick"></a>
     <div class="switches">
-      <div class="seg lang" role="group" aria-label="Sprache">
-        <button data-lang="de" aria-pressed="true">DE</button>
-        <button data-lang="en" aria-pressed="false">EN</button>
-      </div>
-      <div class="mktwrap"><button class="mktbtn" id="mktToggle" aria-haspopup="dialog" aria-expanded="false" aria-label="Land wählen"><span class="mktbtn-flag" id="mktFlag">🌐</span></button><div class="mktpop" id="mktPop" role="dialog" aria-labelledby="mktPopTitle" hidden><div class="mktpop-title" id="mktPopTitle"></div><div class="mktpop-list" id="mktPopList"></div></div></div><button class="themebtn" id="themeToggle" aria-label="Hell/Dunkel umschalten"></button>
+      <div class="mktwrap"><button class="mktbtn" id="mktToggle" aria-haspopup="dialog" aria-expanded="false" aria-label="Land wählen"><span class="mktbtn-flag" id="mktFlag">🌐</span></button><div class="mktpop" id="mktPop" role="dialog" aria-labelledby="mktPopTitle" hidden><div class="mktpop-title" id="mktPopTitle"></div><div class="mktpop-list" id="mktPopList"></div></div></div>
     </div>
   </div>
 </header>
@@ -741,6 +803,10 @@ SHELL = """<!DOCTYPE html>
   </section>
 
   <footer>
+    <div class="seg lang footlang" role="group" aria-label="Sprache">
+      <button data-lang="de" aria-pressed="true">DE</button>
+      <button data-lang="en" aria-pressed="false">EN</button>
+    </div>
     <a href="#" data-legal="imprint" data-i18n="imprint">Impressum</a>
     <a href="#" data-legal="privacy" data-i18n="privacy">Datenschutz</a>
     <a href="#" data-legal="about" data-i18n="about">Über uns</a>
@@ -876,6 +942,18 @@ const I18N = {
   kino_h2:"Aktuell im Kino", kino_s:"Kinderfilme auf der großen Leinwand",
   kino_zeigen:"Filme anzeigen", kino_trailer:"Trailer ansehen",
   kino_ab:"Kinostart", kino_offen:"FSK folgt", alter_alle:"Alle",
+  kino_zu:"Ausblenden", anb_zu:"Ausblenden", kat_zu:"Einklappen", tipp_zu:"Ausblenden",
+  hero_kick:"Kinderprogramm heute",
+  hero_h1:"Was läuft heute – <em>und passt zu meinem Kind?</em>",
+  hero_lead:"Sendezeiten, Altersempfehlungen, kostenlose Mediatheken und aktuelle Kinderfilme – ruhig, übersichtlich und ohne Suchstress.",
+  stat_sender:"Kindersender im Blick", stat_heute:"Sendungen heute",
+  stat_frei:"Elterntipps aus der Redaktion", stat_alter:"Jahre Altersfilter",
+  feat_kick:"Streaming & Kino", feat_h:"Wenn im TV gerade nichts passt.",
+  feat_s:"Kostenlose Mediathek-Tipps und die aktuellen Kinderfilme im Kino – in einem eigenen Bereich.",
+  feat_cta:"Jetzt entdecken",
+  spiel_h:"Spiele-Ecke kommt bald",
+  spiel_s:"Memory, Schatten-Raten und mehr – wir basteln schon dran.",
+  spiel_bald:"Bald",
   fussnote:"TVKinderprogramm.de überträgt selbst keine Sendungen. Wir verweisen nur auf legale Sender und Mediatheken und betten ausschließlich offizielle, freigegebene Videos ein. Altersempfehlungen sind redaktionell und ersetzen keine FSK-Freigabe. Programmangaben ohne Gewähr — verbindlich ist das Programm des Senders.",
   jetzt_frei:"Gerade kostenlos",
   tzhint:"Alle Sendezeiten in deutscher Zeit (Europe/Berlin).",
@@ -944,6 +1022,18 @@ const I18N = {
   kino_h2:"Now in cinemas", kino_s:"kids films on the big screen",
   kino_zeigen:"Show films", kino_trailer:"Watch trailer",
   kino_ab:"In cinemas from", kino_offen:"rating pending", alter_alle:"All",
+  kino_zu:"Hide", anb_zu:"Hide", kat_zu:"Collapse", tipp_zu:"Hide",
+  hero_kick:"Kids TV today",
+  hero_h1:"What's on today – <em>and what suits my child?</em>",
+  hero_lead:"Air times, age recommendations, free media libraries and current kids films – calm, clear and without the search stress.",
+  stat_sender:"kids channels covered", stat_heute:"shows today",
+  stat_frei:"parent tips from the editors", stat_alter:"years of age filter",
+  feat_kick:"Streaming & cinema", feat_h:"When nothing on TV fits right now.",
+  feat_s:"Free library tips and the current kids films in cinemas – in their own section.",
+  feat_cta:"Explore now",
+  spiel_h:"Games corner coming soon",
+  spiel_s:"Memory, shadow guessing and more – we're working on it.",
+  spiel_bald:"Soon",
   fussnote:"TVKinderprogramm.de does not broadcast anything itself. We only point to legal channels and media libraries and embed officially released videos. Age guidance is editorial and does not replace an official rating. Schedules without guarantee — the channel's own listing is binding.",
   jetzt_frei:"Free right now",
   tzhint:"All broadcast times in German local time (Europe/Berlin).",
@@ -1013,7 +1103,7 @@ function applyI18n(){
   uebersetzeDaten();
   document.documentElement.lang = LANG;
   $$("[data-i18n]").forEach(e=>{
-    if(e.classList.contains("intro")) e.innerHTML = t(e.dataset.i18n);
+    if(e.classList.contains("intro") || e.classList.contains("heroh1")) e.innerHTML = t(e.dataset.i18n);
     else e.textContent = t(e.dataset.i18n);
   });
   $$("[data-i18n-ph]").forEach(e=>{ e.placeholder = t(e.dataset.i18nPh); });
@@ -1025,8 +1115,9 @@ const MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-wi
 function setTheme(t){ document.documentElement.setAttribute("data-theme",t);
   const b=$("#themeToggle"); if(b) b.innerHTML = t==="dark"?SUN:MOON; }
 (function(){
-  const sys = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark":"light";
-  setTheme(LS.get("tvk_theme", sys));
+  const mq = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : null;
+  setTheme(mq && mq.matches ? "dark" : "light");
+  if(mq && mq.addEventListener) mq.addEventListener("change", e=>setTheme(e.matches?"dark":"light"));
 })();
 
 let _tt; function toast(m){ const t=$("#toast"); if(!t) return;
@@ -1516,7 +1607,8 @@ document.addEventListener("keydown", e=>{
 });
 
 (function boot(){
-  $("#themeToggle").addEventListener("click", ()=>{
+  const tb=$("#themeToggle");
+  if(tb) tb.addEventListener("click", ()=>{
     const n = document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";
     setTheme(n); LS.set("tvk_theme",n);
   });
@@ -1943,8 +2035,18 @@ PAGES["live"] = dict(
     # Rückweg: seo_ld=broadcast_ld, prerender=prerender_shows wieder eintragen.
     seo_ld=faq_ld,
     prerender=lambda: "",
-    main="""    <h1 class="srh1">Kinderprogramm heute: KiKA, Toggo plus und Kinderfilme mit Altersempfehlung und Eltern-Check</h1>
-    <p class="intro" data-i18n="intro_idx"><b>TVKinderprogramm.de</b> beantwortet eine einfache Frage: <b>Was läuft heute für Kinder im TV?</b> Alle Kindersendungen mit Altersempfehlung, Eltern-Check und kostenlosen Mediathek-Links.</p>
+    main="""    <section class="hero">
+    <div class="kicker" data-i18n="hero_kick">Kinderprogramm heute</div>
+    <h1 class="heroh1" data-i18n="hero_h1">Was läuft heute – <em>und passt zu meinem Kind?</em></h1>
+    <p class="lead" data-i18n="hero_lead">Sendezeiten, Altersempfehlungen, kostenlose Mediatheken und aktuelle Kinderfilme – ruhig, übersichtlich und ohne Suchstress.</p>
+    <div class="stats">
+      <div class="stat"><strong id="statSender">23</strong><span data-i18n="stat_sender">Kindersender im Blick</span></div>
+      <div class="stat"><strong id="statHeute">70+</strong><span data-i18n="stat_heute">Sendungen heute</span></div>
+      <div class="stat"><strong id="statTipps">25+</strong><span data-i18n="stat_frei">Elterntipps aus der Redaktion</span></div>
+      <div class="stat"><strong>3–13</strong><span data-i18n="stat_alter">Jahre Altersfilter</span></div>
+    </div>
+    <img class="heroart" src="hero.jpg" width="1500" height="701" fetchpriority="high" decoding="async" alt="Familie schaut gemeinsam Kinderprogramm – Illustration">
+    </section>
     <a class="crosslink" id="bannerTvf" href="https://tvfussball.de" target="_blank" rel="noopener">
       <span class="cl-ic" aria-hidden="true">TV</span>
       <span class="cl-txt"><b data-i18n="cl_b">Und für die Großen?</b><span data-i18n="cl_s">Alle Spiele heute im TV, Stream und Radio: auf TVFussball.de</span></span>
@@ -1978,6 +2080,15 @@ PAGES["live"] = dict(
     </div></div></div>
     <div class="board" id="liveBoard">{prerender}</div>
     <noscript><p class="nojs">Diese Seite zeigt das Kinderprogramm oben als Liste. Filter, Suche und die Detailangaben brauchen JavaScript.</p></noscript>
+    <a class="feature" href="mediathek-kinder.html">
+      <span><span class="kicker2" data-i18n="feat_kick">Streaming &amp; Kino</span><b data-i18n="feat_h">Wenn im TV gerade nichts passt.</b><span class="fs" data-i18n="feat_s">Kostenlose Mediathek-Tipps und die aktuellen Kinderfilme im Kino – in einem eigenen Bereich.</span><span class="cta" data-i18n="feat_cta">Jetzt entdecken</span></span>
+      <img src="kino.png" alt="" width="640" height="580" loading="lazy" decoding="async">
+    </a>
+    <div class="spielteaser">
+      <img src="leer.png" alt="" width="480" height="479" loading="lazy" decoding="async">
+      <span><b data-i18n="spiel_h">Spiele-Ecke kommt bald</b><span class="s" data-i18n="spiel_s">Memory, Schatten-Raten und mehr – wir basteln schon dran.</span></span>
+      <span class="bald" data-i18n="spiel_bald">Bald</span>
+    </div>
 
 """ + seosec('<rect x="2.5" y="4.5" width="19" height="12.5" rx="2.6"/><path d="M8 20.5h8M12 17v3.5"/>',
              "Wo läuft das Kinderprogramm?",
@@ -1999,6 +2110,16 @@ PAGES["live"] = dict(
                      "Bei Kinderfilmen wird die FSK-Stufe zusätzlich als eigenes Feld angezeigt."]),
     page_js="""
 const board = document.getElementById("liveBoard");
+
+(function(){
+  try{
+    const d=new Date(), ds=("0"+d.getDate()).slice(-2)+"."+("0"+(d.getMonth()+1)).slice(-2)+"."+d.getFullYear();
+    const heute=SHOWS.filter(x=>x.day && x.day.indexOf(ds)>=0);
+    if(heute.length) document.getElementById("statHeute").textContent=heute.length;
+    if(typeof TIPPS!=="undefined") document.getElementById("statTipps").textContent=TIPPS.length;
+    document.getElementById("statSender").textContent=Object.keys(CH_INFO).length;
+  }catch(_){}
+})();
 
 function zeigeTippsIndex(){
   board.innerHTML =
@@ -2120,7 +2241,7 @@ PAGES["mediathek"] = dict(
     </div></div>
     </div></div></div>
     <div class="section-eyebrow tipphead"><h2 data-i18n="tipps_h2">Mediathek-Tipps</h2>
-      <button class="imgbtn" id="tippMehr" title="5 Tipps anzeigen"><img src="elterntipps.png" width="441" height="160" loading="lazy" decoding="async" alt="5 Tipps anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button></div>
+      <button class="imgbtn" id="tippMehr" title="5 Tipps anzeigen"><img src="elterntipps.png" width="441" height="160" loading="lazy" decoding="async" alt="5 Tipps anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button><button class="mehrbtn klein" id="tippZu" data-i18n="tipp_zu" style="display:none">Ausblenden</button></div>
     <div class="tippnote" id="tippNote" aria-live="polite"></div>
     <div class="board" id="tippBoard"></div>
     <div class="section-eyebrow tipphead"><h2 data-i18n="kino_h2">Aktuell im Kino</h2><span class="cnt" data-i18n="kino_s">Kinderfilme auf der großen Leinwand</span>  <button class="mehrbtn klein" id="kinoStart" data-i18n="kino_zeigen">Filme anzeigen</button></div>
@@ -2128,7 +2249,7 @@ PAGES["mediathek"] = dict(
     <div class="board" id="kinoBoard"></div>
     </div></div>
     <div class="section-eyebrow tipphead"><h2 data-i18n="kat_h2">Kostenfreie Mediathek-Inhalte</h2><span class="cnt" id="katCount"></span>
-      <button class="imgbtn" id="katMehrKopf" title="30 weitere anzeigen"><img src="katalog.png" width="400" height="160" loading="lazy" decoding="async" alt="30 weitere anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button></div>
+      <button class="imgbtn" id="katMehrKopf" title="30 weitere anzeigen"><img src="katalog.png" width="400" height="160" loading="lazy" decoding="async" alt="30 weitere anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button><button class="mehrbtn klein" id="katZu" data-i18n="kat_zu" style="display:none">Einklappen</button></div>
     <div class="board" id="medBoard">{prerender}</div>
     <button class="mehrbtn" id="katMehr" data-i18n="mehr30" style="display:none">30 weitere anzeigen</button>
 
@@ -2139,6 +2260,12 @@ PAGES["mediathek"] = dict(
     <div class="board" id="medFree"></div>
     <div class="board" id="medPaid"></div>
     </div></div>
+
+<div class="spielteaser">
+  <img src="leer.png" alt="" width="480" height="479" loading="lazy" decoding="async">
+  <span><b data-i18n="spiel_h">Spiele-Ecke kommt bald</b><span class="s" data-i18n="spiel_s">Memory, Schatten-Raten und mehr – wir basteln schon dran.</span></span>
+  <span class="bald" data-i18n="spiel_bald">Bald</span>
+</div>
 
 <section class="seotext">
   <h2 data-i18n="seo_med_h">Kinderserien und Kinderfilme kostenlos in den Mediatheken</h2>
@@ -2431,8 +2558,8 @@ suchOben.addEventListener("input", ()=>{
 });
 initSearch(suchOben, mBoard);
 document.getElementById("anbStart").addEventListener("click", function(){
-  document.getElementById("anbKlapp").classList.add("auf");
-  this.style.display="none";
+  const auf=document.getElementById("anbKlapp").classList.toggle("auf");
+  this.textContent=t(auf?"anb_zu":"anb_start");
 });
 
 /* ---- Aktuell im Kino ---- */
@@ -2461,13 +2588,34 @@ function kinoZeigen(){
   }).join("");
 }
 document.getElementById("kinoStart").addEventListener("click", function(){
-  kinoZeigen();
-  document.getElementById("kinoKlapp").classList.add("auf");
+  const auf=document.getElementById("kinoKlapp").classList.toggle("auf");
+  if(auf) kinoZeigen();
+  this.textContent=t(auf?"kino_zu":"kino_zeigen");
+});
+
+/* ---- Tipps und Katalog wieder einklappen ---- */
+const tippZuBtn=document.getElementById("tippZu");
+document.getElementById("tippMehr").addEventListener("click", ()=>{ if(tippZuBtn) tippZuBtn.style.display=""; });
+if(tippZuBtn) tippZuBtn.addEventListener("click", function(){
+  tippOffen=false; document.getElementById("tippBoard").innerHTML="";
+  const n=document.getElementById("tippNote"); if(n) n.textContent="";
   this.style.display="none";
+});
+const katZuBtn=document.getElementById("katZu");
+["katMehrKopf","katMehr"].forEach(id=>{const b=document.getElementById(id);
+  if(b) b.addEventListener("click", ()=>{ if(katZuBtn && katLimit>10) katZuBtn.style.display=""; });});
+if(katZuBtn) katZuBtn.addEventListener("click", function(){
+  katLimit=10; katalogZeigen(); this.style.display="none";
+  const kopf=document.querySelector('h2[data-i18n="kat_h2"]');
+  if(kopf) kopf.scrollIntoView({behavior:"smooth", block:"start"});
 });
 window.reRender = ()=>{
   katalogZeigen();
   if(document.getElementById("kinoKlapp").classList.contains("auf")) kinoZeigen();
+  const kk=document.getElementById("kinoKlapp"), kb=document.getElementById("kinoStart");
+  if(kk&&kb) kb.textContent=t(kk.classList.contains("auf")?"kino_zu":"kino_zeigen");
+  const ak=document.getElementById("anbKlapp"), ab=document.getElementById("anbStart");
+  if(ak&&ab) ab.textContent=t(ak.classList.contains("auf")?"anb_zu":"anb_start");
   /* sichtbare Tippkarten in der neuen Sprache neu zeichnen, Bestand behalten */
   const em = (typeof fElterntipp!=="undefined" && fElterntipp);
   document.getElementById("tippBoard").innerHTML = sichtbareTipps.map(em ? tippKarteIndex : mcard).join("");
