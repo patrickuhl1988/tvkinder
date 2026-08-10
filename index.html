@@ -2081,10 +2081,6 @@
   </section>
 
   <footer>
-    <div class="seg lang footlang" role="group" aria-label="Sprache">
-      <button data-lang="de" aria-pressed="true">DE</button>
-      <button data-lang="en" aria-pressed="false">EN</button>
-    </div>
     <a href="#" data-legal="imprint" data-i18n="imprint">Impressum</a>
     <a href="#" data-legal="privacy" data-i18n="privacy">Datenschutz</a>
     <a href="#" data-legal="about" data-i18n="about">Über uns</a>
@@ -3414,7 +3410,7 @@ window.dname = d => LANG==="en"
       m=>TAG_EN[m]||m).replace(/^(\w+), (\d{2})\.(\d{2})\.(\d{4})$/, (a,w,t,mo,j)=>`${TAG_EN[w]||w}, ${t}/${mo}/${j}`)
   : d;
 
-let LANG = LS.get("tvk_lang","de");
+let LANG = "de";
 window.t = function t(k){ return (I18N[LANG] && I18N[LANG][k]) || I18N.de[k] || k; };
 function uebersetzeDaten(){
   if(typeof EN==="undefined") return;
