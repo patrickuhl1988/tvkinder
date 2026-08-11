@@ -123,9 +123,9 @@ ADD_CSS = """
 
   /* ---- Kompakt-Kacheln: alles sichtbar, kein Aufklappen ---- */
   .kompaktrow .rowhead{cursor:default; padding-bottom:9px}
-  .rowfuss{display:flex; align-items:center; gap:10px; padding:9px 14px 12px;
+  .rowfuss{display:flex; flex-wrap:wrap; align-items:center; gap:9px 10px; padding:9px 14px 12px;
     border-top:1px solid var(--line)}
-  .pcheck{flex:1 1 auto; min-width:0; display:flex; align-items:center; gap:6px}
+  .pcheck{flex:1 1 230px; min-width:0; display:flex; align-items:center; gap:6px}
   .pclbl{font:700 9.5px "JetBrains Mono",monospace; letter-spacing:.07em;
     text-transform:uppercase; color:var(--muted); white-space:nowrap}
   .pcval{font:850 14px "Archivo",sans-serif}
@@ -134,7 +134,7 @@ ADD_CSS = """
     background:var(--bg2); overflow:hidden}
   .pcbar span{display:block; height:100%; border-radius:999px}
   .pcleer{flex:1 1 auto}
-  .rowact{display:flex; align-items:center; gap:7px; flex:0 0 auto}
+  .rowact{display:flex; align-items:center; gap:7px; flex:0 0 auto; margin-left:auto}
   .minibtn{width:34px; height:34px; border-radius:10px; border:1px solid var(--line2);
     background:var(--surface); color:var(--muted); display:grid; place-items:center; cursor:pointer}
   .minibtn svg{width:16px; height:16px}
