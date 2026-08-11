@@ -352,6 +352,13 @@ ADD_CSS = """
     padding:13px 24px; font:700 13.5px "Inter",sans-serif; min-height:44px; align-items:center;
     box-shadow:0 10px 24px -10px rgba(242,103,58,.55); transition:transform .12s, box-shadow .12s}
   .allebtn:hover{transform:translateY(-1px); box-shadow:0 13px 28px -10px rgba(242,103,58,.6)}
+  .kopfnav{display:flex; align-items:center; gap:3px; margin-left:auto}
+  .kopfnav a{padding:9px 13px; border-radius:999px; text-decoration:none;
+    font:700 13px "Inter",sans-serif; color:var(--muted)}
+  .kopfnav a:hover{color:#F2673A}
+  .kopfnav a.an{background:rgba(242,103,58,.13); color:#F2673A}
+  @media (max-width:430px){ .kopfnav a{padding:8px 7px; font-size:12px}
+    .logowort{height:31px !important} }
   .logowort{display:block; height:48px; width:auto}
   @media (max-width:430px){ .logowort{height:38px} }
   .logo{display:flex; align-items:center; gap:9px}
@@ -963,22 +970,14 @@ CHEV = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width
 
 
 def nav_html(active):
-    return ""                         # Bottom-Navigation komplett entfernt
-    if active == "live":
-        return ""
+    eintraege = [("live", "index.html", "Heute"),
+                 ("mediathek", "mediathek-kinder.html", "Mediathek"),
+                 ("memory", "memory.html", "Memory")]
     rows = []
-    for tab, href, label, icon in NAV:
-        if tab == "mediathek":
-            continue                  # eigener Tab wird nicht angezeigt
-        rows.append(
-            f'  <a class="navitem" role="tab" aria-selected="{"true" if tab == active else "false"}" '
-            f'data-tab="{tab}" href="{href}">\n'
-            f'    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" '
-            f'stroke-linecap="round" stroke-linejoin="round">{icon}</svg>\n'
-            f'    <span data-i18n="{"nav_live" if tab=="live" else "nav_med"}">{label}</span></a>')
-    return ('<nav class="bottomnav" role="tablist" aria-label="Bereiche">\n'
-            + "\n".join(rows) + "\n</nav>")
-
+    for tab, href, label in eintraege:
+        an = ' class="an" aria-current="page"' if tab == active else ""
+        rows.append(f'<a href="{href}"{an}>{label}</a>')
+    return '<nav class="kopfnav" aria-label="Bereiche">' + "".join(rows) + '</nav>'
 
 def seosec(icon, title, sub, paragraphs):
     ps = "\n      ".join(f"<p>{p}</p>" for p in paragraphs)
@@ -1043,6 +1042,7 @@ SHELL = """<!DOCTYPE html>
 <header>
   <div class="hbar">
     <a class="logo" href="index.html" aria-label="{brand} – zur Startseite"><img class="logowort" src="logo-schriftzug.png" alt="TVKinderprogramm.de: Kinderprogramm im Überblick" height="52" fetchpriority="high" decoding="async"></a>
+    {nav}
   </div>
 </header>
 
@@ -1088,7 +1088,6 @@ SHELL = """<!DOCTYPE html>
   </div>
 </div>
 
-{nav}
 
 <div class="consent hide" id="consent">
   <p data-i18n="consent">Wir messen anonym, welche Seiten genutzt werden — cookiefrei über Cloudflare Web Analytics. Weitere Dienste laden wir erst nach deiner Einwilligung.</p>
@@ -2736,6 +2735,24 @@ let tippOffen=false;
 
 /* ---- Katalog: vollständig, A bis Z; die Suche ignoriert die Chips ---- */
 let katOffen=true, katLimit=4;
+function empfehlungen(l){
+  /* Klassiker, Trends und gut bewertete Titel nach vorn; Tages-Seed sorgt
+     fuer taeglich wechselnde Reihenfolge bei stabiler Ansicht am selben Tag */
+  const d=new Date();
+  const seed=d.getFullYear()*372+(d.getMonth()+1)*31+d.getDate();
+  const rnd=i=>{ const x=Math.sin(seed*9301+i*49297)*233280; return x-Math.floor(x); };
+  return l.map((e,i)=>{
+    let pkt=0;
+    const r=(e.imdb&&e.imdb.r)||0, v=(e.imdb&&e.imdb.v)||0;
+    if(r>=7.5) pkt+=3; else if(r>=6.5) pkt+=2; else if(r>=5.8) pkt+=1;
+    if(v>=5000) pkt+=2; else if(v>=800) pkt+=1;          /* bekannt */
+    if(e.retro && r>=6.3) pkt+=2;                        /* Klassiker */
+    if(e.year && e.year>=2019) pkt+=1;                   /* aktuell */
+    if(e.neu) pkt+=2;                                    /* neu im Katalog */
+    return {e, s: pkt + rnd(i)*2.4};
+  }).sort((a,b)=>b.s-a.s).map(x=>x.e);
+}
+
 function katalogZeigen(){
   const mehrBtn=document.getElementById("katMehr"),
         kopfBtn=document.getElementById("katMehrKopf"),
@@ -2751,7 +2768,7 @@ function katalogZeigen(){
   let l = MEDIA.filter(kat);
   if(fAge) l = l.filter(e=>e.grp===fAge);
   if(fInts.size) l = l.filter(e=>(e.ints||[]).some(c=>fInts.has(c)));
-  l = l.slice().sort((a,b)=>a.title.localeCompare(b.title, LANG==="en"?"en":"de"));
+  l = empfehlungen(l);
   /* Bei aktiver Suche die volle Liste rendern, sonst seitenweise zu 30 */
   const seite = suchtext.trim() ? l : l.slice(0, katLimit);
   mBoard.innerHTML = seite.map(mcard).join("") + '<div class="empty" style="display:none">'+t("nichts")+'</div>';
