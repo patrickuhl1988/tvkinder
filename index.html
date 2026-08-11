@@ -1393,6 +1393,34 @@
   .kinogrid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
   @media (min-width:760px){ .kinogrid{grid-template-columns:repeat(4,1fr)} }
   .kinogrid .kinoart{height:150px}
+  .kinocard.klick{cursor:pointer; transition:transform .12s, box-shadow .12s}
+  .kinocard.klick:hover{transform:translateY(-2px); box-shadow:0 16px 34px -14px rgba(60,45,25,.28)}
+  .kinodialog{position:fixed; inset:0; z-index:70; display:grid; place-items:center;
+    background:rgba(32,37,49,.45); backdrop-filter:blur(5px); padding:16px}
+  .kinodialog[hidden]{display:none}
+  .kd-karte{width:min(440px,100%); max-height:88vh; overflow:auto; background:var(--surface);
+    border-radius:22px; box-shadow:0 30px 70px -20px rgba(0,0,0,.45)}
+  .kd-kopf{position:relative; height:110px; border-radius:22px 22px 0 0;
+    background:url(kino-platzhalter.jpg) center/cover, linear-gradient(150deg,#493B73,#7B61D1)}
+  .kd-kopf .fskcircle{left:12px; top:12px; right:auto; width:34px; height:34px; font-size:14px}
+  .kd-zu{position:absolute; right:10px; top:10px; width:36px; height:36px; border-radius:12px;
+    border:0; cursor:pointer; background:rgba(255,255,255,.92); color:#202531;
+    display:grid; place-items:center}
+  .kd-zu svg{width:17px; height:17px}
+  .kd-inhalt{padding:16px 18px 20px}
+  .kd-inhalt h3{font:850 20px "Archivo",sans-serif; letter-spacing:-.02em; margin:0 0 8px}
+  .kd-meta{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 11px}
+  .kd-kurz{font-size:13.5px; line-height:1.65; color:var(--muted); margin:0 0 14px}
+  .kd-fakten{border-top:1px solid var(--line); padding-top:2px; margin-bottom:14px}
+  .kd-fakten .arow{display:flex; gap:12px; padding:8px 0; border-bottom:1px solid var(--line);
+    font-size:13px; align-items:baseline}
+  .kd-fakten .arow:last-child{border-bottom:0}
+  .kd-fakten .alb{flex:0 0 118px; font:700 9.5px "JetBrains Mono",monospace;
+    letter-spacing:.07em; text-transform:uppercase; color:var(--muted)}
+  .kd-fakten .aval{color:var(--ink); font-weight:650; min-width:0}
+  .kd-aktionen{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+  .trailerbtn.gross{padding:11px 16px; font-size:13px;
+    background:linear-gradient(135deg,#F2673A,#FF8B5F); color:#fff; border:0}
   .jetztbox + .jetztbox{margin-top:16px}
   .heromed ~ .heroslot{margin:0 0 16px}
   .anblogo{font:850 26px "Archivo",sans-serif; color:#fff; letter-spacing:-.02em;

@@ -113,6 +113,34 @@ ADD_CSS = """
   .kinogrid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
   @media (min-width:760px){ .kinogrid{grid-template-columns:repeat(4,1fr)} }
   .kinogrid .kinoart{height:150px}
+  .kinocard.klick{cursor:pointer; transition:transform .12s, box-shadow .12s}
+  .kinocard.klick:hover{transform:translateY(-2px); box-shadow:0 16px 34px -14px rgba(60,45,25,.28)}
+  .kinodialog{position:fixed; inset:0; z-index:70; display:grid; place-items:center;
+    background:rgba(32,37,49,.45); backdrop-filter:blur(5px); padding:16px}
+  .kinodialog[hidden]{display:none}
+  .kd-karte{width:min(440px,100%); max-height:88vh; overflow:auto; background:var(--surface);
+    border-radius:22px; box-shadow:0 30px 70px -20px rgba(0,0,0,.45)}
+  .kd-kopf{position:relative; height:110px; border-radius:22px 22px 0 0;
+    background:url(kino-platzhalter.jpg) center/cover, linear-gradient(150deg,#493B73,#7B61D1)}
+  .kd-kopf .fskcircle{left:12px; top:12px; right:auto; width:34px; height:34px; font-size:14px}
+  .kd-zu{position:absolute; right:10px; top:10px; width:36px; height:36px; border-radius:12px;
+    border:0; cursor:pointer; background:rgba(255,255,255,.92); color:#202531;
+    display:grid; place-items:center}
+  .kd-zu svg{width:17px; height:17px}
+  .kd-inhalt{padding:16px 18px 20px}
+  .kd-inhalt h3{font:850 20px "Archivo",sans-serif; letter-spacing:-.02em; margin:0 0 8px}
+  .kd-meta{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 11px}
+  .kd-kurz{font-size:13.5px; line-height:1.65; color:var(--muted); margin:0 0 14px}
+  .kd-fakten{border-top:1px solid var(--line); padding-top:2px; margin-bottom:14px}
+  .kd-fakten .arow{display:flex; gap:12px; padding:8px 0; border-bottom:1px solid var(--line);
+    font-size:13px; align-items:baseline}
+  .kd-fakten .arow:last-child{border-bottom:0}
+  .kd-fakten .alb{flex:0 0 118px; font:700 9.5px "JetBrains Mono",monospace;
+    letter-spacing:.07em; text-transform:uppercase; color:var(--muted)}
+  .kd-fakten .aval{color:var(--ink); font-weight:650; min-width:0}
+  .kd-aktionen{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+  .trailerbtn.gross{padding:11px 16px; font-size:13px;
+    background:linear-gradient(135deg,#F2673A,#FF8B5F); color:#fff; border:0}
   .jetztbox + .jetztbox{margin-top:16px}
   .heromed ~ .heroslot{margin:0 0 16px}
   .anblogo{font:850 26px "Archivo",sans-serif; color:#fff; letter-spacing:-.02em;
@@ -2420,15 +2448,34 @@ PAGES["mediathek"] = dict(
     </div></div>
     </div>
     <section class="jetztbox">
-    <div class="section-eyebrow tipphead sekkopf"><span class="secic gruen"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5l10 6.5-10 6.5z"/></svg></span><div class="secht"><h2>Mediathek-Vorschläge</h2><span class="cnt" id="katCount"></span></div></div>
+    <div class="section-eyebrow tipphead sekkopf"><span class="secic gruen"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5l10 6.5-10 6.5z"/></svg></span><div class="secht"><h2>Mediathek-Vorschläge</h2></div></div>
     <div class="board" id="medBoard">{prerender}</div>
     <button class="allelink unten" id="katMehr" style="display:none">4 weitere anzeigen →</button>
     </section>
     <section class="jetztbox">
-    <div class="section-eyebrow tipphead sekkopf"><span class="secic lila2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 9h18M7 5l2 4M12 5l2 4M17 5l2 4"/></svg></span><div class="secht"><h2>Aktuell im Kino</h2><span class="cnt">Kinderfilme, die jetzt laufen oder bald starten</span></div></div>
+    <div class="section-eyebrow tipphead sekkopf"><span class="secic lila2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 9h18M7 5l2 4M12 5l2 4M17 5l2 4"/></svg></span><div class="secht"><h2>Aktuell im Kino</h2></div></div>
     <div class="board" id="kinoBoard"></div>
     <button class="allelink unten" id="kinoMehr" style="display:none">4 weitere anzeigen →</button>
     </section>
+
+    <div class="kinodialog" id="kinoDialog" role="dialog" aria-modal="true" aria-labelledby="kdTitel" hidden>
+      <div class="kd-karte">
+        <div class="kd-kopf" id="kdKopf">
+          <span class="fskcircle" id="kdFsk">0</span>
+          <button class="kd-zu" id="kdZu" aria-label="Schließen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        </div>
+        <div class="kd-inhalt">
+          <h3 id="kdTitel"></h3>
+          <div class="kd-meta" id="kdMeta"></div>
+          <p class="kd-kurz" id="kdKurz"></p>
+          <div class="kd-fakten" id="kdFakten"></div>
+          <div class="kd-aktionen">
+            <a class="trailerbtn gross" id="kdTrailer" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5l10 6.5-10 6.5z"/></svg>Trailer ansehen</a>
+            <a class="allelink" id="kdImdb" target="_blank" rel="noopener">bei IMDb nachschlagen →</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <noscript><p class="nojs">Der Katalog steht oben als Liste. Filter, Sortierung und Suche brauchen JavaScript.</p></noscript>
 
@@ -2568,11 +2615,9 @@ function mcard(e){
     </div>
     <div class="pvrow panelprov">${prov}</div>
     <div class="agebox">
-      <div class="arow"><span class="alb">${t("alter")}</span><span class="aval">${t("ab")} ${e.age} ${t("jahren")}<span class="est">${t("redaktionell")}</span></span></div>
+      <div class="arow"><span class="alb">${t("alter")}</span><span class="aval">${t("ab")} ${e.age} ${t("jahren")} <span class="est">${t("redaktionell")}</span></span></div>
       ${e.year?`<div class="arow"><span class="alb">${LANG==="en"?"Since":"Seit"}</span><span class="aval">${e.year}</span></div>`:""}
       ${e.folgen?`<div class="arow"><span class="alb">${LANG==="en"?"Episodes":"Folgen"}</span><span class="aval">${e.folgen}${e.dauer?` · ${LANG==="en"?"approx.":"ca."} ${e.dauer} ${LANG==="en"?"min each":"Min je Folge"}`:""}</span></div>`:""}
-      <div class="arow sp-sicher"><span class="alb">${t("nachsehen")}</span><span class="aval"><span class="spdot"></span>${
-        t("nachsehen_ja")}: ${e.prov.filter(p=>p.ok).map(p=>p.n).join(LANG==="en"?" and ":" und ")}</span></div>
       ${e.retro?`<div class="arow"><span class="alb">${t("kennst")}</span><span class="aval">${e.retro.n}</span></div>`:""}
       <div class="arow"><span class="alb">IMDb</span><span class="aval">${
         rate?`<b>${rate}</b> ${t("imdb_von")} <span class="votes">${t("imdb_stimmen").replace("%s",(e.imdb.v||0).toLocaleString("de-DE"))}</span> · <a href="https://www.imdb.com/title/${e.imdb.id}/" target="_blank" rel="noopener">${t("imdb_ansehen")}</a>`
@@ -2701,7 +2746,6 @@ function katalogZeigen(){
     mBoard.innerHTML = tipps.map(tippKarteIndex).join("") + '<div class="empty" style="display:none">'+t("nichts")+'</div>';
     const e1=mBoard.querySelector(".tipprow");
     if(e1){ e1.classList.add("open"); e1.querySelector(".rowhead").setAttribute("aria-expanded","true"); }
-    document.getElementById("katCount").textContent = tipps.length + " " + t("tipps_n");
     return;
   }
   let l = MEDIA.filter(kat);
@@ -2715,8 +2759,6 @@ function katalogZeigen(){
   mehrBtn.style.display = rest>0 ? "" : "none";
   if(kopfBtn) kopfBtn.style.display = rest>0 ? "" : "none";
   if(rest>0) mehrBtn.textContent = Math.min(4,rest)+" weitere anzeigen \u2192";
-  document.getElementById("katCount").textContent =
-    (suchtext.trim() ? l.length : Math.min(katLimit,l.length)+" / "+l.length) + " " + t("titel_n");
   const mc=document.getElementById("medCount");
   if(mc) mc.textContent = MEDIA.filter(kat).length + " " + t("titel_n");
 }
@@ -2762,10 +2804,10 @@ function kinoZeigen(){
   const heute=new Date(); heute.setHours(0,0,0,0);
   const dat = x=>{ const m=x.split("."); return new Date(+m[2], +m[1]-1, +m[0]); };
   const pool=kinoAuswahl(), seite=pool.slice(0,kinoLimit);
-  kb.innerHTML = '<div class="kinogrid">'+seite.map(f=>{
+  kb.innerHTML = '<div class="kinogrid">'+seite.map((f,fi)=>{
     const st=dat(f.start), zukunft=st>heute;
     const neu=!zukunft && (heute-st)/864e5<=21;
-    return '<article class="kinocard">'+
+    return '<article class="kinocard klick" data-fi="'+fi+'" role="button" tabindex="0" aria-label="'+f.t+': Details anzeigen">'+
       '<div class="kinoart">'+
         (zukunft?'<span class="ribbon">Demn\u00e4chst</span>':(neu?'<span class="ribbon neu">Neu</span>':""))+
         '<span class="fskcircle">'+(f.fsk!==""?f.fsk:"?")+'</span>'+
@@ -2777,10 +2819,58 @@ function kinoZeigen(){
       '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5l10 6.5-10 6.5z"/></svg>Trailer</a>'+
       '</article>';
   }).join("")+"</div>";
+  kb._pool = seite;
   const km=document.getElementById("kinoMehr"), rest=pool.length-seite.length;
   if(km){ km.style.display = rest>0 ? "" : "none";
     km.textContent = Math.min(4,rest)+" weitere anzeigen \u2192"; }
 }
+
+/* ---- Film-Details im Dialog ---- */
+function kinoDetails(f){
+  const heute=new Date(); heute.setHours(0,0,0,0);
+  const m=f.start.split("."), st=new Date(+m[2], +m[1]-1, +m[0]);
+  const zukunft=st>heute;
+  document.getElementById("kdTitel").textContent=f.t;
+  document.getElementById("kdFsk").textContent = f.fsk!=="" ? f.fsk : "?";
+  document.getElementById("kdMeta").innerHTML =
+    (f.genre?'<span class="comp">'+f.genre+'</span>':"")+
+    (f.dauer?'<span class="durtag">'+f.dauer+' Min</span>':"")+
+    '<span class="durtag">'+(f.fsk!==""?("FSK "+f.fsk):"FSK folgt")+'</span>';
+  document.getElementById("kdKurz").textContent=f.kurz||"";
+  document.getElementById("kdFakten").innerHTML =
+    '<div class="arow"><span class="alb">Altersfreigabe</span><span class="aval">'+
+      (f.fsk!==""?("FSK "+f.fsk):"noch nicht bekannt")+'</span></div>'+
+    '<div class="arow"><span class="alb">'+(zukunft?"Kinostart":"Im Kino seit")+'</span><span class="aval">'+f.start+'</span></div>'+
+    (f.genre?'<div class="arow"><span class="alb">Genre</span><span class="aval">'+f.genre+'</span></div>':"")+
+    (f.dauer?'<div class="arow"><span class="alb">Laufzeit</span><span class="aval">'+f.dauer+' Minuten</span></div>':"");
+  document.getElementById("kdTrailer").href=trailerUrl(f.t);
+  document.getElementById("kdImdb").href="https://www.imdb.com/find/?q="+encodeURIComponent(f.t);
+  const d=document.getElementById("kinoDialog");
+  d.hidden=false; document.body.style.overflow="hidden";
+}
+function kinoDialogZu(){
+  const d=document.getElementById("kinoDialog");
+  if(d){ d.hidden=true; document.body.style.overflow=""; }
+}
+document.getElementById("kinoBoard").addEventListener("click", e=>{
+  if(e.target.closest(".trailerbtn")) return;      /* Trailer bleibt Direktlink */
+  const k=e.target.closest(".kinocard.klick"); if(!k) return;
+  const pool=document.getElementById("kinoBoard")._pool||[];
+  const f=pool[+k.dataset.fi]; if(f) kinoDetails(f);
+});
+document.getElementById("kinoBoard").addEventListener("keydown", e=>{
+  if(e.key!=="Enter" && e.key!==" ") return;
+  const k=e.target.closest(".kinocard.klick"); if(!k) return;
+  e.preventDefault();
+  const pool=document.getElementById("kinoBoard")._pool||[];
+  const f=pool[+k.dataset.fi]; if(f) kinoDetails(f);
+});
+{ const d=document.getElementById("kinoDialog");
+  if(d){
+    document.getElementById("kdZu").addEventListener("click", kinoDialogZu);
+    d.addEventListener("click", e=>{ if(e.target===d) kinoDialogZu(); });
+    document.addEventListener("keydown", e=>{ if(e.key==="Escape") kinoDialogZu(); });
+  } }
 document.getElementById("kinoMehr").addEventListener("click", ()=>{ kinoLimit+=4; kinoZeigen(); });
 
 /* ---- Tipps und Katalog wieder einklappen ---- */
