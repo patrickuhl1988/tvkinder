@@ -1,34 +1,11 @@
 # -*- coding: utf-8 -*-
 """Kindersendungen der Vollprogramme.
 
-Erzeugt von scan_kinder.py aus tv.de am 13.08.2026. Auswahl nach Kategorie,
+Erzeugt von scan_kinder.py aus tv.de am 14.08.2026. Auswahl nach Kategorie,
 bekannten Titeln und Beschreibung; Alterswerte heuristisch.
 """
 
 TAGE = [
-    ("Donnerstag, 13.08.2026", "ProSieben Maxx", [
-        ('16:40', 'Dr. STONE', 'Das Licht der Hoffnung und Verzweiflung', 'Anime', 25, 12, 'a10', 55, 'Die Crew der Perseus kommt an der Schatzinsel an. Senku, Soyuz, Kohaku und Gen gehen an Land, um das'),
-        ('17:05', 'Dragon Ball Super', 'Der zehnte Kämpfer bist du! Goku besucht Freezer!', 'Anime', 25, 12, 'a10', 55, 'Son Goku will Freezer bitten, als Ersatz für Boo mit Team Erde am Turnier der Universen teilzunehmen'),
-        ('17:30', 'Detektiv Conan', 'Drei Tage mit Hattori Heiji (1)', 'Anime', 30, 12, 'a10', 55, 'Conan und die anderen sind auf einem Kirschblütenfest. Der junge Detektiv hat Heiji dorthin bestellt'),
-        ('18:00', 'One Piece', 'Die Klinge des eisernen Willens - Der Gamma Knife Gegenangriff!', 'Anime', 25, 12, 'a10', 55, 'De Flamingo unterbreitet Law ein Angebot: Wenn dieser ihm mit Hilfe seiner Teufelskräfte Unsterblich'),
-        ('18:25', 'One Piece', 'Zusammenprall der Haki! - Ruffy gegen De Flamingo', 'Anime', 25, 12, 'a10', 55, 'Laws Angriff setzt De Flamingo ordentlich zu. Der Samurai aber verfügt über außergewöhnliche Selbsth'),
-        ('18:50', 'Detektiv Conan', 'Der Serienmörder von Osaka (2)', 'Anime', 30, 12, 'a10', 55, 'Die Todesursache von Sumie Okazaki steht fest: Strangulation mit einem Seil. Conan, Hejii und Yusuke'),
-    ]),
-    ("Donnerstag, 13.08.2026", "WDR", [
-        ('07:55', 'Das Camp in der Wildnis', 'Krise im Kajak', 'Vorlesen', 25, 3, 'a3', 55, 'Emilia ergründet auf der Huskyfarm das Wesen ihres Patenhundes Skare und sie darf das erste Mal eine'),
-    ]),
-    ("Donnerstag, 13.08.2026", "NDR", [
-        ('07:40', 'Die Pfefferkörner', 'Der Einbruch', 'Serie', 35, 10, 'a10', 55, 'Ein Nachbar bittet Mira, eine wertvolle Skulptur zu verwahren, während er für einen Tag verreist ist'),
-    ]),
-    ("Donnerstag, 13.08.2026", "MDR", [
-        ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Dr. Brumm macht das, was er immer macht, wenn Pottwal sich die Flossen vertreten will: Er radelt mit'),
-    ]),
-    ("Donnerstag, 13.08.2026", "RBB", [
-        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Dr. Brumm: Dr. Brumm will helfen'),
-    ]),
-    ("Donnerstag, 13.08.2026", "SRF 1", [
-        ('17:45', 'Pompon der kleine Bär', 'Es Waldmonschter', 'Vorlesen', 15, 6, 'a6', 55, 'Pompon und Rita auf Spuren des Waldmonsters Zerbidul, das letztlich doch keins ist.'),
-    ]),
     ("Freitag, 14.08.2026", "ProSieben Maxx", [
         ('16:40', 'Dr. STONE', 'Das Ass im Ärmel auf dem Schiff der Wissenschaft', 'Anime', 30, 12, 'a10', 55, 'Die Besatzung der Perseus wurde versteinert. Senku, Soyuz, Kohaku und Gen, die sich auf der Schatzin'),
         ('17:10', 'Dragon Ball Super', 'Die Auferstehung des bösen Imperators! Die rätselhafen Attentäter!', 'Anime', 25, 12, 'a10', 55, 'Nachdem Quitela, der Gott der Zerstörung aus dem vierten Universum, von Freezers geplanter Wiederbel'),
@@ -36,15 +13,6 @@ TAGE = [
         ('18:00', 'One Piece', 'Unangreifbar! - Trebols schockierendes Geheimnis', 'Anime', 30, 12, 'a10', 55, 'Mit seiner Klebeschleuder gelingt es Trébol, Ruffy lahmzulegen. Um De Flamingos Sieg zu garantieren,'),
         ('18:30', 'One Piece', 'Der Ärger bricht aus - Ich werde alles auf mich nehmen!', 'Anime', 25, 12, 'a10', 55, 'Ruffy übergibt Law an seine Verbündeten, doch der lässt sich nicht auf den Handel ein. Außerdem wird'),
         ('18:55', 'Detektiv Conan', 'Im falschen Film', 'Anime', 25, 12, 'a10', 55, 'Conan und die Detective Boys warten auf Kogoro und dessen Tochter Ran. Sie planen gemeinsam ein neue'),
-    ]),
-    ("Freitag, 14.08.2026", "WDR", [
-        ('07:25', 'Campsite', 'Ich kann nicht schwimmen', 'Jugendserie', 5, 3, 'a3', 55, 'Silje freut sich über ein neues Schlauchboot, das sie von ihrem Vater geschenkt bekommen hat. Begeis'),
-        ('07:30', 'Campsite', 'Ein zu heißer Sommertag', 'Jugendserie', 10, 3, 'a3', 55, 'Ohne ihre Eltern zu fragen, lädt Andrine Nura, Sebbe, Theodor und Ronja zu einem Bootsausflug ein. A'),
-        ('07:40', 'Campsite', 'Silje in der Patsche', 'Jugendserie', 10, 3, 'a3', 55, 'Der Influencer Kattekryp kommt auf den Campingplatz und Silje prahlt damit, dass sie eng befreundet '),
-    ]),
-    ("Freitag, 14.08.2026", "NDR", [
-        ('06:00', 'Sesamstraße', '', 'Vorlesen', 20, 3, 'a3', 55, 'Bert will mithilfe eines Ventilators Windkraft erklären. Aber als Ernie den Ventilator auf die höchs'),
-        ('06:20', 'Grüße vom Mars', '', 'Film', 80, 3, 'a3', 55, 'Tom ist zehn und anders als die anderen Kinder. Er mag keine Veränderungen, keine Dinge, die rot sin'),
     ]),
     ("Freitag, 14.08.2026", "BR", [
         ('20:15', 'Hubert ohne Staller', 'Pony am Stock', 'Serie', 45, 10, 'a10', 55, 'Riedls Dienstfahrrad wurde gestohlen. Der Sohn des Gestütbesitzers Georg Dausinger wurde von Riedls '),
@@ -55,22 +23,9 @@ TAGE = [
     ("Freitag, 14.08.2026", "RBB", [
         ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Liedergeschichten: Kitzelkanon'),
     ]),
-    ("Freitag, 14.08.2026", "HR", [
-        ('06:20', 'Leo da Vinci', 'Die zwei Bären', 'Zeichentrick', 10, 3, 'a3', 55, 'Leo und seinen Freunden gelingt es, ihr Gefährt zu verstecken, bevor die Gauner um Jack und Robert e'),
-        ('06:30', 'Leo da Vinci', 'Lisas Entführung', 'Zeichentrick', 15, 3, 'a3', 55, 'Die beiden gerissenen Kaufleute Jack und Robert überwältigen Lisa in der Annahme, Bianca de Medici v'),
-        ('07:00', 'Young Reporter', 'Zwischen Wald, Wahl und Wirklichkeit\nWas Schülerinnen und Schüler der ', 'Wissen', 15, 3, 'a3', 55, 'Wie blicken Jugendliche auf die großen Fragen unserer Zeit? Schülerinnen und Schüler der Dreieichsch'),
-    ]),
-    ("Freitag, 14.08.2026", "arte", [
-        ('04:05', 'Verdammte Katze!', 'Großer Bruder', 'Zeichentrick', 5, 3, 'a3', 55, 'Stéphane passt auf das Nachbarskätzchen Grisbi auf - niedlich, aber leider ein Problem. Denn Moustiq'),
-    ]),
     ("Freitag, 14.08.2026", "ORF 1", [
-        ('06:00', 'ZIB KiDS', '', 'Serie', 10, 3, 'a3', 55, ''),
-        ('06:10', 'Wickie und die starken Männer', 'Nochmals davongekommen', 'Zeichentrick', 25, 3, 'a3', 55, 'Wickie tritt als Küchenjunge in die Dienste der Franken. Die Vorbereitungen für das große Fest sind '),
-        ('06:35', 'Servus Kasperl', 'Kasperl & Pezi: Räuber in der Märchenstadt', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
-        ('07:00', 'Die Jagd nach dem Kju Wang', 'Ardelias neue Leidenschaft', 'Zeichentrick', 25, 3, 'a3', 55, 'Graf Yagor gelingt es, seine Nichte Alma unter einem Vorwand in Cirillos Palast einzuschleusen. Arde'),
-        ('07:40', 'Galapagos X', 'Das perfekte Spielzeug', 'Zeichentrick', 5, 3, 'a3', 55, 'Die Welt wird von nicht recycelbaren Einweg-Spielsachen überflutet, sodass es beinahe kein Durchkomm'),
-        ('07:45', 'Garfield', 'Die Glitzer-Schlucht - Teil 1', 'Zeichentrick', 15, 3, 'a3', 55, 'Garfield hat eine Rolle in einem Western Film! Er spielt den Hilfssheriff von Jon, der den Hauptsher'),
-        ('08:00', 'ZIB KiDS', '', 'Serie', 15, 6, 'a6', 55, ''),
+        ('07:49', 'Garfield', 'Die Glitzer-Schlucht - Teil 1', 'Zeichentrick', 14, 3, 'a3', 55, 'Garfield hat eine Rolle in einem Western Film! Er spielt den Hilfssheriff von Jon, der den Hauptsher'),
+        ('08:03', 'ZIB KiDS', '', 'Serie', 10, 6, 'a6', 55, ''),
     ]),
     ("Freitag, 14.08.2026", "SRF 1", [
         ('17:45', 'Pompon der kleine Bär', 'Es Geburtstagsgheimnis', 'Vorlesen', 15, 6, 'a6', 55, 'Pompon macht seinem Papa eine Überraschung in einer Kiste, die dieser prompt findet. Mit List und Ri'),
@@ -123,7 +78,7 @@ TAGE = [
         ('12:50', 'Voltron: Legendärer Verteidiger', 'Ursprung', 'Zeichentrick', 30, 6, 'a6', 55, 'In höchster Eile bricht Voltron nach Oriande auf, um Honervas durchtriebene Pläne zu durchkreuzen. M'),
         ('13:20', 'Voltron: Legendärer Verteidiger', 'Tag 47', 'Zeichentrick', 25, 6, 'a6', 55, 'In ihrem Vlog gewähren die Piloten Kinkade und Rizavi einen Einblick in den Alltag an Bord der Atlas'),
         ('13:45', 'She-Ra und die Rebellen-Prinzessinnen', 'Die Schlacht von Bright Moon', 'Zeichentrick', 20, 6, 'a6', 55, 'Die Kriegerin She-Ra will ihren Planeten aus den Fängen der Horde befreien.'),
-        ('23:55', 'Dragon Ball Super', 'Überschreite alle Grenzen! Goku gegen Gohan!', 'Anime', 25, 12, 'a10', 55, 'Durch Piccolos Training strotzt Son Gohan geradezu vor Selbstvertrauen. Siegessicher fordert er sein'),
+        ('23:50', 'Dragon Ball Super', 'Überschreite alle Grenzen! Goku gegen Gohan!', 'Anime', 25, 12, 'a10', 55, 'Durch Piccolos Training strotzt Son Gohan geradezu vor Selbstvertrauen. Siegessicher fordert er sein'),
     ]),
     ("Samstag, 15.08.2026", "WDR", [
         ('08:10', 'Die Sendung mit dem Elefanten', 'Wie funktioniert ein Pfandflaschenautomat?', 'Serie', 25, 3, 'a3', 55, 'In der Sendung mit dem Elefanten macht sich Knolle auf Entdeckungsreise zum Supermarkt. Er will wiss'),
@@ -166,5 +121,61 @@ TAGE = [
         ('07:30', 'Grizzy und die Lemminge', 'Die Eisparty', 'Zeichentrick', 10, 3, 'a3', 55, 'Es ist Hochsommer und brütend heiß. Im Fernsehen sieht Grizzy eine appetitanregende Werbung für Eisc'),
         ('07:40', 'Servus Kasperl', 'Kasperl & Strolchi: Die Zauberrose', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
         ('08:05', 'Paw Patrol - Der Kinofilm', '', 'Zeichentrick', 75, 6, 'a6', 55, "Temporeiches, erstes Kinoabenteuer der beliebten Hunde-Stars der 'Paw Patrol'. Als Bürgermeister dro"),
+    ]),
+    ("Sonntag, 16.08.2026", "ARD", [
+        ('05:30', 'HipHorses - Du und Dein Pferd', 'Zoe und ihre Voltigier-Crew', 'Vorlesen', 25, 3, 'a3', 55, 'Handstand und Spagat-Sprung auf dem Rücken eines Pferdes? Das ist für Zoe aus Delitzsch kein Problem'),
+        ('05:55', '#WIR - Freundschaft grenzenlos', 'Showtanz: Mehr als Karneval', 'Vorlesen', 10, 3, 'a3', 55, 'Vorhang auf für die Showgirls Larissa und Jana. Die beiden besten Freundinnen aus Rheinland-Pfalz ke'),
+        ('06:05', 'Tigerenten Club', 'Der Club zum Mitmachen - Spiele, Spaß und spannendes Wissen', 'Vorlesen', 60, 3, 'a3', 55, 'Kickboxen mit Jugend-Europameisterin Theresa Schnelle Kicks und klare Regeln! Jugend-Europameisterin'),
+        ('07:05', 'Ein Sommer in Sommerby', '', 'Serie', 75, 3, 'a3', 55, 'Seit vielen Jahren lebt Inge allein in ihrem reetgedeckten Haus an der Schlei. Hier gibt es weder ei'),
+        ('08:20', 'Die Sendung mit der Maus', '', 'Vorlesen', 30, 6, 'a6', 55, 'Lach- und Sachgeschichten, heute mit Stadtschafen beim Scheren, einem Lied von einem besonderen Cowb'),
+    ]),
+    ("Sonntag, 16.08.2026", "ZDF", [
+        ('06:00', 'Die Werkel-Ferkel', 'Nacht der Sternschnuppen', 'Zeichentrick', 10, 3, 'a3', 55, 'Die Füchsin Fiona hat sich am Bein verletzt. Wie soll sie so auf den Berg wandern, um von dort in de'),
+        ('06:10', 'Die Werkel-Ferkel', 'Treppe zum Mond', 'Zeichentrick', 15, 3, 'a3', 55, 'Der Wolf Wilf hätte gerne den Vollmond ganz nahe bei sich - und deshalb heult er ohrenbetäubend laut'),
+        ('06:25', 'Sam & Julia im Mäusehaus', 'Mit Pauken und Trompeten', 'Zeichentrick', 5, 3, 'a3', 55, 'Die Mäuseband plant ein Konzert im Mäusehaus und ruft alle zum Mitspielen auf. Mitmachen kann jeder,'),
+        ('06:30', 'Sam & Julia im Mäusehaus', 'Julia ist hingefallen', 'Zeichentrick', 10, 3, 'a3', 55, 'Julia rutscht aus und fällt hin. Sie verletzt sich nicht, aber weil sie über Schmerzen klagt, bekomm'),
+        ('06:40', 'Sam & Julia im Mäusehaus', 'Der Vatertag', 'Zeichentrick', 5, 3, 'a3', 55, 'Alle Mäusekinder sind dabei, Vatertags-Geschenke für ihre Väter zu basteln. Nur Tonio, der gleich zw'),
+        ('06:45', 'Pettersson und Findus', 'Armer Pettersson', 'Zeichentrick', 15, 3, 'a3', 55, 'Einen solch verregneten Tag hat es auf dem Hof schon lange nicht mehr gegeben. Pettersson möchte am '),
+        ('07:00', 'Wickie und die starken Männer', 'Ylvi in Not', 'Zeichentrick', 10, 3, 'a3', 55, 'Wickie hat Geburtstag. Ylvi und Ylva wollen über den Klippen von Flake Beeren für einen leckeren Geb'),
+        ('07:10', 'Wickie und die starken Männer', 'Olympische Spiele', 'Zeichentrick', 15, 3, 'a3', 55, 'Die Wikinger bringen das Olympische Feuer nach Spanien, wo sich Vertreter vieler Nationen treffen, u'),
+        ('07:25', 'Bibi Blocksberg', 'Der Kobold aus dem Briefkasten', 'Zeichentrick', 25, 3, 'a3', 55, 'Bibi und ihr Vater Bernhard sind allein zu Hause. Als Bibi sich beim Frühstück verhext, landet statt'),
+        ('07:50', 'Bibi und Tina', 'Der Hufschmied', 'Zeichentrick', 25, 3, 'a3', 55, 'Graf Falko von Falkenstein lässt sich zu einer riskanten Wette hinreißen. Dadurch stehen seine beste'),
+        ('08:15', 'Löwenzahn', 'Detektive - Spurensuche in Bärstadt', 'Serie', 25, 6, 'a6', 55, 'Fritz Fuchs und David Paschulke nehmen die Ermittlungen auf: Millies größter Schatz, ihr Skizzenbuch'),
+        ('08:40', 'Michel aus Lönneberga', 'Als Michel einen Freund gewann', 'Serie', 23, 6, 'a6', 55, 'Die neu gekaufte Sau wirft mitten in der Nacht ein Ferkel. Michel, der zufällig in den Stall kommt, '),
+        ('15:30', 'plan b', 'Clever reisen - Trips vor der Haustür', 'Serie', 45, 6, 'a6', 55, 'Sommerzeit - Ferienzeit! Ob Surfen oder Städtetrip: Urlaub muss kein Vermögen kosten - dank innovati'),
+    ]),
+    ("Sonntag, 16.08.2026", "ProSieben Maxx", [
+        ('04:10', 'One Piece', 'Unangreifbar! - Trebols schockierendes Geheimnis', 'Anime', 20, 12, 'a10', 55, 'Mit seiner Klebeschleuder gelingt es Trébol, Ruffy lahmzulegen. Um De Flamingos Sieg zu garantieren,'),
+        ('04:30', 'One Piece', 'Der Ärger bricht aus - Ich werde alles auf mich nehmen!', 'Anime', 25, 12, 'a10', 55, 'Ruffy übergibt Law an seine Verbündeten, doch der lässt sich nicht auf den Handel ein. Außerdem wird'),
+        ('04:55', 'Detektiv Conan', 'Wo ist Nintaro Shinmei? (1)', 'Anime', 20, 12, 'a10', 55, 'Fünf Personen stehen um einen in der Mitte liegenden toten Körper herum, als plötzlich ein Unbekannt'),
+    ]),
+    ("Sonntag, 16.08.2026", "NDR", [
+        ('06:45', 'Edgar, das Super-Karibu', 'Bernhard lernt Rad fahren', 'Zeichentrick', 10, 3, 'a3', 55, 'Bernhard, das ungeschickte Eichhörnchen, träumt davon, Radfahren zu lernen, damit er mit Katja, der '),
+        ('06:55', 'Edgar, das Super-Karibu', 'Der große Streit', 'Zeichentrick', 15, 3, 'a3', 55, 'Im Dorfcafé streiten sich die beiden Unzertrennlichen Bosse, der Igel, und Piet, der Esel, ohne Ende'),
+    ]),
+    ("Sonntag, 16.08.2026", "SWR", [
+        ('11:00', 'Das doppelte Lottchen', '', 'Serie', 90, 6, 'a6', 55, 'Sonne, Wasser, Surfen - für die meisten Kinder ist das Ferienheim am Wolfgangsee ein Paradies, doch '),
+    ]),
+    ("Sonntag, 16.08.2026", "MDR", [
+        ('15:50', 'Der Meisterdieb', '', 'Serie', 60, 6, 'a6', 55, 'Das Märchen der Brüder Grimm erzählt von einem jungen Mann, der als Junge von Zuhause weggelaufen wa'),
+        ('16:50', 'Rotkäppchen', '', 'Serie', 70, 6, 'a6', 55, 'Rotkäppchen wird von der Mutter in den Wald geschickt zur Großmutter, die krank im Bett liegt. "Aber'),
+        ('18:52', 'Unser Sandmännchen', '', 'Serie', 8, 3, 'a3', 55, 'Pitti schießt den Fußball in Schnatterinchens Primelbeet. Moppi meint: "Das gibt Ärger!", aber Pitti'),
+    ]),
+    ("Sonntag, 16.08.2026", "RBB", [
+        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Kallis Gute-Nacht-Geschichten: Kalli - Schnecke'),
+    ]),
+    ("Sonntag, 16.08.2026", "ORF 1", [
+        ('06:00', 'Tom - Ein echter Freund', 'Tom in Istanbul', 'Zeichentrick', 25, 3, 'a3', 55, 'Rupert hat sich auf der Sightseeingtour durch Istanbul verletzt. Bösewicht Carter wittert seine groß'),
+        ('06:25', 'Vegesaurier', 'Erbse in der Mitte', 'Zeichentrick', 5, 3, 'a3', 55, 'Ginger und die Erbs-Rex-Babys freuen sich auf ihr Lecker-Drops-Frühstück. Doch die Früchte wurden vo'),
+        ('06:30', 'Servus Kasperl', 'Kasperl & Buffi: Buffikopf und Blumentopf', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
+        ('06:55', 'Vegesaurier', 'Blütenfest', 'Zeichentrick', 5, 3, 'a3', 55, 'Im Frühling werden die Broccolisaurier von ganz besonderen Blüten auf einem Baum angelockt. Doch ein'),
+        ('07:00', 'Vegesaurier', 'Rennen ohne Regeln', 'Zeichentrick', 5, 3, 'a3', 55, 'Die jungen Vegesaurier machen regelmäßig Wettrennen und Ginger ruft ein Rennen ohne Regeln aus. Bald'),
+        ('07:05', 'Bakabu', 'Aufräum-Lied', 'Vorlesen', 5, 3, 'a3', 55, "Hey, was ist da los? Ui, wie schaut's da aus? Wenn Dinge einfach herumliegen, herrscht meistens ein "),
+        ('07:10', 'Knall genial', '', 'Wissen', 15, 3, 'a3', 55, 'Originelle Tipps und Tricks von Thomas Brezina und den Kids! Auch dieses Mal ist wieder für jeden Ge'),
+        ('07:25', 'Der gestiefelte Kater - Abenteuer in San Lorenzo', 'Skelette in der Stadt', 'Serie', 25, 3, 'a3', 55, 'Mit Hut und Degen zieht der gestiefelte Kater durchs Land, immer auf der Suche nach einem neuen Aben'),
+        ('07:50', 'Drunter & drüber mit Christoph Hirschler', 'Lachattacke mit Isabell Pannagl', 'Vorlesen', 15, 3, 'a3', 55, 'Heute wird es richtig lustig. Christoph Hirschler begrüßt die Kabarettistin Isabell Pannagl in seine'),
+        ('08:05', 'Campsite', 'Ich kann nicht schwimmen', 'Jugendserie', 5, 10, 'a10', 55, 'Silje möchte mit ihrem Schlauchboot eine runde Paddeln gehen und lädt Thea ein, mitzukommen. Diese s'),
+        ('08:10', 'Campsite', 'Ein zu heißer Sommertag', 'Jugendserie', 15, 10, 'a10', 55, 'An einem viel zu heißen Sommertag will Andrine ihren Schwarm Sebbe, Theo und Nura mit einer Bootsfah'),
+        ('12:30', 'Der König der Löwen', '', 'Zeichentrick', 105, 6, 'a6', 55, "Herzerwärmende Neuverfilmung eines der erfolgreichsten Disney-Klassikers. Jon Favreau ('The Jungle B"),
     ]),
 ]
