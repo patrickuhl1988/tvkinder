@@ -1,39 +1,12 @@
 # -*- coding: utf-8 -*-
 """Kindersendungen der Vollprogramme.
 
-Erzeugt von scan_kinder.py aus tv.de am 14.08.2026. Auswahl nach Kategorie,
+Erzeugt von scan_kinder.py aus tv.de am 15.08.2026. Auswahl nach Kategorie,
 bekannten Titeln und Beschreibung; Alterswerte heuristisch.
 """
 
 TAGE = [
-    ("Freitag, 14.08.2026", "ProSieben Maxx", [
-        ('16:40', 'Dr. STONE', 'Das Ass im Ärmel auf dem Schiff der Wissenschaft', 'Anime', 30, 12, 'a10', 55, 'Die Besatzung der Perseus wurde versteinert. Senku, Soyuz, Kohaku und Gen, die sich auf der Schatzin'),
-        ('17:10', 'Dragon Ball Super', 'Die Auferstehung des bösen Imperators! Die rätselhafen Attentäter!', 'Anime', 25, 12, 'a10', 55, 'Nachdem Quitela, der Gott der Zerstörung aus dem vierten Universum, von Freezers geplanter Wiederbel'),
-        ('17:35', 'Detektiv Conan', 'Drei Tage mit Hattori Heiji (2)', 'Anime', 25, 12, 'a10', 55, 'Kogoro ist überzeugt, das Rätsel um die verschwundene Frauenleiche im Tempel gelöst zu haben. Doch C'),
-        ('18:00', 'One Piece', 'Unangreifbar! - Trebols schockierendes Geheimnis', 'Anime', 30, 12, 'a10', 55, 'Mit seiner Klebeschleuder gelingt es Trébol, Ruffy lahmzulegen. Um De Flamingos Sieg zu garantieren,'),
-        ('18:30', 'One Piece', 'Der Ärger bricht aus - Ich werde alles auf mich nehmen!', 'Anime', 25, 12, 'a10', 55, 'Ruffy übergibt Law an seine Verbündeten, doch der lässt sich nicht auf den Handel ein. Außerdem wird'),
-        ('18:55', 'Detektiv Conan', 'Im falschen Film', 'Anime', 25, 12, 'a10', 55, 'Conan und die Detective Boys warten auf Kogoro und dessen Tochter Ran. Sie planen gemeinsam ein neue'),
-    ]),
-    ("Freitag, 14.08.2026", "BR", [
-        ('20:15', 'Hubert ohne Staller', 'Pony am Stock', 'Serie', 45, 10, 'a10', 55, 'Riedls Dienstfahrrad wurde gestohlen. Der Sohn des Gestütbesitzers Georg Dausinger wurde von Riedls '),
-    ]),
-    ("Freitag, 14.08.2026", "MDR", [
-        ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Ähnlich wie beim bekannten "Drei Chinesen mit nem Kontrabass"-Song, wird beim Kitzelkanon mit Vokale'),
-    ]),
-    ("Freitag, 14.08.2026", "RBB", [
-        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Liedergeschichten: Kitzelkanon'),
-    ]),
-    ("Freitag, 14.08.2026", "ORF 1", [
-        ('07:49', 'Garfield', 'Die Glitzer-Schlucht - Teil 1', 'Zeichentrick', 14, 3, 'a3', 55, 'Garfield hat eine Rolle in einem Western Film! Er spielt den Hilfssheriff von Jon, der den Hauptsher'),
-        ('08:03', 'ZIB KiDS', '', 'Serie', 10, 6, 'a6', 55, ''),
-    ]),
-    ("Freitag, 14.08.2026", "SRF 1", [
-        ('17:45', 'Pompon der kleine Bär', 'Es Geburtstagsgheimnis', 'Vorlesen', 15, 6, 'a6', 55, 'Pompon macht seinem Papa eine Überraschung in einer Kiste, die dieser prompt findet. Mit List und Ri'),
-    ]),
     ("Samstag, 15.08.2026", "ARD", [
-        ('05:30', 'Arthur und die Freunde der Tafelrunde', 'Der Umkehrtrunk', 'Zeichentrick', 10, 3, 'a3', 55, 'König Uther empfängt den Gesandten des Königs von Orkanien, um den Frieden zu feiern. Doch das Banke'),
-        ('05:40', 'Arthur und die Freunde der Tafelrunde', 'Das Monster auf Camelot', 'Zeichentrick', 15, 3, 'a3', 55, 'Normalerweise ist Guineveres Werwolfkatze Migarou ein liebes Tier. Doch an diesem Morgen verhält sie'),
-        ('05:55', 'HobbyMania - Tausch mit mir dein Hobby!', 'Gardetanz vs. Kegeln', 'Vorlesen', 25, 3, 'a3', 55, 'Elisabeth macht ordentlich Ballett: Sie hüpft und springt zur Musik, wirbelt dabei übers Parkett. Di'),
         ('07:05', 'Shaun das Schaf', 'Abgehoben', 'Zeichentrick', 10, 3, 'a3', 55, 'Ein Heißluftballon auf der Weide - das weckt die Neugier der Schafe! Im Nu entern sie den Korb. Als '),
         ('07:15', 'Anna im Land der tausend Seen', 'Die Riesen des Waldes', 'Vorlesen', 25, 3, 'a3', 55, 'Anna erfährt von ihrem Rangerkollegen Thomas, dass der größte Landschaftsgärtner Deutschlands, der W'),
         ('07:40', 'Pia und die Haustiere', 'Ein Tag in der Reptilienauffangstation', 'Vorlesen', 15, 3, 'a3', 55, 'Die Auffangstation für Reptilien in München ist Deutschlands größtes Tierheim für exotische Haustier'),
@@ -44,9 +17,6 @@ TAGE = [
         ('09:20', 'Die Pfefferkörner', 'Helden lügen nicht', 'Serie', 30, 10, 'a10', 55, 'Rafa soll ein Referat über Alltagshelden halten - und hat sich für seinen Vater entschieden. Der Pol'),
     ]),
     ("Samstag, 15.08.2026", "ZDF", [
-        ('06:20', 'Dylans Spielkiste', 'Flughafenmitarbeiter', 'Zeichentrick', 10, 3, 'a3', 55, "Heute ist Dylan Flughafenmitarbeiter. Doch statt Routine gibt's Chaos: Ozzy hat kein Ticket, ein ver"),
-        ('06:30', 'Dylans Spielkiste', 'Detektiv', 'Zeichentrick', 10, 3, 'a3', 55, 'Dylan ist Detektiv und sucht Bitsys verschwundenen Pinsel. Er entdeckt Farbspritzer, Fußabdrücke und'),
-        ('06:40', 'Meine Freundin Conni', 'Conni spielt Fußball', 'Zeichentrick', 15, 3, 'a3', 55, 'Mit Papa und Onkel Günther im Garten zu bolzen, macht Spaß, aber richtig dribbeln und kicken zu könn'),
         ('06:55', 'Die Biene Maja', 'Die Sonnenfinsternis', 'Zeichentrick', 10, 3, 'a3', 55, 'Maja erlebt eine totale Sonnenfinsternis. Bei der unerwarteten Dunkelheit verirren sich drei kleine '),
         ('07:05', 'Bibi Blocksberg', 'Wo ist Kartoffelbrei?', 'Zeichentrick', 25, 3, 'a3', 55, 'Bibi war unartig und bekommt deshalb drei Tage Hexverbot. Das ist eine schwere Strafe für sie. Vater'),
         ('07:30', 'Bibi Blocksberg', 'Das Wettfliegen', 'Zeichentrick', 30, 3, 'a3', 55, 'Es gibt einen großen Flugwettbewerb in Neustadt. Für Bibi ist es selbstverständlich, dass sie daran '),
@@ -54,12 +24,6 @@ TAGE = [
         ('08:10', 'Robin Hood - Schlitzohr von Sherwood', 'Sheriff Robin', 'Zeichentrick', 15, 6, 'a6', 55, 'Der Sheriff hat sich verletzt, und König Richard bittet Robin, ihn zu vertreten. Natürlich passt das'),
     ]),
     ("Samstag, 15.08.2026", "ProSieben Maxx", [
-        ('04:15', 'Frieren - Nach dem Ende der Reise', 'Es hätte nicht unbedingt Magie sein müssen ...', 'Anime', 25, 12, 'a10', 55, 'Frieren unterrichtet Fern in den Grundlagen der Magie. Zeitgleich versucht sie, das Buch zu entschlü'),
-        ('04:40', 'Frieren - Nach dem Ende der Reise', 'Tötungszauber', 'Anime', 25, 12, 'a10', 55, 'Fern und Frieren kommen in der Handelsstadt Warm an. Die Frauen wollen dort ihre Vorräte für die wei'),
-        ('05:05', 'One Piece', 'Tödlicher Sternenstaub! - Diamantes Sturm der bösartigen Angriffe', 'Anime', 20, 12, 'a10', 55, 'Auf dem Königsplateau spitzt sich der Kampf zwischen Kyros und Diamante immer weiter zu. Trotz seine'),
-        ('05:25', 'One Piece', "Trueno Bastardo - Kyros' ultimative Attacke!", 'Anime', 35, 12, 'a10', 55, "Diamante verliert angesichts Kyros' Gleichgültigkeit die Fassung. Blutüberströmt nimmt der Krieger d"),
-        ('06:00', 'Eyeshield 21', 'Das teuflische Sportfest der Deimon-Oberschule', 'Anime', 25, 12, 'a10', 55, 'An der Deimon-Oberschule findet das traditionelle Sportfest statt. Die Mitglieder der Devil Bats lan'),
-        ('06:25', 'Eyeshield 21', 'Sena ist ein Sprinter', 'Anime', 25, 12, 'a10', 55, 'Es bleiben nur noch fünf Tage bis zum nächsten Spiel der Devil Bats. Die Konkurrenz ist sehr stark, '),
         ('06:50', 'Eyeshield 21', 'Das Versprechen der Drei', 'Anime', 25, 12, 'a10', 55, 'Riku taucht beim Training der Devil Bats und will herausfinden, wer sich hinter Eyeshield wirklich v'),
         ('07:15', 'Eyeshield 21', 'Beweis wahrer Schnelligkeit', 'Anime', 25, 12, 'a10', 55, 'Im Halbfinale treffen die Devil Bats auf die Seibu Wild Gunmen - und somit stehen sich auch Riku und'),
         ('07:40', 'Die neuen Abenteuer des He-Man', 'Mutantenhochzeit', 'Zeichentrick', 25, 3, 'a3', 55, 'Prinz Adam muss auf dem Planeten Primus gegen gefährliche Mutanten kämpfen.'),
@@ -97,8 +61,6 @@ TAGE = [
         ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Herr Fuchs hat wieder einmal eine Erfindung gemacht. Sie soll verhindern, dass man das Zähneputzen v'),
     ]),
     ("Samstag, 15.08.2026", "RBB", [
-        ('05:45', 'Schloss Einstein', '', 'Jugendserie', 25, 10, 'a10', 55, 'Während eines Fußballspiels im Sportunterricht, rastet Tommy aus, beleidigt Herrn Krassnick und wirf'),
-        ('06:10', 'Schloss Einstein', '', 'Jugendserie', 25, 10, 'a10', 55, 'Weil Tochter Leonie auf Klassenfahrt fährt, muss Herr Berger für einige Tage Karlchen, Leonies Kanin'),
         ('06:35', 'Samuel - Graffiti-Sprayer aus Berlin', '', 'Vorlesen', 25, 3, 'a3', 55, 'Der 13-jährige Samuel aus Berlin ist ein begeisterter Sprayer. Diese Leidenschaft teilt er mit viele'),
         ('07:00', 'Die Wrack-Taucherin in der Ostsee', '', 'Vorlesen', 25, 3, 'a3', 55, 'Antonia ist 12 Jahre alt und das Wasser ist ihr zweites Zuhause. Sie schwimmt und taucht am liebsten'),
         ('10:25', 'Die sieben Raben', '', 'Zeichentrick', 95, 6, 'a6', 55, 'Bohdanka ist ein glückliches Mädchen. Wenn nur nicht ihre Mutter immer so traurig wäre und um die Tr'),
@@ -110,17 +72,12 @@ TAGE = [
     ("Samstag, 15.08.2026", "3sat", [
         ('12:15', "Liebesg'schichten und Heiratssachen", '', 'Serie', 45, 6, 'a6', 55, 'In der Halbzeitausgabe der Jubiläumsstaffel von "Liebesg\'schichten und Heiratssachen" besucht Nina H'),
     ]),
-    ("Samstag, 15.08.2026", "arte", [
-        ('04:40', 'Verdammte Katze!', 'Puma oder nicht Puma', 'Zeichentrick', 35, 3, 'a3', 55, 'Moustique ist frustriert: Irgendwie fühlt er sich nicht mehr wie der wilde, unbesiegbare Jäger von e'),
-    ]),
     ("Samstag, 15.08.2026", "ORF 1", [
-        ('06:00', 'Die Jagd nach dem Kju Wang', 'Ardelias neue Leidenschaft', 'Zeichentrick', 25, 3, 'a3', 55, 'Graf Yagor gelingt es, seine Nichte Alma unter einem Vorwand in Cirillos Palast einzuschleusen. Arde'),
-        ('06:25', 'Kung Fu Panda: Die Tatzen des Schicksals', 'Auf dünnem Eis', 'Zeichentrick', 25, 3, 'a3', 55, 'Po ist fest entschlossen, sein Chi wiederzubekommen. Außerdem muss er seine Schüler wiederfinden. Di'),
-        ('06:50', 'Der gestiefelte Kater - Abenteuer in San Lorenzo', 'Der große Zauber', 'Serie', 20, 3, 'a3', 55, 'Mit Hut und Degen zieht der gestiefelte Kater durchs Land, immer auf der Suche nach einem neuen Aben'),
-        ('07:10', 'Der gestiefelte Kater - Abenteuer in San Lorenzo', 'Der Schatz von San Losano', 'Serie', 20, 3, 'a3', 55, 'Mit Hut und Degen zieht der gestiefelte Kater durchs Land, immer auf der Suche nach einem neuen Aben'),
-        ('07:30', 'Grizzy und die Lemminge', 'Die Eisparty', 'Zeichentrick', 10, 3, 'a3', 55, 'Es ist Hochsommer und brütend heiß. Im Fernsehen sieht Grizzy eine appetitanregende Werbung für Eisc'),
-        ('07:40', 'Servus Kasperl', 'Kasperl & Strolchi: Die Zauberrose', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
-        ('08:05', 'Paw Patrol - Der Kinofilm', '', 'Zeichentrick', 75, 6, 'a6', 55, "Temporeiches, erstes Kinoabenteuer der beliebten Hunde-Stars der 'Paw Patrol'. Als Bürgermeister dro"),
+        ('06:46', 'Der gestiefelte Kater - Abenteuer in San Lorenzo', 'Der große Zauber', 'Serie', 23, 3, 'a3', 55, 'Mit Hut und Degen zieht der gestiefelte Kater durchs Land, immer auf der Suche nach einem neuen Aben'),
+        ('07:09', 'Der gestiefelte Kater - Abenteuer in San Lorenzo', 'Der Schatz von San Losano', 'Serie', 22, 3, 'a3', 55, 'Mit Hut und Degen zieht der gestiefelte Kater durchs Land, immer auf der Suche nach einem neuen Aben'),
+        ('07:31', 'Grizzy und die Lemminge', 'Die Eisparty', 'Zeichentrick', 8, 3, 'a3', 55, 'Es ist Hochsommer und brütend heiß. Im Fernsehen sieht Grizzy eine appetitanregende Werbung für Eisc'),
+        ('07:39', 'Servus Kasperl', 'Kasperl & Strolchi: Die Zauberrose', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
+        ('08:04', 'Paw Patrol - Der Kinofilm', '', 'Zeichentrick', 76, 6, 'a6', 55, "Temporeiches, erstes Kinoabenteuer der beliebten Hunde-Stars der 'Paw Patrol'. Als Bürgermeister dro"),
     ]),
     ("Sonntag, 16.08.2026", "ARD", [
         ('05:30', 'HipHorses - Du und Dein Pferd', 'Zoe und ihre Voltigier-Crew', 'Vorlesen', 25, 3, 'a3', 55, 'Handstand und Spagat-Sprung auf dem Rücken eines Pferdes? Das ist für Zoe aus Delitzsch kein Problem'),
@@ -165,17 +122,68 @@ TAGE = [
         ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Kallis Gute-Nacht-Geschichten: Kalli - Schnecke'),
     ]),
     ("Sonntag, 16.08.2026", "ORF 1", [
-        ('06:00', 'Tom - Ein echter Freund', 'Tom in Istanbul', 'Zeichentrick', 25, 3, 'a3', 55, 'Rupert hat sich auf der Sightseeingtour durch Istanbul verletzt. Bösewicht Carter wittert seine groß'),
-        ('06:25', 'Vegesaurier', 'Erbse in der Mitte', 'Zeichentrick', 5, 3, 'a3', 55, 'Ginger und die Erbs-Rex-Babys freuen sich auf ihr Lecker-Drops-Frühstück. Doch die Früchte wurden vo'),
+        ('06:00', 'Tom - Ein echter Freund', 'Tom in Istanbul', 'Zeichentrick', 24, 3, 'a3', 55, 'Rupert hat sich auf der Sightseeingtour durch Istanbul verletzt. Bösewicht Carter wittert seine groß'),
+        ('06:24', 'Vegesaurier', 'Erbse in der Mitte', 'Zeichentrick', 6, 3, 'a3', 55, 'Ginger und die Erbs-Rex-Babys freuen sich auf ihr Lecker-Drops-Frühstück. Doch die Früchte wurden vo'),
         ('06:30', 'Servus Kasperl', 'Kasperl & Buffi: Buffikopf und Blumentopf', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
         ('06:55', 'Vegesaurier', 'Blütenfest', 'Zeichentrick', 5, 3, 'a3', 55, 'Im Frühling werden die Broccolisaurier von ganz besonderen Blüten auf einem Baum angelockt. Doch ein'),
         ('07:00', 'Vegesaurier', 'Rennen ohne Regeln', 'Zeichentrick', 5, 3, 'a3', 55, 'Die jungen Vegesaurier machen regelmäßig Wettrennen und Ginger ruft ein Rennen ohne Regeln aus. Bald'),
         ('07:05', 'Bakabu', 'Aufräum-Lied', 'Vorlesen', 5, 3, 'a3', 55, "Hey, was ist da los? Ui, wie schaut's da aus? Wenn Dinge einfach herumliegen, herrscht meistens ein "),
-        ('07:10', 'Knall genial', '', 'Wissen', 15, 3, 'a3', 55, 'Originelle Tipps und Tricks von Thomas Brezina und den Kids! Auch dieses Mal ist wieder für jeden Ge'),
-        ('07:25', 'Der gestiefelte Kater - Abenteuer in San Lorenzo', 'Skelette in der Stadt', 'Serie', 25, 3, 'a3', 55, 'Mit Hut und Degen zieht der gestiefelte Kater durchs Land, immer auf der Suche nach einem neuen Aben'),
-        ('07:50', 'Drunter & drüber mit Christoph Hirschler', 'Lachattacke mit Isabell Pannagl', 'Vorlesen', 15, 3, 'a3', 55, 'Heute wird es richtig lustig. Christoph Hirschler begrüßt die Kabarettistin Isabell Pannagl in seine'),
-        ('08:05', 'Campsite', 'Ich kann nicht schwimmen', 'Jugendserie', 5, 10, 'a10', 55, 'Silje möchte mit ihrem Schlauchboot eine runde Paddeln gehen und lädt Thea ein, mitzukommen. Diese s'),
-        ('08:10', 'Campsite', 'Ein zu heißer Sommertag', 'Jugendserie', 15, 10, 'a10', 55, 'An einem viel zu heißen Sommertag will Andrine ihren Schwarm Sebbe, Theo und Nura mit einer Bootsfah'),
-        ('12:30', 'Der König der Löwen', '', 'Zeichentrick', 105, 6, 'a6', 55, "Herzerwärmende Neuverfilmung eines der erfolgreichsten Disney-Klassikers. Jon Favreau ('The Jungle B"),
+        ('07:10', 'Knall genial', '', 'Wissen', 16, 3, 'a3', 55, 'Originelle Tipps und Tricks von Thomas Brezina und den Kids! Auch dieses Mal ist wieder für jeden Ge'),
+        ('07:26', 'Der gestiefelte Kater - Abenteuer in San Lorenzo', 'Skelette in der Stadt', 'Serie', 24, 3, 'a3', 55, 'Mit Hut und Degen zieht der gestiefelte Kater durchs Land, immer auf der Suche nach einem neuen Aben'),
+        ('07:50', 'Drunter & drüber mit Christoph Hirschler', 'Lachattacke mit Isabell Pannagl', 'Vorlesen', 16, 3, 'a3', 55, 'Heute wird es richtig lustig. Christoph Hirschler begrüßt die Kabarettistin Isabell Pannagl in seine'),
+        ('08:06', 'Campsite', 'Ich kann nicht schwimmen', 'Jugendserie', 5, 10, 'a10', 55, 'Silje möchte mit ihrem Schlauchboot eine runde Paddeln gehen und lädt Thea ein, mitzukommen. Diese s'),
+        ('08:11', 'Campsite', 'Ein zu heißer Sommertag', 'Jugendserie', 14, 10, 'a10', 55, 'An einem viel zu heißen Sommertag will Andrine ihren Schwarm Sebbe, Theo und Nura mit einer Bootsfah'),
+        ('12:29', 'Der König der Löwen', '', 'Zeichentrick', 106, 6, 'a6', 55, "Herzerwärmende Neuverfilmung eines der erfolgreichsten Disney-Klassikers. Jon Favreau ('The Jungle B"),
+    ]),
+    ("Montag, 17.08.2026", "ZDF", [
+        ('22:15', 'Memory - Sein letzter Auftrag', '', 'Serie', 25, 10, 'a10', 55, 'Schnell, leise, unauffällig und professionell: Alex Lewis ist ein Auftragskiller, der keine Spuren h'),
+    ]),
+    ("Montag, 17.08.2026", "RTLzwei", [
+        ('17:08', 'Hartz Rot Gold', 'Einfach machen!', 'Serie', 61, 6, 'a6', 55, 'In Gelsenkirchen macht sich Rentnerin Elke (69) heute auf den Weg in den Stadtteil Bulmke-Hüllen. Do'),
+    ]),
+    ("Montag, 17.08.2026", "ProSieben Maxx", [
+        ('16:40', 'Dr. STONE', 'Schöne Wissenschaft', 'Anime', 25, 12, 'a10', 55, 'Ginro und Suika versuchen heimlich, das mobile Labor von Bord des Schiffes zu schmuggeln, um es Senk'),
+        ('17:05', 'Dragon Ball Super', 'Eine Tat des Grauens! Freezer verliert die Kontrolle!', 'Anime', 25, 12, 'a10', 55, 'Prompt ist Freezer von den Toten zurückgekehrt, wird er schon von Feinden umzingelt. Unzählige Auftr'),
+        ('17:30', 'Detektiv Conan', 'Drei Tage mit Hattori Heiji (3)', 'Anime', 30, 12, 'a10', 55, 'Heiji nimmt Conan mit zu einer Versammlung der Oberschülerdetektive. Die jungen Ermittler sollen für'),
+        ('18:00', 'One Piece', 'Gear 4 - Der phänomenale Boundman!', 'Anime', 25, 12, 'a10', 55, 'Ruffy aktiviert Gear 4, dessen Faustschlag De Flamingo aus der Stadt hinausbefördert. De Flamingo su'),
+        ('18:25', 'One Piece', 'Ein massiver Gegenangriff - De Flamingos Erwachen!', 'Anime', 30, 12, 'a10', 55, 'Ruffy greift De Flamingo an, doch der Shichibukai blockiert die Attacke und reagiert mit einer verst'),
+        ('18:55', 'Detektiv Conan', 'Angriff der Killerwespen', 'Anime', 25, 12, 'a10', 55, 'Conan, Ran und Kogoro werden in die Yamazaki-Residenz eingeladen. Als Conan dort ein Modell für eine'),
+    ]),
+    ("Montag, 17.08.2026", "WDR", [
+        ('07:05', 'Wissen macht Ah!', 'Pännnnng', 'Vorlesen', 25, 3, 'a3', 55, 'Jeder Wurf ein Treffer! Über die fünf Fragen der heutigen Sendung entscheiden diesmal der Zufall und'),
+        ('07:30', 'POV - Deine Geschichte zählt', '', 'Vorlesen', 10, 3, 'a3', 55, 'Leonie (16) fühlt sich in der Schule oft ausgeschlossen. Halt findet sie in Musik, Konzerten und Onl'),
+        ('07:40', 'Campsite', 'Der Trampolin-Streit', 'Jugendserie', 5, 3, 'a3', 55, 'Nura, Thea und Theo wollen auf das begehrte Campingplatz-Trampolin, aber Andrine beansprucht es exkl'),
+        ('07:45', 'Campsite', 'Es gibt Krieg', 'Jugendserie', 10, 3, 'a3', 55, 'Der Kampf um das Trampolin geht weiter. Die beiden gegnerischen Gruppen bekämpfen sich mit Wasserpis'),
+        ('07:55', 'Campsite', 'Olsok', 'Jugendserie', 5, 3, 'a3', 55, 'Ronja und Anja bereiten am Feiertag zu Ehren des Heiligen Olav eine kleine Zeremonie vor. Ronja nimm'),
+        ('08:00', 'Neue Geschichten vom Franz', '', 'Film', 70, 6, 'a6', 55, 'Franz steckt in der Zwickmühle: Seine beste Freundin Gabi und sein bester Freund Eberhard streiten s'),
+    ]),
+    ("Montag, 17.08.2026", "NDR", [
+        ('04:15', 'Ostwind', '', 'Film', 100, 3, 'a3', 55, 'Kurz vor Schulferienbeginn steht bei Familie Schwarz die Polizei vor der Tür. Nicht nur, dass die Ve'),
+    ]),
+    ("Montag, 17.08.2026", "MDR", [
+        ('07:05', 'Unterwegs in Sachsen-Anhalt', 'Urlaub auf dem Bauernhof', 'Serie', 30, 3, 'a3', 55, 'Zwischen Erholung und echter Hofarbeit: Urlaub auf dem Bauernhof kann vielfältig sein. Aber was habe'),
+        ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'MiWaus Napf mit Katzenmilch ist leer und ihr Durst ist groß. Moppi schickt MiWau zum Milchregal, sch'),
+    ]),
+    ("Montag, 17.08.2026", "RBB", [
+        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Moppi und MiWau: Die Katzenmilch'),
+    ]),
+    ("Montag, 17.08.2026", "HR", [
+        ('05:15', 'Schau in meine Welt', 'Cocos Welt. YouTuberin in London', 'Vorlesen', 25, 3, 'a3', 55, 'Coco (12) lebt in London und ist ein YouTube-Star. 100.000 Follower aus der ganzen Welt schauen ihre'),
+        ('06:30', 'Leo da Vinci', 'Bianca die Furchtlose', 'Zeichentrick', 10, 3, 'a3', 55, 'Robert und Jack wollen Lisa erst freilassen, wenn Leo ihnen mehr über den Verbleib des legendären Ru'),
+        ('06:40', 'Leo da Vinci', 'Die Panzerkutsche', 'Zeichentrick', 15, 3, 'a3', 55, 'Statt schnell nach Venedig zu reisen, um nach dem Rubin des Marco Polo zu suchen, beschließt Leo, se'),
+    ]),
+    ("Montag, 17.08.2026", "3sat", [
+        ('13:15', 'Borkum ... mit Judith Rakers', '', 'Serie', 45, 6, 'a6', 55, 'Judith Rakers entdeckt die größte der Ostfriesischen Inseln durch die Menschen, die dort entweder le'),
+    ]),
+    ("Montag, 17.08.2026", "ORF 1", [
+        ('06:00', 'Mister Paper', 'Mister Paper hat Geburtstag', 'Zeichentrick', 5, 3, 'a3', 55, 'Mister Paper hat Geburtstag! Zur Feier des Tages möchte er ein großes Fest geben. Dekoration und Tor'),
+        ('06:05', 'Wickie und die starken Männer', 'Die Wasserleitung', 'Zeichentrick', 25, 3, 'a3', 55, 'Der Steuereintreiber kommt mit seinem schwerbewaffneten Gefolge nach Flake. Seine Übermacht ist so g'),
+        ('06:30', 'Servus Kasperl', 'Kasperl & Leopold: Das große Durcheinander', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
+        ('06:55', 'Die Jagd nach dem Kju Wang', 'Notlandung im Schnee', 'Zeichentrick', 25, 3, 'a3', 55, 'Der Herzog muss zu einer internationalen Konferenz nach Wien. Ardelia will ihn mit mehreren Schrankk'),
+        ('07:40', 'Garfield', 'Die Glitzer-Schlucht - Teil 2', 'Zeichentrick', 10, 3, 'a3', 55, 'Sheriff Jon macht sich auf die Suche nach der Schnurrbartbande, die ihr Unheil in der Stadt treibt. '),
+        ('07:50', 'Garfield', 'Die Glitzer-Schlucht - Teil 3', 'Zeichentrick', 10, 3, 'a3', 55, 'Die Dreharbeiten des Westernfilms gehen fleißig weiter und Garfield findet sich bei einem Duell mit '),
+    ]),
+    ("Montag, 17.08.2026", "SRF 1", [
+        ('17:30', 'BooSnoo! - Redli', '', 'Zeichentrick', 10, 6, 'a6', 55, 'BooSnoo, der rote Ball, geht auf Reisen. Fliessende Bewegungen, sanfte Rhythmen - BooSnoo beruhigt, '),
     ]),
 ]
