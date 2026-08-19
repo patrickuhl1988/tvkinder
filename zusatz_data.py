@@ -1,46 +1,11 @@
 # -*- coding: utf-8 -*-
 """Kindersendungen der Vollprogramme.
 
-Erzeugt von scan_kinder.py aus tv.de am 18.08.2026. Auswahl nach Kategorie,
+Erzeugt von scan_kinder.py aus tv.de am 19.08.2026. Auswahl nach Kategorie,
 bekannten Titeln und Beschreibung; Alterswerte heuristisch.
 """
 
 TAGE = [
-    ("Dienstag, 18.08.2026", "ProSieben Maxx", [
-        ('16:45', 'Dr. STONE', 'Science Wars', 'Anime', 25, 12, 'a10', 55, 'Senku stellt einen Ohrring her, den er nutzt, um mit Kohaku zu kommunizieren. Diese schleicht sich m'),
-        ('17:10', 'Dragon Ball Super', 'Die Zeit ist gekommen! Das Schicksal der Universen steht auf dem Spiel', 'Anime', 25, 12, 'a10', 55, 'Endlich ist es so weit: Das große Turnier beginnt. Die Kämpfer der acht teilnehmenden Universen vers'),
-        ('17:35', 'Detektiv Conan', 'Drei Tage mit Hattori Heiji (4)', 'Anime', 30, 12, 'a10', 55, 'Conan, Heiji und Saguru müssen den Mord an dem Oberschülerdetektiv Junya Tokitsu aufklären. Die jung'),
-        ('18:05', 'One Piece', 'Ruffys Trumpf - Die Leo-Bazooka!', 'Anime', 25, 12, 'a10', 55, 'De Flamingo hat die Oberhand im Kampf gegen Ruffy, doch dieser holt zu einem massiven Gegenschlag au'),
-        ('18:30', 'One Piece', 'Der König des Drachenfeuers - Beschützt Ruffys Leben!', 'Anime', 25, 12, 'a10', 55, 'Gatz rückt mit weiteren Gladiatoren an, um Ruffys Leben zu beschützen und De Flamingo abzulenken. In'),
-        ('18:55', 'Detektiv Conan', 'Das versiegelte Badezimmer (1)', 'Anime', 25, 12, 'a10', 55, 'Mina hilft ihrer Schwester Masayo beim Einkaufen, da diese gerade ihren Auszug vorbereitet und schon'),
-    ]),
-    ("Dienstag, 18.08.2026", "WDR", [
-        ('07:35', 'Campsite', 'Siljes Spiel', 'Jugendserie', 5, 3, 'a3', 55, 'Silje ist stolz auf ihre weibliche Figur. In der Hoffnung, bei den Jungs Eindruck zu machen, schlägt'),
-        ('07:40', 'Campsite', 'Ein großer Fremder', 'Jugendserie', 5, 3, 'a3', 55, 'Andrine ist eifersüchtig, weil Sebbe sich lieber mit Silje als mit ihr trifft. Um Silje von ihm wegz'),
-        ('07:45', 'Campsite', 'Psychopath?', 'Jugendserie', 10, 3, 'a3', 55, 'Emmi ist empört, als Anja ihr erzählt, dass Max sie "süß" genannt hat. Für Emmi ist das sexistische '),
-        ('07:55', 'Das Camp in der Wildnis', 'Viel Gegenwind', 'Vorlesen', 25, 3, 'a3', 55, 'Nach einer anstrengenden Nacht im Zelt mitten in der norwegischen Wildnis verlassen Niklas beim Kaja'),
-        ('08:20', 'Das Camp in der Wildnis', 'Erste Liebe', 'Vorlesen', 25, 6, 'a6', 55, 'Kaja ist frisch verliebt und bringt ihren neuen Freund beim Tanzkurs zum Schwitzen. Der hat für Nach'),
-    ]),
-    ("Dienstag, 18.08.2026", "NDR", [
-        ('06:45', 'Schloss Einstein - Erfurt', 'Alle für Einstein', 'Jugendserie', 25, 10, 'a10', 55, 'Reena versucht, Charlotte in Sachen Share Space mit einem Coaching zu helfen. Ihre Methode führt jed'),
-        ('07:10', 'Die Pfefferkörner', 'Fakt oder Fake', 'Serie', 30, 10, 'a10', 55, 'Moritz hilft geistesgegenwärtig und mit viel Zivilcourage einem Obdachlosen, der von zwei jungen Män'),
-        ('07:40', 'Die Pfefferkörner', 'Entführt', 'Serie', 35, 10, 'a10', 55, 'Eine Entführung am helllichten Tag mitten in der Stadt? Amy behauptet, gesehen zu haben, wie ein ält'),
-    ]),
-    ("Dienstag, 18.08.2026", "MDR", [
-        ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Die Biene auf meiner Schmusedecke hat ein Problem: Ihr Flügel hat ein Riss und sie kann nicht mehr f'),
-    ]),
-    ("Dienstag, 18.08.2026", "RBB", [
-        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Meine Schmusedecke: Die Biene'),
-    ]),
-    ("Dienstag, 18.08.2026", "ORF 1", [
-        ('06:54', 'Die Jagd nach dem Kju Wang', 'Die Uhr', 'Zeichentrick', 23, 3, 'a3', 55, 'Yagor macht sich die Dankbarkeit des Volkes von Zinzania zunutze und schickt dem Herzog in des Volke'),
-        ('07:34', 'Garfield', 'Die Glitzer-Schlucht - Teil 4', 'Zeichentrick', 14, 3, 'a3', 55, 'Garfields Frau wird vom Oberhaupt der Schnurrbartbande entführt. Als Star des Western-Films und Hilf'),
-        ('07:48', 'Garfield', 'Die Glitzer-Schlucht - Teil 5', 'Zeichentrick', 14, 3, 'a3', 55, 'Der Regisseur Nermal beschließt kurzfristig, sich selbst mit einer Hauptrolle in den Film reinzuschr'),
-    ]),
-    ("Dienstag, 18.08.2026", "SRF 1", [
-        ('17:30', 'BooSnoo! - Musig', '', 'Zeichentrick', 10, 6, 'a6', 55, 'BooSnoo, der rote Ball, geht auf Reisen. Fliessende Bewegungen, sanfte Rhythmen - BooSnoo beruhigt, '),
-        ('21:10', 'Kassensturz', 'Risiko Online-Rezept - Medikamente ohne Arztbesuch', 'Serie', 40, 10, 'a10', 55, 'Risiko Online-Rezept - Medikamente ohne Arztbesuch Keine Lust aufs Wartezimmer, auf einen Arztbesuch'),
-    ]),
     ("Mittwoch, 19.08.2026", "ProSieben Maxx", [
         ('16:45', 'Dr. STONE', 'Das Wunder mit dieser Faust', 'Anime', 25, 12, 'a10', 55, 'Kohaku gelingt es, die Schatztruhe ausfindig zu machen. Doch diese befindet sich in einem massiven B'),
         ('17:10', 'Dragon Ball Super', 'Der Kampf ums Überleben beginnt! Vorhang auf für das Turnier der Kraft', 'Anime', 25, 12, 'a10', 55, 'Bevor sich die 80 Kämpfer gleichzeitig aufeinander stürzen, erklärt der Hohepriester die Regeln des '),
@@ -57,8 +22,6 @@ TAGE = [
         ('08:20', 'Das Camp in der Wildnis', 'Spurlos verschwunden', 'Vorlesen', 25, 6, 'a6', 55, 'Pirschen, Verbergen, Aufspüren: Der Endspurt um den Sieg bei der Foto-Challenge geht für die Teams i'),
     ]),
     ("Mittwoch, 19.08.2026", "NDR", [
-        ('06:00', 'Sesamstraße', '', 'Vorlesen', 20, 3, 'a3', 55, 'Bert hat ein Dosentelefon gebaut, um damit das Phänomen der Schallübertragung zu erklären. Als das K'),
-        ('06:20', 'Schloss Einstein', 'Die Suche nach der Wahrheit', 'Jugendserie', 25, 10, 'a10', 55, 'Noah hat eine wichtige Mission: Für einen Bewerbungsfilm will er die Schatzsuche dokumentieren. Nur '),
         ('06:45', 'Schloss Einstein', 'Die Schatzkarte', 'Jugendserie', 25, 10, 'a10', 55, 'Der Schatz ist zum Greifen nah, bis Karl einen entscheidenden Fehler macht. Maxi ist sauer, doch Kar'),
         ('07:10', 'Die Pfefferkörner', 'Leinen los!', 'Serie', 30, 10, 'a10', 55, 'Als Jasina für ein Fotoprojekt der Schule eine Hafenrundfahrt mit ihrer Lieblingskapitänin Anja mach'),
         ('07:40', 'Die Pfefferkörner', 'Die falsche Vermieterin', 'Serie', 35, 10, 'a10', 55, 'Leos Mutter Kim will nach der Rückkehr aus der Therapie alles richtig machen und sucht nach einer gr'),
@@ -70,16 +33,12 @@ TAGE = [
         ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Jan & Henry: Das Känguru mit dem Wecker'),
     ]),
     ("Mittwoch, 19.08.2026", "HR", [
-        ('05:55', 'Leo da Vinci', 'Brieftauben', 'Zeichentrick', 10, 3, 'a3', 55, 'Leo will seinem Freund Fabrizio eine Brieftaube nach Venedig schicken. Doch dazu muss er erst einmal'),
-        ('06:05', 'Leo da Vinci', 'Der Bühnenmaler', 'Zeichentrick', 15, 3, 'a3', 55, 'Auf dem Weg nach Venedig treffen Leo und seine Freunde auf eine Truppe, deren Kutsche feststeckt. Al'),
         ('23:45', 'Der Kommissar und die Alpen', 'Schnee am Dienstag', 'Serie', 25, 10, 'a10', 55, 'Vice-Questore Rocco Schiavones Geduldsfaden ist am Reißen - unfähige Mitarbeiter und ein frustrieren'),
     ]),
     ("Mittwoch, 19.08.2026", "ORF 1", [
-        ('06:05', 'Wickie und die starken Männer', 'Brieftaube', 'Zeichentrick', 25, 3, 'a3', 55, 'Wickie und Ylvi gehen einer neuen Beschäftigung nach: sie dressieren Tauben. Halvar hält nicht viel '),
-        ('06:30', 'Servus Kasperl', 'Kasperl & Co: Eine Kragenweite zu groß', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
-        ('06:55', 'Die Jagd nach dem Kju Wang', 'Sesam, öffne dich', 'Zeichentrick', 25, 3, 'a3', 55, 'Die neueste Errungenschaft des Herzogs hält im Palast Einzug: Eine Panzertür mit Spracherkennungsmod'),
-        ('07:40', 'Garfield', 'Garfield, der Pirat - Teil 1', 'Zeichentrick', 10, 3, 'a3', 55, 'Garfield ist ein gefürchteter Pirat. Er und seine Mannschaft kapern andere Schiffe nach Belieben. Er'),
-        ('07:50', 'Garfield', 'Garfield, der Pirat - Teil 2', 'Zeichentrick', 10, 3, 'a3', 55, 'Captain Garfield und Admiral Nermal stellen zu ihrem Erstaunen fest, dass sie auf der einsamen Insel'),
+        ('06:52', 'Die Jagd nach dem Kju Wang', 'Sesam, öffne dich', 'Zeichentrick', 24, 3, 'a3', 55, 'Die neueste Errungenschaft des Herzogs hält im Palast Einzug: Eine Panzertür mit Spracherkennungsmod'),
+        ('07:33', 'Garfield', 'Garfield, der Pirat - Teil 1', 'Zeichentrick', 14, 3, 'a3', 55, 'Garfield ist ein gefürchteter Pirat. Er und seine Mannschaft kapern andere Schiffe nach Belieben. Er'),
+        ('07:47', 'Garfield', 'Garfield, der Pirat - Teil 2', 'Zeichentrick', 14, 3, 'a3', 55, 'Captain Garfield und Admiral Nermal stellen zu ihrem Erstaunen fest, dass sie auf der einsamen Insel'),
     ]),
     ("Mittwoch, 19.08.2026", "SRF 1", [
         ('11:30', 'Kassensturz', 'Risiko Online-Rezept - Medikamente ohne Arztbesuch', 'Serie', 40, 6, 'a6', 55, 'Risiko Online-Rezept - Medikamente ohne Arztbesuch Keine Lust aufs Wartezimmer, auf einen Arztbesuch'),
@@ -91,10 +50,10 @@ TAGE = [
     ("Donnerstag, 20.08.2026", "ProSieben Maxx", [
         ('16:45', 'Dr. STONE', 'Die Gegenoffensive des Wissenschafts-Königreichs', 'Anime', 25, 12, 'a10', 55, 'Senku und seine Freunde haben es geschafft, das Platin in ihren Besitz zu bringen. Nun können sie me'),
         ('17:10', 'Dragon Ball Super', 'Ach Vergänglichkeit! Ein Universum verzweifelt!', 'Anime', 25, 12, 'a10', 55, 'Die Kämpfer des neunten Universums haben es auf Son Goku abgesehen. Gemeinsam versuchen sie, den Sai'),
-        ('17:35', 'Detektiv Conan', 'Das Messer der Waldhexe (1)', 'Anime', 25, 12, 'a10', 55, 'Professor Agasa will mit den Kindern campen gehen, doch die Gruppe verirrt sich im Wald. In einem ab'),
-        ('18:00', 'One Piece', 'Tot oder lebendig! - Ein schicksalshafter Countdown', 'Anime', 30, 12, 'a10', 55, 'Gatz verkündet, dass Ruffy zurückkehren und De Flamingo endgültig besiegen wird. Dieser ist außer si'),
+        ('17:35', 'Detektiv Conan', 'Das Messer der Waldhexe (1)', 'Anime', 30, 12, 'a10', 55, 'Professor Agasa will mit den Kindern campen gehen, doch die Gruppe verirrt sich im Wald. In einem ab'),
+        ('18:05', 'One Piece', 'Tot oder lebendig! - Ein schicksalshafter Countdown', 'Anime', 25, 12, 'a10', 55, 'Gatz verkündet, dass Ruffy zurückkehren und De Flamingo endgültig besiegen wird. Dieser ist außer si'),
         ('18:30', 'One Piece', 'Himmelskampf - Ruffys rasende King Kong Gun!', 'Anime', 25, 12, 'a10', 55, 'De Flamingo und Ruffy nehmen ihren Kampf wieder auf: Ruffy gelingt der Befreiungsschlag auf den Fäng'),
-        ('18:55', 'Detektiv Conan', 'Zahlenspiele', 'Anime', 25, 12, 'a10', 55, 'Als Conan mit seinen Jungs nach Hause kommt, bemerkt er eine noch nicht abgehörte Nachricht auf sein'),
+        ('18:55', 'Detektiv Conan', 'Zahlenspiele', 'Anime', 30, 12, 'a10', 55, 'Als Conan mit seinen Jungs nach Hause kommt, bemerkt er eine noch nicht abgehörte Nachricht auf sein'),
     ]),
     ("Donnerstag, 20.08.2026", "WDR", [
         ('07:30', 'Campsite', 'Putzaktion am Klo', 'Jugendserie', 10, 3, 'a3', 55, 'Theo will Nura endlich sagen, dass er in sie verknallt ist. Doch bevor er die Gelegenheit findet, ta'),
@@ -144,5 +103,58 @@ TAGE = [
         ('17:10', 'SRF Kids Inside', 'Aufnahmeprüfung Musicalschule - Next stop: Broadway New York?', 'Vorlesen', 15, 6, 'a6', 55, 'Ein Verein, vier Kids und noch mehr Storys: «SRF Kids Inside» erzählt Geschichten mitten aus dem Leb'),
         ('17:25', 'SRF Kids', '#SayHi 2026 - Zu Besuch bei den Songaufnahmen von «Alli zäme» ?', 'Vorlesen', 5, 6, 'a6', 55, 'Was ist #SayHi? Jedes Jahr folgen Tausende Kinder dem Aufruf von SRF Kids, zum #SayHi-Song gegen Mob'),
         ('17:30', 'BooSnoo! - Rägeboge', '', 'Zeichentrick', 10, 6, 'a6', 55, 'BooSnoo, der rote Ball, geht auf Reisen. Fliessende Bewegungen, sanfte Rhythmen - BooSnoo beruhigt, '),
+    ]),
+    ("Freitag, 21.08.2026", "ProSieben Maxx", [
+        ('16:40', 'Dr. STONE', 'Medusas wahres Gesicht', 'Anime', 25, 12, 'a10', 55, 'Mithilfe der Entsteinerungsflüssigkeit gelingt es Senku und seinen Freunden, Kaseki wiederzubeleben.'),
+        ('17:05', 'Dragon Ball Super', 'Zeig sie uns! Krillins verborgene Kraft!', 'Anime', 25, 12, 'a10', 55, 'Geschockt von der Vernichtung der ersten Verlierer, wägen die Kämpfer ihre Taktiken neu ab. Umso ver'),
+        ('17:30', 'Detektiv Conan', 'Das Messer der Waldhexe (2)', 'Anime', 30, 12, 'a10', 55, 'Inspektor Yamamura rückt an, um den Mord an Akane Ooba in dem einsamen Haus im Wald aufzuklären. Mit'),
+        ('18:00', 'One Piece', 'Für die Freiheit! - Dressrosas Freudentränen', 'Anime', 25, 12, 'a10', 55, 'Die Einwohner von Dressrosa feiern De Flamingos Niederlage. Sie beklagen alle das Leid, dass sie unt'),
+        ('18:25', 'One Piece', 'Unglaublich! - Admiral Fujitoras überraschende Entscheidung', 'Anime', 30, 12, 'a10', 55, 'Die Hafenpolizei nimmt alle Donquixote Piraten in Gewahrsam, außer Viola, Baby 5 und Bellamy. Maynar'),
+        ('18:55', 'Detektiv Conan', 'Der mysteriöse Scharfschütze (1)', 'Anime', 25, 12, 'a10', 55, 'Kogoro nimmt an einer Party in der Veranstaltungshalle eines Hotels teil, bei der auch Conan und Ran'),
+        ('20:15', 'Ame & Yuki - Die Wolfskinder', '', 'Serie', 135, 10, 'a10', 55, 'Die junge Studentin Hana ist über beide Ohren verliebt in einen Mann, der sich als Wolfsmensch entpu'),
+        ('22:30', 'Gachiakuta', 'Der Himmel', 'Anime', 30, 12, 'a10', 55, 'Rudo lebt in einer Welt, in der die Oberschicht sich ihres Besitzes achtlos entledigt und alles sofo'),
+        ('23:00', 'Gachiakuta', 'Was innewohnt', 'Anime', 20, 12, 'a10', 55, 'Rudo wird von mehreren Müllmonstern in die Enge getrieben und nimmt den Kampf mit ihnen auf. Ein mys'),
+        ('23:20', 'Gachiakuta', 'Die Unterwelt', 'Anime', 30, 12, 'a10', 55, 'Enjin rekrutiert Rudo für den sogenannten Putztrupp, da seine neu erwachte Fähigkeit als Giver im Ka'),
+    ]),
+    ("Freitag, 21.08.2026", "WDR", [
+        ('07:25', 'Campsite', 'Der geheime Club', 'Jugendserie', 5, 3, 'a3', 55, 'Nura und Silje folgen Thea heimlich zum Fundsachenraum, wo sie überraschend auf verschlossene Türen '),
+        ('07:30', 'Campsite', 'Dirty Dancing', 'Jugendserie', 10, 3, 'a3', 55, 'Sebbe plant eine große romantische Aktion auf der Campingplatz-Party, inspiriert von dem Film "Dirty'),
+        ('07:40', 'Campsite', 'Lost and Found', 'Jugendserie', 5, 3, 'a3', 55, 'Theo, Thea, Nura und Silja kramen sich durch merkwürdige Sachen im Fundraum des Campingplatzes, als '),
+        ('07:45', 'Max und die wilde 7', '', 'Film', 85, 3, 'a3', 55, 'Eine echte Ritterburg als neues Zuhause - kann man sich etwas Cooleres vorstellen? Ja, kann man, fin'),
+    ]),
+    ("Freitag, 21.08.2026", "NDR", [
+        ('06:00', 'Sesamstraße', '', 'Vorlesen', 20, 3, 'a3', 55, 'Bert hat ein Experiment zur Lichtbrechung aufgebaut. Er will zeigen, wie eine Münze, die unter einem'),
+        ('06:20', 'Schloss Einstein', 'Der Code-Knacker', 'Jugendserie', 25, 10, 'a10', 55, 'Joshua beschließt, dem Schatzsuche-Team um Maxi zu helfen. Die Lösung des Rätsels führt jedoch nicht'),
+        ('06:45', 'Schloss Einstein', 'Noahs Geständnis', 'Jugendserie', 25, 10, 'a10', 55, 'Noahs Reise nach Köln nimmt eine überraschende Wendung. Maxi erfährt Oma Maggies Geheimnis und stell'),
+        ('07:10', 'Die Pfefferkörner', 'Das Geisterhaus', 'Serie', 30, 10, 'a10', 55, 'In dem alten Haus von Tante Gordy spukt es. Amy beschließt, bei Gordy zu übernachten, um der Sache n'),
+        ('07:40', 'Die Pfefferkörner', 'Peking-Kracher', 'Serie', 35, 10, 'a10', 55, 'Hakim ist mit Alina und seiner Schwester im Hafenmuseum. Jasina ist davon überzeugt, dass die beiden'),
+    ]),
+    ("Freitag, 21.08.2026", "SWR", [
+        ('12:55', 'Meine liebe Familie - Zeit für Veränderung', '', 'Serie', 90, 6, 'a6', 55, 'Ausgerechnet mit Hilfe ihres Widersachers Marius Perlinger kann Barbara Herzog den drohenden Verkauf'),
+    ]),
+    ("Freitag, 21.08.2026", "MDR", [
+        ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Spielerisch das ABC lernen: Von A wie Affe, bis Z wie Zebra findet in diesem Song jedes Tier seinen '),
+    ]),
+    ("Freitag, 21.08.2026", "RBB", [
+        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Liedergeschichten: Tier-ABC'),
+    ]),
+    ("Freitag, 21.08.2026", "HR", [
+        ('06:25', 'Leo da Vinci', 'Mission Brombeere', 'Zeichentrick', 10, 3, 'a3', 55, 'Dank Lollos Heilmittel werden Leo und seine Freunde von der Räuberbande des "Schäfers" freigelassen.'),
+        ('06:35', 'Leo da Vinci', 'Die Da Vinci - Brücke', 'Zeichentrick', 15, 3, 'a3', 55, 'Endlich hat Leo seine Verfolger abschütteln können. Diese sind noch immer auf der Suche nach ihren P'),
+        ('11:25', 'Brücke zum Herzen', '', 'Serie', 85, 6, 'a6', 55, 'Die erfolgreiche Ärztin Karen Tillner traut ihren Augen kaum, als eines Tages plötzlich ihr Vater vo'),
+    ]),
+    ("Freitag, 21.08.2026", "arte", [
+        ('04:15', 'Verdammte Katze!', 'Mein Revier', 'Zeichentrick', 5, 3, 'a3', 55, 'Wo Moustique und Stéphane sich niemals einig werden, ist das Sofa. Moustique liebt es, Stéphanes Sof'),
+    ]),
+    ("Freitag, 21.08.2026", "ORF 1", [
+        ('06:00', 'ZIB KiDS', '', 'Serie', 10, 3, 'a3', 55, ''),
+        ('06:10', 'Wickie und die starken Männer', 'Der dicke König', 'Zeichentrick', 25, 3, 'a3', 55, 'Die Wikinger landen im Land der Bulgaren und werden von einem König, der ständig von Hunger geplagt '),
+        ('06:35', 'Servus Kasperl', 'Kasperl & Strolchi: Simsis Einladung nach Afrika', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
+        ('07:00', 'Die Jagd nach dem Kju Wang', 'Eine hinterhältige Maschine', 'Zeichentrick', 25, 3, 'a3', 55, 'Ein Beben erschüttert Venedig. Kurz darauf fordert der Rattenkönig in einem Brief das sofortige Abda'),
+        ('07:40', 'Galapagos X', 'Kleiner Goldfisch - große Folgen', 'Zeichentrick', 10, 3, 'a3', 55, 'Die ganze Stadt wird von Goldfischen geflutet. Irgendetwas ist da in der Vergangenheit gehörig schie'),
+        ('07:50', 'ZIB KiDS', '', 'Serie', 10, 3, 'a3', 55, ''),
+    ]),
+    ("Freitag, 21.08.2026", "SRF 1", [
+        ('17:30', 'BooSnoo! - Wältall', '', 'Zeichentrick', 10, 6, 'a6', 55, 'BooSnoo, der rote Ball, geht auf Reisen. Fliessende Bewegungen, sanfte Rhythmen - BooSnoo beruhigt, '),
     ]),
 ]
