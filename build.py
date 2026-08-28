@@ -90,11 +90,331 @@ ADD_CSS = """
     .switches{gap:4px}
     .switches .seg.lang button{padding:0 7px} }
 
-  .section-eyebrow.tipphead{display:flex; align-items:center; gap:10px}
+  .section-eyebrow.tipphead{display:flex; align-items:center; gap:10px; flex-wrap:wrap; row-gap:8px}
   .section-eyebrow.tipphead h2{flex:1 1 auto; min-width:0}
   .mehrbtn.klein{width:auto; margin:0; padding:8px 12px; font-size:12px; flex:0 0 auto}
   .intro{font-size:13px; color:var(--muted); line-height:1.65; margin:14px 2px 4px}
   .intro b{color:var(--ink); font-weight:750}
+
+
+
+
+
+
+  /* ---- Vorschlags-Boxen: Cover-Kacheln + Kino-Raster ---- */
+  .mthumb{position:relative; width:76px; flex:0 0 auto; border-radius:11px; overflow:hidden;
+    align-self:stretch; min-height:76px; background:var(--bg2)}
+  .mthumb img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+  .mfolgen{position:absolute; left:4px; bottom:4px; right:4px; text-align:center;
+    background:rgba(32,37,49,.72); color:#fff; border-radius:7px; padding:2px 4px;
+    font:700 8.5px "JetBrains Mono",monospace; letter-spacing:.02em; white-space:nowrap;
+    overflow:hidden; text-overflow:ellipsis}
+  #medBoard .rowhead{display:flex; gap:12px}
+  .kinogrid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  @media (min-width:760px){ .kinogrid{grid-template-columns:repeat(4,1fr)} }
+  .kinogrid .kinoart{height:150px}
+  .kinocard.klick{cursor:pointer; transition:transform .12s, box-shadow .12s}
+  .kinocard.klick:hover{transform:translateY(-2px); box-shadow:0 16px 34px -14px rgba(60,45,25,.28)}
+  .kinodialog{position:fixed; inset:0; z-index:70; display:grid; place-items:center;
+    background:rgba(32,37,49,.45); backdrop-filter:blur(5px); padding:16px}
+  .kinodialog[hidden]{display:none}
+  .kd-karte{width:min(440px,100%); max-height:88vh; overflow:auto; background:var(--surface);
+    border-radius:22px; box-shadow:0 30px 70px -20px rgba(0,0,0,.45)}
+  .kd-kopf{position:relative; height:110px; border-radius:22px 22px 0 0;
+    background:url(kino-platzhalter.jpg) center/cover, linear-gradient(150deg,#493B73,#7B61D1)}
+  .kd-kopf .fskcircle{left:12px; top:12px; right:auto; width:34px; height:34px; font-size:14px}
+  .kd-zu{position:absolute; right:10px; top:10px; width:36px; height:36px; border-radius:12px;
+    border:0; cursor:pointer; background:rgba(255,255,255,.92); color:#202531;
+    display:grid; place-items:center}
+  .kd-zu svg{width:17px; height:17px}
+  .kd-inhalt{padding:16px 18px 20px}
+  .kd-inhalt h3{font:850 20px "Archivo",sans-serif; letter-spacing:-.02em; margin:0 0 8px}
+  .kd-meta{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 11px}
+  .kd-kurz{font-size:13.5px; line-height:1.65; color:var(--muted); margin:0 0 14px}
+  .kd-fakten{border-top:1px solid var(--line); padding-top:2px; margin-bottom:14px}
+  .kd-fakten .arow{display:flex; gap:12px; padding:8px 0; border-bottom:1px solid var(--line);
+    font-size:13px; align-items:baseline}
+  .kd-fakten .arow:last-child{border-bottom:0}
+  .kd-fakten .alb{flex:0 0 118px; font:700 9.5px "JetBrains Mono",monospace;
+    letter-spacing:.07em; text-transform:uppercase; color:var(--muted)}
+  .kd-fakten .aval{color:var(--ink); font-weight:650; min-width:0}
+  .kd-aktionen{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+  .trailerbtn.gross{padding:11px 16px; font-size:13px;
+    background:linear-gradient(135deg,#F2673A,#FF8B5F); color:#fff; border:0}
+  .jetztbox + .jetztbox{margin-top:16px}
+  .heromed ~ .heroslot{margin:0 0 16px}
+  .anblogo{font:850 26px "Archivo",sans-serif; color:#fff; letter-spacing:-.02em;
+    text-shadow:0 2px 6px rgba(0,0,0,.3)}
+  .kdesc{font-size:10.5px; color:var(--muted); line-height:1.5; margin:0 1px 9px;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+    min-height:31px}
+
+  /* ---- Kompakt-Kacheln: alles sichtbar, kein Aufklappen ---- */
+  .kompaktrow .rowhead{cursor:default; padding-bottom:9px}
+  .rowfuss{display:flex; flex-wrap:wrap; align-items:center; gap:9px 10px; padding:9px 14px 12px;
+    border-top:1px solid var(--line)}
+  .pcheck{flex:1 1 230px; min-width:0; display:flex; align-items:center; gap:6px}
+  .pclbl{font:700 9.5px "JetBrains Mono",monospace; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); white-space:nowrap}
+  .pcval{font:850 14px "Archivo",sans-serif}
+  .pcmax{font-size:10px; color:var(--faint); margin-right:2px}
+  .pcbar{flex:1 1 auto; min-width:34px; height:5px; border-radius:999px;
+    background:var(--bg2); overflow:hidden}
+  .pcbar span{display:block; height:100%; border-radius:999px}
+  .pcleer{flex:1 1 auto}
+  .rowact{display:flex; align-items:center; gap:7px; flex:0 0 auto; margin-left:auto}
+  .minibtn{width:34px; height:34px; border-radius:10px; border:1px solid var(--line2);
+    background:var(--surface); color:var(--muted); display:grid; place-items:center; cursor:pointer}
+  .minibtn svg{width:16px; height:16px}
+  .minibtn:hover{color:#F2673A; border-color:#F2673A}
+  .schaubtn{display:inline-flex; align-items:center; gap:6px; padding:8px 12px;
+    border-radius:10px; background:linear-gradient(135deg,#F2673A,#FF8B5F); color:#fff;
+    font:700 11.5px "Inter",sans-serif; text-decoration:none; white-space:nowrap}
+  .schaubtn svg{width:12px; height:12px}
+  .durtag.adfrei{color:#1D7A4B; background:rgba(35,154,104,.1); border-color:rgba(35,154,104,.35)}
+
+  /* ---- Mediathek-Redesign: Hero, Filterkarte, Bereichskoepfe, Kino-Karten ---- */
+  .heromed{background:linear-gradient(180deg, rgba(123,97,209,.12), rgba(123,97,209,0) 82%);
+    border-radius:24px; padding:18px 16px 6px; margin:6px 0 14px}
+  .heromed .kicker{color:#7B61D1}
+  .heromed .heroh1{font-size:clamp(24px,4.4vw,36px)}
+  .heromask{display:block; width:min(200px,52%); height:auto; margin:10px auto 14px;
+    filter:drop-shadow(0 14px 26px rgba(73,59,115,.28))}
+  .filtercard{background:var(--surface); border:1px solid var(--line); border-radius:20px;
+    box-shadow:var(--shadow); padding:14px 14px 6px; margin:0 0 16px}
+
+  .section-eyebrow.tipphead.sekkopf{display:flex; align-items:center; gap:11px;
+    flex-wrap:nowrap; row-gap:0; margin:20px 2px 10px}
+  .sekkopf .secht h2{font-size:15px}
+  @media (max-width:420px){ .sekkopf .secht h2{font-size:13.5px} .sekkopf .cnt{display:none} }
+  .secic{flex:0 0 auto; width:38px; height:38px; border-radius:12px; display:grid; place-items:center; color:#fff}
+  .secic svg{width:19px; height:19px}
+  .secic.lila{background:linear-gradient(145deg,#8E77DC,#7B61D1)}
+  .secic.lila2{background:linear-gradient(145deg,#6550A5,#493B73)}
+  .secic.gruen{background:linear-gradient(145deg,#2FB077,#239A68)}
+  .secic.blau{background:linear-gradient(145deg,#54A0E0,#3988D6)}
+  .secht{flex:1 1 auto; min-width:0}
+  .secht h2{margin:0}
+  .secht .cnt{display:block; margin:1px 0 0}
+  .sekkopf .allelink{padding:8px 0}
+
+  .hscroll{display:grid; grid-auto-flow:column; grid-auto-columns:170px; gap:10px;
+    overflow-x:auto; padding:2px 2px 8px; scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch}
+  .kinocard{scroll-snap-align:start; background:var(--surface); border:1px solid var(--line);
+    border-radius:16px; box-shadow:var(--shadow); padding:9px 9px 11px}
+  .kinoart{position:relative; height:120px; border-radius:11px; overflow:hidden;
+    background:linear-gradient(150deg,var(--k1),var(--k2)); display:grid; place-items:center}
+  .kinoart img{width:100%; height:100%; object-fit:cover}
+  .ribbon{position:absolute; left:-26px; top:12px; transform:rotate(-38deg); z-index:2;
+    background:linear-gradient(90deg,#F2673A,#FF8B5F); color:#fff; padding:3px 28px;
+    font:800 9px "JetBrains Mono",monospace; letter-spacing:.09em; text-transform:uppercase}
+  .ribbon.neu{background:linear-gradient(90deg,#239A68,#2FB077)}
+  .fskcircle{position:absolute; right:7px; top:7px; z-index:2; width:26px; height:26px;
+    border-radius:50%; background:rgba(255,255,255,.94); color:#202531; display:grid;
+    place-items:center; font:800 11.5px "Archivo",sans-serif; box-shadow:0 2px 6px rgba(0,0,0,.25)}
+  .kinocard h3{font:800 13px "Archivo",sans-serif; letter-spacing:-.01em; color:var(--ink);
+    margin:9px 1px 3px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+    overflow:hidden; min-height:33px}
+  .kinocard .kmeta{font-size:10.5px; color:var(--muted); margin:0 1px 9px}
+  .kinocard .trailerbtn{padding:7px 11px; font-size:11.5px}
+
+  /* ---- Sendungs-Kacheln 2.0 ---- */
+  .row{position:relative; padding-left:0; background:var(--surface); border:1px solid var(--line);
+    border-radius:16px; box-shadow:var(--shadow); margin:0 0 10px; overflow:hidden}
+  .row.free{box-shadow:var(--shadow)}
+  .row.playing{border-color:rgba(229,72,77,.38)}
+  .row.past{opacity:.55}
+  .rowhead{display:flex; grid-template-columns:none; gap:12px; padding:13px 14px;
+    align-items:flex-start; width:100%; text-align:left}
+  .chtile{width:46px; height:46px; flex:0 0 auto; border-radius:14px; display:grid; place-items:center;
+    color:#fff; font:850 19px "Archivo",sans-serif; letter-spacing:0;
+    background:linear-gradient(145deg, color-mix(in srgb, var(--chc) 78%, #fff), var(--chc));
+    text-shadow:0 1px 2px rgba(0,0,0,.22)}
+  .teams{flex:1 1 auto; min-width:0}
+  .topline{display:flex; align-items:center; gap:8px; margin:1px 0 5px;
+    font:700 10px "JetBrains Mono",monospace; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--muted)}
+  .chname{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .livebadge{display:inline-flex; align-items:center; gap:5px; color:#E5484D; flex:0 0 auto}
+  .livedot{width:7px; height:7px; border-radius:50%; background:#E5484D;
+    box-shadow:0 0 0 0 rgba(229,72,77,.45); animation:tvkpuls 1.7s infinite}
+  @keyframes tvkpuls{70%{box-shadow:0 0 0 6px rgba(229,72,77,0)}100%{box-shadow:0 0 0 0 rgba(229,72,77,0)}}
+  .topzeit{margin-left:auto; flex:0 0 auto; font:800 13.5px "Archivo",sans-serif;
+    letter-spacing:-.01em; color:var(--ink); text-transform:none}
+  .rowhead .t{font-family:"Archivo",sans-serif; font-weight:800; font-size:15px; letter-spacing:-.015em}
+  .rowhead .t.subline{font:600 12px "Inter",sans-serif; color:var(--muted); letter-spacing:0; margin-top:1px}
+  .rowhead .meta{margin-top:7px; display:flex; flex-wrap:wrap; gap:5px 6px; align-items:center}
+  .durtag{font-family:"JetBrains Mono",monospace; font-size:9.5px; font-weight:700;
+    padding:2.5px 7px; border-radius:6px; white-space:nowrap;
+    background:var(--bg2); color:var(--muted); border:1px solid var(--line2)}
+  .liveprog{margin-top:10px; height:5px; border-radius:999px; background:var(--bg2); overflow:hidden}
+  .liveprog span{display:block; height:100%; border-radius:999px;
+    background:linear-gradient(90deg,#F2673A,#FF8B5F)}
+
+  /* ---- Jetzt-Box mit kleinem Alle-Link ---- */
+  .jetztbox{display:block; background:var(--bg2); border:1px solid var(--line);
+    border-radius:20px; padding:13px 12px 4px; margin:16px 0 0}
+  .jetztbox .daybar{background:var(--bg2)}
+  .jetztbox.offen{background:none; border:0; border-radius:0; padding:0; margin:0}
+  .jetztbox.offen .daybar{background:var(--bg)}
+  .allelink{margin-left:auto; flex:0 0 auto; border:0; background:none; cursor:pointer;
+    color:#F2673A; font:800 12.5px "Inter",sans-serif; padding:6px 0; white-space:nowrap}
+  .allelink:hover{text-decoration:underline}
+  .allelink.unten{display:flex; justify-content:center; width:100%; margin:0 auto 6px;
+    padding:10px 0; min-height:44px; align-items:center; font-size:13px}
+  /* ---- Breites Desktop-Layout wie TVFussball ---- */
+  .wrap, .hbar{max-width:1080px}
+
+  /* ---- Info-Abschnitte (SEO) im neuen Kartenstil ---- */
+  .seotext{border-top:0; padding-top:6px; display:grid; grid-template-columns:1fr; gap:10px}
+  @media (min-width:760px){ .seotext{grid-template-columns:1fr 1fr} }
+  .seotext h2, .seotext p{grid-column:1 / -1}
+  details.wmsec[open]{grid-column:1 / -1}
+  .seotext h2{font-family:"Archivo",sans-serif; font-weight:850; font-size:17px;
+    letter-spacing:-.02em; color:var(--ink); margin:14px 0 0}
+  details.wmsec{border-radius:18px; margin-top:0; border:1px solid var(--line);
+    transition:box-shadow .15s}
+  details.wmsec:hover{box-shadow:0 14px 32px -14px rgba(60,45,25,.22)}
+  details.wmsec>summary{padding:16px; gap:13px}
+  .wm-secico{width:40px; height:40px; flex:0 0 auto; border-radius:12px; border:0 !important;
+    background:rgba(242,103,58,.12) !important; color:#F2673A !important;
+    display:grid; place-items:center}
+  .wm-secico svg{width:20px; height:20px}
+  .wm-sectt b{display:block; font-family:"Archivo",sans-serif; font-weight:800;
+    font-size:14.5px; letter-spacing:-.015em; color:var(--ink);
+    text-transform:none !important}
+  .wm-sectt>span, .wm-sub{color:var(--muted); font-size:12px; text-transform:none !important;
+    letter-spacing:0 !important; font-family:"Inter",sans-serif !important}
+  .wmchev{width:32px; height:32px; border-radius:10px; border:1px solid var(--line2);
+    background:var(--surface); color:var(--muted); display:grid; place-items:center;
+    transition:transform .2s, color .15s, border-color .15s}
+  details.wmsec>summary:hover .wmchev{color:#F2673A !important; border-color:#F2673A !important;
+    background:var(--surface) !important}
+  details.wmsec[open]>summary .wmchev{transform:rotate(180deg); color:#F2673A !important;
+    background:rgba(242,103,58,.1) !important; border-color:rgba(242,103,58,.4) !important}
+  .wmsec-body{padding:0 16px 18px; color:var(--muted); font-size:13px; line-height:1.7}
+  .wmsec-body p{margin:0 0 10px}
+  details.wmsec::after{content:none !important}   /* Deko-Ring aus der Basis aus */
+
+  .footnav{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; font-size:12px}
+  .footnav a{color:var(--ink); font-weight:650; text-decoration:none}
+  .footnav a:hover{color:#F2673A}
+  .footnav span{color:var(--faint)}
+
+  /* Feinschliff Kacheln: ruhige weisse Karten, normale Schrift, ohne Sticker */
+  .row, .row.free, .row.playing, .row.retro{background:var(--surface) !important;
+    background-image:none !important}
+  .rowhead .teams .t{font-family:"Archivo",sans-serif !important; font-weight:800 !important;
+    font-size:15px !important; letter-spacing:-.015em !important; text-transform:none !important}
+  .rowhead .teams .t.subline{font-family:"Inter",sans-serif !important; font-weight:600 !important;
+    font-size:12px !important; color:var(--muted) !important; text-transform:none !important;
+    letter-spacing:0 !important}
+  .rowhead .stick{display:none !important}
+  .row.playing{border-color:var(--line)}
+  .row.playing .liveprog{margin-top:10px}
+  .row .rowhead, .row .rowhead:hover{background:none !important}
+  .row .rowhead:hover{background:var(--hover) !important}
+  .row.playing, .row.playing.free{border-color:var(--line) !important}
+  .row::after{content:none !important}          /* Deko-Ring aus der Basis aus */
+  .row::before{width:0 !important}              /* alter Farbbalken links aus */
+  .logowort{height:44px}
+  @media (max-width:430px){ .logowort{height:34px} }
+
+  /* ---- Redesign 2026: Hero, Feature-Banner, Spiele-Teaser, Footer ---- */
+  .hero{margin:8px 2px 16px}
+  .filterbar{margin:6px 0 14px}
+  .filterbar .chiprow{margin:0 0 9px}
+  .filterbar .fsearch{margin:0}
+  .kicker{font:800 11px "JetBrains Mono",monospace; letter-spacing:.14em;
+    text-transform:uppercase; color:#F2673A; margin:0 0 10px}
+  .heroh1{font-family:"Archivo",sans-serif; font-weight:850;
+    font-size:clamp(25px,4.6vw,38px); line-height:1.08; letter-spacing:-.025em;
+    color:var(--ink); margin:0 0 12px; max-width:820px}
+  .heroh1 em{font-style:normal; color:#F2673A}
+  .lead{font-size:14.5px; line-height:1.65; color:var(--muted); max-width:680px; margin:0 0 16px}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:9px; margin:0 0 14px}
+  .stat{border:1px solid var(--line); border-radius:14px; background:var(--surface);
+    box-shadow:var(--shadow); padding:11px 13px}
+  .stat strong{display:block; font-family:"Archivo",sans-serif; font-size:20px;
+    font-weight:850; letter-spacing:-.03em; color:var(--ink)}
+  .stat span{display:block; color:var(--muted); font-size:11.5px; margin-top:2px}
+  .heroslot{position:relative; display:block; text-decoration:none}
+  .heroslot.klickbar{cursor:pointer}
+  .heroart{display:block; width:100%; height:auto; aspect-ratio:1500/701; object-fit:cover;
+    border-radius:var(--r); box-shadow:var(--shadow); border:1px solid var(--line);
+    transition:opacity .38s ease}
+  .herocap{position:absolute; left:12px; bottom:12px; max-width:calc(100% - 24px);
+    background:rgba(32,37,49,.78); color:#fff; backdrop-filter:blur(6px);
+    border-radius:999px; padding:8px 14px; font:650 12px "Inter",sans-serif; line-height:1.35}
+  .allebtn{display:flex; justify-content:center; margin:14px auto 0; border:0; cursor:pointer;
+    background:linear-gradient(135deg,#F2673A,#FF8B5F); color:#fff; border-radius:999px;
+    padding:13px 24px; font:700 13.5px "Inter",sans-serif; min-height:44px; align-items:center;
+    box-shadow:0 10px 24px -10px rgba(242,103,58,.55); transition:transform .12s, box-shadow .12s}
+  .allebtn:hover{transform:translateY(-1px); box-shadow:0 13px 28px -10px rgba(242,103,58,.6)}
+  .kopfnav{display:flex; align-items:center; gap:3px; margin-left:auto}
+  .kopfnav a{padding:9px 13px; border-radius:999px; text-decoration:none;
+    font:700 13px "Inter",sans-serif; color:var(--muted)}
+  .kopfnav a:hover{color:#F2673A}
+  .kopfnav a.an{background:rgba(242,103,58,.13); color:#F2673A}
+  @media (max-width:430px){ .kopfnav a{padding:8px 7px; font-size:12px}
+    .logowort{height:31px !important} }
+  .logowort{display:block; height:48px; width:auto}
+  @media (max-width:430px){ .logowort{height:38px} }
+  .logo{display:flex; align-items:center; gap:9px}
+  html[data-theme="dark"] .heroart{opacity:.94}
+
+  .feature{display:grid; grid-template-columns:1.25fr .75fr; gap:18px; align-items:center;
+    margin:22px 0 0; padding:20px 22px; border-radius:20px; text-decoration:none;
+    background:linear-gradient(135deg,#2D2942,#493B73 58%,#6550A5); color:#fff;
+    box-shadow:0 18px 44px -14px rgba(73,59,115,.5)}
+  .feature .kicker2{display:block; font:800 10.5px "JetBrains Mono",monospace;
+    letter-spacing:.13em; text-transform:uppercase; color:#D7CAFE; margin-bottom:8px}
+  .feature b{display:block; font-family:"Archivo",sans-serif; font-size:22px;
+    font-weight:850; letter-spacing:-.03em; margin-bottom:7px}
+  .feature .fs{display:block; color:#DDD7EE; font-size:13px; line-height:1.6; margin-bottom:13px}
+  .feature .ctas{display:flex; flex-wrap:wrap; gap:8px; margin-top:13px}
+  .feature .cta{display:inline-flex; background:#fff; color:#322A50; padding:10px 14px;
+    border-radius:11px; font-weight:800; font-size:12.5px; text-decoration:none; min-height:40px;
+    align-items:center}
+  .feature .cta.cta2{background:rgba(255,255,255,.12); color:#fff;
+    border:1px solid rgba(255,255,255,.45)}
+  .feature .cta.cta2:hover{background:rgba(255,255,255,.2)}
+  .feature img{width:100%; max-width:240px; height:auto; justify-self:center}
+  .feature:hover .cta{background:#F2E9FF}
+  @media(max-width:620px){ .feature{grid-template-columns:1fr; gap:10px} .feature img{max-width:180px} }
+
+  .spielteaser{display:flex; align-items:center; gap:14px; margin:14px 0 0;
+    padding:13px 16px; border:1px dashed var(--line2); border-radius:16px; background:var(--surface2);
+    text-decoration:none}
+  a.spielteaser:hover{border-color:#F2673A; border-style:solid}
+  .spielteaser img{width:62px; height:auto; flex:0 0 auto}
+  .spielteaser b{display:block; font-family:"Archivo",sans-serif; font-size:14.5px;
+    font-weight:800; color:var(--ink); margin-bottom:3px}
+  .spielteaser .s{display:block; font-size:12.5px; color:var(--muted); line-height:1.55}
+  .spielteaser .bald{margin-left:auto; flex:0 0 auto; font:700 10px "JetBrains Mono",monospace;
+    letter-spacing:.08em; text-transform:uppercase; color:#8A5A00; border:1px solid #D9A94E;
+    background:rgba(217,169,78,.14); border-radius:999px; padding:4px 9px}
+  html[data-theme="dark"] .spielteaser .bald{color:#F0C868; border-color:rgba(240,200,104,.5);
+    background:rgba(240,200,104,.12)}
+
+  .empty::before{content:""; display:block; width:110px; height:110px; margin:6px auto 10px;
+    background:url(leer.png) center/contain no-repeat}
+
+  footer .footlang{display:inline-flex; gap:2px; border:1px solid var(--line2);
+    border-radius:999px; padding:2px; margin-right:8px; vertical-align:middle}
+  footer .footlang button{border:0; background:none; color:var(--muted);
+    font:700 11px "Inter",sans-serif; padding:5px 10px; border-radius:999px; cursor:pointer}
+  footer .footlang button[aria-pressed="true"]{background:var(--surface); color:var(--ink);
+    box-shadow:var(--shadow)}
+
+  #medGenres .fchip[data-i]::before{content:""; display:inline-block; width:19px; height:19px;
+    background:center/contain no-repeat; margin:-3px 5px -4px -2px}
+  #medGenres .fchip[data-i="ab"]::before{background-image:url(interesse-abenteuer.png)}
+  #medGenres .fchip[data-i="ti"]::before{background-image:url(interesse-tiere.png)}
+  #medGenres .fchip[data-i="ma"]::before{background-image:url(interesse-magie.png)}
+  #medGenres .fchip[data-i="la"]::before{background-image:url(interesse-lachen.png)}
+  #medGenres .fchip[data-i="wi"]::before{background-image:url(interesse-wissen.png)}
 
   .seotext{margin:30px 2px 12px; padding-top:18px; border-top:1px solid var(--line)}
   .seotext h2{font-family:"Archivo",sans-serif; font-weight:800; font-size:15px;
@@ -106,6 +426,23 @@ ADD_CSS = """
     letter-spacing:.09em; text-transform:uppercase; font-weight:700;
     color:var(--muted); margin:0 2px 5px}
 
+  .kinorow{border:1px solid var(--line2); border-radius:14px; background:var(--surface);
+    padding:12px 14px 13px; margin:0 0 10px}
+  .kinorow h3{font-family:"Archivo",sans-serif; font-size:14.5px; font-weight:800;
+    letter-spacing:-.01em; color:var(--ink); margin:0 0 7px}
+  .kinometa{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px}
+  .kinobadge{font-family:"JetBrains Mono",monospace; font-size:10px; font-weight:600;
+    letter-spacing:.05em; color:var(--muted); border:1px solid var(--line2);
+    border-radius:var(--r-ctl); padding:3px 7px}
+  .kinobadge.neu{color:#8A5A00; border-color:#D9A94E; background:rgba(217,169,78,.14)}
+  .kinodesc{font-size:12.5px; color:var(--muted); line-height:1.62; margin:0 0 10px}
+  .trailerbtn{display:inline-flex; align-items:center; gap:7px; padding:8px 13px;
+    border:1px solid var(--line2); border-radius:var(--r-ctl); background:none;
+    color:var(--ink); font-family:"Inter",sans-serif; font-size:12px; font-weight:650;
+    text-decoration:none}
+  .trailerbtn svg{width:13px; height:13px; color:#F1571A}
+  .trailerbtn:hover{border-color:#F1571A}
+
   .tippnote{font-size:12.5px; color:var(--muted); margin:0 2px 8px; min-height:0}
   .tippnote:empty{display:none}
 
@@ -113,11 +450,9 @@ ADD_CSS = """
   .panelprov:empty{display:none}
 
   /* Aufklappbarer Filterblock der Startseite */
-  .imgbtn{flex:0 0 auto; padding:0; border:0; background:none; cursor:pointer; line-height:0;
-    -webkit-appearance:none; appearance:none}
-  .imgcta{display:flex; justify-content:center; margin:2px 0 12px}
-  .imgbtn img{height:52px; width:auto; display:block; border-radius:10px;
-    transition:transform .12s}
+  .imgbtn{flex:0 0 auto; padding:0; border:0; background:none; cursor:pointer; line-height:0}
+  .imgbtn img{height:44px; width:auto; display:block; border-radius:0;
+    filter:drop-shadow(0 1px 3px rgba(58,42,32,.22)); transition:transform .12s}
   .imgbtn:hover img{transform:translateY(-1px)}
   .imgbtn:disabled{opacity:.55; cursor:default}
   .imgbtn.ohnebild{padding:8px 12px; border:1px solid var(--line2); border-radius:var(--r-ctl);
@@ -241,9 +576,9 @@ ADD_CSS = """
      Struktur und Abstände bleiben identisch zu TVFussball, nur die
      Neutraltöne und der Akzent wechseln. Grün bleibt für „kostenlos".  */
   :root{
-    --bg:#FDF6F0; --bg2:#F8EADF; --surface:#FFFFFF; --surface2:#FDF3EB;
-    --line:#F0DFD1; --line2:#E2C8B4;
-    --ink:#1F1512; --muted:#7A6153; --faint:#A89083;
+    --bg:#F7F5F0; --bg2:#F1EDE6; --surface:#FFFFFF; --surface2:#FFF8F3;
+    --line:#E8E3DB; --line2:#DBD3C7;
+    --ink:#202531; --muted:#6F7683; --faint:#9AA0AB;
     --green:#C24009; --green-soft:rgba(194,64,9,.10); --green-line:rgba(194,64,9,.28);
     --free:#B07408; --free-soft:rgba(176,116,8,.12); --free-line:rgba(176,116,8,.34);
     --free-grad:linear-gradient(135deg,#FFC14D,#F2A413 58%,#D98E0B);
@@ -271,12 +606,12 @@ ADD_CSS = """
   }
 
   /* Hintergrundschein */
-  :root{--glow1:rgba(251,133,0,.10); --glow2:rgba(247,37,133,.05)}
-  html[data-theme="dark"]{--glow1:rgba(251,133,0,.07); --glow2:rgba(247,37,133,.045)}
+  :root{--glow1:rgba(242,103,58,.10); --glow2:rgba(123,97,209,.06)}
+  html[data-theme="dark"]{--glow1:rgba(242,103,58,.07); --glow2:rgba(123,97,209,.05)}
 
   /* Tagestrenner bekommt den warmen Verlauf */
-  .daybar .dtag{background:linear-gradient(135deg,#FB8500,#F72585); border:0}
-  .daybar .dtag.tm{background:transparent; color:#FB8500; border:1px solid rgba(251,133,0,.42)}
+  .daybar .dtag{background:linear-gradient(135deg,#F2673A,#FF8B5F); border:0}
+  .daybar .dtag.tm{background:transparent; color:#F2673A; border:1px solid rgba(242,103,58,.45)}
 
   /* --- Farbbalken links auf jeder Karte -------------------------------- */
   .row{padding-left:6px}
@@ -368,11 +703,12 @@ ADD_CSS = """
      Bewusst nicht auf 0px: ganz kantig plus Haarlinien wäre das nächste
      Klischee. 4px liest sich präzise, nicht steril.
      ===================================================================== */
-  :root{--r:4px; --r-ctl:3px; --r-tag:2px;
-        --shadow:none;
-        --header-shadow:0 1px 0 rgba(90,50,25,.10)}
-  html[data-theme="dark"]{--r:4px; --shadow:none;
-        --header-shadow:0 1px 0 rgba(255,255,255,.07)}
+  :root{--r:16px; --r-ctl:11px; --r-tag:8px;
+        --shadow:0 1px 2px rgba(60,45,25,.05), 0 10px 28px -12px rgba(60,45,25,.16);
+        --header-shadow:0 1px 0 rgba(90,50,25,.06), 0 10px 26px -16px rgba(90,50,25,.18)}
+  html[data-theme="dark"]{--r:16px;
+        --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 30px -14px rgba(0,0,0,.6);
+        --header-shadow:0 6px 24px rgba(0,0,0,.5)}
 
   /* Karten: Kontur statt Schatten */
   .row{border-radius:var(--r); box-shadow:none; padding-left:5px}
@@ -624,7 +960,7 @@ NAV = [
     ("live", "index.html", "Heute",
      '<rect x="2.5" y="4.5" width="19" height="12.5" rx="2.6"/><path d="M8 20.5h8M12 17v3.5"/>'
      '<path d="M10.7 9.1l3.4 2-3.4 2z" fill="currentColor" stroke="none"/>'),
-    ("mediathek", "mediathek-kinder.html", "Mediathek",
+    ("mediathek", "mediathek-kinder.html", "Streaming & Kino",
      '<rect x="3" y="4.6" width="18" height="14.8" rx="2"/>'
      '<path d="M10.3 9.2l4.6 2.8-4.6 2.8z" fill="currentColor" stroke="none"/>'),
 ]
@@ -634,17 +970,14 @@ CHEV = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width
 
 
 def nav_html(active):
+    eintraege = [("live", "index.html", "Heute"),
+                 ("mediathek", "mediathek-kinder.html", "Mediathek"),
+                 ("memory", "memory.html", "Memory")]
     rows = []
-    for tab, href, label, icon in NAV:
-        rows.append(
-            f'  <a class="navitem" role="tab" aria-selected="{"true" if tab == active else "false"}" '
-            f'data-tab="{tab}" href="{href}">\n'
-            f'    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" '
-            f'stroke-linecap="round" stroke-linejoin="round">{icon}</svg>\n'
-            f'    <span data-i18n="{"nav_live" if tab=="live" else "nav_med"}">{label}</span></a>')
-    return ('<nav class="bottomnav" role="tablist" aria-label="Bereiche">\n'
-            + "\n".join(rows) + "\n</nav>")
-
+    for tab, href, label in eintraege:
+        an = ' class="an" aria-current="page"' if tab == active else ""
+        rows.append(f'<a href="{href}"{an}>{label}</a>')
+    return '<nav class="kopfnav" aria-label="Bereiche">' + "".join(rows) + '</nav>'
 
 def seosec(icon, title, sub, paragraphs):
     ps = "\n      ".join(f"<p>{p}</p>" for p in paragraphs)
@@ -668,14 +1001,20 @@ SHELL = """<!DOCTYPE html>
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{domain}/{canon}">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#F7F5F0">
 <meta property="og:url" content="{domain}/{canon}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{brand}">
 <meta property="og:locale" content="de_DE">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="{domain}/icon-512.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{domain}/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{brand}: Was läuft heute für Kinder?">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{domain}/og-image.jpg">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{desc}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -685,12 +1024,11 @@ SHELL = """<!DOCTYPE html>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<style>
+<link rel="preload" as="image" href="logo-schriftzug.png" fetchpriority="high">
+{head_extra}<style>
 {css}
 </style>
-<script type="application/ld+json">
-{{"@context":"https://schema.org","@type":"WebSite","name":"{brand}","url":"{domain}/","inLanguage":"de-DE"}}
-</script>
+{site_ld}
 {seo_ld}
 {cat_ld}
 </head>
@@ -703,14 +1041,8 @@ SHELL = """<!DOCTYPE html>
 
 <header>
   <div class="hbar">
-    <a class="logo" href="index.html" aria-label="{brand} – zur Startseite"><img class="logobanner" src="headerbild.png" height="160" alt="TVKinderprogramm.de: Kinderprogramm im Überblick"></a>
-    <div class="switches">
-      <div class="seg lang" role="group" aria-label="Sprache">
-        <button data-lang="de" aria-pressed="true">DE</button>
-        <button data-lang="en" aria-pressed="false">EN</button>
-      </div>
-      <div class="mktwrap"><button class="mktbtn" id="mktToggle" aria-haspopup="dialog" aria-expanded="false" aria-label="Land wählen"><span class="mktbtn-flag" id="mktFlag">🌐</span></button><div class="mktpop" id="mktPop" role="dialog" aria-labelledby="mktPopTitle" hidden><div class="mktpop-title" id="mktPopTitle"></div><div class="mktpop-list" id="mktPopList"></div></div></div><button class="themebtn" id="themeToggle" aria-label="Hell/Dunkel umschalten"></button>
-    </div>
+    <a class="logo" href="index.html" aria-label="{brand} – zur Startseite"><img class="logowort" src="logo-schriftzug.png" alt="TVKinderprogramm.de: Kinderprogramm im Überblick" height="52" fetchpriority="high" decoding="async"></a>
+    {nav}
   </div>
 </header>
 
@@ -720,6 +1052,7 @@ SHELL = """<!DOCTYPE html>
   </section>
 
   <footer>
+    <nav class="footnav" aria-label="Seiten"><a href="index.html">Kinderprogramm heute</a><span>·</span><a href="mediathek-kinder.html">Kinderserien streamen &amp; Kino</a><span>·</span><a href="memory.html">Memory online spielen</a></nav>
     <a href="#" data-legal="imprint" data-i18n="imprint">Impressum</a>
     <a href="#" data-legal="privacy" data-i18n="privacy">Datenschutz</a>
     <a href="#" data-legal="about" data-i18n="about">Über uns</a>
@@ -755,7 +1088,6 @@ SHELL = """<!DOCTYPE html>
   </div>
 </div>
 
-{nav}
 
 <div class="consent hide" id="consent">
   <p data-i18n="consent">Wir messen anonym, welche Seiten genutzt werden — cookiefrei über Cloudflare Web Analytics. Weitere Dienste laden wir erst nach deiner Einwilligung.</p>
@@ -813,7 +1145,7 @@ const GENRES = ["Zeichentrick","Anime","Serie","Jugendserie","Fantasyserie","Wis
 /* =================================================================== */
 const I18N = {
  de:{
-  nav_live:"Heute", nav_med:"Entdecken",
+  nav_live:"Heute", nav_med:"Streaming & Kino",
   land:"Land wählen", en_hint:"Interface switched to English",
   such_live:"Sendung, Folge oder Sender suchen …",
   such_med:"Titel, Genre oder Anbieter suchen …",
@@ -852,6 +1184,29 @@ const I18N = {
   consent:"Wir messen anonym, welche Seiten genutzt werden — cookiefrei über Cloudflare Web Analytics. Weitere Dienste laden wir erst nach deiner Einwilligung.",
   c_no:"Ablehnen", c_yes:"Einverstanden",
   anbieter_h:"Die Anbieter", anbieter_s:"Kinderbereich im Vergleich",
+  kino_h2:"Aktuell im Kino", kino_s:"Kinderfilme auf der großen Leinwand",
+  kino_zeigen:"Filme anzeigen", kino_trailer:"Trailer ansehen",
+  kino_ab:"Kinostart", kino_offen:"FSK folgt", alter_alle:"Alle",
+  kino_zu:"Ausblenden", anb_zu:"Ausblenden", kat_zu:"Einklappen", tipp_zu:"Ausblenden",
+  hero_kick:"Kinderprogramm heute",
+  hero_h1:"Was läuft heute – <em>und passt zu meinem Kind?</em>",
+  hero_lead:"Sendezeiten, Altersempfehlungen, kostenlose Mediatheken und aktuelle Kinderfilme – ruhig, übersichtlich und ohne Suchstress.",
+  stat_sender:"Kindersender im Blick", stat_heute:"Sendungen heute",
+  stat_frei:"Elterntipps aus der Redaktion", stat_alter:"Jahre Altersfilter",
+  feat_kick:"Streaming & Kino", feat_h:"Wenn im TV gerade nichts passt.",
+  feat_s:"Kostenlose Mediathek-Tipps und die aktuellen Kinderfilme im Kino – in einem eigenen Bereich.",
+  feat_cta:"Jetzt entdecken",
+  spiel_h:"Spiele-Ecke: Memory ist da!",
+  spiel_s:"Paare finden mit Tieren, Fahrzeugen und Leckereien – kostenlos im Browser spielen.",
+  spiel_bald:"Neu",
+  jetzt_h2:"Jetzt & als Nächstes",
+  jetzt_s:"Die wichtigsten Sendungen der nächsten Stunden",
+  jetzt_alle:"%s weitere anzeigen →",
+  alter_a3:"3–5 Jahre", alter_a6:"6–9 Jahre", alter_a10:"10–13 Jahre",
+  slide_tvf:"Für die Großen: alle Spiele heute auf TVFussball.de",
+  slide_mm:"Kurze Pause? Mühle Meister – kostenlos im Play Store",
+  slide_mem:"Spiele-Ecke: Memory jetzt kostenlos spielen",
+  slide_share:"Sharing is caring: Teile TVKinderprogramm.de mit deinen Liebsten",
   fussnote:"TVKinderprogramm.de überträgt selbst keine Sendungen. Wir verweisen nur auf legale Sender und Mediatheken und betten ausschließlich offizielle, freigegebene Videos ein. Altersempfehlungen sind redaktionell und ersetzen keine FSK-Freigabe. Programmangaben ohne Gewähr — verbindlich ist das Programm des Senders.",
   jetzt_frei:"Gerade kostenlos",
   tzhint:"Alle Sendezeiten in deutscher Zeit (Europe/Berlin).",
@@ -861,16 +1216,14 @@ const I18N = {
   toast_bald:"Disney+, Netflix & Co. folgen bald",
   int_ab:"Abenteuer & Action", int_ti:"Tiere & Natur", int_ma:"Magie & Fantasie",
   int_la:"Lachen & Quatsch", int_wi:"Wissen & Entdecken",
-  tipps_h2:"Mediathek Tipps", mehr5:"5 weitere zeigen",
+  tipps_h2:"Mediathek-Tipps", mehr5:"5 weitere zeigen",
   wenig_tipps:"Dazu haben wir gerade nur %s Tipps: hier noch Ideen aus ähnlichen Kategorien",
   alle_gezeigt:"Das war's: schau morgen wieder vorbei!",
   grp_alter:"Alter", grp_genre:"Genre", grp_sonst:"Sonstiges", grp_suche:"Suche",
   filter_zeigen:"Filter & Suche", tipps_start:"5 Tipps anzeigen",
   mm_b:"Kurze Pause?", mm_s:"Mühle Meister: der Brettspiel-Klassiker als kostenlose App im Play Store",
-  intro_med:"<b>Kostenlose Kinderserien und Kinderfilme</b> aus den Mediatheken von KiKA, ARD, ZDF & Co.: mit Altersempfehlung, Eltern-Check und Tipps von Eltern für Eltern.",
+  intro_med:"<b>Kostenlose Kinderserien und Kinderfilme</b> aus den Mediatheken von KiKA, ARD, ZDF & Co.: mit Altersempfehlung und Eltern-Check. Dazu: die aktuellen Kinderfilme im Kino.",
   kat_start:"Katalog anzeigen", mehr30:"%s weitere anzeigen", anb_start:"Vergleich anzeigen",
-  alle_l:"Alle", kino_h2:"Aktuell im Kino", kino_start:"Filme anzeigen",
-  kino_n:"Filme", kino_trailer:"Trailer auf YouTube ansehen",
   kat_h2:"Kostenfreie Mediathek-Inhalte", titel_n:"Titel", tipp_l:"Tipp", dagegen:"Was dagegen spricht:",
   seo_med_h:"Kinderserien und Kinderfilme kostenlos in den Mediatheken",
   seo_med_1:"TVKinderprogramm.de sammelt Kinderserien und Kinderfilme, die in den kostenlosen Mediatheken der öffentlich-rechtlichen Sender abrufbar sind: im KiKA-Player, in der ARD Mediathek, bei ZDFtivi und bei 3sat. Jeder Titel trägt eine redaktionelle Altersempfehlung (ab 3, ab 6 oder ab 10 Jahren), dazu Folgenzahl, Laufzeit und, wo vorhanden, die IMDb-Bewertung mit Stimmenzahl.",
@@ -880,7 +1233,7 @@ const I18N = {
   inhalt_de:""
  },
  en:{
-  nav_live:"Today", nav_med:"Discover",
+  nav_live:"Today", nav_med:"Streaming & cinema",
   land:"Choose country", en_hint:"Programme details stay in German",
   such_live:"Search shows, episodes or channels …",
   such_med:"Search titles, genres or providers …",
@@ -919,6 +1272,29 @@ const I18N = {
   consent:"We measure anonymously which pages are used — cookie-free via Cloudflare Web Analytics. Any further services load only after your consent.",
   c_no:"Decline", c_yes:"Accept",
   anbieter_h:"The providers", anbieter_s:"kids sections compared",
+  kino_h2:"Now in cinemas", kino_s:"kids films on the big screen",
+  kino_zeigen:"Show films", kino_trailer:"Watch trailer",
+  kino_ab:"In cinemas from", kino_offen:"rating pending", alter_alle:"All",
+  kino_zu:"Hide", anb_zu:"Hide", kat_zu:"Collapse", tipp_zu:"Hide",
+  hero_kick:"Kids TV today",
+  hero_h1:"What's on today – <em>and what suits my child?</em>",
+  hero_lead:"Air times, age recommendations, free media libraries and current kids films – calm, clear and without the search stress.",
+  stat_sender:"kids channels covered", stat_heute:"shows today",
+  stat_frei:"parent tips from the editors", stat_alter:"years of age filter",
+  feat_kick:"Streaming & cinema", feat_h:"When nothing on TV fits right now.",
+  feat_s:"Free library tips and the current kids films in cinemas – in their own section.",
+  feat_cta:"Explore now",
+  spiel_h:"Games corner: Memory is here!",
+  spiel_s:"Find pairs with animals, vehicles and treats – free in your browser.",
+  spiel_bald:"New",
+  jetzt_h2:"Now & up next",
+  jetzt_s:"The most important shows of the next hours",
+  jetzt_alle:"%s more →",
+  alter_a3:"3–5 years", alter_a6:"6–9 years", alter_a10:"10–13 years",
+  slide_tvf:"For the grown-ups: all matches today on TVFussball.de",
+  slide_mm:"Quick break? Mühle Meister – free on Google Play",
+  slide_mem:"Games corner: play Memory for free now",
+  slide_share:"Sharing is caring: share TVKinderprogramm.de with your loved ones",
   fussnote:"TVKinderprogramm.de does not broadcast anything itself. We only point to legal channels and media libraries and embed officially released videos. Age guidance is editorial and does not replace an official rating. Schedules without guarantee — the channel's own listing is binding.",
   jetzt_frei:"Free right now",
   tzhint:"All broadcast times in German local time (Europe/Berlin).",
@@ -928,17 +1304,15 @@ const I18N = {
   toast_bald:"Disney+, Netflix & Co. are coming soon",
   int_ab:"Adventure & Action", int_ti:"Animals & Nature", int_ma:"Magic & Fantasy",
   int_la:"Laughs & Silliness", int_wi:"Learning & Discovery",
-  tipps_h2:"Media library picks", mehr5:"Show 5 more",
+  tipps_h2:"Library tips", mehr5:"Show 5 more",
   wenig_tipps:"We only have %s picks for that right now: adding ideas from similar categories",
   alle_gezeigt:"That's all: check back tomorrow!",
   grp_alter:"Age", grp_genre:"Genre", grp_sonst:"More", grp_suche:"Search",
   filter_zeigen:"Filter & search", tipps_start:"Show 5 tips",
   mm_b:"Quick break?", mm_s:"Mühle Meister: the classic mill board game, free on Google Play",
-  intro_med:"<b>Free children's series and films</b> from the German public media libraries (KiKA, ARD, ZDF and more): with age recommendations, a parent check and tips from parents for parents.",
+  intro_med:"<b>Free children's series and films</b> from the German public media libraries (KiKA, ARD, ZDF and more): with age recommendations and a parent check. Plus: kids films now showing in cinemas.",
   kat_start:"Show catalogue", mehr30:"Show %s more", anb_start:"Show comparison",
-  alle_l:"All", kino_h2:"In cinemas now", kino_start:"Show films",
-  kino_n:"films", kino_trailer:"Watch the trailer on YouTube",
-  kat_h2:"Free media library titles", titel_n:"titles", tipp_l:"Tip", dagegen:"What speaks against it:",
+  kat_h2:"Free library content", titel_n:"titles", tipp_l:"Tip", dagegen:"What speaks against it:",
   seo_med_h:"Children's series and films, free in the German media libraries",
   seo_med_1:"TVKinderprogramm.de collects children's series and films available in the free media libraries of the German public broadcasters: the KiKA player, the ARD Mediathek, ZDFtivi and 3sat. Every title carries an editorial age recommendation (3+, 6+ or 10+), plus episode count, running time and, where available, the IMDb rating with vote count.",
   seo_med_2:"The public media libraries are ad-free and need no account: a real difference to YouTube and the commercial broadcasters' apps. Use the filters above to narrow titles by age group and interests such as animals and nature, learning and discovery, or magic and fantasy. The picks are reshuffled on every visit.",
@@ -958,7 +1332,7 @@ window.dname = d => LANG==="en"
       m=>TAG_EN[m]||m).replace(/^(\w+), (\d{2})\.(\d{2})\.(\d{4})$/, (a,w,t,mo,j)=>`${TAG_EN[w]||w}, ${t}/${mo}/${j}`)
   : d;
 
-let LANG = LS.get("tvk_lang","de");
+let LANG = "de";
 window.t = function t(k){ return (I18N[LANG] && I18N[LANG][k]) || I18N.de[k] || k; };
 function uebersetzeDaten(){
   if(typeof EN==="undefined") return;
@@ -990,7 +1364,7 @@ function applyI18n(){
   uebersetzeDaten();
   document.documentElement.lang = LANG;
   $$("[data-i18n]").forEach(e=>{
-    if(e.classList.contains("intro")) e.innerHTML = t(e.dataset.i18n);
+    if(e.classList.contains("intro") || e.classList.contains("heroh1")) e.innerHTML = t(e.dataset.i18n);
     else e.textContent = t(e.dataset.i18n);
   });
   $$("[data-i18n-ph]").forEach(e=>{ e.placeholder = t(e.dataset.i18nPh); });
@@ -1001,10 +1375,7 @@ const SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-wid
 const MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></svg>';
 function setTheme(t){ document.documentElement.setAttribute("data-theme",t);
   const b=$("#themeToggle"); if(b) b.innerHTML = t==="dark"?SUN:MOON; }
-(function(){
-  const sys = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark":"light";
-  setTheme(LS.get("tvk_theme", sys));
-})();
+setTheme("light");
 
 let _tt; function toast(m){ const t=$("#toast"); if(!t) return;
   t.textContent=m; t.classList.add("show"); clearTimeout(_tt);
@@ -1327,80 +1698,29 @@ function rowHTML(s){
       : `<span class="freebest pay">${t("nichtfrei")} · ${best.n}</span>`) : "";
   const sc = typeof s.score==="number" ? s.score : null;
   const col = sc===null ? "" : (sc>=70?"#15A554": sc>=45?"#f59e0b":"#E5484D");
-
   const past = isPast(s), now = isNow(s);
-  const e = endMin(s);
-  const [pc1,pc2] = pairFor(s.title);
-  const styleVars = `--c1:${pc1};--c2:${pc2};`+
-    `--w1:${hexA(pc1,.22)};--w2:${hexA(pc2,.20)};`+
-    `--w1d:${hexA(pc1,.14)};--w2d:${hexA(pc2,.11)}`;
+  const lv = (typeof LIVESTREAM!=="undefined" && LIVESTREAM[s.channel]) ? LIVESTREAM[s.channel] : null;
 
   return `
-<div class="row${free.length?" free":""}${past?" past":""}${now?" playing":""}" style="${styleVars}" data-k="${s.day}|${s.time}|${s.title}|${s.sub||""}|${s.genre||""}|${(s.ch||[]).map(c=>c.n).join(" ")}">
-  <button class="rowhead" aria-expanded="false">
-    <div class="time"><span class="t-start">${s.time}</span><span class="t-dur">${s.dur||""}</span></div>
+<div class="row kompaktrow${free.length?" free":""}${past?" past":""}${now?" playing":""}" data-k="${s.day}|${s.time}|${s.title}|${s.sub||""}|${s.genre||""}|${(s.ch||[]).map(c=>c.n).join(" ")}">
+  <div class="rowhead statisch">
+    <span class="chtile" style="--chc:${s.color||"#F2673A"}" aria-hidden="true">${(s.channel||"?").slice(0,1)}</span>
     <div class="teams">
-      <div class="t">${sticker(s)}<span>${s.title}</span></div>
+      <div class="topline"><span class="chname">${s.channel||""}</span>${now?'<span class="livebadge"><span class="livedot"></span>'+t("laeuft")+'</span>':""}${past?'<span class="pasttag">'+t("vorbei")+'</span>':""}<span class="topzeit">${s.time}</span></div>
+      <div class="t"><span>${s.title}</span></div>
       ${s.sub?`<div class="t subline">${s.sub}</div>`:""}
-      <div class="meta">${now?'<span class="nowtag">'+t("laeuft")+'</span>':""}${past?'<span class="pasttag">'+t("vorbei")+'</span>':""}<span class="comp">${s.channel?s.channel+" · ":""}${gname(s.genre)}</span>${imdbBadge(s)}${s.retro?`<span class="retro">${LANG==="en"?"since":"seit"} ${s.retro.y}</span>`:""}
-        ${s.age!==undefined?`<span class="agetag">${t("ab")} ${s.age}</span>`:""}
-        ${(s.fsk!==null&&s.fsk!==undefined)?`<span class="fsktag">FSK ${s.fsk}</span>`:""}${badge}</div>
+      <div class="meta">${s.age!==undefined?`<span class="agetag">${t("ab")} ${s.age}</span>`:""}${s.dur?`<span class="durtag">${s.dur}</span>`:""}${(s.fsk!==null&&s.fsk!==undefined)?`<span class="fsktag">FSK ${s.fsk}</span>`:""}${s.ads===false?`<span class="durtag adfrei">${t("werbefrei")}</span>`:""}${badge}<span class="comp">${gname(s.genre)}</span>${imdbBadge(s)}${s.retro?`<span class="retro">seit ${s.retro.y}</span>`:""}</div>
+      ${now?`<div class="liveprog"><span style="width:${Math.min(99,Math.max(2,Math.round((berlinJetzt().min-startMin(s))/Math.max(1,durMin(s))*100)))}%"></span></div>`:""}
     </div>
-    <div class="rh-right"><span class="chev">${RCHEV}</span></div>
-  </button>
-  <div class="panel"><div class="panel-in"><div class="panel-pad">
-
-    <div class="dh"><span class="ff">🇩🇪</span>${t("wo")}</div>
-    <div class="chlist">${(s.ch||[]).map(c=>
-      `<div class="chrow"><span class="nm">${CH(c).u?`<a class="streamlink" href="${CH(c).u}" target="_blank" rel="noopener">${c.n}</a>`:c.n}`+
-      `${c.note?`<span class="chnote">${c.note}</span>`:""}</span>`+
-      `<span class="tag ${c.free?"fta":"pay"}">${c.free?t("kostenlos"):t("nichtfrei")}</span></div>`).join("")
-      || `<div class="chrow"><span class="none">${t("kein_sender")}</span></div>`}</div>
-
-    <div class="agebox">
-      <div class="arow"><span class="alb">${t("alter")}</span>
-        <span class="aval">${t("ab")} ${s.age} ${t("jahren")}${s.est?`<span class="estmark">${t("redaktionell")}</span>`:""}</span></div>
-      <div class="arow"><span class="alb">${t("laufzeit")}</span><span class="aval">${s.dur||"—"}</span></div>
-      <div class="arow"><span class="alb">${t("werbung")}</span><span class="aval">${s.ads===false?t("werbefrei"):(s.ads===true?t("mit_werbung"):"—")}</span></div>
-      ${s.retro?`<div class="arow"><span class="alb">${t("kennst")}</span><span class="aval">${s.retro.n}</span></div>`:""}
-      ${(()=>{ const lv=LIVESTREAM[s.channel]; if(!lv) return "";
-        const zusatz = lv[1]==="konto" ? " · <span class=\"votes\">"+t("lv_konto")+"</span>"
-                     : lv[1]==="abo"   ? " · <span class=\"votes\">"+t("lv_abo")+"</span>" : "";
-        return `<div class="arow"><span class="alb">Livestream</span><span class="aval">`+
-               `<a href="${lv[0]}" target="_blank" rel="noopener">${t("lv_jetzt")} (${s.channel})</a>${zusatz}</span></div>`;
-      })()}
-      <div class="arow"><span class="alb">IMDb</span><span class="aval">${
-        (s.imdb && s.imdb.r)
-          ? `<b>${String(s.imdb.r).replace(".",",")}</b> ${t("imdb_von")} <span class="votes">${t("imdb_stimmen").replace("%s",(s.imdb.v||0).toLocaleString(LANG==="en"?"en-US":"de-DE"))}</span> · <a href="${imdbUrl(s)}" target="_blank" rel="noopener">${t("imdb_ansehen")}</a>`
-          : `<a href="${imdbUrl(s)}" target="_blank" rel="noopener">${t("imdb_nach")}</a>`}</span></div>
+  </div>
+  <div class="rowfuss">
+    ${sc!==null?`<div class="pcheck"><span class="pclbl">Eltern Check</span><b class="pcval" style="color:${col}">${sc}</b><span class="pcmax">/100</span><span class="pcbar"><span style="width:${sc}%;background:${col}"></span></span></div>`:'<span class="pcleer"></span>'}
+    <div class="rowact">
+      ${now&&lv?`<a class="schaubtn" href="${lv[0]}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5l10 6.5-10 6.5z"/></svg>${t("lv_jetzt")}</a>`:""}
+      <button class="minibtn" data-cal data-title="${s.title}" data-day="${s.day}" data-time="${s.time}" aria-label="${t("kalender")}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg></button>
+      <button class="minibtn" data-share data-title="${s.title}" data-text="${s.title} · ${s.time} Uhr auf ${best?best.n:""} (BRANDNAME)" aria-label="${t("teilen")}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.7l7.4-4.3M8.3 13.3l7.4 4.3"/></svg></button>
     </div>
-
-    ${(s.more||[]).length?`
-    <button class="morebtn" data-more aria-expanded="false"><span class="mlbl">${t("weitere_laender")}</span>${MCHEV}</button>
-    <div class="morewrap"><div class="sendlist">${s.more.map(m=>
-      `<div class="sendrow"><span class="sflag">${m.f}</span><span class="schans">`+
-      m.ch.map(c=>`<span class="ch ${c.free?"fta":"pay"}">${c.n}</span>`).join("")+
-      `</span></div>`).join("")}</div></div>`:""}
-
-    <div class="lohntwrap">
-      ${sc!==null?`<div class="lh-score"><div class="lh-sc-top"><span class="lh-sc-lbl">${t("elterncheck")}</span>`+
-        `<b class="lh-sc-val" style="color:${col}">${sc}</b><span class="lh-sc-max">/100</span></div>`+
-        `<div class="lh-sc-bar"><span style="width:${sc}%;background:${col}"></span></div></div>`:""}
-      ${s.detail ? `
-        <p class="lh-txt lang">${s.detail.lang}</p>
-        <div class="lh-flags">${s.detail.flags.map(f=>`<span class="lh-flag">${f}</span>`).join("")}</div>
-        <p class="lh-reden"><b>Zum Nachbesprechen:</b> ${s.detail.reden}</p>`
-      : `<p class="lh-txt">${s.note || t("keine_einschaetzung")}</p>`}
-    </div>
-
-    <div class="actwrap"><div class="actrow main">
-      <button class="sharebtn calbtn" data-cal data-title="${s.title}" data-day="${s.day}" data-time="${s.time}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4"></path></svg><span>${t("kalender")}</span></button>
-      <button class="sharebtn" data-share data-title="${s.title}" data-text="${s.title} · ${s.time} Uhr auf ${best?best.n:""} (BRANDNAME)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.6"></circle><circle cx="6" cy="12" r="2.6"></circle><circle cx="18" cy="19" r="2.6"></circle><path d="M8.3 10.7l7.4-4.3M8.3 13.3l7.4 4.3"></path></svg><span>${t("teilen")}</span></button>
-    </div></div>
-
-  </div></div></div>
+  </div>
 </div>`;
 }
 
@@ -1448,6 +1768,61 @@ function initSearch(input, board){
   });
 }
 
+/* ---- Hero-Rotation: Eigenwerbung im Bildplatz ---- */
+(function(){
+  const KANDIDATEN=[
+    {img:"hero.jpg", href:null, cap:null, alt:"Familie schaut gemeinsam Kinderprogramm – Illustration"},
+    {img:"banner-tvfussball.jpg", href:"https://tvfussball.de", ext:true, cap:"slide_tvf", alt:"Fußball im Stadion: TVFussball.de für die Großen"},
+    {img:"banner-muehle.jpg", href:"https://play.google.com/store/apps/details?id=app.muehle.muehle&utm_source=tvk_hero", ext:true, cap:"slide_mm", alt:"Mühle Meister: Brettspiel-App kostenlos im Play Store"},
+    {img:"banner-memory.jpg", href:"memory.html", cap:"slide_mem", alt:"Memory online spielen: Paare finden für Kinder"},
+    {img:"banner-abend.jpg", href:null, cap:null, alt:"Gemütlicher Fernsehabend für Kinder – Illustration"},
+    {img:"banner-collage.jpg", href:null, share:true, cap:"slide_share", alt:"TVKinderprogramm: Maskottchen, Programm und Kinder – Illustration"}
+  ];
+  const slot=document.getElementById("heroSlot"), bild=document.getElementById("heroBild"),
+        cap=document.getElementById("heroCap");
+  if(!slot||!bild) return;
+  const da=[KANDIDATEN[0]];
+  let aktiv=KANDIDATEN[0];
+  let geprueft=1;
+  KANDIDATEN.slice(1).forEach(k=>{
+    const i=new Image();
+    i.onload=()=>{ da.push(k); fertig(); };
+    i.onerror=fertig;
+    i.src=k.img;
+  });
+  function fertig(){ geprueft++; if(geprueft===KANDIDATEN.length && da.length>1) start(); }
+  let idx=0;
+  function zeigen(k){
+    aktiv=k;
+    bild.style.opacity="0";
+    setTimeout(()=>{
+      bild.src=k.img;
+      if(k.alt) bild.alt=k.alt;
+      if(k.href){ slot.setAttribute("href",k.href);
+        if(k.ext){ slot.setAttribute("target","_blank"); slot.setAttribute("rel","noopener"); }
+        else { slot.removeAttribute("target"); slot.removeAttribute("rel"); }
+        slot.classList.add("klickbar");
+      } else { slot.removeAttribute("href"); slot.removeAttribute("target");
+        slot.classList.toggle("klickbar", !!k.share); }
+      if(cap){ if(k.cap){ cap.hidden=false; cap.textContent=t(k.cap); } else cap.hidden=true; }
+      bild.style.opacity="1";
+    }, 380);
+  }
+  slot.addEventListener("click", e=>{
+    if(!aktiv || !aktiv.share) return;
+    e.preventDefault();
+    const url="https://tvkinderprogramm.de/";
+    if(navigator.share){
+      navigator.share({title:"TVKinderprogramm.de",
+        text:"Kinderprogramm heute \u2013 \u00fcbersichtlich f\u00fcr Eltern", url}).catch(()=>{});
+    } else if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url);
+      if(typeof toast==="function") toast("Link kopiert \u2013 danke f\u00fcrs Teilen!");
+    }
+  });
+  function start(){ setInterval(()=>{ idx=(idx+1)%da.length; zeigen(da[idx]); }, 6500); }
+})();
+
 function markFavs(){
   const f=LS.get("tvk_favs",[]);
   $$(".favstar").forEach(s=>{
@@ -1467,7 +1842,7 @@ function ics(d){
 
 document.addEventListener("click", e=>{
   const head=e.target.closest(".rowhead");
-  if(head && !e.target.closest(".favstar")){
+  if(head && !head.classList.contains("statisch") && !e.target.closest(".favstar")){
     const row=head.closest(".row"); const open=row.classList.toggle("open");
     head.setAttribute("aria-expanded",String(open)); return;
   }
@@ -1493,30 +1868,11 @@ document.addEventListener("keydown", e=>{
 });
 
 (function boot(){
-  $("#themeToggle").addEventListener("click", ()=>{
+  const tb=$("#themeToggle");
+  if(tb) tb.addEventListener("click", ()=>{
     const n = document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";
     setTheme(n); LS.set("tvk_theme",n);
   });
-
-  const mb=$("#mktToggle"), mp=$("#mktPop"), ml=$("#mktPopList");
-  let market = LS.get("tvk_market","DE");
-  $("#mktPopTitle").textContent="Land wählen";
-  function paintMarket(){
-    const m = MARKETS.find(x=>x.c===market)||MARKETS[0];
-    $("#mktFlag").textContent = m.f;
-    ml.innerHTML = MARKETS.map(x=>`<button class="mktopt" data-c="${x.c}" aria-current="${x.c===market}">`+
-      `<span class="fl">${x.f}</span><span class="nm">${x.n}</span></button>`).join("");
-  }
-  paintMarket();
-  mb.addEventListener("click", ()=>{ const o=mb.getAttribute("aria-expanded")==="true";
-    mb.setAttribute("aria-expanded",String(!o)); mp.hidden=o; });
-  ml.addEventListener("click", e=>{ const o=e.target.closest(".mktopt"); if(!o) return;
-    market=o.dataset.c; LS.set("tvk_market",market); paintMarket();
-    mp.hidden=true; mb.setAttribute("aria-expanded","false");
-    toast("Land: "+(MARKETS.find(x=>x.c===market)||{}).n); });
-  document.addEventListener("click", e=>{
-    if(!mp.hidden && !mp.contains(e.target) && !mb.contains(e.target)){
-      mp.hidden=true; mb.setAttribute("aria-expanded","false"); } });
 
   const seg=$(".seg.lang");
   if(seg){
@@ -1619,24 +1975,6 @@ if(_ft) _ft.addEventListener("click", function(){
 });
 
 
-/* Google-Ads-Conversion. Feuert nur, wenn gtag geladen ist — also nur nach
-   Einwilligung; ohne Einwilligung passiert nichts. Ausgelöst wird sie von
-   echten Aktionen (siehe unten), nicht vom bloßen Seitenaufruf. */
-function adsConversion(quelle){
-  if(typeof gtag !== "function") return;
-  gtag('event', 'ads_conversion_Lead_Formular_senden_1', {
-    quelle: quelle || "unbekannt"
-  });
-}
-window.adsConversion = adsConversion;
-
-/* Eigenwerbung: ein Banner pro Seitenaufruf, 1 von 4 zeigt die Mühle-App */
-(function(){
-  const tvf=document.getElementById("bannerTvf"), mm=document.getElementById("bannerMuehle");
-  if(tvf && mm && Math.random()<0.25){ tvf.hidden=true; mm.hidden=false; }
-  if(tvf) tvf.addEventListener("click", ()=>adsConversion("banner_tvfussball"));
-  if(mm)  mm.addEventListener("click", ()=>adsConversion("banner_muehle"));
-})();
 
 """
 
@@ -1797,7 +2135,7 @@ def media_itemlist_ld():
     """ItemList für den Katalog — maschinenlesbar für Suchmaschinen."""
     import json, mediathek_data, imdb_data
     items = []
-    for i, m in enumerate(mediathek_data.MVW, 1):
+    for i, m in enumerate(mediathek_data.MVW[:80], 1):
         im = imdb_data.lookup(m["title"])
         w = {"@type": "TVSeries", "name": m["title"], "genre": m["genre"],
              "inLanguage": "de", "typicalAgeRange": "%s-13" % m["age"]}
@@ -1819,6 +2157,14 @@ def media_itemlist_ld():
             + "</script>")
 
 
+def kino_js():
+    """Aktuelle Kinofilme als JS-Konstante fuer die Mediathek-Seite."""
+    import json, kino_data
+    return ("const KINO = "
+            + json.dumps(kino_data.KINO, ensure_ascii=False, separators=(",", ":"))
+            + ";\nconst KINO_STAND = " + json.dumps(kino_data.STAND) + ";")
+
+
 def providers_js():
     rows = []
     for p in D.MEDIA_PROVIDERS:
@@ -1831,61 +2177,139 @@ def providers_js():
     return "const PROVIDERS = [\n  " + ",\n  ".join(rows) + "\n];"
 
 
-import kino_data
 
-def kino_js():
-    import json as _j
-    return "const KINO = " + _j.dumps(kino_data.KINO, ensure_ascii=False) + ";"
+
+def site_ld(pg):
+    """WebSite + Organization + WebPage mit Tagesdatum: ein Graph pro Seite."""
+    import json, datetime, zoneinfo
+    heute = datetime.datetime.now(zoneinfo.ZoneInfo("Europe/Berlin")).date().isoformat()
+    website = {"@type": "WebSite", "@id": DOMAIN + "/#website",
+               "name": BRAND, "url": DOMAIN + "/", "inLanguage": "de-DE",
+               "alternateName": ["TV Kinderprogramm", "Kinderprogramm heute"],
+               "description": "Das TV-Programm für Kinder: alle Sendungen mit "
+                              "Altersempfehlung, Eltern-Check und kostenlosen "
+                              "Mediathek-Links, täglich aktualisiert.",
+               "publisher": {"@id": DOMAIN + "/#org"}}
+    org = {"@type": "Organization", "@id": DOMAIN + "/#org",
+           "name": BRAND, "url": DOMAIN + "/",
+           "logo": {"@type": "ImageObject", "url": DOMAIN + "/icon-512.png",
+                    "width": 512, "height": 512}}
+    page = {"@type": "CollectionPage" if pg["page"] == "mediathek" else "WebPage",
+            "@id": DOMAIN + "/" + pg["canon"] + "#webpage",
+            "url": DOMAIN + "/" + pg["canon"],
+            "name": pg["title"].replace(" \u2014 ", ": "),
+            "description": pg["desc"],
+            "inLanguage": "de-DE", "dateModified": heute,
+            "isPartOf": {"@id": DOMAIN + "/#website"},
+            "primaryImageOfPage": {"@type": "ImageObject",
+                                   "url": DOMAIN + "/og-image.jpg",
+                                   "width": 1200, "height": 630}}
+    graph = [website, org, page]
+    if pg["page"] == "mediathek":
+        graph.append({"@type": "BreadcrumbList",
+                      "itemListElement": [
+                          {"@type": "ListItem", "position": 1, "name": "Startseite",
+                           "item": DOMAIN + "/"},
+                          {"@type": "ListItem", "position": 2,
+                           "name": "Mediatheken und Streaming",
+                           "item": DOMAIN + "/mediathek-kinder.html"}]})
+    return ('<script type="application/ld+json">'
+            + json.dumps({"@context": "https://schema.org", "@graph": graph},
+                         ensure_ascii=False, separators=(",", ":"))
+            + "</script>")
+
+
+def faq_ld():
+    """FAQ-Schema fuer die Startseite: entspricht dem sichtbaren Text der
+    aufklappbaren Info-Abschnitte und dem Intro."""
+    import json
+    try:
+        n = sum(len(t) for _, _, t in D._alle_tage())
+    except Exception:
+        n = 0
+    a1 = ("TVKinderprogramm.de zeigt das komplette Kinderprogramm von heute und "
+          "den nächsten Tagen: alle Sendungen auf KiKA, Super RTL (Toggo und "
+          "Toggolino), Nickelodeon, Disney Channel, Toggo plus und RiC, dazu "
+          "Kindersendungen und Kinderfilme in den Vollprogrammen von ARD, ZDF "
+          "und weiteren Sendern.")
+    if n:
+        a1 += " Aktuell stehen über %d Sendungen im Programmfenster." % (n // 100 * 100)
+    fragen = [
+        ("Was läuft heute für Kinder im TV?", a1),
+        ("Welche Kindersender kann man kostenlos sehen?",
+         "KiKA sendet täglich von 6 bis 21 Uhr werbefrei und komplett kostenlos. "
+         "Auch Super RTL, Nickelodeon, Toggo plus und RiC sind im Free-TV "
+         "empfangbar. Die grüne Kante an einer Programmzeile bedeutet: Es gibt "
+         "eine kostenlose Möglichkeit, die Sendung zu sehen, im Free-TV oder in "
+         "einer Mediathek wie dem KiKA-Player, der ARD- oder der ZDF-Mediathek."),
+        ("Was bedeutet die Altersempfehlung, und was ist der Unterschied zur FSK?",
+         "Die Angabe wie 'ab 6' ist eine redaktionelle Einschätzung anhand von "
+         "Tempo, Lautstärke und Konfliktdichte der Sendung. Eine FSK-Freigabe "
+         "existiert dagegen nur fuer Kinofilme und Bildträger; einzelne "
+         "Serienfolgen im Fernsehen tragen keine FSK. Bei Kinderfilmen wird die "
+         "FSK-Stufe zusätzlich als eigenes Feld angezeigt."),
+    ]
+    items = [{"@type": "Question", "name": q,
+              "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in fragen]
+    return ('<script type="application/ld+json" id="tvkFaq">'
+            + json.dumps({"@context": "https://schema.org", "@type": "FAQPage",
+                          "mainEntity": items},
+                         ensure_ascii=False, separators=(",", ":"))
+            + "</script>")
+
 
 PAGES = {}
 
 PAGES["live"] = dict(
     file="index.html", canon="", page="live",
-    title="TVKinderprogramm.de — Was läuft heute für Kinder?",
-    desc="Wo läuft heute Kinderprogramm? Alle Sendungen mit Sender, Startzeit, Laufzeit, "
-         "Altersempfehlung und Freigabe — mit Fokus auf kostenlose Angebote.",
+    head_extra='<link rel="preload" as="image" href="hero.jpg" fetchpriority="high">\n',
+    title="Kinderprogramm heute: Was läuft für Kinder im TV? | TVKinderprogramm.de",
+    desc="Das TV-Programm für Kinder heute und morgen: alle Sendungen auf KiKA, Toggo, "
+         "Nick und Co. mit Startzeit, Altersempfehlung und Eltern-Check. Täglich aktualisiert.",
     data=lambda: D.shows_js() + "\n\n" + D.kanaele_js() + "\n\n" + D.tipps_js() + "\n\n" + D.en_js(),
     # Sendungstexte bewusst nicht statisch ausliefern: nur Intro, h1 und
     # Beschreibung sind für Google sichtbar, die Liste kommt per JavaScript.
     # Rückweg: seo_ld=broadcast_ld, prerender=prerender_shows wieder eintragen.
-    seo_ld=lambda: "",
+    seo_ld=faq_ld,
     prerender=lambda: "",
-    main="""    <h1 class="srh1">Kinderprogramm heute: KiKA, Toggo plus und Kinderfilme mit Altersempfehlung und Eltern-Check</h1>
-    <p class="intro" data-i18n="intro_idx"><b>TVKinderprogramm.de</b> beantwortet eine einfache Frage: <b>Was läuft heute für Kinder im TV?</b> Alle Kindersendungen mit Altersempfehlung, Eltern-Check und kostenlosen Mediathek-Links.</p>
-    <a class="crosslink" id="bannerTvf" href="https://tvfussball.de" target="_blank" rel="noopener">
-      <span class="cl-ic" aria-hidden="true">TV</span>
-      <span class="cl-txt"><b data-i18n="cl_b">Und für die Großen?</b><span data-i18n="cl_s">Alle Spiele heute im TV, Stream und Radio: auf TVFussball.de</span></span>
-      <span class="cl-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+    main="""    <section class="hero">
+    <h1 class="heroh1" data-i18n="hero_h1">Was läuft heute – <em>und passt zu meinem Kind?</em></h1>
+    <p class="lead" data-i18n="hero_lead">Sendezeiten, Altersempfehlungen, kostenlose Mediatheken und aktuelle Kinderfilme – ruhig, übersichtlich und ohne Suchstress.</p>
+    <div class="stats">
+      <div class="stat"><strong id="statSender">23</strong><span data-i18n="stat_sender">Kindersender im Blick</span></div>
+      <div class="stat"><strong id="statHeute">70+</strong><span data-i18n="stat_heute">Sendungen heute</span></div>
+      <div class="stat"><strong id="statTipps">25+</strong><span data-i18n="stat_frei">Elterntipps aus der Redaktion</span></div>
+      <div class="stat"><strong>3–13</strong><span data-i18n="stat_alter">Jahre Altersfilter</span></div>
+    </div>
+    <a class="heroslot" id="heroSlot">
+      <img class="heroart" id="heroBild" src="hero.jpg" width="1500" height="701" fetchpriority="high" decoding="async" alt="TVKinderprogramm – Illustration">
+      <span class="herocap" id="heroCap" hidden></span>
     </a>
-    <a class="crosslink muehle" id="bannerMuehle" href="https://play.google.com/store/apps/details?id=app.muehle.muehle&amp;utm_source=emea_Med" target="_blank" rel="noopener" hidden>
-      <span class="cl-ic mm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="5" r="2.2"/><circle cx="12" cy="5" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="5" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="12" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/></svg></span>
-      <span class="cl-txt"><b data-i18n="mm_b">Kurze Pause?</b><span data-i18n="mm_s">Mühle Meister: der Brettspiel-Klassiker als kostenlose App im Play Store</span></span>
-      <span class="cl-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
-    </a>
-    <button class="fchip filtertoggle" id="filterToggle" aria-expanded="false">
-      <span data-i18n="filter_zeigen">Filter &amp; Suche</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-    </button>
-    <div class="klapp" id="filterKlapp"><div class="klapp-in"><div class="klapp-pad">
-      <div class="fgroup">
-      <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" data-i18n-ph="such_live" placeholder="Sendung, Folge oder Sender suchen …"></div></div>
-      <div class="fgroup"><span class="fglabel" data-i18n="grp_alter">Alter</span>
+    </section>
+    <div class="fgroup filterbar">
       <div class="chiprow" id="idxAlter" role="group" aria-label="Alter">
-        <button class="fchip tmode" data-a="alle" aria-pressed="true" data-i18n="alle_l">Alle</button>
-        <button class="fchip tmode" data-a="a3" aria-pressed="false">3–5</button>
-        <button class="fchip tmode" data-a="a6" aria-pressed="false">6–9</button>
-        <button class="fchip tmode" data-a="a10" aria-pressed="false">10–13</button>
-      </div></div>
-      <div class="fgroup"><span class="fglabel" data-i18n="grp_sonst">Sonstiges</span>
-      <div class="chiprow" id="liveOpts">
-        <label class="opt"><input type="checkbox" id="optFree" checked><span data-i18n="o_free">Nur kostenlos</span></label>
-        <button class="fchip tippchip" id="optTipp" aria-pressed="false" data-i18n="f_tipp">Elterntipp</button>
-        <button class="fchip retrochip" id="optRetro" aria-pressed="false" data-i18n="f_retro">Kennst du noch?</button>
-      </div></div>
-    </div></div></div>
+        <button class="fchip tmode" data-a="all" aria-pressed="true" data-i18n="alter_alle">Alle</button>
+        <button class="fchip tmode" data-a="a3" aria-pressed="false" data-i18n="alter_a3">3–5 Jahre</button>
+        <button class="fchip tmode" data-a="a6" aria-pressed="false" data-i18n="alter_a6">6–9 Jahre</button>
+        <button class="fchip tmode" data-a="a10" aria-pressed="false" data-i18n="alter_a10">10–13 Jahre</button>
+      </div>
+      <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" data-i18n-ph="such_live" placeholder="Sendung, Folge oder Sender suchen …"></div>
+    </div>
+    <section class="jetztbox" id="jetztBox">
+    <div class="section-eyebrow tipphead jetzthead"><h2 data-i18n="jetzt_h2">Jetzt &amp; als Nächstes</h2></div>
     <div class="board" id="liveBoard">{prerender}</div>
+    <button class="allelink unten" id="alleZeigen">Alle anzeigen</button>
+    </section>
     <noscript><p class="nojs">Diese Seite zeigt das Kinderprogramm oben als Liste. Filter, Suche und die Detailangaben brauchen JavaScript.</p></noscript>
-
+    <div class="feature">
+      <span><span class="kicker2">Streaming &amp; Kino</span><b>Wenn im TV gerade nichts passt.</b>
+      <span class="ctas">
+        <a class="cta" href="mediathek-kinder.html">Mediathek- &amp; Kino-Tipps entdecken</a>
+        <a class="cta cta2" href="memory.html">Eine Runde Memory spielen</a>
+      </span></span>
+      <img src="kino.png" alt="" width="640" height="580" loading="lazy" decoding="async">
+    </div>
+    <section class="seotext">
 """ + seosec('<rect x="2.5" y="4.5" width="19" height="12.5" rx="2.6"/><path d="M8 20.5h8M12 17v3.5"/>',
              "Wo läuft das Kinderprogramm?",
              "KiKA, Super RTL, Nick, Disney Channel",
@@ -1903,9 +2327,21 @@ PAGES["live"] = dict(
                      "im Detail als redaktionell gekennzeichnet.",
                      "Eine FSK-Freigabe existiert dagegen nur für Kinofilme und Bildträger. Einzelne "
                      "Serienfolgen im Fernsehen tragen keine FSK — dort steht deshalb „keine Angabe\". "
-                     "Bei Kinderfilmen wird die FSK-Stufe zusätzlich als eigenes Feld angezeigt."]),
+                     "Bei Kinderfilmen wird die FSK-Stufe zusätzlich als eigenes Feld angezeigt."]) + """
+    </section>
+""",
     page_js="""
 const board = document.getElementById("liveBoard");
+
+(function(){
+  try{
+    const d=new Date(), ds=("0"+d.getDate()).slice(-2)+"."+("0"+(d.getMonth()+1)).slice(-2)+"."+d.getFullYear();
+    const heute=SHOWS.filter(x=>x.day && x.day.indexOf(ds)>=0);
+    if(heute.length) document.getElementById("statHeute").textContent=heute.length;
+    if(typeof TIPPS!=="undefined") document.getElementById("statTipps").textContent=TIPPS.length;
+    document.getElementById("statSender").textContent=Object.keys(CH_INFO).length;
+  }catch(_){}
+})();
 
 function zeigeTippsIndex(){
   board.innerHTML =
@@ -1925,89 +2361,78 @@ const EMPTY_LIVE = ()=> '<div class="soonbox"><span class="ic">\\ud83d\\udcfa</s
   '<b style="display:block;color:var(--ink);font-family:Archivo,sans-serif;font-size:14px;margin-bottom:3px">'+t("leer_tt")+'</b>' +
   '<span style="font-size:12.5px;line-height:1.55">'+t("leer_tx")+'</span></div></div>';
 
-let fGroup = "all", fFree = true, fPast = false, fSpecial = "all";
+let fGroup = "all", fFree = false, fPast = false, fSpecial = "all";
+let teaserLimit = 4;                       /* Startansicht: 4, dann in 10er-Schritten */
 
 function apply(){
-  if(typeof fTipp!=="undefined" && fTipp){ zeigeTippsIndex(); return; }
-  if(fSpecial === "tipps"){ zeigeTippsIndex(); return; }
   let list = SHOWS;
-  if(fSpecial === "retro") list = list.filter(s=>!!s.retro);
-  if(fFree) list = list.filter(s=>(s.ch||[]).some(c=>c.free));
   if(!fPast) list = list.filter(s=>!isPast(s));
   list = list.filter(s=>(s.age||0) < 16);   /* ab 16 wird nie angezeigt */
-  if(fRetro) list = list.filter(s=>!!s.retro);
   if(fGroup.indexOf("genre:")===0) list = list.filter(s=>(s.genres||[s.genre]).includes(fGroup.slice(6)));
   else if(fGroup !== "all") list = list.filter(s=>s.grp===fGroup);
-  renderBoard(board, list, EMPTY_LIVE());
+  const suche=(document.getElementById("liveSearch").value||"").trim();
+  const jb=document.getElementById("alleZeigen");
+  if(suche){
+    if(jb) jb.style.display="none";
+    renderBoard(board, list, EMPTY_LIVE());
+    return;
+  }
+  let basis=list;
+  if(fGroup==="all"){ const kinder=list.filter(x=>(x.age||0)<=6); if(kinder.length>=4) basis=kinder; }
+  renderBoard(board, basis.slice(0,teaserLimit), EMPTY_LIVE());
+  const rest=Math.max(0, basis.length - Math.min(teaserLimit, basis.length));
+  if(jb){ jb.style.display = rest>0 ? "" : "none";
+    jb.textContent = Math.min(10,rest)+" weitere anzeigen \u2192"; }
 }
 
 /* Minütlich nachziehen, damit gelaufene Sendungen von selbst verschwinden */
 setInterval(()=>{ if(!fPast) apply(); }, 60000);
 
-buildOptions(document.getElementById("liveOpts"), o=>{ fFree=o.free; fPast=o.past; apply(); });
-buildSpecial(document.getElementById("liveSpecial"), v=>{ fSpecial=v; apply(); });
-let fRetro=false;
-document.getElementById("optRetro").addEventListener("click", function(){
-  fRetro = this.getAttribute("aria-pressed") !== "true";
-  this.setAttribute("aria-pressed", String(fRetro)); apply();
-});
-let fTipp=false;
-document.getElementById("optTipp").addEventListener("click", function(){
-  fTipp = this.getAttribute("aria-pressed") !== "true";
-  this.setAttribute("aria-pressed", String(fTipp));
-  if(fTipp){ document.getElementById("optRetro").setAttribute("aria-pressed","false"); fRetro=false; }
-  apply();
-});
 document.getElementById("idxAlter").addEventListener("click", e=>{
   const b=e.target.closest(".fchip"); if(!b) return;
-  fGroup = b.dataset.a==="alle" ? "all" : ((fGroup===b.dataset.a) ? "all" : b.dataset.a);
+  teaserLimit = 4;
+  fGroup = (fGroup===b.dataset.a) ? "all" : b.dataset.a;
   document.querySelectorAll("#idxAlter .fchip").forEach(x=>
-    x.setAttribute("aria-pressed", String(fGroup==="all" ? x.dataset.a==="alle" : x.dataset.a===fGroup)));
+    x.setAttribute("aria-pressed", String(x.dataset.a===fGroup)));
   apply();
 });
+document.getElementById("alleZeigen").addEventListener("click", ()=>{ teaserLimit+=10; apply(); });
+
+
+document.getElementById("liveSearch").addEventListener("input", apply);
 apply();
 initSearch(document.getElementById("liveSearch"), board);
-window.reRender = ()=>{ document.getElementById("idxAlter").addEventListener("click", e=>{
-  const b=e.target.closest(".fchip"); if(!b) return;
-  fGroup = b.dataset.a==="alle" ? "all" : ((fGroup===b.dataset.a) ? "all" : b.dataset.a);
-  document.querySelectorAll("#idxAlter .fchip").forEach(x=>
-    x.setAttribute("aria-pressed", String(fGroup==="all" ? x.dataset.a==="alle" : x.dataset.a===fGroup)));
-  apply();
-}); apply(); };
+window.reRender = ()=>{ apply(); };
 """)
 
 PAGES["mediathek"] = dict(
     file="mediathek-kinder.html", canon="mediathek-kinder.html", page="mediathek",
-    title="Kinderprogramm bei Netflix, Disney+, Prime & Co. | TVKinderprogramm.de",
-    desc="Welche Streaming-Anbieter haben einen Kinderbereich? Netflix, Prime Video, Disney+, "
-         "WOW, YouTube Kids und die kostenlosen Mediatheken im Überblick.",
+    title="Kinderserien kostenlos streamen: KiKA, Netflix, Disney+ und Co. | TVKinderprogramm.de",
+    desc="Kinderserien und Kinderfilme kostenlos streamen: KiKA-Player, ARD und ZDF Mediathek "
+         "im Vergleich mit Netflix, Disney+, Prime Video, WOW und YouTube Kids.",
     prerender=lambda: "",
-    cat_ld=lambda: "",  # Katalog-Schema abgeschaltet; Rückweg: media_itemlist_ld
-    data=lambda: providers_js() + "\n\n" + D.media_js() + "\n\n" + D.tipps_js() + "\n\n" + D.en_js(),
+    cat_ld=media_itemlist_ld,  # Top 80 des Katalogs als ItemList
+    data=lambda: kino_js() + "\n\n" + providers_js() + "\n\n" + D.media_js() + "\n\n" + D.tipps_js() + "\n\n" + D.en_js(),
     main="""
-    <h1 class="srh1">Kinderserien und -filme in den Mediatheken: kostenlos abrufbar, mit Altersempfehlung und IMDb-Bewertung</h1>
-    <p class="intro" data-i18n="intro_med"><b>Kostenlose Kinderserien und Kinderfilme</b> aus den Mediatheken von KiKA, ARD, ZDF &amp; Co.: mit Altersempfehlung, Eltern-Check und Tipps von Eltern für Eltern.</p>
-    <a class="crosslink" id="bannerTvf" href="https://tvfussball.de" target="_blank" rel="noopener">
-      <span class="cl-ic" aria-hidden="true">TV</span>
-      <span class="cl-txt"><b data-i18n="cl_b">Und für die Großen?</b><span data-i18n="cl_s">Alle Spiele heute im TV, Stream und Radio: auf TVFussball.de</span></span>
-      <span class="cl-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+    <section class="hero heromed">
+    <div class="kicker">Streaming &amp; Kino</div>
+    <h1 class="heroh1">Die besten Filme &amp; Serien für Kinder – <em>online &amp; im Kino</em></h1>
+    <p class="lead">Altersgerechte Inhalte aus den kostenlosen Mediatheken und die aktuellen Kinderfilme im Kino – geprüft, übersichtlich und kindgerecht.</p>
+    <div class="stats statsmed">
+      <div class="stat"><strong id="statMed">190+</strong><span>Mediathek-Titel</span></div>
+      <div class="stat"><strong id="statKino">8</strong><span>Kinofilme aktuell</span></div>
+      <div class="stat"><strong>100%</strong><span>kinderfreundlich</span></div>
+      <div class="stat"><strong>0 €</strong><span>kostenlos oder im Abo</span></div>
+    </div>
+    </section>
+    <a class="heroslot" id="heroSlot">
+      <img class="heroart" id="heroBild" src="hero.jpg" width="1500" height="701" loading="lazy" decoding="async" alt="TVKinderprogramm – Illustration">
+      <span class="herocap" id="heroCap" hidden></span>
     </a>
-    <a class="crosslink muehle" id="bannerMuehle" href="https://play.google.com/store/apps/details?id=app.muehle.muehle&amp;utm_source=emea_Med" target="_blank" rel="noopener" hidden>
-      <span class="cl-ic mm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="5" r="2.2"/><circle cx="12" cy="5" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="5" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="12" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/></svg></span>
-      <span class="cl-txt"><b data-i18n="mm_b">Kurze Pause?</b><span data-i18n="mm_s">Mühle Meister: der Brettspiel-Klassiker als kostenlose App im Play Store</span></span>
-      <span class="cl-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
-    </a>
-    <button class="fchip filtertoggle" id="filterToggle" aria-expanded="false">
-      <span data-i18n="filter_zeigen">Filter &amp; Suche</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6-6 6"/></svg>
-    </button>
-    <div class="klapp" id="filterKlapp"><div class="klapp-in"><div class="klapp-pad">
-      <div class="fgroup">
-    <div class="fsearch"><span class="ic">⌕</span><input id="medSearchTop" type="text" data-i18n-ph="such_med" placeholder="Titel, Genre oder Anbieter suchen …"></div>
-      </div>
+    <div class="filtercard">
     <div class="fgroup"><span class="fglabel" data-i18n="grp_alter">Alter</span>
     <div class="chiprow" id="medChips" role="group" aria-label="Alter">
-      <button class="fchip tmode" data-a="alle" aria-pressed="true" data-i18n="alle_l">Alle</button>
+      <button class="fchip tmode" data-a="" aria-pressed="true" data-i18n="alter_alle">Alle</button>
       <button class="fchip tmode" data-a="a3" aria-pressed="false">3–5</button>
       <button class="fchip tmode" data-a="a6" aria-pressed="false">6–9</button>
       <button class="fchip tmode" data-a="a10" aria-pressed="false">10–13</button>
@@ -2020,37 +2445,51 @@ PAGES["mediathek"] = dict(
       <button class="fchip" data-i="la" aria-pressed="false" data-i18n="int_la">Lachen &amp; Quatsch</button>
       <button class="fchip" data-i="wi" aria-pressed="false" data-i18n="int_wi">Wissen &amp; Entdecken</button>
     </div></div>
-    <div class="fgroup"><span class="fglabel" data-i18n="grp_sonst">Sonstiges</span>
-    <div class="chiprow">
-      <button class="fchip tippchip" id="medTipp" aria-pressed="false" data-i18n="f_tipp">Elterntipp</button>
-      <label class="opt"><input type="checkbox" id="medFrei" checked><span data-i18n="o_free">Nur kostenfrei</span></label>
-    </div></div>
-    </div></div></div>
-    <div class="section-eyebrow"><h2 data-i18n="tipps_h2">Mediathek Tipps</h2><span class="cnt" id="tippNoteCnt"></span></div>
-    <div class="imgcta"><button class="imgbtn" id="tippMehr" title="5 Tipps anzeigen"><img src="elterntipps.png" alt="5 Tipps anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button></div>
-    <div class="tippnote" id="tippNote" aria-live="polite"></div>
-    <div class="board" id="tippBoard"></div>
-    <div class="section-eyebrow tipphead"><h2 data-i18n="kino_h2">Aktuell im Kino</h2><span class="cnt" id="kinoCount"></span>
-      <button class="mehrbtn klein" id="kinoStart" data-i18n="kino_start">Filme anzeigen</button></div>
-    <div class="klapp" id="kinoKlapp"><div class="klapp-in"><div class="board" id="kinoBoard"></div></div></div>
-    <div class="section-eyebrow"><h2 data-i18n="kat_h2">Kostenfreie Mediathek-Inhalte</h2><span class="cnt" id="katCount"></span></div>
+    </div>
+    <section class="jetztbox">
+    <div class="section-eyebrow tipphead sekkopf"><span class="secic gruen"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5l10 6.5-10 6.5z"/></svg></span><div class="secht"><h2>Mediathek-Vorschläge</h2></div></div>
     <div class="board" id="medBoard">{prerender}</div>
-    <div class="imgcta"><button class="imgbtn" id="katMehr" style="display:none" title="30 weitere anzeigen"><img src="katalog.png" alt="30 weitere anzeigen" onerror="this.parentNode.classList.add('ohnebild'); this.parentNode.textContent=this.alt;"></button></div>
+    <button class="allelink unten" id="katMehr" style="display:none">4 weitere anzeigen →</button>
+    </section>
+    <section class="jetztbox">
+    <div class="section-eyebrow tipphead sekkopf"><span class="secic lila2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 9h18M7 5l2 4M12 5l2 4M17 5l2 4"/></svg></span><div class="secht"><h2>Aktuell im Kino</h2></div></div>
+    <div class="board" id="kinoBoard"></div>
+    <button class="allelink unten" id="kinoMehr" style="display:none">4 weitere anzeigen →</button>
+    </section>
+
+    <div class="kinodialog" id="kinoDialog" role="dialog" aria-modal="true" aria-labelledby="kdTitel" hidden>
+      <div class="kd-karte">
+        <div class="kd-kopf" id="kdKopf">
+          <span class="fskcircle" id="kdFsk">0</span>
+          <button class="kd-zu" id="kdZu" aria-label="Schließen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        </div>
+        <div class="kd-inhalt">
+          <h3 id="kdTitel"></h3>
+          <div class="kd-meta" id="kdMeta"></div>
+          <p class="kd-kurz" id="kdKurz"></p>
+          <div class="kd-fakten" id="kdFakten"></div>
+          <div class="kd-aktionen">
+            <a class="trailerbtn gross" id="kdTrailer" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5l10 6.5-10 6.5z"/></svg>Trailer ansehen</a>
+            <a class="allelink" id="kdImdb" target="_blank" rel="noopener">bei IMDb nachschlagen →</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <noscript><p class="nojs">Der Katalog steht oben als Liste. Filter, Sortierung und Suche brauchen JavaScript.</p></noscript>
 
-    <div class="section-eyebrow tipphead"><h2 data-i18n="anbieter_h">Die Anbieter</h2><span class="cnt" data-i18n="anbieter_s">Kinderbereich im Vergleich</span>  <button class="mehrbtn klein" id="anbStart" data-i18n="anb_start">Vergleich anzeigen</button></div>
-    <div class="klapp" id="anbKlapp"><div class="klapp-in">
-    <div class="board" id="medFree"></div>
-    <div class="board" id="medPaid"></div>
-    </div></div>
+    <section class="jetztbox">
+    <div class="section-eyebrow tipphead sekkopf"><span class="secic blau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="7.5" height="16" rx="2"/><rect x="13.5" y="4" width="7.5" height="16" rx="2"/></svg></span><div class="secht"><h2>Die Anbieter</h2><span class="cnt">Kinderbereiche im Vergleich: kostenlos und im Abo</span></div></div>
+    <div class="board" id="anbBoard"></div>
+    <button class="allelink unten" id="anbMehr" style="display:none">4 weitere anzeigen →</button>
+    </section>
+
 
 <section class="seotext">
   <h2 data-i18n="seo_med_h">Kinderserien und Kinderfilme kostenlos in den Mediatheken</h2>
   <p data-i18n="seo_med_1">TVKinderprogramm.de sammelt Kinderserien und Kinderfilme, die in den kostenlosen Mediatheken der öffentlich-rechtlichen Sender abrufbar sind: im KiKA-Player, in der ARD Mediathek, bei ZDFtivi und bei 3sat. Jeder Titel trägt eine redaktionelle Altersempfehlung (ab 3, ab 6 oder ab 10 Jahren), dazu Folgenzahl, Laufzeit und, wo vorhanden, die IMDb-Bewertung mit Stimmenzahl.</p>
   <p data-i18n="seo_med_2">Die Angebote der öffentlich-rechtlichen Mediatheken sind werbefrei und ohne Anmeldung nutzbar: ein Unterschied zu YouTube und den Apps der Privatsender. Über die Filter oben lassen sich Titel nach Altersgruppe und Interessen wie Tiere und Natur, Wissen und Entdecken oder Magie und Fantasie eingrenzen. Die Tipps werden bei jedem Besuch neu gemischt.</p>
   <p data-i18n="seo_med_3">Verfügbarkeiten in den Mediatheken ändern sich laufend; verbindlich ist stets die Angabe des jeweiligen Anbieters. Kostenpflichtige Dienste wie Disney+, Netflix und Prime Video werden derzeit nicht gelistet, folgen aber. Das laufende Fernsehprogramm der Kindersender zeigt die Startseite.</p>
-</section>
 
 
 """ + seosec('<circle cx="12" cy="12" r="9"/><path d="M10.2 8.6l4.8 3.4-4.8 3.4z" fill="currentColor" stroke="none"/>',
@@ -2074,7 +2513,9 @@ PAGES["mediathek"] = dict(
                      "reduziert, aber nicht immer ganz abgeschaltet — vor dem Abschluss lohnt der "
                      "Blick ins Kleingedruckte.",
                      "Werbefrei und kostenlos sind ausschließlich die öffentlich-rechtlichen "
-                     "Mediatheken: KiKA-Player, ARD Mediathek und ZDFtivi."]),
+                     "Mediatheken: KiKA-Player, ARD Mediathek und ZDFtivi."]) + """
+    </section>
+""",
     page_js="""
 /* ---------- Anbieterkarten ---------- */
 const PCOL={"Netflix":"#E50914","Prime Video":"#00A8E1","Disney+":"#0C2A6B",
@@ -2104,8 +2545,31 @@ function pcard(p){
     'Streaming-Verf\u00fcgbarkeit: <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">TMDB</a>, powered by <a href="https://www.justwatch.com/" target="_blank" rel="noopener">JustWatch</a>.';
 })();
 
-document.getElementById("medFree").innerHTML = PROVIDERS.filter(p=>p.type!=="abo").map(pcard).join("");
-document.getElementById("medPaid").innerHTML = PROVIDERS.filter(p=>p.type==="abo").map(pcard).join("");
+let anbLimit=4;
+function anbKarte(p){
+  const c=PCOL[p.name]||"#C24009";
+  return '<article class="kinocard anbcard">'+
+    '<div class="kinoart" style="background:linear-gradient(150deg,'+c+',color-mix(in srgb, '+c+' 68%, #14161c))">'+
+      (p.type!=="abo"?'<span class="ribbon neu">Kostenlos</span>':'<span class="ribbon">Abo</span>')+
+      '<span class="anblogo">'+p.short+'</span>'+
+    '</div>'+
+    '<h3>'+p.name+'</h3>'+
+    '<p class="kmeta">'+(p.type==="abo"?p.price:"kostenlos")+' \u00b7 Alter '+p.age+'</p>'+
+    '<p class="kdesc">'+p.kids+'</p>'+
+    '<a class="trailerbtn" target="_blank" rel="noopener" href="'+p.u+'">'+
+    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5l10 6.5-10 6.5z"/></svg>Zum Anbieter</a>'+
+    '</article>';
+}
+function anbZeigen(){
+  const b=document.getElementById("anbBoard"); if(!b) return;
+  const pool=PROVIDERS.slice().sort((a,x)=>((a.type==="abo")?1:0)-((x.type==="abo")?1:0));
+  const seite=pool.slice(0,anbLimit);
+  b.innerHTML='<div class="kinogrid">'+seite.map(anbKarte).join("")+'</div>';
+  const km=document.getElementById("anbMehr"), rest=pool.length-seite.length;
+  if(km){ km.style.display=rest>0?"":"none"; km.textContent=Math.min(4,rest)+" weitere anzeigen \u2192"; }
+}
+{ const am=document.getElementById("anbMehr");
+  if(am) am.addEventListener("click", ()=>{ anbLimit+=4; anbZeigen(); }); }
 
 /* ---------- Katalog und Tipps ---------- */
 const mBoard = document.getElementById("medBoard");
@@ -2133,7 +2597,7 @@ function mcard(e){
   return `
 <div class="row free" style="${vars}" data-k="${key}">
   <button class="rowhead" aria-expanded="false">
-    <div class="time"><span class="t-start">${zc1}</span><span class="t-dur">${zc2}</span></div>
+    <div class="mthumb"><img src="cover-${({ti:"tiere",ma:"magie",ab:"abenteuer",la:"lachen",wi:"wissen"})[(e.ints||[])[0]]||"musik"}.jpg" alt="" loading="lazy" decoding="async"><span class="mfolgen">${zc1}${zc2?" "+zc2:""}</span></div>
     <div class="teams">
       <div class="t">${sticker({title:e.title, genre:e.genre})}<span>${e.title}</span></div>
       ${e.sub?`<div class="t subline">${e.sub}</div>`:""}
@@ -2150,11 +2614,9 @@ function mcard(e){
     </div>
     <div class="pvrow panelprov">${prov}</div>
     <div class="agebox">
-      <div class="arow"><span class="alb">${t("alter")}</span><span class="aval">${t("ab")} ${e.age} ${t("jahren")}<span class="est">${t("redaktionell")}</span></span></div>
+      <div class="arow"><span class="alb">${t("alter")}</span><span class="aval">${t("ab")} ${e.age} ${t("jahren")} <span class="est">${t("redaktionell")}</span></span></div>
       ${e.year?`<div class="arow"><span class="alb">${LANG==="en"?"Since":"Seit"}</span><span class="aval">${e.year}</span></div>`:""}
       ${e.folgen?`<div class="arow"><span class="alb">${LANG==="en"?"Episodes":"Folgen"}</span><span class="aval">${e.folgen}${e.dauer?` · ${LANG==="en"?"approx.":"ca."} ${e.dauer} ${LANG==="en"?"min each":"Min je Folge"}`:""}</span></div>`:""}
-      <div class="arow sp-sicher"><span class="alb">${t("nachsehen")}</span><span class="aval"><span class="spdot"></span>${
-        t("nachsehen_ja")}: ${e.prov.filter(p=>p.ok).map(p=>p.n).join(LANG==="en"?" and ":" und ")}</span></div>
       ${e.retro?`<div class="arow"><span class="alb">${t("kennst")}</span><span class="aval">${e.retro.n}</span></div>`:""}
       <div class="arow"><span class="alb">IMDb</span><span class="aval">${
         rate?`<b>${rate}</b> ${t("imdb_von")} <span class="votes">${t("imdb_stimmen").replace("%s",(e.imdb.v||0).toLocaleString("de-DE"))}</span> · <a href="https://www.imdb.com/title/${e.imdb.id}/" target="_blank" rel="noopener">${t("imdb_ansehen")}</a>`
@@ -2173,9 +2635,6 @@ function toast(txt){
   el.textContent=txt; el.classList.add("an");
   clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove("an"), 3000);
 }
-["medFrei"].forEach(id=>document.getElementById(id).addEventListener("change", e=>{
-  if(!e.target.checked){ e.target.checked=true; toast(t("toast_bald")); }
-}));
 
 /* ---- Filterchips: Alter (Einfachauswahl) + Interessen (Mehrfach) ---- */
 let fAge=null, fInts=new Set();
@@ -2187,7 +2646,7 @@ try{
 
 function chipsAnzeigen(){
   document.querySelectorAll("#medChips .fchip[data-a]").forEach(b=>
-    b.setAttribute("aria-pressed", String(fAge===null ? b.dataset.a==="alle" : b.dataset.a===fAge)));
+    b.setAttribute("aria-pressed", String((b.dataset.a||null)===fAge)));
   document.querySelectorAll("#medGenres .fchip[data-i]").forEach(b=>
     b.setAttribute("aria-pressed", String(fInts.has(b.dataset.i))));
   const mt=document.getElementById("medTipp");
@@ -2198,15 +2657,14 @@ function chipsSpeichern(){
 }
 function chipKlick(e, zustand, danach){
   const b=e.target.closest(".fchip"); if(!b || b.id) return;
-  if(b.dataset.a) zustand.age = b.dataset.a==="alle" ? null
-                 : ((zustand.age===b.dataset.a) ? null : b.dataset.a);
+  if(b.dataset.a!==undefined) zustand.age = (b.dataset.a==="") ? null : ((zustand.age===b.dataset.a) ? null : b.dataset.a);
   if(b.dataset.i){ zustand.ints.has(b.dataset.i) ? zustand.ints.delete(b.dataset.i) : zustand.ints.add(b.dataset.i); }
   danach();
 }
 const topZustand={get age(){return fAge}, set age(v){fAge=v}, get ints(){return fInts}};
 ["medChips","medGenres"].forEach(id=>document.getElementById(id).addEventListener("click",
   e=>chipKlick(e, topZustand, ()=>{ chipsAnzeigen(); chipsSpeichern();
-    if(tippOffen) tippsZeigen(true); katalogZeigen(); })));
+    katalogZeigen(); kinoZeigen(); })));
 
 /* ---- Tipps: Treffer mischen, ohne Wiederholung in der Sitzung ---- */
 const gezeigt = new Set();
@@ -2274,46 +2732,57 @@ function tippsZeigen(neuAufbau){
   ersterTippAuf();
 }
 let tippOffen=false;
-document.getElementById("tippMehr").addEventListener("click", ()=>{
-  if(!tippOffen){ tippOffen=true; tippsZeigen(true); }
-  else tippsZeigen(false);
-});
 
 /* ---- Katalog: vollständig, A bis Z; die Suche ignoriert die Chips ---- */
-let katOffen=true, katLimit=10;
+let katOffen=true, katLimit=4;
+function empfehlungen(l){
+  /* Klassiker, Trends und gut bewertete Titel nach vorn; Tages-Seed sorgt
+     fuer taeglich wechselnde Reihenfolge bei stabiler Ansicht am selben Tag */
+  const d=new Date();
+  const seed=d.getFullYear()*372+(d.getMonth()+1)*31+d.getDate();
+  const rnd=i=>{ const x=Math.sin(seed*9301+i*49297)*233280; return x-Math.floor(x); };
+  return l.map((e,i)=>{
+    let pkt=0;
+    const r=(e.imdb&&e.imdb.r)||0, v=(e.imdb&&e.imdb.v)||0;
+    if(r>=7.5) pkt+=3; else if(r>=6.5) pkt+=2; else if(r>=5.8) pkt+=1;
+    if(v>=5000) pkt+=2; else if(v>=800) pkt+=1;          /* bekannt */
+    if(e.retro && r>=6.3) pkt+=2;                        /* Klassiker */
+    if(e.year && e.year>=2019) pkt+=1;                   /* aktuell */
+    if(e.neu) pkt+=2;                                    /* neu im Katalog */
+    return {e, s: pkt + rnd(i)*2.4};
+  }).sort((a,b)=>b.s-a.s).map(x=>x.e);
+}
+
 function katalogZeigen(){
   const mehrBtn=document.getElementById("katMehr"),
+        kopfBtn=document.getElementById("katMehrKopf"),
         suchtext=(document.getElementById("medSearchTop")||{}).value||"";
   if(typeof fElterntipp!=="undefined" && fElterntipp){
-    mehrBtn.style.display="none";
+    mehrBtn.style.display="none"; if(kopfBtn) kopfBtn.style.display="none";
     const tipps=TIPPS.filter(x=>!x.seite||x.seite==="beide"||x.seite==="mediathek");
     mBoard.innerHTML = tipps.map(tippKarteIndex).join("") + '<div class="empty" style="display:none">'+t("nichts")+'</div>';
     const e1=mBoard.querySelector(".tipprow");
     if(e1){ e1.classList.add("open"); e1.querySelector(".rowhead").setAttribute("aria-expanded","true"); }
-    document.getElementById("katCount").textContent = tipps.length + " " + t("tipps_n");
     return;
   }
   let l = MEDIA.filter(kat);
   if(fAge) l = l.filter(e=>e.grp===fAge);
   if(fInts.size) l = l.filter(e=>(e.ints||[]).some(c=>fInts.has(c)));
-  l = l.slice().sort((a,b)=>a.title.localeCompare(b.title, LANG==="en"?"en":"de"));
+  l = empfehlungen(l);
   /* Bei aktiver Suche die volle Liste rendern, sonst seitenweise zu 30 */
   const seite = suchtext.trim() ? l : l.slice(0, katLimit);
   mBoard.innerHTML = seite.map(mcard).join("") + '<div class="empty" style="display:none">'+t("nichts")+'</div>';
   const rest = suchtext.trim() ? 0 : l.length - seite.length;
   mehrBtn.style.display = rest>0 ? "" : "none";
-  if(rest>0){ const lbl=t("mehr30").replace("%s", Math.min(30,rest));
-    mehrBtn.title=lbl;
-    if(mehrBtn.classList.contains("ohnebild")) mehrBtn.textContent=lbl;
-    const bi=mehrBtn.querySelector("img"); if(bi) bi.alt=lbl; }
-  document.getElementById("katCount").textContent =
-    (suchtext.trim() ? l.length : Math.min(katLimit,l.length)+" / "+l.length) + " " + t("titel_n");
+  if(kopfBtn) kopfBtn.style.display = rest>0 ? "" : "none";
+  if(rest>0) mehrBtn.textContent = Math.min(4,rest)+" weitere anzeigen \u2192";
   const mc=document.getElementById("medCount");
   if(mc) mc.textContent = MEDIA.filter(kat).length + " " + t("titel_n");
 }
 
-document.getElementById("katMehr").addEventListener("click", ()=>{ katLimit+=30; katalogZeigen(); });
-
+document.getElementById("katMehr").addEventListener("click", ()=>{ katLimit+=4; katalogZeigen(); });
+{ const kk=document.getElementById("katMehrKopf");
+  if(kk) kk.addEventListener("click", ()=>{ katLimit+=4; katalogZeigen(); }); }
 let fElterntipp=false;
 function elterntippUmschalten(){
   fElterntipp = !fElterntipp;
@@ -2321,71 +2790,128 @@ function elterntippUmschalten(){
   katalogZeigen();
   if(tippOffen) tippsZeigen(true);
 }
-document.getElementById("medTipp").addEventListener("click", elterntippUmschalten);
 
 chipsAnzeigen();
 katalogZeigen();
-{ const b=document.getElementById("tippMehr"); b.title=t("tipps_start");
-  if(b.classList.contains("ohnebild")) b.textContent=t("tipps_start");
-  const bi=b.querySelector("img"); if(bi) bi.alt=t("tipps_start"); }
-const suchOben=document.getElementById("medSearchTop");
-/* Erst neu zeichnen (bei Suche: volle Liste), DANN filtert initSearch die Zeilen.
-   Reihenfolge der Registrierung entscheidet. */
-suchOben.addEventListener("input", ()=>{
-  if(!katOffen && suchOben.value.trim()) katOffen=true;
-  katalogZeigen();
-});
-initSearch(suchOben, mBoard);
-/* Aktuell im Kino: zugeklappt, Trailer öffnet die passende YouTube-Suche */
-function kinoKarte(f){
-  const [c1,c2]=pairFor(f.t);
-  const vars=`--c1:${c1};--c2:${c2};--w1:${hexA(c1,.22)};--w2:${hexA(c2,.20)};--w1d:${hexA(c1,.14)};--w2d:${hexA(c2,.11)}`;
-  const beschr = LANG==="en" ? f.en : f.de;
-  const suche = encodeURIComponent(f.t + (LANG==="en" ? " Trailer Englisch" : " Trailer Deutsch"));
-  return `
-<div class="row free" style="${vars}" data-k="${f.t}">
-  <button class="rowhead" aria-expanded="false">
-    <div class="time"><span class="t-start">${LANG==="en"?"Cinema":"Kino"}</span><span class="t-dur">${f.start}</span></div>
-    <div class="teams">
-      <div class="t">${sticker({title:f.t, genre:"Film"})}<span>${f.t}</span></div>
-      <div class="meta"><span class="comp">${LANG==="en"?"In cinemas now":"Aktuell im Kino"}</span><span class="agetag">FSK ${f.fsk}</span>${f.dauer?`<span class="folgen">${f.dauer} Min</span>`:""}</div>
-    </div>
-    <div class="rh-right"><span class="chev">${RCHEV}</span></div>
-  </button>
-  <div class="panel"><div class="panel-in"><div class="panel-pad">
-    <div class="lh"><p class="lh-txt">${beschr}</p></div>
-    <div class="actrow"><a class="sharebtn" href="https://www.youtube.com/results?search_query=${suche}" target="_blank" rel="noopener"><span>${t("kino_trailer")}</span></a></div>
-  </div></div></div>
-</div>`;
-}
-let kinoOffen=false;
-function kinoZeigen(){
-  document.getElementById("kinoCount").textContent = KINO.length + " " + t("kino_n");
-  if(!kinoOffen) return;
-  document.getElementById("kinoBoard").innerHTML = KINO.map(kinoKarte).join("");
-}
-document.getElementById("kinoStart").addEventListener("click", function(){
-  kinoOffen=true; kinoZeigen();
-  document.getElementById("kinoKlapp").classList.add("auf");
-  this.style.display="none";
-});
-kinoZeigen();
+anbZeigen();
+(function(){ try{
+  if(typeof MEDIA!=="undefined") document.getElementById("statMed").textContent=MEDIA.length;
+  if(typeof KINO!=="undefined") document.getElementById("statKino").textContent=KINO.length;
+}catch(_){} })();
 
-document.getElementById("anbStart").addEventListener("click", function(){
-  document.getElementById("anbKlapp").classList.add("auf");
-  this.style.display="none";
+
+
+/* ---- Aktuell im Kino ---- */
+function trailerUrl(titel){
+  const w = (typeof LANG!=="undefined" && LANG==="en") ? "Trailer Englisch" : "Trailer Deutsch";
+  return "https://www.youtube.com/results?search_query=" + encodeURIComponent(titel + " " + w);
+}
+let kinoLimit=4;
+function kinoAuswahl(){
+  const map={a3:["0"], a6:["0","6"], a10:["0","6","12"]};
+  let pool=KINO.slice();
+  if(typeof fAge!=="undefined" && fAge && map[fAge]){
+    const ok=pool.filter(f=>f.fsk!=="" && map[fAge].indexOf(String(f.fsk))>=0);
+    pool=ok.concat(pool.filter(f=>ok.indexOf(f)<0));   /* passend zuerst, dann auffuellen */
+  }
+  return pool;
+}
+function kinoZeigen(){
+  const kb=document.getElementById("kinoBoard"); if(!kb) return;
+  const heute=new Date(); heute.setHours(0,0,0,0);
+  const dat = x=>{ const m=x.split("."); return new Date(+m[2], +m[1]-1, +m[0]); };
+  const pool=kinoAuswahl(), seite=pool.slice(0,kinoLimit);
+  kb.innerHTML = '<div class="kinogrid">'+seite.map((f,fi)=>{
+    const st=dat(f.start), zukunft=st>heute;
+    const neu=!zukunft && (heute-st)/864e5<=21;
+    return '<article class="kinocard klick" data-fi="'+fi+'" role="button" tabindex="0" aria-label="'+f.t+': Details anzeigen">'+
+      '<div class="kinoart">'+
+        (zukunft?'<span class="ribbon">Demn\u00e4chst</span>':(neu?'<span class="ribbon neu">Neu</span>':""))+
+        '<span class="fskcircle">'+(f.fsk!==""?f.fsk:"?")+'</span>'+
+        '<img src="kino-platzhalter.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()">'+
+      '</div>'+
+      '<h3>'+f.t+'</h3>'+
+      '<p class="kmeta">'+(f.dauer?f.dauer+" Min \u00b7 ":"")+(zukunft?("Kinostart "+f.start.slice(0,6)):"jetzt im Kino")+'</p>'+
+      '<a class="trailerbtn" target="_blank" rel="noopener" href="'+trailerUrl(f.t)+'">'+
+      '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5l10 6.5-10 6.5z"/></svg>Trailer</a>'+
+      '</article>';
+  }).join("")+"</div>";
+  kb._pool = seite;
+  const km=document.getElementById("kinoMehr"), rest=pool.length-seite.length;
+  if(km){ km.style.display = rest>0 ? "" : "none";
+    km.textContent = Math.min(4,rest)+" weitere anzeigen \u2192"; }
+}
+
+/* ---- Film-Details im Dialog ---- */
+function kinoDetails(f){
+  const heute=new Date(); heute.setHours(0,0,0,0);
+  const m=f.start.split("."), st=new Date(+m[2], +m[1]-1, +m[0]);
+  const zukunft=st>heute;
+  document.getElementById("kdTitel").textContent=f.t;
+  document.getElementById("kdFsk").textContent = f.fsk!=="" ? f.fsk : "?";
+  document.getElementById("kdMeta").innerHTML =
+    (f.genre?'<span class="comp">'+f.genre+'</span>':"")+
+    (f.dauer?'<span class="durtag">'+f.dauer+' Min</span>':"")+
+    '<span class="durtag">'+(f.fsk!==""?("FSK "+f.fsk):"FSK folgt")+'</span>';
+  document.getElementById("kdKurz").textContent=f.kurz||"";
+  document.getElementById("kdFakten").innerHTML =
+    '<div class="arow"><span class="alb">Altersfreigabe</span><span class="aval">'+
+      (f.fsk!==""?("FSK "+f.fsk):"noch nicht bekannt")+'</span></div>'+
+    '<div class="arow"><span class="alb">'+(zukunft?"Kinostart":"Im Kino seit")+'</span><span class="aval">'+f.start+'</span></div>'+
+    (f.genre?'<div class="arow"><span class="alb">Genre</span><span class="aval">'+f.genre+'</span></div>':"")+
+    (f.dauer?'<div class="arow"><span class="alb">Laufzeit</span><span class="aval">'+f.dauer+' Minuten</span></div>':"");
+  document.getElementById("kdTrailer").href=trailerUrl(f.t);
+  document.getElementById("kdImdb").href="https://www.imdb.com/find/?q="+encodeURIComponent(f.t);
+  const d=document.getElementById("kinoDialog");
+  d.hidden=false; document.body.style.overflow="hidden";
+}
+function kinoDialogZu(){
+  const d=document.getElementById("kinoDialog");
+  if(d){ d.hidden=true; document.body.style.overflow=""; }
+}
+document.getElementById("kinoBoard").addEventListener("click", e=>{
+  if(e.target.closest(".trailerbtn")) return;      /* Trailer bleibt Direktlink */
+  const k=e.target.closest(".kinocard.klick"); if(!k) return;
+  const pool=document.getElementById("kinoBoard")._pool||[];
+  const f=pool[+k.dataset.fi]; if(f) kinoDetails(f);
+});
+document.getElementById("kinoBoard").addEventListener("keydown", e=>{
+  if(e.key!=="Enter" && e.key!==" ") return;
+  const k=e.target.closest(".kinocard.klick"); if(!k) return;
+  e.preventDefault();
+  const pool=document.getElementById("kinoBoard")._pool||[];
+  const f=pool[+k.dataset.fi]; if(f) kinoDetails(f);
+});
+{ const d=document.getElementById("kinoDialog");
+  if(d){
+    document.getElementById("kdZu").addEventListener("click", kinoDialogZu);
+    d.addEventListener("click", e=>{ if(e.target===d) kinoDialogZu(); });
+    document.addEventListener("keydown", e=>{ if(e.key==="Escape") kinoDialogZu(); });
+  } }
+document.getElementById("kinoMehr").addEventListener("click", ()=>{ kinoLimit+=4; kinoZeigen(); });
+
+/* ---- Tipps und Katalog wieder einklappen ---- */
+const katZuBtn=document.getElementById("katZu");
+["katMehrKopf","katMehr"].forEach(id=>{const b=document.getElementById(id);
+  if(b) b.addEventListener("click", ()=>{ if(katZuBtn && katLimit>10) katZuBtn.style.display=""; });});
+if(katZuBtn) katZuBtn.addEventListener("click", function(){
+  katLimit=10; katalogZeigen(); this.style.display="none";
+  const kopf=document.querySelector('h2[data-i18n="kat_h2"]');
+  if(kopf) kopf.scrollIntoView({behavior:"smooth", block:"start"});
 });
 window.reRender = ()=>{
-  kinoZeigen();
   katalogZeigen();
+  kinoZeigen();
+  const kk=document.getElementById("kinoKlapp"), kb=document.getElementById("kinoStart");
+  const ak=document.getElementById("anbKlapp"), ab=document.getElementById("anbStart");
+
   /* sichtbare Tippkarten in der neuen Sprache neu zeichnen, Bestand behalten */
   const em = (typeof fElterntipp!=="undefined" && fElterntipp);
   document.getElementById("tippBoard").innerHTML = sichtbareTipps.map(em ? tippKarteIndex : mcard).join("");
   ersterTippAuf();
-  const btn=document.getElementById("tippMehr");
-  btn.title = tippRest.length ? t("mehr5") : t("alle_gezeigt");
   chipsAnzeigen();
 };
+kinoZeigen();
 """)
 
 def main():
@@ -2397,7 +2923,9 @@ def main():
             title=p["title"], desc=p["desc"], canon=p["canon"], page=p["page"],
             css=css, main=p["main"].replace("{prerender}", p.get("prerender", lambda: "")()),
             nav=nav_html(p["page"]),
-            data_js=p["data"]() + "\n" + kino_js(), shell_js=shell_js, page_js=p["page_js"],
+            data_js=p["data"](), shell_js=shell_js, page_js=p["page_js"],
+            site_ld=site_ld(p),
+            head_extra=p.get("head_extra", ""),
             seo_ld=p.get("seo_ld", lambda: "")(),
             cat_ld=p.get("cat_ld", lambda: "")(),
         )
