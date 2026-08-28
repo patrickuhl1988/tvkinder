@@ -6,21 +6,6 @@ bekannten Titeln und Beschreibung; Alterswerte heuristisch.
 """
 
 TAGE = [
-    ("Freitag, 28.08.2026", "ProSieben Maxx", [
-        ('18:25', 'One Piece', 'Sakeschalen der Gefolgschaft - Die Entstehung der Strohhut-Großflotte!', 'Anime', 30, 12, 'a10', 55, 'Im Kampf gegen de Flamingo schließen sich Ruffys Anhänger zu einer mächtigen Truppe zusammen. Kann d'),
-        ('18:55', 'Detektiv Conan', 'Den Männern in Schwarz auf der Spur (1)', 'Anime', 25, 12, 'a10', 55, 'In der Klasse 1B der Teitan Grundschule wird eine neue Schülerin erwartet: Ai Haibara. Die Lehrerin '),
-        ('20:15', 'Naruto Shippuden the Movie', '', 'Zeichentrick', 105, 12, 'a10', 55, 'Als ein mächtiger Dämon ins Reich der Lebenden zurückkommt, beschließt Naruto, die Schamanin Shion z'),
-        ('22:00', 'Gachiakuta', 'Das Hauptquartier des Putztrupps', 'Anime', 30, 12, 'a10', 55, 'Enjin und die anderen bringen Rudo in das Hauptquartier des Putztrupps. Dort angekommen, erhält er e'),
-        ('22:30', 'Gachiakuta', 'Die Vandalen', 'Anime', 30, 12, 'a10', 55, 'Der Putztrupp veranstaltet eine Willkommensfeier für Rudo. Der Junge ist jedoch gar nicht in Partyst'),
-        ('23:00', 'Gachiakuta', 'Die volle Breitseite!', 'Anime', 20, 12, 'a10', 55, 'Rudo und zwei seiner Kollegen vom Putztrupp treffen auf den Vandalen Jabber, der ihnen den Weg versp'),
-        ('23:50', 'Frieren - Nach dem Ende der Reise', 'Der Held des Dorfes', 'Anime', 25, 12, 'a10', 55, 'Fern bittet Stark, ihr und Frieren beim Kampf gegen den Drachen zu helfen. Der Junge hat zwar Angst '),
-    ]),
-    ("Freitag, 28.08.2026", "WDR", [
-        ('21:15', 'Wuppertal und die einzigartige Schwebebahn', '', 'Wissen', 30, 10, 'a10', 55, 'Einmal im Leben durch Wuppertal schweben! Die Wuppertaler Schwebebahn feiert ihren 125. Geburtstag -'),
-    ]),
-    ("Freitag, 28.08.2026", "MDR", [
-        ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'In diesem traditionellen chinesischen Wiegenlied wird das Bett im Traum zu einem Schiff, mit dem das'),
-    ]),
     ("Samstag, 29.08.2026", "ARD", [
         ('05:30', 'Arthur und die Freunde der Tafelrunde', 'Die Nadel der Gerechtigkeit', 'Zeichentrick', 10, 3, 'a3', 55, 'Arthur darf nicht am großen Ritterturnier teilnehmen, weil er nicht von edlem Blut ist. Morgan hat e'),
         ('05:40', 'Arthur und die Freunde der Tafelrunde', 'Die versprochene Braut', 'Zeichentrick', 15, 3, 'a3', 55, 'Guinevere ist in Not. Ihre Eltern wollen sie gegen ihren Willen verheiraten. Arthur und seine Freund'),
@@ -116,27 +101,27 @@ TAGE = [
         ('04:25', 'Athleticus', 'Seilakrobatik', 'Zeichentrick', 50, 3, 'a3', 55, 'Ein Flamingo fährt Einrad auf einem Seil, das zwischen zwei Hochhäusern gespannt ist. Der Elefant so'),
     ]),
     ("Samstag, 29.08.2026", "ORF 1", [
-        ('06:00', 'Tom - Ein echter Freund', 'Tom in Ägypten', 'Zeichentrick', 25, 3, 'a3', 55, 'Auch in Ägypten stoßen Tom und seine Freunde auf Carters Komplizen. Diesmal haben es Weedon und Miss'),
-        ('06:25', 'Grizzy und die Lemminge', 'Die Schmetterlingsjäger', 'Zeichentrick', 5, 3, 'a3', 55, 'Grizzys Angebetete ist von Schmetterlingen ziemlich angetan. Deshalb will er ihr einen Schmetterling'),
-        ('06:30', 'Servus Kasperl', 'Kasperl & Leopold: Die Wunschkette', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
-        ('06:55', 'Grizzy und die Lemminge', 'Brandneue Turnschuhe!', 'Zeichentrick', 5, 3, 'a3', 55, 'In der Hütte des Rangers finden die Lemminge ein Paar nagelneue Turnschuhe und haben auch sogleich i'),
-        ('07:00', 'Dora 3D', 'Der Zungenknoten / Mampfi und die Wolkenblume', 'Zeichentrick', 25, 3, 'a3', 55, 'Der Zungenknoten: Durch das Aufsagen eines Zungenbrechers hat der grummelige alte Troll einen Knoten'),
-        ('07:25', 'Helmi-Kinder-Verkehrs-Club', 'Voll da am Schulweg', 'Wissen', 5, 3, 'a3', 55, 'Sokrates ist ununterbrochen am Laptop und hängt deshalb irrtümlich sein Ohr ins Kakaohäferl, weil er'),
-        ('07:30', 'ABC Bär', '', 'Vorlesen', 15, 3, 'a3', 55, 'Der ABC Bär und seine Tierfreunde reisen mit ihrem lustigen Baumhaus durch das Land, um ihre Zahl- u'),
-        ('07:45', 'Kung Fu Panda: Die Tatzen des Schicksals', 'Die Quelle wird geöffnet', 'Zeichentrick', 25, 3, 'a3', 55, 'Jindiao hat Po und seine Schüler gefunden und ist seinem finsteren Ziel einen Schritt näher gekommen'),
-        ('08:10', 'Box', 'Basteln', 'Wissen', 5, 6, 'a6', 55, 'Ein federleichter Schlüsselanhänger, aromatisch duftende Blütenkerzen und ein fuchstastischer Tassen'),
-        ('08:15', 'Tom Turbo', 'Der Hund aus dem All', 'Serie', 25, 6, 'a6', 55, 'Thomas Brezina erinnert sich an spannende Kriminalfälle, die er gemeinsam mit Tom Turbo im Detektivb'),
-        ('08:55', 'Cyber Kids', 'Virus', 'Wissen', 15, 6, 'a6', 55, 'Wie gefährlich sind Computerviren? Valentin bekommt eine E-Mail, die zu schön klingt, um wahr zu sei'),
-        ('09:10', 'Der gestiefelte Kater - Abenteuer in San Lorenzo', 'Das Geheimnis der Schwestern', 'Serie', 20, 6, 'a6', 55, 'Mit Hut und Degen zieht der gestiefelte Kater durchs Land, immer auf der Suche nach einem neuen Aben'),
-        ('09:30', 'Tanzen mit den Stars', 'Rumba mit Katrin Kallus', 'Vorlesen', 15, 6, 'a6', 55, 'Heute bei Tanzen mit den Stars zeigt Dancing Stars Profi Kati Kallus unseren Tanzkinds die Rumba-Gru'),
-        ('09:45', 'Klimakrach', 'Krach fürs Klima', 'Wissen', 15, 6, 'a6', 55, 'Waldemar ist traurig, weil er sich mehr für den Klimaschutz starkmachen möchte, aber nicht weiß, was'),
-        ('10:00', 'Dragons - Die Wächter von Berk', 'Drachentausch', 'Zeichentrick', 20, 6, 'a6', 55, 'Dass sich Rotzbakke und Astrid nicht leiden können, weiß jeder auf Berk. Als aus heiterem Himmel abe'),
-        ('10:20', '1000 Tricks', '', 'Vorlesen', 15, 6, 'a6', 55, 'Die Magierinnen und Magier Melly, Christoph, Magic Max und Tristan zeigen wie sie Paprika und Saftpa'),
-        ('10:35', 'Ganz Ohr', 'Klimaangst', 'Vorlesen', 21, 6, 'a6', 55, 'Viele Kinder und Jugendliche haben Angst vor der Zukunft. Sie fürchten sich vor den Folgen des Klima'),
-        ('10:56', 'Galapagos X', 'Schädlingsbefall', 'Zeichentrick', 9, 6, 'a6', 55, 'Raes kleiner Bruder Shade ist zu Besuch. Als er hört, wie die anderen über Insekten denken, kapert e'),
+        ('06:00', 'Tom - Ein echter Freund', 'Tom in Ägypten', 'Zeichentrick', 23, 3, 'a3', 55, 'Auch in Ägypten stoßen Tom und seine Freunde auf Carters Komplizen. Diesmal haben es Weedon und Miss'),
+        ('06:23', 'Grizzy und die Lemminge', 'Die Schmetterlingsjäger', 'Zeichentrick', 7, 3, 'a3', 55, 'Grizzys Angebetete ist von Schmetterlingen ziemlich angetan. Deshalb will er ihr einen Schmetterling'),
+        ('06:30', 'Servus Kasperl', 'Kasperl & Leopold: Die Wunschkette', 'Serie', 24, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
+        ('06:54', 'Grizzy und die Lemminge', 'Brandneue Turnschuhe!', 'Zeichentrick', 7, 3, 'a3', 55, 'In der Hütte des Rangers finden die Lemminge ein Paar nagelneue Turnschuhe und haben auch sogleich i'),
+        ('07:01', 'Dora 3D', 'Der Zungenknoten / Mampfi und die Wolkenblume', 'Zeichentrick', 22, 3, 'a3', 55, 'Der Zungenknoten: Durch das Aufsagen eines Zungenbrechers hat der grummelige alte Troll einen Knoten'),
+        ('07:23', 'Helmi-Kinder-Verkehrs-Club', 'Voll da am Schulweg', 'Wissen', 5, 3, 'a3', 55, 'Sokrates ist ununterbrochen am Laptop und hängt deshalb irrtümlich sein Ohr ins Kakaohäferl, weil er'),
+        ('07:28', 'ABC Bär', '', 'Vorlesen', 15, 3, 'a3', 55, 'Der ABC Bär und seine Tierfreunde reisen mit ihrem lustigen Baumhaus durch das Land, um ihre Zahl- u'),
+        ('07:43', 'Kung Fu Panda: Die Tatzen des Schicksals', 'Die Quelle wird geöffnet', 'Zeichentrick', 22, 3, 'a3', 55, 'Jindiao hat Po und seine Schüler gefunden und ist seinem finsteren Ziel einen Schritt näher gekommen'),
+        ('08:05', 'Box', 'Basteln', 'Wissen', 6, 6, 'a6', 55, 'Ein federleichter Schlüsselanhänger, aromatisch duftende Blütenkerzen und ein fuchstastischer Tassen'),
+        ('08:11', 'Tom Turbo', 'Der Hund aus dem All', 'Serie', 28, 6, 'a6', 55, 'Thomas Brezina erinnert sich an spannende Kriminalfälle, die er gemeinsam mit Tom Turbo im Detektivb'),
+        ('08:54', 'Cyber Kids', 'Virus', 'Wissen', 15, 6, 'a6', 55, 'Wie gefährlich sind Computerviren? Valentin bekommt eine E-Mail, die zu schön klingt, um wahr zu sei'),
+        ('09:09', 'Der gestiefelte Kater - Abenteuer in San Lorenzo', 'Das Geheimnis der Schwestern', 'Serie', 22, 6, 'a6', 55, 'Mit Hut und Degen zieht der gestiefelte Kater durchs Land, immer auf der Suche nach einem neuen Aben'),
+        ('09:31', 'Tanzen mit den Stars', 'Rumba mit Katrin Kallus', 'Vorlesen', 17, 6, 'a6', 55, 'Heute bei Tanzen mit den Stars zeigt Dancing Stars Profi Kati Kallus unseren Tanzkinds die Rumba-Gru'),
+        ('09:48', 'Klimakrach', 'Krach fürs Klima', 'Wissen', 14, 6, 'a6', 55, 'Waldemar ist traurig, weil er sich mehr für den Klimaschutz starkmachen möchte, aber nicht weiß, was'),
+        ('10:02', 'Dragons - Die Wächter von Berk', 'Drachentausch', 'Zeichentrick', 22, 6, 'a6', 55, 'Dass sich Rotzbakke und Astrid nicht leiden können, weiß jeder auf Berk. Als aus heiterem Himmel abe'),
+        ('10:24', '1000 Tricks', '', 'Vorlesen', 15, 6, 'a6', 55, 'Die Magierinnen und Magier Melly, Christoph, Magic Max und Tristan zeigen wie sie Paprika und Saftpa'),
+        ('10:39', 'Ganz Ohr', 'Klimaangst', 'Vorlesen', 19, 6, 'a6', 55, 'Viele Kinder und Jugendliche haben Angst vor der Zukunft. Sie fürchten sich vor den Folgen des Klima'),
+        ('10:58', 'Galapagos X', 'Schädlingsbefall', 'Zeichentrick', 12, 6, 'a6', 55, 'Raes kleiner Bruder Shade ist zu Besuch. Als er hört, wie die anderen über Insekten denken, kapert e'),
     ]),
     ("Samstag, 29.08.2026", "SRF 1", [
-        ('10:55', 'SRF Kids News', '', 'Serie', 15, 6, 'a6', 55, ''),
+        ('11:00', 'SRF Kids News', '', 'Serie', 10, 6, 'a6', 55, ''),
         ('11:10', 'SRF Kids Inside', 'IG Seifenkisten Derby Schweiz - Schnelligkeit ohne Motor', 'Vorlesen', 15, 6, 'a6', 55, '1 Verein, 3 Kids und noch mehr Storys: «SRF Kids Inside» erzählt Geschichten mitten aus dem Leben.'),
         ('11:25', 'SRF Kids News spezial', 'Was ist Mobbing? Und was kannst du dagegen tun?', 'Vorlesen', 20, 6, 'a6', 55, 'Wie die wöchentlichen «SRF Kids News» zeigen die «SRF Kids News spezial» ausgewählte Themen, aber mi'),
         ('17:40', 'Minisguard', 'Wie macht man eigentlich Glace?', 'Serie', 20, 6, 'a6', 55, 'An einem heissen Sommertag gibt es kaum etwas Besseres als eine feine Glace. Aber wie wird Glace eig'),
@@ -242,5 +227,50 @@ TAGE = [
     ]),
     ("Sonntag, 30.08.2026", "SRF 1", [
         ('17:10', 'Minisguard', 'Wie macht man eigentlich Glace?', 'Serie', 15, 6, 'a6', 55, 'An einem heissen Sommertag gibt es kaum etwas Besseres als eine feine Glace. Aber wie wird Glace eig'),
+    ]),
+    ("Montag, 31.08.2026", "ProSieben Maxx", [
+        ('16:45', 'Dr. STONE', 'Last Man Standing', 'Anime', 25, 12, 'a10', 55, 'Der teuflische Ibara hat jede Person auf der Insel versteinert und denkt, er sei der einzige Überleb'),
+        ('17:10', 'Dragon Ball Super', 'Ein erbitterter Kampf! Muten-Roshi gibt alles!', 'Anime', 25, 12, 'a10', 55, 'Drei Kämpfer des vierten Universums haben es auf Muten-Roshi abgesehen. Darunter auch Caway, die sog'),
+        ('17:35', 'Detektiv Conan', 'Love-Story im Hauptquartier 8 - Der linke Ringfinger (2)', 'Anime', 25, 12, 'a10', 55, 'Sato übernimmt die Befragung der drei Verdächtigen, die an dem Interview mit dem verstorbenen Krimin'),
+        ('18:00', 'One Piece', 'Kämpfer unter sich! - Die wütenden Monster der neuen Welt', 'Anime', 25, 12, 'a10', 55, 'De Flamingo schwört Rache an Ruffy. Gut, dass dieser auch in Zukunft auf die Hilfe seiner Verbündete'),
+        ('18:25', 'One Piece', 'Die silberne Festung! - Ruffys und Bartolomeos großes Abenteuer', 'Anime', 30, 12, 'a10', 55, 'Nach einer ausgelassenen Party begibt sich Ruffy auf die Suche nach etwas Essbarem. Doch sein Hunger'),
+        ('18:55', 'Detektiv Conan', 'Den Männern in Schwarz auf der Spur (2)', 'Anime', 25, 12, 'a10', 55, 'Conan findet heraus, dass Pisco einer von sieben Verdächtigen sein muss. Auf dem Boden findet er ein'),
+    ]),
+    ("Montag, 31.08.2026", "WDR", [
+        ('06:50', 'Wissen macht Ah!', 'Im Ah!telier', 'Vorlesen', 25, 3, 'a3', 55, 'Das Studio von "Wissen macht Ah!" wird heute zum Maler-Atelier und Ralph vollbringt eine künstlerisc'),
+        ('07:15', 'POV - Deine Geschichte zählt', 'Was tun, wenn keiner was sagt · Rechtsextremismus unter Jugendlichen', 'Vorlesen', 10, 3, 'a3', 55, 'Leonie (16) fühlt sich in der Schule oft ausgeschlossen. Halt findet sie in Musik, Konzerten und Onl'),
+        ('07:25', 'Campsite', 'Die Klette', 'Jugendserie', 5, 3, 'a3', 55, 'Theo ist sehr verliebt in Nura und möchte am liebsten die ganze Zeit mit ihr verbringen. Lea ist das'),
+        ('07:30', 'Campsite', 'Das Midsommar-Brüllen', 'Jugendserie', 10, 3, 'a3', 55, 'Theo leidet unter der Trennung von Nura und möchte so gern wieder mit ihr zusammen sein. Doch im Str'),
+        ('07:40', 'Campsite', 'Lach-Dämonen', 'Jugendserie', 5, 3, 'a3', 55, 'Andrine, Lea, Thea und Max chillen auf dem Campingplatz, als sie merkwürdige Geräusche hören. Wer la'),
+    ]),
+    ("Montag, 31.08.2026", "SWR", [
+        ('12:55', 'Familie für Fortgeschrittene', '', 'Serie', 90, 6, 'a6', 55, 'Der Berliner Lehrer Oliver zieht mit Tochter Holly in die bayerische Provinz zu seiner neuen Lebensp'),
+    ]),
+    ("Montag, 31.08.2026", "MDR", [
+        ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Oh, was für ein Lampenfieber! Denn heute steht für die Turnschuhe ein großes Konzert an und Wetz dar'),
+    ]),
+    ("Montag, 31.08.2026", "RBB", [
+        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Geschichten aus dem Schuhregal: Wer gibt den Takt an?'),
+    ]),
+    ("Montag, 31.08.2026", "HR", [
+        ('05:10', 'Schau in meine Welt', 'Sammys erste Filmrolle', 'Vorlesen', 25, 3, 'a3', 55, 'Samanta Lillia (13) hat ihre erste Rolle beim Film. Als Sängerin stand sie schon auf vielen Bühnen. '),
+        ('06:25', 'Leo da Vinci', 'Der gierige Schneider', 'Zeichentrick', 10, 3, 'a3', 55, 'Bianca wird in der Medici-Bank für eine Betrügerin gehalten und bekommt keine Fiorini, dafür wird si'),
+        ('06:35', 'Leo da Vinci', 'Die Ankunft in Venedig', 'Zeichentrick', 15, 3, 'a3', 55, 'Unterwegs treffen die Freunde das kleine Mädchen Maria und retten sie vor einem wütenden Stier. Sie '),
+    ]),
+    ("Montag, 31.08.2026", "3sat", [
+        ('10:15', 'Ein Schloss am Wörthersee - Der Film', '', 'Film', 85, 6, 'a6', 55, 'Der charmante Lennie Berger hat von seinem Onkel das Schlosshotel Velden geerbt und will es auf Vord'),
+    ]),
+    ("Montag, 31.08.2026", "arte", [
+        ('04:35', 'Athleticus', 'Gym Tonic', 'Zeichentrick', 25, 3, 'a3', 55, 'Die dritte Staffel des Kurzprogramms wirft in 30 Folgen einen humorvollen Blick auf unsere Gesellsch'),
+    ]),
+    ("Montag, 31.08.2026", "ORF 1", [
+        ('06:05', 'Wickie und die starken Männer', 'Der Eskimoschatz', 'Zeichentrick', 25, 3, 'a3', 55, 'Nach einer langen Reise kommen die Wikinger in Grönland an und machen sich auf die Schatzsuche. Die '),
+        ('06:30', 'Servus Kasperl', 'Kasperl & Co: Zwei wie Pech und Schwefel', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
+        ('06:55', 'Die Jagd nach dem Kju Wang', 'Der schwarze Gondoliere', 'Zeichentrick', 25, 3, 'a3', 55, 'Da der Herzog auf Reisen ist, erklärt er Talbot zu seinem Stellvertreter. Zunächst profitiert Yagor '),
+        ('07:35', 'Vegesaurier', 'Flugübungen', 'Zeichentrick', 5, 3, 'a3', 55, 'Das Trikarrotops-Mädchen Ginger und die Baby-Erbs-Rexe Minzi, Wasabi und Split lernen einen kleinen '),
+        ('07:40', 'Dragons - Die Wächter von Berk', 'Drachentausch', 'Zeichentrick', 20, 3, 'a3', 55, 'Dass sich Rotzbakke und Astrid nicht leiden können, weiß jeder auf Berk. Als aus heiterem Himmel abe'),
+    ]),
+    ("Montag, 31.08.2026", "SRF 1", [
+        ('17:30', 'Timmy Ziit - Pöschtler', '', 'Vorlesen', 10, 6, 'a6', 55, ''),
     ]),
 ]
