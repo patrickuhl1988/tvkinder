@@ -1,35 +1,11 @@
 # -*- coding: utf-8 -*-
 """Kindersendungen der Vollprogramme.
 
-Erzeugt von scan_kinder.py aus tv.de am 30.08.2026. Auswahl nach Kategorie,
+Erzeugt von scan_kinder.py aus tv.de am 31.08.2026. Auswahl nach Kategorie,
 bekannten Titeln und Beschreibung; Alterswerte heuristisch.
 """
 
 TAGE = [
-    ("Sonntag, 30.08.2026", "SAT.1", [
-        ('17:00', 'Matilda', '', 'Film', 115, 6, 'a6', 55, 'Kaum zu glauben, dass solche Eltern eine solche Tochter haben: Die kleine Matilda ist ein telekineti'),
-    ]),
-    ("Sonntag, 30.08.2026", "WDR", [
-        ('17:20', 'Wuppertal und die einzigartige Schwebebahn', '', 'Wissen', 30, 6, 'a6', 55, 'Einmal im Leben durch Wuppertal schweben! Die Wuppertaler Schwebebahn feiert ihren 125. Geburtstag -'),
-    ]),
-    ("Sonntag, 30.08.2026", "MDR", [
-        ('15:30', 'Hans Röckle und der Teufel', '', 'Serie', 75, 6, 'a6', 55, 'Dem Puppenspieler und Erfinder Hans Röckle erscheint der Teufel und bietet ihm einen Pakt an. Röckle'),
-        ('16:45', 'Das Mädchen auf dem Besenstiel', '', 'Serie', 75, 6, 'a6', 55, 'Hexenschülerin Saxana muss 300 Jahre nachsitzen und sucht nach Abwechslung. Im Zauberlexikon stößt s'),
-        ('18:52', 'Unser Sandmännchen', '', 'Serie', 8, 3, 'a3', 55, 'Pitti und Moppi spielen Feuerwehr. Rasen mit dem Handwagen quer über die Gartenbeete und stoßen alle'),
-    ]),
-    ("Sonntag, 30.08.2026", "RBB", [
-        ('11:40', 'Die Gänsemagd', '', 'Serie', 60, 6, 'a6', 55, 'Prinzessin Elisabeth ist schon seit vielen Jahren dem Prinzen Leopold versprochen. Auf den Weg zur V'),
-        ('13:50', 'Der Froschkönig', '', 'Serie', 65, 6, 'a6', 55, 'Der schönen Prinzessin fällt eines Tages beim Spielen ihre Goldkugel in den Brunnen. Traurig über de'),
-        ('14:55', 'Die Gänseprinzessin', '', 'Serie', 60, 6, 'a6', 55, 'Nach Motiven der Brüder Grimm erzählt das Märchen die Geschichte eines Königreiches im Ausnahmezusta'),
-        ('16:55', 'König Drosselbart', '', 'Serie', 58, 6, 'a6', 55, 'Es war einmal die stolze Prinzessin Isabella von Geranien, die war schön, aber hochmütig. Als ihr Va'),
-        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Kallis Gute-Nacht-Geschichten: Super-Kalli'),
-    ]),
-    ("Sonntag, 30.08.2026", "3sat", [
-        ('17:15', 'Ein Schloss am Wörthersee - Der Film', '', 'Film', 80, 6, 'a6', 55, 'Der charmante Lennie Berger hat von seinem Onkel das Schlosshotel Velden geerbt und will es auf Vord'),
-    ]),
-    ("Sonntag, 30.08.2026", "SRF 1", [
-        ('17:10', 'Minisguard', 'Wie macht man eigentlich Glace?', 'Serie', 15, 6, 'a6', 55, 'An einem heissen Sommertag gibt es kaum etwas Besseres als eine feine Glace. Aber wie wird Glace eig'),
-    ]),
     ("Montag, 31.08.2026", "ProSieben Maxx", [
         ('16:45', 'Dr. STONE', 'Last Man Standing', 'Anime', 25, 12, 'a10', 55, 'Der teuflische Ibara hat jede Person auf der Insel versteinert und denkt, er sei der einzige Überleb'),
         ('17:10', 'Dragon Ball Super', 'Ein erbitterter Kampf! Muten-Roshi gibt alles!', 'Anime', 25, 12, 'a10', 55, 'Drei Kämpfer des vierten Universums haben es auf Muten-Roshi abgesehen. Darunter auch Caway, die sog'),
@@ -37,13 +13,6 @@ TAGE = [
         ('18:00', 'One Piece', 'Kämpfer unter sich! - Die wütenden Monster der neuen Welt', 'Anime', 30, 12, 'a10', 55, 'De Flamingo schwört Rache an Ruffy. Gut, dass dieser auch in Zukunft auf die Hilfe seiner Verbündete'),
         ('18:30', 'One Piece', 'Die silberne Festung! - Ruffys und Bartolomeos großes Abenteuer', 'Anime', 25, 12, 'a10', 55, 'Nach einer ausgelassenen Party begibt sich Ruffy auf die Suche nach etwas Essbarem. Doch sein Hunger'),
         ('18:55', 'Detektiv Conan', 'Den Männern in Schwarz auf der Spur (2)', 'Anime', 25, 12, 'a10', 55, 'Conan findet heraus, dass Pisco einer von sieben Verdächtigen sein muss. Auf dem Boden findet er ein'),
-    ]),
-    ("Montag, 31.08.2026", "WDR", [
-        ('06:50', 'Wissen macht Ah!', 'Im Ah!telier', 'Vorlesen', 25, 3, 'a3', 55, 'Das Studio von "Wissen macht Ah!" wird heute zum Maler-Atelier und Ralph vollbringt eine künstlerisc'),
-        ('07:15', 'POV - Deine Geschichte zählt', 'Was tun, wenn keiner was sagt · Rechtsextremismus unter Jugendlichen', 'Vorlesen', 10, 3, 'a3', 55, 'Leonie (16) fühlt sich in der Schule oft ausgeschlossen. Halt findet sie in Musik, Konzerten und Onl'),
-        ('07:25', 'Campsite', 'Die Klette', 'Jugendserie', 5, 3, 'a3', 55, 'Theo ist sehr verliebt in Nura und möchte am liebsten die ganze Zeit mit ihr verbringen. Lea ist das'),
-        ('07:30', 'Campsite', 'Das Midsommar-Brüllen', 'Jugendserie', 10, 3, 'a3', 55, 'Theo leidet unter der Trennung von Nura und möchte so gern wieder mit ihr zusammen sein. Doch im Str'),
-        ('07:40', 'Campsite', 'Lach-Dämonen', 'Jugendserie', 5, 3, 'a3', 55, 'Andrine, Lea, Thea und Max chillen auf dem Campingplatz, als sie merkwürdige Geräusche hören. Wer la'),
     ]),
     ("Montag, 31.08.2026", "SWR", [
         ('12:55', 'Familie für Fortgeschrittene', '', 'Serie', 90, 6, 'a6', 55, 'Der Berliner Lehrer Oliver zieht mit Tochter Holly in die bayerische Provinz zu seiner neuen Lebensp'),
@@ -54,26 +23,8 @@ TAGE = [
     ("Montag, 31.08.2026", "RBB", [
         ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Geschichten aus dem Schuhregal: Wer gibt den Takt an?'),
     ]),
-    ("Montag, 31.08.2026", "HR", [
-        ('05:10', 'Schau in meine Welt', 'Sammys erste Filmrolle', 'Vorlesen', 25, 3, 'a3', 55, 'Samanta Lillia (13) hat ihre erste Rolle beim Film. Als Sängerin stand sie schon auf vielen Bühnen. '),
-        ('06:25', 'Leo da Vinci', 'Der gierige Schneider', 'Zeichentrick', 10, 3, 'a3', 55, 'Bianca wird in der Medici-Bank für eine Betrügerin gehalten und bekommt keine Fiorini, dafür wird si'),
-        ('06:35', 'Leo da Vinci', 'Die Ankunft in Venedig', 'Zeichentrick', 15, 3, 'a3', 55, 'Unterwegs treffen die Freunde das kleine Mädchen Maria und retten sie vor einem wütenden Stier. Sie '),
-    ]),
-    ("Montag, 31.08.2026", "3sat", [
-        ('10:15', 'Ein Schloss am Wörthersee - Der Film', '', 'Film', 85, 6, 'a6', 55, 'Der charmante Lennie Berger hat von seinem Onkel das Schlosshotel Velden geerbt und will es auf Vord'),
-    ]),
-    ("Montag, 31.08.2026", "arte", [
-        ('04:35', 'Athleticus', 'Gym Tonic', 'Zeichentrick', 25, 3, 'a3', 55, 'Die dritte Staffel des Kurzprogramms wirft in 30 Folgen einen humorvollen Blick auf unsere Gesellsch'),
-    ]),
-    ("Montag, 31.08.2026", "ORF 1", [
-        ('06:05', 'Wickie und die starken Männer', 'Der Eskimoschatz', 'Zeichentrick', 25, 3, 'a3', 55, 'Nach einer langen Reise kommen die Wikinger in Grönland an und machen sich auf die Schatzsuche. Die '),
-        ('06:30', 'Servus Kasperl', 'Kasperl & Co: Zwei wie Pech und Schwefel', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
-        ('06:55', 'Die Jagd nach dem Kju Wang', 'Der schwarze Gondoliere', 'Zeichentrick', 25, 3, 'a3', 55, 'Da der Herzog auf Reisen ist, erklärt er Talbot zu seinem Stellvertreter. Zunächst profitiert Yagor '),
-        ('07:35', 'Vegesaurier', 'Flugübungen', 'Zeichentrick', 5, 3, 'a3', 55, 'Das Trikarrotops-Mädchen Ginger und die Baby-Erbs-Rexe Minzi, Wasabi und Split lernen einen kleinen '),
-        ('07:40', 'Dragons - Die Wächter von Berk', 'Drachentausch', 'Zeichentrick', 20, 3, 'a3', 55, 'Dass sich Rotzbakke und Astrid nicht leiden können, weiß jeder auf Berk. Als aus heiterem Himmel abe'),
-    ]),
     ("Montag, 31.08.2026", "SRF 1", [
-        ('17:30', 'Timmy Ziit - Pöschtler', '', 'Vorlesen', 10, 6, 'a6', 55, ''),
+        ('17:30', 'Timmy Ziit - Pöschtler', '', 'Vorlesen', 10, 6, 'a6', 55, 'Timmy ist das freche kleine Schaf aus Shauns Herde. Jeden Tag geht er in den Kindergarten, wo er gem'),
     ]),
     ("Dienstag, 01.09.2026", "ZDF", [
         ('20:15', 'besseresser: Die Tricks in Bärchenwurst, Pizzateig & Co.', 'Sebastian Lege deckt auf', 'Serie', 45, 10, 'a10', 55, 'Ob überraschende Zusatzstoffe, cleveres Kindermarketing oder irreführendes Verpackungsdesign: Sebast'),
@@ -123,5 +74,46 @@ TAGE = [
     ("Dienstag, 01.09.2026", "SRF 1", [
         ('17:30', 'Timmy Ziit - Baby', '', 'Vorlesen', 10, 6, 'a6', 55, ''),
         ('23:55', 'Les hirondelles de Kaboul', '', 'Zeichentrick', 25, 10, 'a10', 55, 'Im Sommer 1998 wird die afghanische Hauptstadt Kabul von den Taliban beherrscht. Die Stadt liegt in '),
+    ]),
+    ("Mittwoch, 02.09.2026", "RTLzwei", [
+        ('16:05', 'Hartz und herzlich - Tag für Tag Benz-Baracken', 'Pommes-Party', 'Serie', 60, 6, 'a6', 55, 'Wegen häufiger Kopfschmerzen und anderer Beschwerden hat Andy beim Arzt abchecken lassen, ob er viel'),
+        ('22:15', 'Zuhause im Glück - Unser Einzug in ein neues Leben', 'Zwischen Hoffnung, Trauer und Neubeginn', 'Serie', 25, 10, 'a10', 55, 'Mathias (31) und Julia (†29) verlieben sich 2002 ineinander. Sie sind drei Jahre zusammen, dann komm'),
+    ]),
+    ("Mittwoch, 02.09.2026", "ProSieben Maxx", [
+        ('16:40', 'Dr. STONE', 'Die Schatzinsel', 'Anime', 25, 12, 'a10', 55, 'Nachdem das Abenteuer auf der Schatzinsel bestanden ist, haben die Wissenschaftler direkt die nächst'),
+        ('17:05', 'Dragon Ball Super', 'F will Rache! Eine überaus tückische Falle!', 'Anime', 25, 12, 'a10', 55, 'Mittlerweile ringen noch 36 Kämpfer um den Sieg und letztlich auch um die Existenz ihres jeweiligen '),
+        ('17:30', 'Detektiv Conan', 'Der Teufel im Fernsehstudio (2)', 'Anime', 35, 12, 'a10', 55, 'Inspektor Megure rückt an, um den Mord an Tenji Urushihara, dem Direktor einer Produktionsfirma, auf'),
+        ('18:05', 'One Piece', 'Eine auswegslose Situation! - Der heiße Kampf auf Silver Mine', 'Anime', 25, 12, 'a10', 55, 'Nachdem Bill immer wieder mit Provokationen um sich wirft, kommt es zwischen ihm und Ruffy zum Kampf'),
+        ('18:30', 'One Piece', 'Ein neues Abenteuer beginnt! - Ankunft auf der Phantominsel Zou', 'Anime', 25, 12, 'a10', 55, 'An Bord des Schiffes erzählt Bartolomeo der Crew bewegende Geschichten und bittet auch Ganbia, sich '),
+        ('18:55', 'Detektiv Conan', 'Den Männern in Schwarz auf der Spur (4)', 'Anime', 25, 12, 'a10', 55, 'Kann Conan endlich den Mörder von Hirota finden? Ai liefert ihm schließlich den entscheidenden Hinwe'),
+    ]),
+    ("Mittwoch, 02.09.2026", "NDR", [
+        ('06:00', 'Sesamstraße', '', 'Vorlesen', 20, 3, 'a3', 55, 'Bert freut sich auf eine entspannte Lektüre, als Ernie vorbeikommt und ein "Fantasieschlagzeug" aufb'),
+    ]),
+    ("Mittwoch, 02.09.2026", "BR", [
+        ('23:50', 'Böse Spiele - Rimini Sparta', '', 'Serie', 25, 10, 'a10', 55, 'Der Tod der Mutter bringt zwei Brüder noch einmal kurz zusammen - im leer stehenden Elternhaus, wo a'),
+    ]),
+    ("Mittwoch, 02.09.2026", "MDR", [
+        ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Die Erdmännchen Jan und Henry sind beunruhigt. Hat sich da etwa ein Krokodil in ihre Küche geschlich'),
+    ]),
+    ("Mittwoch, 02.09.2026", "RBB", [
+        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Jan & Henry: Das weinende Krokodil'),
+    ]),
+    ("Mittwoch, 02.09.2026", "HR", [
+        ('06:15', 'Leo da Vinci', 'Das Wappentier', 'Zeichentrick', 10, 3, 'a3', 55, 'Nachdem sie die geheimnisvolle Botschaft gelesen haben, sind die Freunde etwas ratlos. Lollo spionie'),
+        ('06:25', 'Leo da Vinci', 'Die Augen des Löwen', 'Zeichentrick', 15, 3, 'a3', 55, 'Lisa und Bianca werden von dem jungen Alvise Tiepolo in den Palazzo zu einem Maskenball eingeladen. '),
+    ]),
+    ("Mittwoch, 02.09.2026", "arte", [
+        ('04:35', 'Athleticus', 'Kellner-Wettlauf', 'Zeichentrick', 30, 3, 'a3', 55, 'Die dritte Staffel des Kurzprogramms wirft in 30 neuen Folgen einen humorvollen Blick auf unsere Ges'),
+    ]),
+    ("Mittwoch, 02.09.2026", "ORF 1", [
+        ('06:05', 'Wickie und die starken Männer', 'Immer Ärger mit den Möwen', 'Zeichentrick', 25, 3, 'a3', 55, 'An Bord des Wikinger-Schiffes gibt es nichts mehr zu essen. Noch hat die Mannschaft Flake nicht erre'),
+        ('06:30', 'Servus Kasperl', 'Kasperl & Strolchi: Rettungsaktion Blumeninsel', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
+        ('06:55', 'Noahs Insel', 'Streit um die Insel', 'Zeichentrick', 25, 3, 'a3', 55, 'Noah ist verzweifelt: Seine Experimente mit der Steuerung der Insel durch die Energie des Feuerballs'),
+        ('07:40', 'Garfield', 'Der Lasagne-Baum - Teil 5', 'Zeichentrick', 10, 3, 'a3', 55, "Die Forscher in Mama Meaney's Fabrik stellen fest, dass der Lasagne-Baum eine Fälschung ist, und die"),
+        ('07:50', 'Garfield', 'Trautes Heim, Glück allein', 'Zeichentrick', 10, 3, 'a3', 55, 'Garfield und Jon stellen sich einer neuen Herausforderung. Sie nehmen an einer Realityserie teil, be'),
+    ]),
+    ("Mittwoch, 02.09.2026", "SRF 1", [
+        ('17:30', 'Timmy Ziit - Verchäuferlis', '', 'Vorlesen', 10, 6, 'a6', 55, ''),
     ]),
 ]
