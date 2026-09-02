@@ -1,35 +1,11 @@
 # -*- coding: utf-8 -*-
 """Kindersendungen der Vollprogramme.
 
-Erzeugt von scan_kinder.py aus tv.de am 01.09.2026. Auswahl nach Kategorie,
+Erzeugt von scan_kinder.py aus tv.de am 02.09.2026. Auswahl nach Kategorie,
 bekannten Titeln und Beschreibung; Alterswerte heuristisch.
 """
 
 TAGE = [
-    ("Dienstag, 01.09.2026", "ZDF", [
-        ('20:15', 'besseresser: Die Tricks in Bärchenwurst, Pizzateig & Co.', 'Sebastian Lege deckt auf', 'Serie', 45, 10, 'a10', 55, 'Ob überraschende Zusatzstoffe, cleveres Kindermarketing oder irreführendes Verpackungsdesign: Sebast'),
-    ]),
-    ("Dienstag, 01.09.2026", "RTLzwei", [
-        ('18:05', 'Hartz und herzlich - Tag für Tag Benz-Baracken', 'Pommes-Party', 'Serie', 60, 6, 'a6', 55, 'Wegen häufiger Kopfschmerzen und anderer Beschwerden hat Andy beim Arzt abchecken lassen, ob er viel'),
-    ]),
-    ("Dienstag, 01.09.2026", "ProSieben Maxx", [
-        ('16:45', 'Dr. STONE', 'First Dream', 'Anime', 25, 12, 'a10', 55, 'Senku hat den Kampf gegen Ibara gewonnen und kann seine Freunde nun nach und nach wiederbeleben. Zue'),
-        ('17:10', 'Dragon Ball Super', 'Gefährliche Reflexion! Attacke des unsichtbaren Angreifers!', 'Anime', 25, 12, 'a10', 55, 'Noch verbleiben 35 Minuten, um das Turnier der Universen zu gewinnen. Mit der schwindenden Zeit nimm'),
-        ('17:35', 'Detektiv Conan', 'Der Teufel im Fernsehstudio (1)', 'Anime', 25, 12, 'a10', 55, 'Yoko lädt die Detective Boys und Professor Agasa in ein Fernsehstudio ein. Dort treffen die Kinder a'),
-        ('18:00', 'One Piece', 'Tief in der Mine - Ruffy gegen den menschlichen Zug!', 'Anime', 25, 12, 'a10', 55, 'Bartolomeo und Ruffy sitzen in den Schächten der Silver Mine fest und leisten damit ehemaligen Pirat'),
-        ('18:25', 'One Piece', 'In der Hitze des Gefechts - Law und Zorro eilen zur Hilfe!', 'Anime', 30, 12, 'a10', 55, 'Ruffy, Bartolomeo und Desire befinden sich weiterhin unter Tage, als sie von Avelon angegriffen werd'),
-        ('18:55', 'Detektiv Conan', 'Den Männern in Schwarz auf der Spur (3)', 'Anime', 30, 12, 'a10', 55, 'Die vorübergehend wieder zu ihrer eigentlichen Größe zurückgekehrte Sherry kann durch den Kamin aufs'),
-    ]),
-    ("Dienstag, 01.09.2026", "MDR", [
-        ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Der Löwe auf meiner Schmusedecke hat ein Problem: Er kann nicht mehr brüllen! Werden seine Freunde e'),
-    ]),
-    ("Dienstag, 01.09.2026", "RBB", [
-        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Meine Schmusedecke: Der Löwe'),
-    ]),
-    ("Dienstag, 01.09.2026", "SRF 1", [
-        ('17:30', 'Timmy Ziit - Baby', '', 'Vorlesen', 10, 6, 'a6', 55, 'Timmy ist das freche kleine Schaf aus Shauns Herde. Jeden Tag geht er in den Kindergarten, wo er gem'),
-        ('23:55', 'Les hirondelles de Kaboul', '', 'Zeichentrick', 25, 10, 'a10', 55, 'Im Sommer 1998 wird die afghanische Hauptstadt Kabul von den Taliban beherrscht. Die Stadt liegt in '),
-    ]),
     ("Mittwoch, 02.09.2026", "RTLzwei", [
         ('16:05', 'Hartz und herzlich - Tag für Tag Benz-Baracken', 'Pommes-Party', 'Serie', 60, 6, 'a6', 55, 'Wegen häufiger Kopfschmerzen und anderer Beschwerden hat Andy beim Arzt abchecken lassen, ob er viel'),
         ('22:15', 'Zuhause im Glück - Unser Einzug in ein neues Leben', 'Zwischen Hoffnung, Trauer und Neubeginn', 'Serie', 25, 10, 'a10', 55, 'Mathias (31) und Julia (†29) verlieben sich 2002 ineinander. Sie sind drei Jahre zusammen, dann komm'),
@@ -42,9 +18,6 @@ TAGE = [
         ('18:30', 'One Piece', 'Ein neues Abenteuer beginnt! - Ankunft auf der Phantominsel Zou', 'Anime', 25, 12, 'a10', 55, 'An Bord des Schiffes erzählt Bartolomeo der Crew bewegende Geschichten und bittet auch Ganbia, sich '),
         ('18:55', 'Detektiv Conan', 'Den Männern in Schwarz auf der Spur (4)', 'Anime', 25, 12, 'a10', 55, 'Kann Conan endlich den Mörder von Hirota finden? Ai liefert ihm schließlich den entscheidenden Hinwe'),
     ]),
-    ("Mittwoch, 02.09.2026", "NDR", [
-        ('06:00', 'Sesamstraße', '', 'Vorlesen', 20, 3, 'a3', 55, 'Bert freut sich auf eine entspannte Lektüre, als Ernie vorbeikommt und ein "Fantasieschlagzeug" aufb'),
-    ]),
     ("Mittwoch, 02.09.2026", "BR", [
         ('23:50', 'Böse Spiele - Rimini Sparta', '', 'Serie', 25, 10, 'a10', 55, 'Der Tod der Mutter bringt zwei Brüder noch einmal kurz zusammen - im leer stehenden Elternhaus, wo a'),
     ]),
@@ -53,20 +26,6 @@ TAGE = [
     ]),
     ("Mittwoch, 02.09.2026", "RBB", [
         ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Jan & Henry: Das weinende Krokodil'),
-    ]),
-    ("Mittwoch, 02.09.2026", "HR", [
-        ('06:15', 'Leo da Vinci', 'Das Wappentier', 'Zeichentrick', 10, 3, 'a3', 55, 'Nachdem sie die geheimnisvolle Botschaft gelesen haben, sind die Freunde etwas ratlos. Lollo spionie'),
-        ('06:25', 'Leo da Vinci', 'Die Augen des Löwen', 'Zeichentrick', 15, 3, 'a3', 55, 'Lisa und Bianca werden von dem jungen Alvise Tiepolo in den Palazzo zu einem Maskenball eingeladen. '),
-    ]),
-    ("Mittwoch, 02.09.2026", "arte", [
-        ('04:34', 'Athleticus', 'Kellner-Wettlauf', 'Zeichentrick', 31, 3, 'a3', 55, 'Die dritte Staffel des Kurzprogramms wirft in 30 neuen Folgen einen humorvollen Blick auf unsere Ges'),
-    ]),
-    ("Mittwoch, 02.09.2026", "ORF 1", [
-        ('06:05', 'Wickie und die starken Männer', 'Immer Ärger mit den Möwen', 'Zeichentrick', 25, 3, 'a3', 55, 'An Bord des Wikinger-Schiffes gibt es nichts mehr zu essen. Noch hat die Mannschaft Flake nicht erre'),
-        ('06:30', 'Servus Kasperl', 'Kasperl & Strolchi: Rettungsaktion Blumeninsel', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
-        ('06:55', 'Noahs Insel', 'Streit um die Insel', 'Zeichentrick', 25, 3, 'a3', 55, 'Noah ist verzweifelt: Seine Experimente mit der Steuerung der Insel durch die Energie des Feuerballs'),
-        ('07:40', 'Garfield', 'Der Lasagne-Baum - Teil 5', 'Zeichentrick', 10, 3, 'a3', 55, "Die Forscher in Mama Meaney's Fabrik stellen fest, dass der Lasagne-Baum eine Fälschung ist, und die"),
-        ('07:50', 'Garfield', 'Trautes Heim, Glück allein', 'Zeichentrick', 10, 3, 'a3', 55, 'Garfield und Jon stellen sich einer neuen Herausforderung. Sie nehmen an einer Realityserie teil, be'),
     ]),
     ("Mittwoch, 02.09.2026", "SRF 1", [
         ('17:30', 'Timmy Ziit - Verchäuferlis', '', 'Vorlesen', 10, 6, 'a6', 55, 'Timmy ist das freche kleine Schaf aus Shauns Herde. Jeden Tag geht er in den Kindergarten, wo er gem'),
@@ -94,7 +53,7 @@ TAGE = [
         ('06:25', 'Leo da Vinci', 'Ein kostbares Paket', 'Zeichentrick', 15, 3, 'a3', 55, 'Nach dem Hinweis von Fabrizio begeben sich die Freunde zum "Fondaco dei Tedeschi", aber von ihrem Fr'),
     ]),
     ("Donnerstag, 03.09.2026", "arte", [
-        ('04:30', 'Athleticus', 'Kite Skating', 'Zeichentrick', 40, 3, 'a3', 55, 'Im Kurzprogramm messen sich vielerlei Tiere in den klassischen Sportarten. In dieser Folge: Ein Elef'),
+        ('04:38', 'Athleticus', 'Kite Skating', 'Zeichentrick', 32, 3, 'a3', 55, 'Im Kurzprogramm messen sich vielerlei Tiere in den klassischen Sportarten. In dieser Folge: Ein Elef'),
     ]),
     ("Donnerstag, 03.09.2026", "ORF 1", [
         ('06:05', 'Wickie und die starken Männer', 'Abenteuer in Griechenland', 'Zeichentrick', 25, 3, 'a3', 55, 'Wieder einmal gehen die Wikinger auf große Fahrt. Als sie unterwegs ein griechisches Schiff treffen,'),
@@ -107,5 +66,45 @@ TAGE = [
         ('17:05', 'SRF Kids News', '', 'Serie', 15, 6, 'a6', 55, ''),
         ('17:20', 'SRF Kids Inside', 'IG Seifenkisten Derby Schweiz - Verrückte Fahrzeuge selber bauen', 'Vorlesen', 10, 6, 'a6', 55, '1 Verein, 3 Kids und noch mehr Storys: «SRF Kids Inside» erzählt Geschichten mitten aus dem Leben - '),
         ('17:30', 'Timmy Ziit - Mittagsschlaf', '', 'Vorlesen', 10, 6, 'a6', 55, 'Timmy ist das freche kleine Schaf aus Shauns Herde. Jeden Tag geht er in den Kindergarten, wo er gem'),
+    ]),
+    ("Freitag, 04.09.2026", "ProSieben Maxx", [
+        ('16:45', 'Yashahime', 'Inuyasha seither', 'Anime', 25, 12, 'a10', 55, 'Die Halbdämonen-Prinzessin Towa Higurashi wird festgenommen und verhört. Da sie mit ihrem Wissen die'),
+        ('17:10', 'Dragon Ball Super', 'Goku lässt die Götter bangen! Der neue Instinkt des Auferwachten!', 'Anime', 25, 12, 'a10', 55, 'Jiren gelingt es, die Genkidama-Attacke auf Son Goku zurückzuwerfen. Nach dem heftigen Einschlag ist'),
+        ('17:35', 'Dragon Ball Super', 'Kampf in einer anderen Dimension! Mit Hit gegen Jiren!', 'Anime', 25, 12, 'a10', 55, 'Nachdem Son Goku seine neuen Kräfte wieder verloren hat, nimmt es Hit mit Jiren auf. Doch auch ihm g'),
+        ('18:00', 'Detektiv Conan', 'Schüsse im Stadion (2)', 'Anime', 25, 12, 'a10', 55, 'Der Erpresser erhöht seine Forderung um eine weitere halbe Millionen, die zu Spielende bei Block 18 '),
+        ('18:25', 'One Piece', 'Ein Kampf beginnt - Ruffy gegen den Mink-Stamm', 'Anime', 30, 12, 'a10', 55, 'Während Ruffy sich auf der Insel umsieht, wird der Rest der Truppe von außergewöhnlichen Mensch-Tier'),
+        ('18:55', 'One Piece', 'Galchu! - Die Wiedervereinigung der Strohhüte', 'Anime', 25, 12, 'a10', 55, 'Die Insel schwebt in ständiger Gefahr zu überfluten, da der Elefant sich regelmäßig mit Wasser bespr'),
+        ('20:15', 'Naruto Shippuden The Movie: Bonds', '', 'Zeichentrick', 105, 12, 'a10', 55, 'Eine Gruppe gefährlicher Himmel-Shinobi ist auf dem Weg ins Feuer-Reich, um das kleine Dorf Konoha v'),
+        ('22:00', 'Gachiakuta', 'Der Abschluss', 'Anime', 30, 12, 'a10', 55, 'Rudo befindet sich noch immer im Kampf mit Jabber. Er versucht, die Auseinandersetzung an einen ande'),
+        ('22:30', 'Gachiakuta', 'Ein Schritt nach vorn', 'Anime', 30, 12, 'a10', 55, 'Rudo hadert mit den Folgen des Kampfes gegen Jabber. Zu seiner Erleichterung erfährt er jedoch, dass'),
+        ('23:00', 'Gachiakuta', 'Die Stadt des Graffiti', 'Anime', 25, 12, 'a10', 55, 'Der Putztrupp stellt eine Einheit für die Reise in die Verbotene Zone zusammen. Zur Vorbereitung beg'),
+        ('23:50', 'Frieren - Nach dem Ende der Reise', 'Die Todesbotin Frieren', 'Anime', 25, 12, 'a10', 55, 'Frieren sitzt im Gefängnis fest. Der Dämon Draht sucht sie in ihrer Zelle auf und möchte sie umbring'),
+    ]),
+    ("Freitag, 04.09.2026", "NDR", [
+        ('06:00', 'Sesamstraße', '', 'Vorlesen', 20, 3, 'a3', 55, 'Ernie ist Rapunzel. Prinz Bert wartet sehnsüchtig darauf, in den Turm hinaufzuklettern. Aber Rapunze'),
+    ]),
+    ("Freitag, 04.09.2026", "MDR", [
+        ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Internationale Kinderlieder Heijanganga Eine Familie erlebt in den Weiten der amerikanischen Prärie '),
+    ]),
+    ("Freitag, 04.09.2026", "RBB", [
+        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Internationale Kinderlieder: Atte katte Nuwa'),
+    ]),
+    ("Freitag, 04.09.2026", "HR", [
+        ('06:15', 'Leo da Vinci', 'Ein verdächtiger Brief', 'Zeichentrick', 10, 3, 'a3', 55, 'Leo, Bianca, Lisa und Lollo wenden sich an Alvise Tiepolo, in der Hoffnung, dass er Neuigkeiten über'),
+        ('06:25', 'Leo da Vinci', 'Das Mädchen und der Stier', 'Zeichentrick', 15, 3, 'a3', 55, 'Auf dem Festland angekommen, erfahren Bianca, Lisa, Lollo und Leo von ihrer kleinen Freundin Maria, '),
+    ]),
+    ("Freitag, 04.09.2026", "arte", [
+        ('04:40', 'Athleticus', 'Roller Show', 'Zeichentrick', 30, 3, 'a3', 55, 'Eine Robbe gibt bei einer Akrobatikvorführung ihre draufgängerischen Kunststücke zum Besten. Nilpfer'),
+    ]),
+    ("Freitag, 04.09.2026", "ORF 1", [
+        ('06:00', 'ZIB KiDS', '', 'Serie', 10, 3, 'a3', 55, ''),
+        ('06:10', 'Wickie und die starken Männer', 'Die Olympiade der Wikinger', 'Zeichentrick', 25, 3, 'a3', 55, 'Die Wikinger sitzen noch immer mit ihren erbeuteten Schätzen im Burggraben des Griechen-Königs fest.'),
+        ('06:35', 'Servus Kasperl', 'Kasperl & Leopold: Das große Schnarchen', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
+        ('07:00', 'Noahs Insel', 'Sascha hier, Sascha dort', 'Zeichentrick', 25, 3, 'a3', 55, 'Noahs Insel läuft vor der afrikanischen Küste auf Grund. Während der Eisbär grübelt, wie er das Eila'),
+        ('07:45', 'Mister Paper', 'Mister Paper verläuft sich', 'Zeichentrick', 5, 3, 'a3', 55, 'Mister Paper macht einen ausgiebigen Spaziergang mit seiner Katze. Unterwegs dekoriert er die Landsc'),
+        ('07:50', 'ZIB KiDS', '', 'Serie', 10, 3, 'a3', 55, ''),
+    ]),
+    ("Freitag, 04.09.2026", "SRF 1", [
+        ('17:30', 'Timmy Ziit - Baschtle', '', 'Vorlesen', 10, 6, 'a6', 55, 'Timmy ist das freche kleine Schaf aus Shauns Herde. Jeden Tag geht er in den Kindergarten, wo er gem'),
     ]),
 ]
