@@ -1,35 +1,11 @@
 # -*- coding: utf-8 -*-
 """Kindersendungen der Vollprogramme.
 
-Erzeugt von scan_kinder.py aus tv.de am 02.09.2026. Auswahl nach Kategorie,
+Erzeugt von scan_kinder.py aus tv.de am 03.09.2026. Auswahl nach Kategorie,
 bekannten Titeln und Beschreibung; Alterswerte heuristisch.
 """
 
 TAGE = [
-    ("Mittwoch, 02.09.2026", "RTLzwei", [
-        ('16:05', 'Hartz und herzlich - Tag für Tag Benz-Baracken', 'Pommes-Party', 'Serie', 60, 6, 'a6', 55, 'Wegen häufiger Kopfschmerzen und anderer Beschwerden hat Andy beim Arzt abchecken lassen, ob er viel'),
-        ('22:15', 'Zuhause im Glück - Unser Einzug in ein neues Leben', 'Zwischen Hoffnung, Trauer und Neubeginn', 'Serie', 25, 10, 'a10', 55, 'Mathias (31) und Julia (†29) verlieben sich 2002 ineinander. Sie sind drei Jahre zusammen, dann komm'),
-    ]),
-    ("Mittwoch, 02.09.2026", "ProSieben Maxx", [
-        ('16:40', 'Dr. STONE', 'Die Schatzinsel', 'Anime', 25, 12, 'a10', 55, 'Nachdem das Abenteuer auf der Schatzinsel bestanden ist, haben die Wissenschaftler direkt die nächst'),
-        ('17:05', 'Dragon Ball Super', 'F will Rache! Eine überaus tückische Falle!', 'Anime', 25, 12, 'a10', 55, 'Mittlerweile ringen noch 36 Kämpfer um den Sieg und letztlich auch um die Existenz ihres jeweiligen '),
-        ('17:30', 'Detektiv Conan', 'Der Teufel im Fernsehstudio (2)', 'Anime', 35, 12, 'a10', 55, 'Inspektor Megure rückt an, um den Mord an Tenji Urushihara, dem Direktor einer Produktionsfirma, auf'),
-        ('18:05', 'One Piece', 'Eine auswegslose Situation! - Der heiße Kampf auf Silver Mine', 'Anime', 25, 12, 'a10', 55, 'Nachdem Bill immer wieder mit Provokationen um sich wirft, kommt es zwischen ihm und Ruffy zum Kampf'),
-        ('18:30', 'One Piece', 'Ein neues Abenteuer beginnt! - Ankunft auf der Phantominsel Zou', 'Anime', 25, 12, 'a10', 55, 'An Bord des Schiffes erzählt Bartolomeo der Crew bewegende Geschichten und bittet auch Ganbia, sich '),
-        ('18:55', 'Detektiv Conan', 'Den Männern in Schwarz auf der Spur (4)', 'Anime', 25, 12, 'a10', 55, 'Kann Conan endlich den Mörder von Hirota finden? Ai liefert ihm schließlich den entscheidenden Hinwe'),
-    ]),
-    ("Mittwoch, 02.09.2026", "BR", [
-        ('23:50', 'Böse Spiele - Rimini Sparta', '', 'Serie', 25, 10, 'a10', 55, 'Der Tod der Mutter bringt zwei Brüder noch einmal kurz zusammen - im leer stehenden Elternhaus, wo a'),
-    ]),
-    ("Mittwoch, 02.09.2026", "MDR", [
-        ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Die Erdmännchen Jan und Henry sind beunruhigt. Hat sich da etwa ein Krokodil in ihre Küche geschlich'),
-    ]),
-    ("Mittwoch, 02.09.2026", "RBB", [
-        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Jan & Henry: Das weinende Krokodil'),
-    ]),
-    ("Mittwoch, 02.09.2026", "SRF 1", [
-        ('17:30', 'Timmy Ziit - Verchäuferlis', '', 'Vorlesen', 10, 6, 'a6', 55, 'Timmy ist das freche kleine Schaf aus Shauns Herde. Jeden Tag geht er in den Kindergarten, wo er gem'),
-    ]),
     ("Donnerstag, 03.09.2026", "ProSieben Maxx", [
         ('16:45', 'Dr. STONE', 'Beyond the New World', 'Anime', 25, 12, 'a10', 55, 'Senku und seine Freunde sind wieder zu Hause angekommen. Nun wollen sie Tsukasa endlich wiederbelebe'),
         ('17:10', 'Dragon Ball Super', 'Freezer und Frost! In Boshaftigkeit verbunden!', 'Anime', 25, 12, 'a10', 55, 'Als Son Gohan fast von Jimmies aus dem zweiten Universum besiegt wird, bekommt er Unterstützung von '),
@@ -38,29 +14,12 @@ TAGE = [
         ('18:30', 'One Piece', 'Der neue Samurai der Meere! - Der Sohn des berüchtigten Whitebeard!', 'Anime', 25, 12, 'a10', 55, 'Das Schiff nimmt weiterhin Kurs auf das Königreich Zou, als Ruffy eine erfreuliche Entdeckung macht.'),
         ('18:55', 'One Piece', 'Ein gefährlicher Aufstieg! - Das Abenteuer auf dem Rücken des Elefante', 'Anime', 25, 12, 'a10', 55, 'Mithilfe eines Drachens versucht die Crew weiterhin, das Königreich Zou zu erklimmen. Doch das Vorha'),
     ]),
-    ("Donnerstag, 03.09.2026", "NDR", [
-        ('06:00', 'Sesamstraße', '', 'Vorlesen', 20, 3, 'a3', 55, 'Ernie macht zusammen mit Bert ein paar Bewegungsübungen. Allerdings muss Bert dabei einen riesigen K'),
-    ]),
     ("Donnerstag, 03.09.2026", "MDR", [
         ('12:30', 'Lilly unter den Linden', '', 'Film', 88, 6, 'a6', 55, 'Das Mädchen Lilly aus Hamburg lernt 1988 bei der Beerdigung der Mutter ihre Tante Lena aus Jena kenn'),
         ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Dr. Brumm macht das, was er immer macht, wenn er ein Abenteuer erleben will: Er fragt Bibi, ob sie I'),
     ]),
     ("Donnerstag, 03.09.2026", "RBB", [
         ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Dr. Brumm: Dr. Brumm geht zelten'),
-    ]),
-    ("Donnerstag, 03.09.2026", "HR", [
-        ('06:15', 'Leo da Vinci', 'Der goldene Hirsch', 'Zeichentrick', 10, 3, 'a3', 55, 'Durch die zweite Nachricht entdecken Leo und seine Freunde, dass der Doge Lorenzo Tiepolo zwei Jahrh'),
-        ('06:25', 'Leo da Vinci', 'Ein kostbares Paket', 'Zeichentrick', 15, 3, 'a3', 55, 'Nach dem Hinweis von Fabrizio begeben sich die Freunde zum "Fondaco dei Tedeschi", aber von ihrem Fr'),
-    ]),
-    ("Donnerstag, 03.09.2026", "arte", [
-        ('04:38', 'Athleticus', 'Kite Skating', 'Zeichentrick', 32, 3, 'a3', 55, 'Im Kurzprogramm messen sich vielerlei Tiere in den klassischen Sportarten. In dieser Folge: Ein Elef'),
-    ]),
-    ("Donnerstag, 03.09.2026", "ORF 1", [
-        ('06:05', 'Wickie und die starken Männer', 'Abenteuer in Griechenland', 'Zeichentrick', 25, 3, 'a3', 55, 'Wieder einmal gehen die Wikinger auf große Fahrt. Als sie unterwegs ein griechisches Schiff treffen,'),
-        ('06:30', 'Servus Kasperl', 'Kasperl & Buffi: Ein sensationeller Freund', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
-        ('06:55', 'Noahs Insel', 'Der Neue', 'Zeichentrick', 25, 3, 'a3', 55, 'Die Atlantikströmung treibt die Insel weiter in Richtung Süden. Noahs Experimente mit dem Feuerball '),
-        ('07:40', 'Garfield', 'Abenteuer Wildnis - Teil 1', 'Zeichentrick', 10, 3, 'a3', 55, 'Heute haben Garfield, Odie und Jon einen Ausflug in die Wildnis vor. Sie gehen Campen. Als wäre das '),
-        ('07:50', 'Garfield', 'Abenteuer Wildnis - Teil 2', 'Zeichentrick', 10, 3, 'a3', 55, 'Garfield, Odie und Nermal finden sich in einer brenzligen Situation wieder. Denn Jon ist ohne die dr'),
     ]),
     ("Donnerstag, 03.09.2026", "SRF 1", [
         ('17:05', 'SRF Kids News', '', 'Serie', 15, 6, 'a6', 55, ''),
@@ -70,9 +29,9 @@ TAGE = [
     ("Freitag, 04.09.2026", "ProSieben Maxx", [
         ('16:45', 'Yashahime', 'Inuyasha seither', 'Anime', 25, 12, 'a10', 55, 'Die Halbdämonen-Prinzessin Towa Higurashi wird festgenommen und verhört. Da sie mit ihrem Wissen die'),
         ('17:10', 'Dragon Ball Super', 'Goku lässt die Götter bangen! Der neue Instinkt des Auferwachten!', 'Anime', 25, 12, 'a10', 55, 'Jiren gelingt es, die Genkidama-Attacke auf Son Goku zurückzuwerfen. Nach dem heftigen Einschlag ist'),
-        ('17:35', 'Dragon Ball Super', 'Kampf in einer anderen Dimension! Mit Hit gegen Jiren!', 'Anime', 25, 12, 'a10', 55, 'Nachdem Son Goku seine neuen Kräfte wieder verloren hat, nimmt es Hit mit Jiren auf. Doch auch ihm g'),
-        ('18:00', 'Detektiv Conan', 'Schüsse im Stadion (2)', 'Anime', 25, 12, 'a10', 55, 'Der Erpresser erhöht seine Forderung um eine weitere halbe Millionen, die zu Spielende bei Block 18 '),
-        ('18:25', 'One Piece', 'Ein Kampf beginnt - Ruffy gegen den Mink-Stamm', 'Anime', 30, 12, 'a10', 55, 'Während Ruffy sich auf der Insel umsieht, wird der Rest der Truppe von außergewöhnlichen Mensch-Tier'),
+        ('17:35', 'Dragon Ball Super', 'Kampf in einer anderen Dimension! Mit Hit gegen Jiren!', 'Anime', 30, 12, 'a10', 55, 'Nachdem Son Goku seine neuen Kräfte wieder verloren hat, nimmt es Hit mit Jiren auf. Doch auch ihm g'),
+        ('18:05', 'Detektiv Conan', 'Schüsse im Stadion (2)', 'Anime', 25, 12, 'a10', 55, 'Der Erpresser erhöht seine Forderung um eine weitere halbe Millionen, die zu Spielende bei Block 18 '),
+        ('18:30', 'One Piece', 'Ein Kampf beginnt - Ruffy gegen den Mink-Stamm', 'Anime', 25, 12, 'a10', 55, 'Während Ruffy sich auf der Insel umsieht, wird der Rest der Truppe von außergewöhnlichen Mensch-Tier'),
         ('18:55', 'One Piece', 'Galchu! - Die Wiedervereinigung der Strohhüte', 'Anime', 25, 12, 'a10', 55, 'Die Insel schwebt in ständiger Gefahr zu überfluten, da der Elefant sich regelmäßig mit Wasser bespr'),
         ('20:15', 'Naruto Shippuden The Movie: Bonds', '', 'Zeichentrick', 105, 12, 'a10', 55, 'Eine Gruppe gefährlicher Himmel-Shinobi ist auf dem Weg ins Feuer-Reich, um das kleine Dorf Konoha v'),
         ('22:00', 'Gachiakuta', 'Der Abschluss', 'Anime', 30, 12, 'a10', 55, 'Rudo befindet sich noch immer im Kampf mit Jabber. Er versucht, die Auseinandersetzung an einen ande'),
@@ -94,7 +53,7 @@ TAGE = [
         ('06:25', 'Leo da Vinci', 'Das Mädchen und der Stier', 'Zeichentrick', 15, 3, 'a3', 55, 'Auf dem Festland angekommen, erfahren Bianca, Lisa, Lollo und Leo von ihrer kleinen Freundin Maria, '),
     ]),
     ("Freitag, 04.09.2026", "arte", [
-        ('04:40', 'Athleticus', 'Roller Show', 'Zeichentrick', 30, 3, 'a3', 55, 'Eine Robbe gibt bei einer Akrobatikvorführung ihre draufgängerischen Kunststücke zum Besten. Nilpfer'),
+        ('04:42', 'Athleticus', 'Roller Show', 'Zeichentrick', 28, 3, 'a3', 55, 'Eine Robbe gibt bei einer Akrobatikvorführung ihre draufgängerischen Kunststücke zum Besten. Nilpfer'),
     ]),
     ("Freitag, 04.09.2026", "ORF 1", [
         ('06:00', 'ZIB KiDS', '', 'Serie', 10, 3, 'a3', 55, ''),
@@ -106,5 +65,113 @@ TAGE = [
     ]),
     ("Freitag, 04.09.2026", "SRF 1", [
         ('17:30', 'Timmy Ziit - Baschtle', '', 'Vorlesen', 10, 6, 'a6', 55, 'Timmy ist das freche kleine Schaf aus Shauns Herde. Jeden Tag geht er in den Kindergarten, wo er gem'),
+    ]),
+    ("Samstag, 05.09.2026", "ARD", [
+        ('05:30', 'Arthur und die Freunde der Tafelrunde', 'Die verwunschene Rüstung', 'Zeichentrick', 10, 3, 'a3', 55, 'Auf dem Markt kauft Arthur eine verrostete Rüstung, die ihm viel Spott einbringt. Doch den Freunden '),
+        ('05:40', 'Arthur und die Freunde der Tafelrunde', 'Die Rache der Wasserfeen', 'Zeichentrick', 15, 3, 'a3', 55, 'Die Wasserfeen beschuldigen König Uther, ihre Schwester Ondine gefangen zu halten und rauben ihm sei'),
+        ('05:55', 'HobbyMania - Tausch mit mir dein Hobby!', 'Eishockey vs. Schalmei', 'Vorlesen', 25, 3, 'a3', 55, 'Bei Maxi (11) geht es laut zu. Sie spielt in einer Schalmei-Kapelle. Justin (11) liebt das Risiko: E'),
+        ('07:05', 'Shaun das Schaf', 'Au Backe Backe Kuchen', 'Zeichentrick', 10, 3, 'a3', 55, 'Bitzer hat alles gegeben und sorgfältig eine Geburtstagstorte für den Farmer gebacken. Die Schafe pr'),
+        ('07:15', 'Nina und die wilden Tiere', 'Pfeilgiftfrösche - Giftzwerge aus dem Regenwald', 'Vorlesen', 25, 3, 'a3', 55, 'Sie sind klein, bunt und giftig: Pfeilgiftfrösche. Nina will mehr über diese Giftzwerge herausfinden'),
+        ('07:55', 'Checker Tobi', 'Der Fett-Check', 'Wissen', 25, 3, 'a3', 55, 'Fett steckt nicht nur in Pommes und Schnitzel. Auch im Körper haben wir Fett, das als Energiespeiche'),
+        ('08:20', 'Wissen macht Ah!', 'Happy Lumpi', 'Vorlesen', 25, 6, 'a6', 55, 'Endlich 18 - "Wissen macht Ah!" wird volljährig! Aber: Psst! Die Party für Lumpi soll eine Überrasch'),
+        ('08:45', 'POV - Deine Geschichte zählt', 'Faszination Techno - Mehr als nur Party', 'Vorlesen', 10, 6, 'a6', 55, 'Als Teenager schon DJ? Kiki trifft Trance-DJ Helie und entdeckt mit ihr, wie aus einem Hobby eine Le'),
+        ('08:55', 'Die Pfefferkörner', 'Vertauscht', 'Serie', 25, 10, 'a10', 55, 'Ein Unbekannter versucht, in die Schneiderei von Jets Mutter einzubrechen - und in einem Paket aus M'),
+        ('09:20', 'Die Pfefferkörner', 'Winterquartier', 'Serie', 30, 10, 'a10', 55, 'Milan hat seine neue Wildkamera in einem leer stehenden Gebäude installiert, um nachts Fledermäuse z'),
+    ]),
+    ("Samstag, 05.09.2026", "ZDF", [
+        ('06:15', 'Dylans Spielkiste', 'Schiffskapitän', 'Zeichentrick', 10, 3, 'a3', 55, 'Dylan ist Schiffskapitän, Daisy und Ozzy sind Matrosen. Doch dann geht Matrosin Daisy mit Papagei To'),
+        ('06:25', 'Dylans Spielkiste', 'Bildhauer', 'Zeichentrick', 10, 3, 'a3', 55, 'Dylan ist Bildhauer und formt eine Tannenzapfenskulptur für Daisy. Doch in der Sonne schmilzt diese.'),
+        ('06:35', 'Meine Freundin Conni', 'Conni auf der Burg', 'Zeichentrick', 10, 3, 'a3', 55, 'Es gibt ein Burgfest ganz in der Nähe. Conni ist begeistert. Schon auf dem Vorplatz der Burg ist jed'),
+        ('06:45', 'Meine Freundin Conni', 'Conni auf Waldsafari', 'Zeichentrick', 10, 3, 'a3', 55, 'Ein Eichhörnchen im Garten? Wo es wohl wohnt? Conni, Anna und Opa folgen ihm in den Wald. Dort begeg'),
+        ('06:55', 'Die Biene Maja', 'Harmonie in der Wiese', 'Zeichentrick', 15, 3, 'a3', 55, 'Um Flips Geige zu reparieren, muss Maja die griesgrämige Spinne Thekla aufsuchen. Was Thekla mit Fli'),
+        ('07:10', 'Die Biene Maja', 'Der rote Rosso und seine Bande', 'Zeichentrick', 15, 3, 'a3', 55, 'Eine Bande von roten Räuberameisen will den Ameisenhügel überfallen. Leider scheitert der Plan der O'),
+        ('07:25', 'Bibi Blocksberg', 'Das große Besenrennen', 'Zeichentrick', 25, 3, 'a3', 55, 'Bibi und Schubia wollen am großen Besenrennen, einem Wettflug für Junghexen, teilnehmen. Ihre Besen '),
+        ('07:50', 'Bibi Blocksberg', 'Die verhexten Marionetten', 'Zeichentrick', 25, 3, 'a3', 55, 'Bibi und ihre Freunde freuen sich riesig auf die Vorstellung des Marionettentheaters, das in Neustad'),
+        ('08:15', 'Robin Hood - Schlitzohr von Sherwood', 'Ein königliches Geschenk', 'Zeichentrick', 15, 6, 'a6', 55, 'König Richard gibt ein Fest, und Prinz John möchte besonders prächtig aussehen. Er lässt sich eine n'),
+        ('08:30', 'Robin Hood - Schlitzohr von Sherwood', 'Der treue Flynn', 'Zeichentrick', 10, 6, 'a6', 55, 'Prinz John bereitet mal wieder einen Anschlag auf seinen Bruder vor. Ein Jagdhorn mit Schlafpulver s'),
+        ('08:40', 'H2O - Abenteuer Meerjungfrau', 'Entführt', 'Zeichentrick', 25, 10, 'a10', 55, 'Unter Wasser herrscht helle Aufregung: Robby, einer der Zwillingsdelfine, ist verschwunden. Bernie b'),
+        ('09:05', 'Bibi und Tina', 'Das Gespensterpferd', 'Zeichentrick', 25, 6, 'a6', 55, 'Auf dem Martinshof treibt ein Gespensterreiter sein Unwesen und vergrault die Ferienkinder mit schau'),
+        ('09:30', 'Pippi Langstrumpf', 'Pippi auf der Walz (1)', 'Serie', 25, 6, 'a6', 55, 'Zermürbt von den ständigen Ermahnungen der Mutter, beschließen Tommy und Annika, auszureißen. Pippi '),
+        ('09:55', 'Pippi Langstrumpf', 'Pippi auf der Walz (2)', 'Serie', 25, 6, 'a6', 55, 'Hausierer Konrad ist vor Annikas Sauberkeitsfimmel geflüchtet. Die Freunde essen selbst gefangene Fi'),
+    ]),
+    ("Samstag, 05.09.2026", "ProSieben Maxx", [
+        ('04:10', 'Frieren - Nach dem Ende der Reise', 'Die Henkerin Aura', 'Anime', 20, 12, 'a10', 55, 'Fern und Stark passen auf den verletzten Graf Granat auf. Frieren trifft währenddessen außerhalb der'),
+        ('04:30', 'Dragon Ball Super', 'Zusammenstoß mit dem ultimativen Gegner! Zeit für die alles entscheide', 'Anime', 25, 12, 'a10', 55, 'Auf diesen Moment hat Son Goku das ganze Turnier über gewartet: Endlich kann er Jiren, den unheimlic'),
+        ('04:55', 'Dragon Ball Super', 'Kampf in einer anderen Dimension! Mit Hit gegen Jiren!', 'Anime', 20, 12, 'a10', 55, 'Nachdem Son Goku seine neuen Kräfte wieder verloren hat, nimmt es Hit mit Jiren auf. Doch auch ihm g'),
+        ('05:15', 'Detektiv Conan', 'Schüsse im Stadion (1)', 'Anime', 25, 12, 'a10', 55, 'Conan, Ai und die Detective Boys gucken sich am Neujahrstag im Nationalstadion das Pokalfinale an. W'),
+        ('05:40', 'Detektiv Conan', 'Schüsse im Stadion (2)', 'Anime', 20, 12, 'a10', 55, 'Der Erpresser erhöht seine Forderung um eine weitere halbe Millionen, die zu Spielende bei Block 18 '),
+        ('06:10', 'Eyeshield 21', 'Die wahre "21"', 'Anime', 25, 12, 'a10', 55, 'Sena soll Ausrüstung für die Mannschaft besorgen und stößt im Laden auf einen Helm mit einem Eyeshie'),
+        ('06:35', 'Eyeshield 21', 'Wer uns noch erwartet', 'Anime', 25, 12, 'a10', 55, 'Mamori weicht Sena nicht von der Seite, weshalb er nicht als Eyeshield am Training teilnehmen kann u'),
+        ('07:00', 'Eyeshield 21', 'Sena Kobayakawa', 'Anime', 25, 12, 'a10', 55, 'Sena fasst einen folgenschweren Entschluss: Vor dem Spiel gegen die Bando Spiders nimmt er seinen He'),
+        ('07:25', 'Eyeshield 21', 'Das beste Special-Team der Welt', 'Anime', 25, 12, 'a10', 55, 'Die Devil Bats müssen sich im Spiel um den dritten Platz beweisen, um am Christmas Bowl teilnehmen z'),
+        ('07:50', 'Die neuen Abenteuer des He-Man', 'Hilferuf aus dem Weltall', 'Zeichentrick', 25, 3, 'a3', 55, 'Prinz Adam muss auf dem Planeten Primus gegen gefährliche Mutanten kämpfen.'),
+        ('08:15', 'Die neuen Abenteuer des He-Man', 'Der elektrische He-Man', 'Zeichentrick', 25, 6, 'a6', 55, 'Prinz Adam muss auf dem Planeten Primus gegen gefährliche Mutanten kämpfen.'),
+        ('08:40', 'Die neuen Abenteuer des He-Man', 'Die Königin der Mytes', 'Zeichentrick', 25, 6, 'a6', 55, 'Prinz Adam muss auf dem Planeten Primus gegen gefährliche Mutanten kämpfen.'),
+        ('09:05', 'She-Ra', 'Die Welt der Dunkelheit', 'Zeichentrick', 25, 6, 'a6', 55, 'Eine von Hordaks Waffen hat eine Fehlzündung, was dazu führt, dass er und She-Ra in einer anderen Di'),
+        ('09:30', 'She-Ra', 'Der Schatz der Gründer', 'Zeichentrick', 20, 6, 'a6', 55, 'Hordak hat es auf einen Schatz abgesehen, der ein Geheimnis enthüllt, mit dem man die Rebellen endgü'),
+        ('09:50', 'Voltron: Legendärer Verteidiger', 'Ritter des Lichts (2)', 'Zeichentrick', 25, 6, 'a6', 55, 'Während sie immer tiefer in Honervas Gedankenwelt eintauchen, sehen sich die Paladine sowohl alten a'),
+        ('10:15', 'Voltron: Legendärer Verteidiger', 'Unbekannte Regionen', 'Zeichentrick', 25, 6, 'a6', 55, 'Während Honerva ihren Plan weiter vorantreibt, spaltet sich die Voltron-Koalition, um sie aufzuhalte'),
+        ('10:40', 'She-Ra und die Rebellen-Prinzessinnen', 'Eine heilige Verbindung', 'Zeichentrick', 25, 6, 'a6', 55, 'Bow und Glimmer wollen herausfinden, was mit Entrapta passiert ist. Dabei nehmen sie aus Versehen Ca'),
+        ('11:05', 'Die neuen Abenteuer des He-Man', 'Kampfspiele', 'Zeichentrick', 20, 6, 'a6', 55, 'Prinz Adam muss auf dem Planeten Primus gegen gefährliche Mutanten kämpfen.'),
+        ('11:25', 'Die neuen Abenteuer des He-Man', 'Hilfe von der Zauberin', 'Zeichentrick', 25, 6, 'a6', 55, 'Prinz Adam muss auf dem Planeten Primus gegen gefährliche Mutanten kämpfen.'),
+        ('11:50', 'Die neuen Abenteuer des He-Man', 'Ein neuer galaktischer Wächter', 'Zeichentrick', 25, 6, 'a6', 55, 'Prinz Adam muss auf dem Planeten Primus gegen gefährliche Mutanten kämpfen.'),
+        ('12:15', 'She-Ra', 'Glimmers Geschichte', 'Zeichentrick', 25, 6, 'a6', 55, 'Auf dem Weg nach Schloss Bright Moon gerät Prinz Haycliff in einen Hinterhalt von Hordaks Schergen. '),
+        ('12:40', 'She-Ra', 'Das Ebenbild', 'Zeichentrick', 20, 6, 'a6', 55, 'Shadow Weaver erschafft eine abscheuliche Kreatur aus Schlamm, mit der Fähigkeit, jedem Lebewesen be'),
+        ('13:00', 'Voltron: Legendärer Verteidiger', 'Der Zenit', 'Zeichentrick', 25, 6, 'a6', 55, 'Das gesamte Universum steht am Abgrund: Die Paladine bündeln nun all ihre Macht und setzen auf ihre '),
+        ('13:25', 'Voltron: Legendärer Verteidiger', 'Das Ende ist der Anfang', 'Zeichentrick', 25, 6, 'a6', 55, 'Voltron und Honerva stehen sich im alles entscheidenden Kampf zwischen Gut und Böse gegenüber. Wer w'),
+        ('13:50', 'She-Ra und die Rebellen-Prinzessinnen', 'Signale', 'Zeichentrick', 25, 6, 'a6', 55, 'Adora und ihre Freunde begeben sich an einen Ort, an dem es spuken soll. Währenddessen macht Entrapt'),
+    ]),
+    ("Samstag, 05.09.2026", "WDR", [
+        ('08:05', 'Die Sendung mit dem Elefanten', 'Ordnung oder Chaos?', 'Serie', 25, 3, 'a3', 55, 'In den Lach- und Sachgeschichten wird heute aufgeräumt: Ritter Rost will beim Ordnung machen helfen '),
+        ('08:30', 'Die Sendung mit der Maus', '', 'Vorlesen', 30, 6, 'a6', 55, 'Lach- und Sachgeschichten'),
+    ]),
+    ("Samstag, 05.09.2026", "NDR", [
+        ('07:00', 'Die Sendung mit der Maus', '', 'Vorlesen', 30, 3, 'a3', 55, 'Lach- und Sachgeschichten, heute mit Johannes in einem sparsamen Dorf, Trudes Tier beim Fußball-Trai'),
+    ]),
+    ("Samstag, 05.09.2026", "MDR", [
+        ('07:10', 'Schloss Einstein', '', 'Jugendserie', 25, 10, 'a10', 55, 'Ein neues Schuljahr startet auf "Schloss Einstein". Die besten Freundinnen Liz und Annika sind neu a'),
+        ('07:35', 'Meister Eder und sein Pumuckl', 'Die geheimnisvollen Briefe', 'Serie', 25, 3, 'a3', 55, 'Pumuckl möchte unbedingt lesen und schreiben lernen. Eder bemüht sich sehr, es ihm beizubringen, abe'),
+        ('08:00', 'Meister Eder und sein Pumuckl', 'Pumuckl und die Ostereier', 'Serie', 25, 6, 'a6', 55, 'Über die Osterfeiertage ist Meister Eder bei seiner Schwester eingeladen, die zusammen mit ihrem Man'),
+        ('09:45', 'Lilly unter den Linden', '', 'Film', 90, 6, 'a6', 55, 'Das Mädchen Lilly aus Hamburg lernt 1988 bei der Beerdigung der Mutter ihre Tante Lena aus Jena kenn'),
+        ('14:00', 'Die kluge Bauerntochter', '', 'Serie', 60, 6, 'a6', 55, 'Ein Garten auf dem Dach ihrer ärmlichen Hütte! Mit dieser Idee verblüfft die kluge Bauerntochter den'),
+        ('15:00', 'Wer reißt denn gleich vorm Teufel aus?', '', 'Serie', 90, 6, 'a6', 55, 'Der arme Bursche Jakob ist vom Missgeschick verfolgt. Und nun hat es auch noch der König auf sein Le'),
+        ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Hinter einem Busch taucht ein Blumenstrauß auf, der hin und her geschwenkt wird. Schnattchen glaubt,'),
+    ]),
+    ("Samstag, 05.09.2026", "RBB", [
+        ('05:50', 'Schloss Einstein', '', 'Jugendserie', 25, 10, 'a10', 55, 'Hubertus ist nervös. Der Gangster, dessen gestohlene 12.000 € Hubertus gefunden hat, verdächtigt Jon'),
+        ('06:15', 'Schloss Einstein', '', 'Jugendserie', 25, 10, 'a10', 55, 'Constanzes Intrige, Elias eine fiese Stalker-Aktion unterzuschieben, um den Einstein X-Press allein '),
+        ('06:40', 'Schau in meine Welt', 'Ginevra - ein Mädchen unter Cowboys', 'Vorlesen', 25, 3, 'a3', 55, 'Ginevra will eine "Buttera" werden, eine Rinderhirtin, die vom Rücken ihres Pferdes die Herden treib'),
+        ('10:30', 'Max und die Wilde 7 - Die Geisteroma', '', 'Film', 90, 6, 'a6', 55, 'In der Seniorenresidenz Burg Geroldseck hat der 10-jährige Max endlich richtige, aber alles andere a'),
+        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Pittiplatsch: Der Blumenstraußwinker'),
+    ]),
+    ("Samstag, 05.09.2026", "HR", [
+        ('08:50', 'Schau in meine Welt', 'Ginevra - Ein Mädchen unter Cowboys', 'Vorlesen', 25, 6, 'a6', 55, 'Ginevra (12) will eine Buttera werden, eine Rinderhirtin, die vom Rücken ihres Pferds die Herden tre'),
+    ]),
+    ("Samstag, 05.09.2026", "arte", [
+        ('04:40', 'Athleticus', 'Frisbee', 'Zeichentrick', 25, 3, 'a3', 55, 'Ein Känguru und ein Strauß liefern sich ein wildes Frisbee-Match mitten in der Stadt, und zwar unter'),
+    ]),
+    ("Samstag, 05.09.2026", "ORF 1", [
+        ('06:00', 'Tom - Ein echter Freund', 'Tom auf dem Machu Picchu', 'Zeichentrick', 25, 3, 'a3', 55, 'Der Tourismusverband von Peru hat Mrs. Hamiltons Zirkus eingeladen. Keiner ahnt, dass sich dahinter '),
+        ('06:25', 'Grizzy und die Lemminge', 'Grizzy als Babysitter', 'Zeichentrick', 5, 3, 'a3', 55, 'Grizzy passt auf die kleine Tochter seiner angebeteten Bärendame auf. Da entdecken die Lemminge freu'),
+        ('06:30', 'Servus Kasperl', 'Kasperl & Hopsi: Balduin und das Gespensterhemd', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
+        ('06:55', 'Grizzy und die Lemminge', 'Finger weg!', 'Zeichentrick', 5, 3, 'a3', 55, 'Grizzy findet einen Safe in der Blockhütte des Rangers. Also der ideale Ort, wo er seine geliebte Sc'),
+        ('07:00', 'Dora 3D', 'Die Schatzkarte / Das Familien-Erinnerungs-Kästchen', 'Zeichentrick', 25, 3, 'a3', 55, 'Die Schatzkarte: Maps Onkel Treasure Map hat eine lange Zeit in einer Flasche verbracht. Um auf Scha'),
+        ('07:25', 'Helmi-Kinder-Verkehrs-Club', 'Alles auf Anfang', 'Wissen', 5, 3, 'a3', 55, 'Helmi wird vom MAUS-Alarm zu einer unsicheren Situation gerufen: Auf Emma und Pauls Schulweg gibt es'),
+        ('07:30', 'ABC Bär', '', 'Vorlesen', 15, 3, 'a3', 55, 'Der ABC Bär und seine Tierfreunde reisen mit ihrem lustigen Baumhaus durch das Land, um ihre Zahl- u'),
+        ('07:45', 'Kung Fu Panda: Die Tatzen des Schicksals', 'Das ultimative Opfer', 'Zeichentrick', 25, 3, 'a3', 55, 'Die Pandakinder wurden beim Kampf mit Jindiao versteinert. Nun stecken sie im Geisterreich bei den v'),
+        ('08:10', 'Box', 'Picknick', 'Wissen', 5, 6, 'a6', 55, 'Lust auf ein Picknick? Damit die Natur dabei aber sauber bleibt und ihr keinen Müll hinterlasst, hab'),
+        ('08:15', 'Tom Turbo', 'Der goldene Greif', 'Serie', 25, 6, 'a6', 55, 'Die interaktive Krimi-Serie von Thomas Brezina mit spannenden Detektivtipps zum Nachmachen und unter'),
+        ('08:55', 'Cyber Kids', 'Künstliche Intelligenz', 'Wissen', 15, 6, 'a6', 55, 'Wie schlau sind Roboter wirklich? Als der Staubsaugroboter Herbert mal wieder feststeckt, fragen sic'),
+        ('09:10', 'Der gestiefelte Kater - Abenteuer in San Lorenzo', 'Gute Taten', 'Serie', 25, 6, 'a6', 55, 'Mit Hut und Degen zieht der gestiefelte Kater durchs Land, immer auf der Suche nach einem neuen Aben'),
+        ('09:35', 'Tanzen mit den Stars', 'Breakdance mit Christoph Hanner', 'Vorlesen', 15, 6, 'a6', 55, 'Auf dem Plan steht heute Breakdance mit Breaker Christoph Hanner und seinen coolen Tanzkids. Viel Sp'),
+        ('09:50', 'Klimakrach', 'Ente gut, alles gut', 'Wissen', 15, 6, 'a6', 55, 'Waldemar erhält ein Paket mit einer geheimnisvollen Gummiente. Er ist überzeugt, dass sie ihm etwas '),
+        ('10:05', 'Dragons - Die Wächter von Berk', 'Händler Johanns Lieferung', 'Zeichentrick', 20, 6, 'a6', 55, 'Händler Johann hat jede Menge Altmetall nach Berk geliefert - sehr zur Freude der Wikinger. Schließl'),
+        ('10:25', '1000 Tricks', '', 'Vorlesen', 15, 6, 'a6', 55, 'Ist es tatsächlich möglich seine Gedanken zu funken? Melly verblüfft Christoph und zeigt euch, wie d'),
+        ('10:40', 'Ganz Ohr', 'Film', 'Vorlesen', 15, 6, 'a6', 55, 'Wie entsteht ein Film oder eine Serie? Um das rauszufinden besucht Esther das Set von "Tage, die es '),
+        ('10:55', 'Mini Spezial', 'Gebärdensprache', 'Vorlesen', 10, 6, 'a6', 55, 'In dieser Mini Spezial schaut sich Julia die Gebärdensprache genauer an. Sie trifft Babs und Milana,'),
+        ('11:05', 'Galapagos X', 'Zeph, der Vampirjäger', 'Zeichentrick', 10, 6, 'a6', 55, 'In der Gegenwart wird die Ruhe durch nervige Staubsauger gestört, die die verpestete Luft in der Sta'),
+    ]),
+    ("Samstag, 05.09.2026", "SRF 1", [
+        ('17:25', 'Minisguard', 'Wie bereitet man sich auf die Jagd vor?', 'Serie', 35, 6, 'a6', 55, 'Wie bereitet man sich auf die Jagd vor? Um das herauszufinden, hat Gian-Carlo Niculin und seinen Bru'),
     ]),
 ]
