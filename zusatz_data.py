@@ -1,31 +1,11 @@
 # -*- coding: utf-8 -*-
 """Kindersendungen der Vollprogramme.
 
-Erzeugt von scan_kinder.py aus tv.de am 03.09.2026. Auswahl nach Kategorie,
+Erzeugt von scan_kinder.py aus tv.de am 04.09.2026. Auswahl nach Kategorie,
 bekannten Titeln und Beschreibung; Alterswerte heuristisch.
 """
 
 TAGE = [
-    ("Donnerstag, 03.09.2026", "ProSieben Maxx", [
-        ('16:45', 'Dr. STONE', 'Beyond the New World', 'Anime', 25, 12, 'a10', 55, 'Senku und seine Freunde sind wieder zu Hause angekommen. Nun wollen sie Tsukasa endlich wiederbelebe'),
-        ('17:10', 'Dragon Ball Super', 'Freezer und Frost! In Boshaftigkeit verbunden!', 'Anime', 25, 12, 'a10', 55, 'Als Son Gohan fast von Jimmies aus dem zweiten Universum besiegt wird, bekommt er Unterstützung von '),
-        ('17:35', 'Dragon Ball Super', 'Zusammenstoß mit dem ultimativen Gegner! Zeit für die alles entscheide', 'Anime', 25, 12, 'a10', 55, 'Auf diesen Moment hat Son Goku das ganze Turnier über gewartet: Endlich kann er Jiren, den unheimlic'),
-        ('18:00', 'Detektiv Conan', 'Schüsse im Stadion (1)', 'Anime', 30, 12, 'a10', 55, 'Conan, Ai und die Detective Boys gucken sich am Neujahrstag im Nationalstadion das Pokalfinale an. W'),
-        ('18:30', 'One Piece', 'Der neue Samurai der Meere! - Der Sohn des berüchtigten Whitebeard!', 'Anime', 25, 12, 'a10', 55, 'Das Schiff nimmt weiterhin Kurs auf das Königreich Zou, als Ruffy eine erfreuliche Entdeckung macht.'),
-        ('18:55', 'One Piece', 'Ein gefährlicher Aufstieg! - Das Abenteuer auf dem Rücken des Elefante', 'Anime', 25, 12, 'a10', 55, 'Mithilfe eines Drachens versucht die Crew weiterhin, das Königreich Zou zu erklimmen. Doch das Vorha'),
-    ]),
-    ("Donnerstag, 03.09.2026", "MDR", [
-        ('12:30', 'Lilly unter den Linden', '', 'Film', 88, 6, 'a6', 55, 'Das Mädchen Lilly aus Hamburg lernt 1988 bei der Beerdigung der Mutter ihre Tante Lena aus Jena kenn'),
-        ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Dr. Brumm macht das, was er immer macht, wenn er ein Abenteuer erleben will: Er fragt Bibi, ob sie I'),
-    ]),
-    ("Donnerstag, 03.09.2026", "RBB", [
-        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Dr. Brumm: Dr. Brumm geht zelten'),
-    ]),
-    ("Donnerstag, 03.09.2026", "SRF 1", [
-        ('17:05', 'SRF Kids News', '', 'Serie', 15, 6, 'a6', 55, ''),
-        ('17:20', 'SRF Kids Inside', 'IG Seifenkisten Derby Schweiz - Verrückte Fahrzeuge selber bauen', 'Vorlesen', 10, 6, 'a6', 55, '1 Verein, 3 Kids und noch mehr Storys: «SRF Kids Inside» erzählt Geschichten mitten aus dem Leben - '),
-        ('17:30', 'Timmy Ziit - Mittagsschlaf', '', 'Vorlesen', 10, 6, 'a6', 55, 'Timmy ist das freche kleine Schaf aus Shauns Herde. Jeden Tag geht er in den Kindergarten, wo er gem'),
-    ]),
     ("Freitag, 04.09.2026", "ProSieben Maxx", [
         ('16:45', 'Yashahime', 'Inuyasha seither', 'Anime', 25, 12, 'a10', 55, 'Die Halbdämonen-Prinzessin Towa Higurashi wird festgenommen und verhört. Da sie mit ihrem Wissen die'),
         ('17:10', 'Dragon Ball Super', 'Goku lässt die Götter bangen! Der neue Instinkt des Auferwachten!', 'Anime', 25, 12, 'a10', 55, 'Jiren gelingt es, die Genkidama-Attacke auf Son Goku zurückzuwerfen. Nach dem heftigen Einschlag ist'),
@@ -39,29 +19,11 @@ TAGE = [
         ('23:00', 'Gachiakuta', 'Die Stadt des Graffiti', 'Anime', 25, 12, 'a10', 55, 'Der Putztrupp stellt eine Einheit für die Reise in die Verbotene Zone zusammen. Zur Vorbereitung beg'),
         ('23:50', 'Frieren - Nach dem Ende der Reise', 'Die Todesbotin Frieren', 'Anime', 25, 12, 'a10', 55, 'Frieren sitzt im Gefängnis fest. Der Dämon Draht sucht sie in ihrer Zelle auf und möchte sie umbring'),
     ]),
-    ("Freitag, 04.09.2026", "NDR", [
-        ('06:00', 'Sesamstraße', '', 'Vorlesen', 20, 3, 'a3', 55, 'Ernie ist Rapunzel. Prinz Bert wartet sehnsüchtig darauf, in den Turm hinaufzuklettern. Aber Rapunze'),
-    ]),
     ("Freitag, 04.09.2026", "MDR", [
         ('18:54', 'Unser Sandmännchen', '', 'Serie', 6, 3, 'a3', 55, 'Internationale Kinderlieder Heijanganga Eine Familie erlebt in den Weiten der amerikanischen Prärie '),
     ]),
     ("Freitag, 04.09.2026", "RBB", [
         ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Internationale Kinderlieder: Atte katte Nuwa'),
-    ]),
-    ("Freitag, 04.09.2026", "HR", [
-        ('06:15', 'Leo da Vinci', 'Ein verdächtiger Brief', 'Zeichentrick', 10, 3, 'a3', 55, 'Leo, Bianca, Lisa und Lollo wenden sich an Alvise Tiepolo, in der Hoffnung, dass er Neuigkeiten über'),
-        ('06:25', 'Leo da Vinci', 'Das Mädchen und der Stier', 'Zeichentrick', 15, 3, 'a3', 55, 'Auf dem Festland angekommen, erfahren Bianca, Lisa, Lollo und Leo von ihrer kleinen Freundin Maria, '),
-    ]),
-    ("Freitag, 04.09.2026", "arte", [
-        ('04:42', 'Athleticus', 'Roller Show', 'Zeichentrick', 28, 3, 'a3', 55, 'Eine Robbe gibt bei einer Akrobatikvorführung ihre draufgängerischen Kunststücke zum Besten. Nilpfer'),
-    ]),
-    ("Freitag, 04.09.2026", "ORF 1", [
-        ('06:00', 'ZIB KiDS', '', 'Serie', 10, 3, 'a3', 55, ''),
-        ('06:10', 'Wickie und die starken Männer', 'Die Olympiade der Wikinger', 'Zeichentrick', 25, 3, 'a3', 55, 'Die Wikinger sitzen noch immer mit ihren erbeuteten Schätzen im Burggraben des Griechen-Königs fest.'),
-        ('06:35', 'Servus Kasperl', 'Kasperl & Leopold: Das große Schnarchen', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
-        ('07:00', 'Noahs Insel', 'Sascha hier, Sascha dort', 'Zeichentrick', 25, 3, 'a3', 55, 'Noahs Insel läuft vor der afrikanischen Küste auf Grund. Während der Eisbär grübelt, wie er das Eila'),
-        ('07:45', 'Mister Paper', 'Mister Paper verläuft sich', 'Zeichentrick', 5, 3, 'a3', 55, 'Mister Paper macht einen ausgiebigen Spaziergang mit seiner Katze. Unterwegs dekoriert er die Landsc'),
-        ('07:50', 'ZIB KiDS', '', 'Serie', 10, 3, 'a3', 55, ''),
     ]),
     ("Freitag, 04.09.2026", "SRF 1", [
         ('17:30', 'Timmy Ziit - Baschtle', '', 'Vorlesen', 10, 6, 'a6', 55, 'Timmy ist das freche kleine Schaf aus Shauns Herde. Jeden Tag geht er in den Kindergarten, wo er gem'),
@@ -118,8 +80,8 @@ TAGE = [
         ('12:15', 'She-Ra', 'Glimmers Geschichte', 'Zeichentrick', 25, 6, 'a6', 55, 'Auf dem Weg nach Schloss Bright Moon gerät Prinz Haycliff in einen Hinterhalt von Hordaks Schergen. '),
         ('12:40', 'She-Ra', 'Das Ebenbild', 'Zeichentrick', 20, 6, 'a6', 55, 'Shadow Weaver erschafft eine abscheuliche Kreatur aus Schlamm, mit der Fähigkeit, jedem Lebewesen be'),
         ('13:00', 'Voltron: Legendärer Verteidiger', 'Der Zenit', 'Zeichentrick', 25, 6, 'a6', 55, 'Das gesamte Universum steht am Abgrund: Die Paladine bündeln nun all ihre Macht und setzen auf ihre '),
-        ('13:25', 'Voltron: Legendärer Verteidiger', 'Das Ende ist der Anfang', 'Zeichentrick', 25, 6, 'a6', 55, 'Voltron und Honerva stehen sich im alles entscheidenden Kampf zwischen Gut und Böse gegenüber. Wer w'),
-        ('13:50', 'She-Ra und die Rebellen-Prinzessinnen', 'Signale', 'Zeichentrick', 25, 6, 'a6', 55, 'Adora und ihre Freunde begeben sich an einen Ort, an dem es spuken soll. Währenddessen macht Entrapt'),
+        ('13:25', 'Voltron: Legendärer Verteidiger', 'Das Ende ist der Anfang', 'Zeichentrick', 30, 6, 'a6', 55, 'Voltron und Honerva stehen sich im alles entscheidenden Kampf zwischen Gut und Böse gegenüber. Wer w'),
+        ('13:55', 'She-Ra und die Rebellen-Prinzessinnen', 'Signale', 'Zeichentrick', 20, 6, 'a6', 55, 'Adora und ihre Freunde begeben sich an einen Ort, an dem es spuken soll. Währenddessen macht Entrapt'),
     ]),
     ("Samstag, 05.09.2026", "WDR", [
         ('08:05', 'Die Sendung mit dem Elefanten', 'Ordnung oder Chaos?', 'Serie', 25, 3, 'a3', 55, 'In den Lach- und Sachgeschichten wird heute aufgeräumt: Ritter Rost will beim Ordnung machen helfen '),
@@ -173,5 +135,77 @@ TAGE = [
     ]),
     ("Samstag, 05.09.2026", "SRF 1", [
         ('17:25', 'Minisguard', 'Wie bereitet man sich auf die Jagd vor?', 'Serie', 35, 6, 'a6', 55, 'Wie bereitet man sich auf die Jagd vor? Um das herauszufinden, hat Gian-Carlo Niculin und seinen Bru'),
+    ]),
+    ("Sonntag, 06.09.2026", "ARD", [
+        ('05:30', 'HipHorses - Du und Dein Pferd', 'Finnja und Showpferd Missy', 'Vorlesen', 25, 3, 'a3', 55, 'Finnja lebt in der Nähe von Bremen, ist 13 Jahre alt und liebt Pferde und Shows. Deshalb ist das Sho'),
+        ('05:55', '#WIR - Freundschaft grenzenlos', 'Eiskunstlaufen: Tanz auf dem Eis', 'Vorlesen', 10, 3, 'a3', 55, 'Laura und Diana sind richtige Eisprinzessinnen. Beide stehen schon von Kindesbeinen an auf dem Eis u'),
+        ('06:05', 'Tigerenten Club', 'Der Club zum Mitmachen - Spiele, Spaß und spannendes Wissen', 'Vorlesen', 60, 3, 'a3', 55, 'Haie: Faszinierend und bedroht! Sie taucht da, wo keiner hinwill: zu Haien! Die Unterwasserkamerafra'),
+        ('08:30', 'Alina', 'Das Turnier', 'Jugendserie', 60, 10, 'a10', 55, 'Alina darf Silverado trainieren, bis ein Käufer gefunden ist, und ihn sogar auf dem bevorstehenden S'),
+        ('09:30', 'Die Sendung mit der Maus', '', 'Vorlesen', 30, 6, 'a6', 55, 'Lach- und Sachgeschichten, heute mit dem Geheimnis der Hafermilch, Nulli in Priesemuts Schwimmschule'),
+        ('15:30', 'Ein Ferienhaus auf Ibiza', '', 'Serie', 90, 6, 'a6', 55, 'Man kann nicht gerade behaupten, dass die Geschwister Karla (Tina Ruland), Henriette (Suzan Anbeh) u'),
+    ]),
+    ("Sonntag, 06.09.2026", "ZDF", [
+        ('06:00', 'Die Biene Maja', 'Majas Geburt', 'Zeichentrick', 10, 3, 'a3', 55, 'Im Bienenstock auf der Klatschmohnwiese wird eine besondere Biene geboren: Maja. Sie will nicht im S'),
+        ('06:10', 'Die Biene Maja', 'Die große, weite Wiesenwelt', 'Zeichentrick', 10, 3, 'a3', 55, 'In der ersten Nacht ihres Bienenlebens schleicht sich Maja zusammen mit Willi aus dem Bienenstock. M'),
+        ('06:20', 'Die Biene Maja', 'Der Buschwindbote', 'Zeichentrick', 15, 3, 'a3', 55, 'Eine Stelle, an der es Nektar zu holen gibt, ist für Bienen Gold wert. Vor allem, wenn den Platz vor'),
+        ('06:35', 'Die Biene Maja', 'Richter Bienenwachs', 'Zeichentrick', 15, 3, 'a3', 55, 'Die Klatschmohnwiese ohne Maja? Für Richter Bienenwachs eine schöne Vorstellung, müsste er sich dann'),
+        ('06:50', 'Die Biene Maja - Ihre schönsten Abenteuer', '', 'Serie', 80, 3, 'a3', 55, 'Maja erlebt unglaubliche Abenteuer mit ihrem liebsten Freund, dem faulen Willi. Schon als Maja auf d'),
+        ('08:10', 'Löwenzahn', 'Bienen - Der Raub der Honigmacher', 'Serie', 25, 6, 'a6', 55, 'Ein Bienenwagen verschwindet über Nacht. Fritz nimmt die Ermittlungen auf und macht sich auf die Suc'),
+        ('08:35', '1, 2 oder 3', 'Bienen - Helden der Natur', 'Serie', 28, 6, 'a6', 55, 'Welches Insekt ist für unser Ökosystem unverzichtbar? Ganz klar: die Biene! Autorin und Biologin Dr.'),
+    ]),
+    ("Sonntag, 06.09.2026", "SAT.1", [
+        ('14:55', 'Ice Age – Die Abenteuer von Buck Wild', '', 'Zeichentrick', 105, 6, 'a6', 55, 'Crash und sein Bruder Eddie verlassen ihre Heimat und stürzen sich in ein aufregendes Abenteuer. In '),
+    ]),
+    ("Sonntag, 06.09.2026", "ProSieben Maxx", [
+        ('04:05', 'One Piece', 'Eine auswegslose Situation! - Der heiße Kampf auf Silver Mine', 'Anime', 20, 12, 'a10', 55, 'Nachdem Bill immer wieder mit Provokationen um sich wirft, kommt es zwischen ihm und Ruffy zum Kampf'),
+        ('04:25', 'One Piece', 'Ein neues Abenteuer beginnt! - Ankunft auf der Phantominsel Zou', 'Anime', 25, 12, 'a10', 55, 'An Bord des Schiffes erzählt Bartolomeo der Crew bewegende Geschichten und bittet auch Ganbia, sich '),
+        ('04:50', 'Dr. STONE', 'Beyond the New World', 'Anime', 20, 12, 'a10', 55, 'Senku und seine Freunde sind wieder zu Hause angekommen. Nun wollen sie Tsukasa endlich wiederbelebe'),
+        ('05:10', 'Yashahime', 'Inuyasha seither', 'Anime', 25, 12, 'a10', 55, 'Die Halbdämonen-Prinzessin Towa Higurashi wird festgenommen und verhört. Da sie mit ihrem Wissen die'),
+    ]),
+    ("Sonntag, 06.09.2026", "NDR", [
+        ('06:45', 'Edgar, das Super-Karibu', 'Das schreckliche Gurgeln', 'Zeichentrick', 10, 3, 'a3', 55, 'Edgar, das Super-Karibu putzt sich die Zähne und singt dabei furchtbar schlecht. Im Wald hört Marion'),
+        ('06:55', 'Edgar, das Super-Karibu', 'Der verliebte Hase', 'Zeichentrick', 15, 3, 'a3', 55, 'Um Birgit zu imponieren, in die er heimlich verliebt ist, steigert Rudi, der Hase seine Heldentaten '),
+    ]),
+    ("Sonntag, 06.09.2026", "BR", [
+        ('09:00', 'Hans im Glück', '', 'Serie', 60, 6, 'a6', 55, 'Sieben Jahre arbeitet Hans im Haus eines reichen Gewürzhändlers. Doch eines Morgens wacht er auf und'),
+    ]),
+    ("Sonntag, 06.09.2026", "MDR", [
+        ('15:20', 'Till Eulenspiegel', '', 'Serie', 115, 6, 'a6', 55, 'Der größten Herausforderung seines Leben stellt sich Till Eulenspiegel, als er gegen den Lübecker Bü'),
+        ('17:35', 'Unser Sandmännchen', '', 'Serie', 5, 3, 'a3', 55, 'Frau Elster drängt den Fuchs etwas zu tun, damit man ihre Anwesenheit auf der Insel bemerkt. Als Her'),
+    ]),
+    ("Sonntag, 06.09.2026", "RBB", [
+        ('17:53', 'Unser Sandmännchen', '', 'Serie', 7, 3, 'a3', 55, 'Kallis Gute-Nacht-Geschichten: Kalli-Saurier'),
+    ]),
+    ("Sonntag, 06.09.2026", "HR", [
+        ('12:20', 'Dann kam Lucy', '', 'Serie', 90, 6, 'a6', 55, 'Die passionierte Pferdezüchterin Saskia lebt zurückgezogen auf ihrem idyllischen Gestüt im Rheinland'),
+    ]),
+    ("Sonntag, 06.09.2026", "arte", [
+        ('04:35', 'Athleticus', 'Jogging', 'Zeichentrick', 45, 3, 'a3', 55, 'Die dritte Staffel des Kurzprogramms wirft in 30 Folgen einen humorvollen Blick auf unsere Gesellsch'),
+    ]),
+    ("Sonntag, 06.09.2026", "ORF 1", [
+        ('04:25', 'Chaos im Netz', '', 'Zeichentrick', 95, 3, 'a3', 55, "Überaus witzige Fortsetzung des Animationshits 'Ralph reicht's'. Vanellope und Ralph stürzen sich wa"),
+        ('06:00', 'Tom - Ein echter Freund', 'Tom in Japan', 'Zeichentrick', 25, 3, 'a3', 55, 'An der Küste Japans rettet Saurier Tom den Perlentaucher Miko gerade noch vor einer geheimnisvollen '),
+        ('06:25', 'Vegesaurier', 'Blubberbad', 'Zeichentrick', 5, 3, 'a3', 55, 'Zur Freude von Ginger und den Erbs-Rex-Babys gibt es beim Vulkan plötzlich ein warmes Blubberbad. Ab'),
+        ('06:30', 'Servus Kasperl', 'Kasperl & Co: Bfrt - Brft - bfrrrt!', 'Serie', 25, 3, 'a3', 55, 'Der Klassiker des österreichischen Kinderfernsehens mit amüsanten Kasperlstücken und vielen Möglichk'),
+        ('06:55', 'Mister Paper', 'Mister Paper geht spazieren', 'Zeichentrick', 5, 3, 'a3', 55, 'In einer Welt aus Papier und Pappe lebt der eigensinnige Mister Paper mit seiner Katze ein heiteres '),
+        ('07:00', 'Mister Paper', 'Mister Paper geht schlafen', 'Zeichentrick', 5, 3, 'a3', 55, 'Als Mister Paper in der Nacht von einer vorwitzigen Fledermaus geweckt wird, hat er Probleme, wieder'),
+        ('07:05', 'Bakabu', 'Beste Freunde', 'Vorlesen', 5, 3, 'a3', 55, 'Mit wem macht dir das Spielen am meisten Spaß? Na klar, mit einer Freundin oder einem Freund. Auch B'),
+        ('07:10', 'Knall genial', '', 'Wissen', 15, 3, 'a3', 55, 'Originelle Tipps und Tricks von Thomas Brezina und den Kids! Theater einmal anders. Im Kameltheater '),
+        ('07:25', 'Der gestiefelte Kater - Abenteuer in San Lorenzo', 'Die Weisheit des Buches', 'Serie', 25, 3, 'a3', 55, 'Mit Hut und Degen zieht der gestiefelte Kater durchs Land, immer auf der Suche nach einem neuen Aben'),
+        ('07:50', 'Drunter & drüber mit Christoph Hirschler', '"Hits im Ohr" mit Christina Stürmer', 'Vorlesen', 20, 3, 'a3', 55, 'Christoph Hirschler begrüßt heute die erfolgreichste Musikerin Österreichs: Christina Stürmer! Sie e'),
+        ('08:10', 'Campsite', 'Psychopath?', 'Jugendserie', 10, 10, 'a10', 55, 'Anja schwebt auf Wolke Sieben wegen Max, denn er hat ihr gesagt, dass er sie süß findet. Sie erzählt'),
+        ('08:20', 'Campsite', 'Ein neuer König', 'Jugendserie', 5, 10, 'a10', 55, 'An der Tischtennisplatte ist Sebbe der ungeschlagene König. Keins der anderen Kinder kann ihm beim S'),
+        ('08:25', 'Campsite', 'Erdbeereis', 'Jugendserie', 5, 10, 'a10', 55, 'Anja möchte sich unbedingt ein Erdbeereis bei Tonis Kiosk holen, doch der gibt ihr fälschlicherweise'),
+        ('08:30', 'Dragons - Die Wächter von Berk', 'Bing! Bamm! Bumm!', 'Zeichentrick', 20, 6, 'a6', 55, 'Die Drachenreiter stöbern ein Trio kleiner Donnertrommler auf. Ohne es zu wollen, folgen ihnen die d'),
+        ('08:50', 'Was geht?', 'Coole Schule', 'Wissen', 15, 6, 'a6', 55, 'Kann Schule Spaß machen? Tiara (10), Konstantin (11) und Amelie (12) berichten von ihren lustigsten '),
+        ('09:05', 'Mini Spezial', 'Elektroauto', 'Vorlesen', 5, 6, 'a6', 55, 'Gibt es in deiner Familie ein Auto? Und wenn ja, womit fährt es - mit Benzin, Diesel oder mit Strom?'),
+        ('09:10', 'Garfield', 'Detektiv  Squeak', 'Zeichentrick', 15, 6, 'a6', 55, 'Jon muss sparen und setzt den gefräßigen Garfield deswegen auf Diät. Die Ernährung des Katers wird n'),
+        ('09:25', 'Hallo, was machst Du?', 'Friseurin', 'Wissen', 15, 6, 'a6', 55, 'Schnipp, schnapp, Haare ab! Lena besucht Friseurin Claudia und lernt dort nicht nur, wie ein Fischgr'),
+        ('09:50', 'Galapagos X', 'Der Klimaanlagen-Kollaps', 'Zeichentrick', 15, 6, 'a6', 55, 'Zeph ist entsetzt! Der Popstar Barney Pluto sagt seine Tournee ab und möchte vor der Hitzewelle, die'),
+        ('10:05', 'Mumien - Ein total verwickeltes Abenteuer', '', 'Zeichentrick', 80, 6, 'a6', 55, 'Vergnügliches Animationsabenteuer. Eine junge ägyptische Prinzessin, ihr Bräutigam wider Willen, des'),
+    ]),
+    ("Sonntag, 06.09.2026", "SRF 1", [
+        ('17:10', 'Minisguard', 'Wie bereitet man sich auf die Jagd vor?', 'Serie', 15, 6, 'a6', 55, 'Wie bereitet man sich auf die Jagd vor? Um das herauszufinden, hat Gian-Carlo Niculin und seinen Bru'),
+        ('23:45', 'One Minute Movies - Selection I', '', 'Zeichentrick', 10, 10, 'a10', 55, 'Der kurzen Aufmerksamkeitsspanne des modernen Menschen Rechnung tragend, ist keine Folge länger als '),
     ]),
 ]
